@@ -9,45 +9,44 @@
 <link rel="alternate" hreflang="ko" href="https://jmhan9417.github.io/ko/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,400;0,9..144,560;1,9..144,340&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+KR:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+KR:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#f6f3ec;
-  --ink:#1c1917;
-  --ink-2:#57514a;
-  --hairline:#cfc8b8;
-  --hairline-strong:#1c1917;
-  --accent:#96361f;
+  --paper:#fcfcfa;
+  --ink:#1a2129;
+  --ink-2:#4d5866;
+  --hairline:#d9dce0;
+  --hairline-strong:#1a2129;
+  --accent:#1a4480;
   --sans:'IBM Plex Sans KR',sans-serif;
   --mono:'IBM Plex Mono',monospace;
-  --serif:'Fraunces','Noto Serif KR',Georgia,serif;
+  --serif:'IBM Plex Serif','Noto Serif KR',Georgia,serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:16px;line-height:1.7;word-break:keep-all}
-a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
-a:hover{color:var(--accent)}
-::selection{background:#e8d5c4}
+a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:#0f2d58}
+::selection{background:#d7e3f4}
 .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
 .mono{font-family:var(--mono)}
 
 /* masthead */
 .masthead{border-bottom:1px solid var(--hairline-strong)}
 .masthead-inner{display:flex;justify-content:space-between;align-items:baseline;padding:20px 0}
-.masthead .name{font-family:var(--serif);font-weight:560;font-size:18px;text-decoration:none}
+.masthead .name{font-family:var(--serif);font-weight:600;font-size:17px;text-decoration:none;color:var(--ink)}
 .masthead nav{display:flex;gap:22px;font-family:var(--mono);font-size:12.5px}
 .masthead nav a{text-decoration:none;color:var(--ink-2);font-family:var(--sans);font-size:13px}
 .masthead nav a:hover{color:var(--accent)}
-.masthead nav .lang{color:var(--ink);border-bottom:1px solid var(--accent);font-family:var(--mono)}
+.masthead nav .lang{color:var(--accent);border-bottom:1px solid var(--accent);font-family:var(--mono)}
 @media(max-width:680px){.masthead nav a:not(.lang){display:none}}
 
 /* hero */
 .hero{padding:72px 0 64px;border-bottom:1px solid var(--hairline)}
 .hero .kicker{font-family:var(--mono);font-size:13px;color:var(--ink-2);margin-bottom:20px}
 .hero .kicker a{color:var(--ink-2)}
-.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(38px,6.4vw,72px);line-height:1.16;letter-spacing:-.015em;margin-bottom:30px;font-optical-sizing:auto}
-.hero h1 .amp{font-style:italic;font-weight:340;color:var(--accent);font-family:'Fraunces',serif}
-.hero h1 .en-name{font-family:'Fraunces',serif;font-weight:560}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,4.2vw,42px);line-height:1.22;letter-spacing:-.005em;margin-bottom:10px}
+.hero .subtitle{font-size:17.5px;color:var(--ink-2);margin-bottom:28px;max-width:660px}
 .hero .lede{max-width:660px;font-size:16.5px;color:var(--ink-2)}
 .hero .lede strong{color:var(--ink);font-weight:600}
 .hero .lede p+p{margin-top:14px}
@@ -63,7 +62,7 @@ a:hover{color:var(--accent)}
 section{padding:76px 0 30px}
 .sec-head{display:flex;align-items:baseline;gap:18px;border-top:2px solid var(--hairline-strong);padding-top:18px;margin-bottom:12px}
 .sec-head .no{font-family:var(--mono);font-size:13px;color:var(--accent)}
-.sec-head h2{font-family:var(--serif);font-weight:600;font-size:28px;letter-spacing:-.01em}
+.sec-head h2{font-family:var(--serif);font-weight:600;font-size:23px;letter-spacing:-.005em}
 .sec-intro{color:var(--ink-2);max-width:640px;margin-bottom:30px;font-size:15.5px}
 
 /* projects */
@@ -73,7 +72,7 @@ section{padding:76px 0 30px}
 @media(max-width:860px){.proj{grid-template-columns:1fr;gap:24px}.proj.flip .shot-col{order:0}}
 .proj .meta{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);margin-bottom:10px}
 .proj .meta em{font-style:normal;color:var(--accent)}
-.proj h3{font-family:var(--serif);font-weight:600;font-size:30px;letter-spacing:-.01em;margin-bottom:4px}
+.proj h3{font-family:var(--serif);font-weight:600;font-size:23px;letter-spacing:-.005em;margin-bottom:4px}
 .proj .sub{font-size:15px;color:var(--ink-2);margin-bottom:16px}
 .proj p{font-size:15.5px;margin-bottom:14px}
 .proj p i{font-family:var(--serif);font-style:normal;font-weight:500}
@@ -97,7 +96,7 @@ section{padding:76px 0 30px}
 .award{border-top:1px solid var(--hairline);padding:40px 0 48px;display:grid;grid-template-columns:220px 1fr;gap:18px}
 @media(max-width:640px){.award{grid-template-columns:1fr}}
 .award .label{font-family:var(--mono);font-size:12.5px;color:var(--accent)}
-.award h3{font-family:var(--serif);font-weight:600;font-size:22px;margin-bottom:6px}
+.award h3{font-family:var(--serif);font-weight:600;font-size:18px;margin-bottom:6px}
 .award p{font-size:15px;color:var(--ink-2);max-width:580px;margin-bottom:10px}
 .award a{font-size:14.5px}
 
@@ -106,7 +105,7 @@ section{padding:76px 0 30px}
 .xp-row:first-of-type{border-top:none}
 @media(max-width:640px){.xp-row{grid-template-columns:1fr;gap:6px}}
 .xp-when{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);padding-top:5px}
-.xp-body h3{font-family:var(--serif);font-weight:600;font-size:20px;display:inline}
+.xp-body h3{font-family:var(--serif);font-weight:600;font-size:17.5px;display:inline}
 .xp-body .org-note{font-size:14px;color:var(--ink-2)}
 .xp-body .role{font-size:14px;font-weight:600;color:var(--accent);margin:2px 0 8px}
 .xp-body p,.xp-body li{font-size:14.5px;color:var(--ink-2)}
@@ -122,8 +121,7 @@ section{padding:76px 0 30px}
 
 /* contact */
 .contact{padding:90px 0 40px}
-.contact h2{font-family:var(--serif);font-weight:600;font-size:clamp(34px,5.4vw,56px);letter-spacing:-.015em;margin-bottom:18px}
-.contact h2 .amp{font-style:italic;font-weight:340;color:var(--accent);font-family:'Fraunces',serif}
+.contact h2{font-family:var(--serif);font-weight:600;font-size:clamp(24px,3.4vw,32px);letter-spacing:-.005em;margin-bottom:16px}
 .contact p{max-width:580px;color:var(--ink-2);margin-bottom:26px}
 .contact .links{display:flex;gap:30px;flex-wrap:wrap;font-size:15.5px;font-weight:500}
 footer{border-top:1px solid var(--hairline-strong);margin-top:70px}
@@ -133,9 +131,9 @@ footer{border-top:1px solid var(--hairline-strong);margin-top:70px}
 .lightbox{position:fixed;inset:0;z-index:100;background:rgba(24,20,16,.92);display:flex;align-items:center;justify-content:center;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .2s ease}
 .lightbox.open{opacity:1;pointer-events:auto}
 .lightbox img{max-width:min(1200px,92vw);max-height:80vh;border:1px solid #6b6157}
-.lb-cap{color:#cfc8b8;font-family:var(--sans);font-size:13px;margin-top:14px;text-align:center;padding:0 20px}
-.lb-btn{position:absolute;background:none;border:1px solid #6b6157;color:#f6f3ec;width:42px;height:42px;font-size:19px;cursor:pointer;font-family:var(--mono)}
-.lb-btn:hover{border-color:#f6f3ec}
+.lb-cap{color:#d9dce0;font-family:var(--sans);font-size:13px;margin-top:14px;text-align:center;padding:0 20px}
+.lb-btn{position:absolute;background:none;border:1px solid #6b6157;color:#fcfcfa;width:42px;height:42px;font-size:19px;cursor:pointer;font-family:var(--mono)}
+.lb-btn:hover{border-color:#fcfcfa}
 .lb-close{top:22px;right:26px}
 .lb-prev{left:26px;top:50%;transform:translateY(-50%)}
 .lb-next{right:26px;top:50%;transform:translateY(-50%)}
@@ -161,7 +159,8 @@ footer{border-top:1px solid var(--hairline-strong);margin-top:70px}
 <div class="hero" id="top">
   <div class="wrap">
     <div class="kicker">PharmD, RPh &middot; 규제과학 석사 &middot; <a href="https://search.dca.ca.gov/details/7200/RPH/87689/59cffe4003b66c6ac7c9e685a639e9fd" target="_blank" rel="noopener">캘리포니아 약사 면허 #87689</a> &middot; 캘리포니아 풀러턴</div>
-    <h1>한민석 <span class="en-name">Minseok &ldquo;Joey&rdquo; Han</span><br>빈틈을 찾아내고, <span class="amp">직접 해결책을 만듭니다.</span></h1>
+    <h1>한민석 Minseok &ldquo;Joey&rdquo; Han</h1>
+    <div class="subtitle">규제과학과 근거, 그리고 소프트웨어 개발을 잇는 약사·과학자입니다.</div>
     <div class="lede">
       <p>한&middot;영 이중언어 약사이자 규제과학 전공자입니다. 운영과 프로세스의 빈틈, 규제 데이터를 파고들어 개선 기회를 찾아내고 <strong>해결책까지 직접 만듭니다.</strong></p>
       <p>규제 테크 제품 두 개를 기획부터 배포까지 혼자 완성했고, FDA 조제 리스트 결정에 근거 자료로 기여했으며, 적자였던 독립 약국을 흑자로 돌려놓았습니다.</p>
@@ -439,7 +438,7 @@ footer{border-top:1px solid var(--hairline-strong);margin-top:70px}
 
 <div class="contact" id="contact">
   <div class="wrap">
-    <h2>이야기 <span class="amp">나눠요.</span></h2>
+    <h2>연락처</h2>
     <p>규제 전문성과 만드는 능력이 동시에 필요한 자리를 찾고 있습니다. 생명과학 컨설팅, 헬스테크, 메디컬 어페어, 약물감시 분야라면 더 반갑습니다. 우리 팀 이야기다 싶으면 편하게 연락 주세요.</p>
     <div class="links">
       <a href="mailto:jmhan9417@gmail.com">jmhan9417@gmail.com</a>
