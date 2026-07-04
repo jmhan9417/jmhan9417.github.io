@@ -4,248 +4,186 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>한민석 Minseok "Joey" Han — PharmD, RPh, 규제과학 석사</title>
-<meta name="description" content="한민석(Joey Han) 포트폴리오: 한·영 이중언어 PharmD + 규제과학 석사. AI 기반 규제·환자안전 도구 GenericCheck, FactCheckMate 개발. FDA 규제과학.">
+<meta name="description" content="한민석(Joey Han) 포트폴리오: 한·영 이중언어 PharmD + 규제과학 석사. 규제·환자안전 도구 GenericCheck, FactCheckMate 개발. FDA 규제과학.">
 <link rel="alternate" hreflang="en" href="https://jmhan9417.github.io/">
 <link rel="alternate" hreflang="ko" href="https://jmhan9417.github.io/ko/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,400;0,9..144,560;1,9..144,340&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+KR:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#101623;
-  --ink-soft:#3d4657;
-  --muted:#68718a;
-  --bg:#fbfaf7;
-  --card:#ffffff;
-  --line:#e6e2d8;
-  --accent:#1d4ed8;
-  --accent-ink:#173ba6;
-  --accent-soft:#eef2ff;
-  --gold:#b7791f;
-  --radius:16px;
+  --paper:#f6f3ec;
+  --ink:#1c1917;
+  --ink-2:#57514a;
+  --hairline:#cfc8b8;
+  --hairline-strong:#1c1917;
+  --accent:#96361f;
+  --sans:'IBM Plex Sans KR',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --serif:'Fraunces','Noto Serif KR',Georgia,serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Inter','Noto Sans KR',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;font-size:16px;overflow-x:hidden;word-break:keep-all}
-h1,h2,h3,.serif{font-family:'Newsreader','Noto Serif KR',Georgia,serif}
-a{color:var(--accent-ink);text-decoration:none}
-a:hover{text-decoration:underline}
-.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
-::selection{background:#c7d5ff}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:16px;line-height:1.7;word-break:keep-all}
+a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:var(--accent)}
+::selection{background:#e8d5c4}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+.mono{font-family:var(--mono)}
 
-/* reveal animation */
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.6,.2,1), transform .7s cubic-bezier(.2,.6,.2,1)}
-.reveal.in{opacity:1;transform:none}
-.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
-@media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}}
-
-/* nav */
-nav{position:sticky;top:0;z-index:50;background:rgba(251,250,247,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:62px}
-.brand{font-family:'Newsreader','Noto Serif KR',serif;font-weight:600;font-size:19px;color:var(--ink)}
-.brand:hover{text-decoration:none}
-.nav-links{display:flex;gap:26px;font-size:14px;font-weight:500;align-items:center}
-.nav-links a{color:var(--ink-soft);position:relative;padding:4px 0}
-.nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--accent);transition:width .25s ease}
-.nav-links a:hover{color:var(--accent-ink);text-decoration:none}
-.nav-links a:hover::after{width:100%}
-.lang-toggle{border:1.5px solid var(--line);border-radius:999px;padding:5px 14px!important;background:var(--card);font-weight:600}
-.lang-toggle::after{display:none}
-.lang-toggle:hover{border-color:var(--accent)}
-@media(max-width:680px){.nav-links a:not(.lang-toggle){display:none}}
+/* masthead */
+.masthead{border-bottom:1px solid var(--hairline-strong)}
+.masthead-inner{display:flex;justify-content:space-between;align-items:baseline;padding:20px 0}
+.masthead .name{font-family:var(--serif);font-weight:560;font-size:18px;text-decoration:none}
+.masthead nav{display:flex;gap:22px;font-family:var(--mono);font-size:12.5px}
+.masthead nav a{text-decoration:none;color:var(--ink-2);font-family:var(--sans);font-size:13px}
+.masthead nav a:hover{color:var(--accent)}
+.masthead nav .lang{color:var(--ink);border-bottom:1px solid var(--accent);font-family:var(--mono)}
+@media(max-width:680px){.masthead nav a:not(.lang){display:none}}
 
 /* hero */
-header{position:relative;padding:96px 0 80px;border-bottom:1px solid var(--line);overflow:hidden}
-.hero-bg{position:absolute;inset:0;pointer-events:none;background:
-  radial-gradient(900px 480px at 82% -10%, #dfe7fc 0%, rgba(223,231,252,0) 62%),
-  radial-gradient(700px 420px at -8% 108%, #f4ead8 0%, rgba(244,234,216,0) 60%)}
-.hero-bg::after{content:"";position:absolute;inset:0;background-image:radial-gradient(#101623 0.8px, transparent 0.8px);background-size:26px 26px;opacity:.045}
-.orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5;animation:drift 14s ease-in-out infinite alternate}
-.orb.a{width:340px;height:340px;background:#c9d8ff;top:-120px;right:6%}
-.orb.b{width:260px;height:260px;background:#f3e2c0;bottom:-100px;left:2%;animation-delay:-6s}
-@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(30px,26px) scale(1.08)}}
-.kicker{display:inline-block;font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent-soft);border:1px solid #dbe3fb;padding:6px 14px;border-radius:999px;margin-bottom:24px}
-h1{font-size:clamp(38px,6vw,58px);font-weight:600;line-height:1.12;letter-spacing:-.012em;margin-bottom:10px}
-.creds{font-family:'Newsreader','Noto Serif KR',serif;font-size:clamp(18px,2.4vw,22px);color:var(--ink-soft);font-style:italic;margin-bottom:26px}
-.lede{max-width:700px;font-size:17px;color:var(--ink-soft);margin-bottom:36px}
-.lede b{color:var(--ink)}
-.cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:11px;font-weight:600;font-size:15px;transition:transform .15s ease, box-shadow .15s ease;cursor:pointer;border:none}
-.btn:hover{text-decoration:none;transform:translateY(-2px)}
-.btn-primary{background:var(--accent);color:#fff;box-shadow:0 6px 18px rgba(29,78,216,.28)}
-.btn-primary:hover{background:var(--accent-ink);box-shadow:0 10px 24px rgba(29,78,216,.34)}
-.btn-ghost{border:1.5px solid var(--line);color:var(--ink);background:var(--card)}
-.btn-ghost:hover{border-color:#c9c3b4}
-.hero-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;margin-top:56px;max-width:900px}
-.fact{background:rgba(255,255,255,.66);border:1px solid var(--line);border-radius:14px;padding:18px 20px;backdrop-filter:blur(4px)}
-.fact .n{font-family:'Newsreader','Noto Serif KR',serif;font-size:30px;font-weight:600;color:var(--ink);line-height:1.1}
-.fact .l{font-size:13px;color:var(--muted);margin-top:4px}
+.hero{padding:72px 0 64px;border-bottom:1px solid var(--hairline)}
+.hero .kicker{font-family:var(--mono);font-size:13px;color:var(--ink-2);margin-bottom:20px}
+.hero .kicker a{color:var(--ink-2)}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(38px,6.4vw,72px);line-height:1.16;letter-spacing:-.015em;margin-bottom:30px;font-optical-sizing:auto}
+.hero h1 .amp{font-style:italic;font-weight:340;color:var(--accent);font-family:'Fraunces',serif}
+.hero h1 .en-name{font-family:'Fraunces',serif;font-weight:560}
+.hero .lede{max-width:660px;font-size:16.5px;color:var(--ink-2)}
+.hero .lede strong{color:var(--ink);font-weight:600}
+.hero .lede p+p{margin-top:14px}
+
+/* facts */
+.facts{margin-top:52px;border-top:1px solid var(--hairline-strong)}
+.fact-row{display:grid;grid-template-columns:220px 1fr;gap:18px;padding:13px 0;border-bottom:1px solid var(--hairline);align-items:baseline}
+.fact-row dt{font-family:var(--mono);font-size:12.5px;color:var(--ink-2)}
+.fact-row dd{font-size:15.5px}
+@media(max-width:640px){.fact-row{grid-template-columns:1fr;gap:2px}}
 
 /* sections */
-section{padding:80px 0}
-.sec-head{margin-bottom:42px}
-.sec-head h2{font-size:32px;font-weight:600;letter-spacing:-.01em}
-.sec-head p{color:var(--muted);margin-top:8px;max-width:640px}
-.rule{width:46px;height:3px;background:var(--accent);border-radius:2px;margin-bottom:14px}
+section{padding:76px 0 30px}
+.sec-head{display:flex;align-items:baseline;gap:18px;border-top:2px solid var(--hairline-strong);padding-top:18px;margin-bottom:12px}
+.sec-head .no{font-family:var(--mono);font-size:13px;color:var(--accent)}
+.sec-head h2{font-family:var(--serif);font-weight:600;font-size:28px;letter-spacing:-.01em}
+.sec-intro{color:var(--ink-2);max-width:640px;margin-bottom:30px;font-size:15.5px}
 
-/* project feature rows */
-.proj{display:grid;grid-template-columns:1.15fr 1fr;gap:46px;align-items:center;padding:44px 0}
-.proj + .proj{border-top:1px solid var(--line)}
-.proj.flip .shot-col{order:2}
-.proj.flip .txt-col{order:1}
-@media(max-width:860px){.proj{grid-template-columns:1fr;gap:26px}.proj.flip .shot-col{order:0}}
-.tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.tag{font-size:11.5px;font-weight:600;letter-spacing:.03em;color:var(--accent-ink);background:var(--accent-soft);padding:4px 11px;border-radius:999px}
-.tag.alt{color:var(--gold);background:#fbf3e4}
-.proj h3{font-size:29px;font-weight:600;margin-bottom:4px}
-.proj .sub{font-size:14.5px;color:var(--muted);margin-bottom:14px}
-.proj p{font-size:15.5px;color:var(--ink-soft);margin-bottom:12px}
-.proj ul{padding-left:18px;font-size:14.5px;color:var(--ink-soft);display:flex;flex-direction:column;gap:7px;margin-bottom:18px}
-.proj .link{font-weight:600;font-size:15px}
+/* projects */
+.proj{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:44px;padding:44px 0;border-top:1px solid var(--hairline);align-items:start}
+.proj:first-of-type{border-top:none}
+.proj.flip .shot-col{order:-1}
+@media(max-width:860px){.proj{grid-template-columns:1fr;gap:24px}.proj.flip .shot-col{order:0}}
+.proj .meta{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);margin-bottom:10px}
+.proj .meta em{font-style:normal;color:var(--accent)}
+.proj h3{font-family:var(--serif);font-weight:600;font-size:30px;letter-spacing:-.01em;margin-bottom:4px}
+.proj .sub{font-size:15px;color:var(--ink-2);margin-bottom:16px}
+.proj p{font-size:15.5px;margin-bottom:14px}
+.proj p i{font-family:var(--serif);font-style:normal;font-weight:500}
+.proj ul{list-style:none;margin-bottom:18px;display:flex;flex-direction:column;gap:9px}
+.proj li{font-size:14.5px;color:var(--ink-2);padding-left:20px;position:relative}
+.proj li::before{content:"—";position:absolute;left:0;color:var(--accent)}
+.proj .visit{font-size:15px;font-weight:500}
 
-/* browser mockup + gallery */
-.browser{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:0 24px 60px -22px rgba(16,22,35,.3);transition:transform .35s cubic-bezier(.2,.6,.2,1), box-shadow .35s ease}
-.shot-col:hover .browser{transform:translateY(-6px) scale(1.012);box-shadow:0 34px 80px -24px rgba(16,22,35,.38)}
-.browser-bar{display:flex;align-items:center;gap:8px;background:#f1efe8;border-bottom:1px solid var(--line);padding:9px 14px}
-.dot{width:10px;height:10px;border-radius:50%}
-.dot.r{background:#f87171}.dot.y{background:#fbbf24}.dot.g{background:#34d399}
-.browser-url{flex:1;text-align:center;font-size:11.5px;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:6px;padding:3px 10px;margin:0 8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.browser .main-shot{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;cursor:zoom-in;transition:opacity .25s ease}
-.browser .main-shot.fade{opacity:0}
-.thumbs{display:flex;gap:10px;margin-top:14px}
-.thumb{width:88px;height:58px;border-radius:8px;overflow:hidden;border:2px solid var(--line);cursor:pointer;padding:0;background:none;transition:border-color .2s ease, transform .2s ease;flex-shrink:0}
+/* image frames */
+.frame{border:1px solid var(--ink);background:#fff}
+.frame img.main-shot{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;cursor:zoom-in;transition:opacity .2s ease}
+.frame img.main-shot.fade{opacity:0}
+.frame-cap{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:11.5px;color:var(--ink-2);padding:8px 2px 0}
+.thumbs{display:flex;gap:8px;margin-top:12px}
+.thumb{width:84px;height:56px;overflow:hidden;border:1px solid var(--hairline);cursor:pointer;padding:0;background:none;opacity:.75;transition:opacity .15s ease,border-color .15s ease}
 .thumb img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
-.thumb:hover{transform:translateY(-2px)}
-.thumb.active{border-color:var(--accent)}
-.zoom-hint{font-size:12px;color:var(--muted);margin-top:10px;display:flex;align-items:center;gap:6px}
-.zoom-hint svg{width:13px;height:13px;opacity:.7}
+.thumb:hover{opacity:1}
+.thumb.active{border-color:var(--accent);opacity:1}
 
-/* award card */
-.award-band{margin-top:34px;background:linear-gradient(120deg,#fdf8ee,#fbf1dc);border:1px solid #efdcb8;border-radius:var(--radius);padding:30px 34px;display:flex;gap:24px;align-items:center;flex-wrap:wrap}
-.award-band .medal{font-size:44px;line-height:1;filter:drop-shadow(0 4px 8px rgba(183,121,31,.3))}
-.award-band h3{font-size:22px;font-weight:600}
-.award-band .sub{font-size:13.5px;color:var(--gold);font-weight:600;margin-bottom:6px}
-.award-band p{font-size:14.5px;color:var(--ink-soft);max-width:640px}
-.award-band .body{flex:1;min-width:260px}
+/* award */
+.award{border-top:1px solid var(--hairline);padding:40px 0 48px;display:grid;grid-template-columns:220px 1fr;gap:18px}
+@media(max-width:640px){.award{grid-template-columns:1fr}}
+.award .label{font-family:var(--mono);font-size:12.5px;color:var(--accent)}
+.award h3{font-family:var(--serif);font-weight:600;font-size:22px;margin-bottom:6px}
+.award p{font-size:15px;color:var(--ink-2);max-width:580px;margin-bottom:10px}
+.award a{font-size:14.5px}
+
+/* experience rows */
+.xp-row{display:grid;grid-template-columns:220px 1fr;gap:18px;padding:26px 0;border-top:1px solid var(--hairline)}
+.xp-row:first-of-type{border-top:none}
+@media(max-width:640px){.xp-row{grid-template-columns:1fr;gap:6px}}
+.xp-when{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);padding-top:5px}
+.xp-body h3{font-family:var(--serif);font-weight:600;font-size:20px;display:inline}
+.xp-body .org-note{font-size:14px;color:var(--ink-2)}
+.xp-body .role{font-size:14px;font-weight:600;color:var(--accent);margin:2px 0 8px}
+.xp-body p,.xp-body li{font-size:14.5px;color:var(--ink-2)}
+.xp-body ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.xp-body li{padding-left:20px;position:relative}
+.xp-body li::before{content:"—";position:absolute;left:0;color:var(--hairline-strong)}
+
+/* skills */
+.skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:34px;padding-top:8px}
+.skill h3{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--ink);border-top:1px solid var(--hairline-strong);padding-top:12px;margin-bottom:12px;font-family:var(--sans);font-weight:600}
+.skill ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+.skill li{font-size:14px;color:var(--ink-2)}
+
+/* contact */
+.contact{padding:90px 0 40px}
+.contact h2{font-family:var(--serif);font-weight:600;font-size:clamp(34px,5.4vw,56px);letter-spacing:-.015em;margin-bottom:18px}
+.contact h2 .amp{font-style:italic;font-weight:340;color:var(--accent);font-family:'Fraunces',serif}
+.contact p{max-width:580px;color:var(--ink-2);margin-bottom:26px}
+.contact .links{display:flex;gap:30px;flex-wrap:wrap;font-size:15.5px;font-weight:500}
+footer{border-top:1px solid var(--hairline-strong);margin-top:70px}
+.foot-inner{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:18px 0 42px;font-family:var(--mono);font-size:12px;color:var(--ink-2)}
 
 /* lightbox */
-.lightbox{position:fixed;inset:0;z-index:100;background:rgba(12,16,26,.9);display:flex;align-items:center;justify-content:center;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .28s ease;backdrop-filter:blur(6px)}
+.lightbox{position:fixed;inset:0;z-index:100;background:rgba(24,20,16,.92);display:flex;align-items:center;justify-content:center;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .2s ease}
 .lightbox.open{opacity:1;pointer-events:auto}
-.lightbox img{max-width:min(1200px,92vw);max-height:80vh;border-radius:10px;box-shadow:0 30px 90px rgba(0,0,0,.5);transform:scale(.96);transition:transform .28s ease}
-.lightbox.open img{transform:scale(1)}
-.lb-cap{color:#cfd6e4;font-size:14px;margin-top:16px;text-align:center;padding:0 20px}
-.lb-btn{position:absolute;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);color:#fff;border-radius:50%;width:46px;height:46px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s ease;user-select:none}
-.lb-btn:hover{background:rgba(255,255,255,.22)}
+.lightbox img{max-width:min(1200px,92vw);max-height:80vh;border:1px solid #6b6157}
+.lb-cap{color:#cfc8b8;font-family:var(--sans);font-size:13px;margin-top:14px;text-align:center;padding:0 20px}
+.lb-btn{position:absolute;background:none;border:1px solid #6b6157;color:#f6f3ec;width:42px;height:42px;font-size:19px;cursor:pointer;font-family:var(--mono)}
+.lb-btn:hover{border-color:#f6f3ec}
 .lb-close{top:22px;right:26px}
 .lb-prev{left:26px;top:50%;transform:translateY(-50%)}
 .lb-next{right:26px;top:50%;transform:translateY(-50%)}
 @media(max-width:640px){.lb-prev{left:10px}.lb-next{right:10px}}
-
-/* experience */
-.xp{border-left:2px solid var(--line);margin-left:8px;padding-left:34px;display:flex;flex-direction:column;gap:40px;position:relative}
-.xp-item{position:relative}
-.xp-item::before{content:"";position:absolute;left:-41px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:3px solid var(--bg);box-shadow:0 0 0 2px rgba(29,78,216,.18)}
-.xp-item.past::before{background:#c3c9d6;box-shadow:none}
-.xp-top{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:baseline}
-.xp-top h3{font-size:21px;font-weight:600}
-.xp-top .when{font-size:13.5px;color:var(--muted);white-space:nowrap}
-.xp .role{font-size:14.5px;color:var(--accent-ink);font-weight:600;margin:2px 0 8px}
-.xp p, .xp li{font-size:15px;color:var(--ink-soft)}
-.xp ul{padding-left:18px;display:flex;flex-direction:column;gap:5px;margin-top:4px}
-
-/* skills */
-.skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:18px}
-.skill{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:transform .2s ease, box-shadow .2s ease}
-.skill:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(16,22,35,.09)}
-.skill h3{font-size:16.5px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:9px}
-.skill h3 .dot-s{width:9px;height:9px;border-radius:50%;background:var(--accent);flex-shrink:0}
-.skill ul{list-style:none;display:flex;flex-direction:column;gap:6px}
-.skill li{font-size:14px;color:var(--ink-soft);padding-left:14px;position:relative}
-.skill li::before{content:"·";position:absolute;left:2px;color:var(--accent);font-weight:700}
-
-/* education */
-.edu{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:transform .2s ease, box-shadow .2s ease}
-.card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(16,22,35,.09)}
-.card h3{font-size:21px;font-weight:600;margin-bottom:4px}
-.card .sub{font-size:13.5px;color:var(--muted);margin-bottom:10px}
-.card p{font-size:14.5px;color:var(--ink-soft)}
-.card ul{padding-left:18px;font-size:14.5px;color:var(--ink-soft);display:flex;flex-direction:column;gap:6px}
-
-/* contact */
-.contact-band{position:relative;overflow:hidden;background:var(--ink);color:#eef1f7;border-radius:22px;padding:60px 52px;margin:20px 0 80px}
-.contact-band::before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,#2b4bbd55,transparent 70%);top:-160px;right:-80px}
-.contact-band h2{font-size:34px;font-weight:600;color:#fff;margin-bottom:12px;position:relative}
-.contact-band p{color:#b8c0d2;max-width:580px;margin-bottom:30px;position:relative}
-.contact-band .btn-primary{background:#fff;color:var(--ink);box-shadow:none}
-.contact-band .btn-ghost{border-color:#3a4356;color:#eef1f7;background:transparent}
-.contact-links{display:flex;gap:14px;flex-wrap:wrap;position:relative}
-footer{padding:0 0 44px;text-align:center;font-size:13px;color:var(--muted)}
-@media(max-width:640px){.contact-band{padding:44px 28px}}
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="wrap nav-inner">
-    <a class="brand" href="#top">Joey Han</a>
-    <div class="nav-links">
+<div class="masthead">
+  <div class="wrap masthead-inner">
+    <a class="name" href="#top">Minseok Han</a>
+    <nav>
       <a href="#projects">프로젝트</a>
       <a href="#experience">경력</a>
       <a href="#skills">역량</a>
       <a href="#education">학력</a>
       <a href="#contact">연락처</a>
-      <a class="lang-toggle" href="../" hreflang="en">EN</a>
-    </div>
+      <a class="lang" href="../" hreflang="en">EN</a>
+    </nav>
   </div>
-</nav>
+</div>
 
-<header id="top">
-  <div class="hero-bg"></div>
-  <div class="orb a"></div><div class="orb b"></div>
-  <div class="wrap" style="position:relative">
-    <span class="kicker reveal">규제과학 &times; AI 도구 개발</span>
-    <h1 class="reveal d1">한민석 <span style="font-size:.62em;color:var(--ink-soft)">Minseok &ldquo;Joey&rdquo; Han</span></h1>
-    <div class="creds reveal d1">PharmD, RPh &middot; 규제과학 석사(MS) &middot; 캘리포니아 약사 면허 <a href="https://search.dca.ca.gov/details/7200/RPH/87689/59cffe4003b66c6ac7c9e685a639e9fd" target="_blank" rel="noopener">#87689</a></div>
-    <p class="lede reveal d2">한&middot;영 이중언어 약사이자 규제과학 전공자입니다. <b>운영과 프로세스의 빈틈, 규제 데이터를 파고들어 개선 기회를 찾아내고, 해결책까지 직접 만듭니다.</b> 규제 테크 제품 두 개를 기획부터 배포까지 혼자 완성했고, FDA 조제 리스트 결정에 근거 자료로 기여했으며, 적자였던 독립 약국을 흑자로 돌려놓았습니다.</p>
-    <div class="cta-row reveal d3">
-      <a class="btn btn-primary" href="#projects">프로젝트 보기 &darr;</a>
-      <a class="btn btn-ghost" href="https://www.linkedin.com/in/minseok-han/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn btn-ghost" href="mailto:jmhan9417@gmail.com">이메일 보내기</a>
+<div class="hero" id="top">
+  <div class="wrap">
+    <div class="kicker">PharmD, RPh &middot; 규제과학 석사 &middot; <a href="https://search.dca.ca.gov/details/7200/RPH/87689/59cffe4003b66c6ac7c9e685a639e9fd" target="_blank" rel="noopener">캘리포니아 약사 면허 #87689</a> &middot; 캘리포니아 풀러턴</div>
+    <h1>한민석 <span class="en-name">Minseok &ldquo;Joey&rdquo; Han</span><br>빈틈을 찾아내고, <span class="amp">직접 해결책을 만듭니다.</span></h1>
+    <div class="lede">
+      <p>한&middot;영 이중언어 약사이자 규제과학 전공자입니다. 운영과 프로세스의 빈틈, 규제 데이터를 파고들어 개선 기회를 찾아내고 <strong>해결책까지 직접 만듭니다.</strong></p>
+      <p>규제 테크 제품 두 개를 기획부터 배포까지 혼자 완성했고, FDA 조제 리스트 결정에 근거 자료로 기여했으며, 적자였던 독립 약국을 흑자로 돌려놓았습니다.</p>
     </div>
-    <div class="hero-facts">
-      <div class="fact reveal"><div class="n"><span class="count" data-to="2">0</span></div><div class="l">직접 만들어 배포한 규제 테크 제품</div></div>
-      <div class="fact reveal d1"><div class="n"><span class="count" data-to="300">0</span>+</div><div class="l">FDA 503B 결정을 위해 검토한 논문</div></div>
-      <div class="fact reveal d2"><div class="n">2위</div><div class="l">FDA 규제과학 인재 경진대회 (2021)</div></div>
-      <div class="fact reveal d3"><div class="n">EN/KR</div><div class="l">이중언어 메디컬 라이팅 &middot; 한&middot;미 규제 대응</div></div>
-    </div>
+    <dl class="facts">
+      <div class="fact-row"><dt>배포한 제품</dt><dd>GenericCheck &middot; FactCheckMate — 둘 다 라이브 베타 운영 중</dd></div>
+      <div class="fact-row"><dt>FDA 근거 작업</dt><dd>503B 벌크 리스트 결정을 위해 논문 300편 이상 검토 (M-CERSI)</dd></div>
+      <div class="fact-row"><dt>수상</dt><dd>2021 America's Got Regulatory Science Talent 2위 (UMB CERSI / FDA)</dd></div>
+      <div class="fact-row"><dt>언어</dt><dd>영어 &middot; 한국어 — 양 언어로 메디컬 라이팅, 한&middot;미 규제 대응</dd></div>
+    </dl>
   </div>
-</header>
+</div>
 
 <section id="projects">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="rule"></div>
-      <h2>주요 프로젝트</h2>
-      <p>규제 프레이밍, 데이터 모델, AI 기반 개발, 배포까지 전 과정을 혼자 진행했습니다. 스크린샷을 클릭하면 크게 볼 수 있고, 썸네일로 화면을 넘겨볼 수 있습니다.</p>
-    </div>
+    <div class="sec-head"><span class="no">01</span><h2>주요 프로젝트</h2></div>
+    <p class="sec-intro">규제 프레이밍, 데이터 모델, AI 기반 개발, 배포까지 전 과정을 혼자 진행했습니다. 스크린샷을 클릭하면 크게 볼 수 있습니다.</p>
 
     <!-- GenericCheck -->
-    <div class="proj reveal">
-      <div class="shot-col">
-        <div class="browser">
-          <div class="browser-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="browser-url">generic-check.vercel.app</span></div>
-          <img class="main-shot" id="gc-main" src="../assets/genericcheck-home.png" alt="GenericCheck 홈페이지" data-gallery="gc" data-idx="0">
-        </div>
-        <div class="thumbs" data-for="gc-main">
-          <button class="thumb active" data-src="../assets/genericcheck-home.png" data-cap="GenericCheck 홈 — 내 제네릭, 실제로 어느 회사가 만들었을까?" aria-label="홈페이지 보기"><img src="../assets/genericcheck-home.png" alt=""></button>
-          <button class="thumb" data-src="../assets/genericcheck-drug.png" data-cap="약물 상세 페이지 — NTI(치료역이 좁은 약물) 안전 경고 포함 (레보티록신)" aria-label="약물 페이지 보기"><img src="../assets/genericcheck-drug.png" alt=""></button>
-          <button class="thumb" data-src="../assets/genericcheck-makers.png" data-cap="제조사 비교 화면 — 제조사별 환자 리포트" aria-label="제조사 비교 보기"><img src="../assets/genericcheck-makers.png" alt=""></button>
-        </div>
-        <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg>스크린샷을 클릭하면 크게 볼 수 있습니다</div>
-      </div>
+    <div class="proj">
       <div class="txt-col">
-        <div class="tags"><span class="tag">환자 안전</span><span class="tag">약물감시</span><span class="tag alt">라이브 베타</span></div>
+        <div class="meta">환자 안전 &middot; 약물감시 &middot; <em>라이브 베타</em></div>
         <h3>GenericCheck</h3>
         <div class="sub">제네릭 의약품, 제조사 단위의 투명성</div>
         <p>대체조제 뒤에 가려진 질문에 답하는 환자용 레지스트리입니다. <i>내가 받은 제네릭은 실제로 어느 제조사가 만들었고, 제조사마다 복용 경험은 어떻게 다를까?</i></p>
@@ -254,96 +192,108 @@ footer{padding:0 0 44px;text-align:center;font-size:13px;color:var(--muted)}
           <li>MedDRA Preferred Term과 FDA Orange Book 치료동등성 코드에 기반한 데이터 모델.</li>
           <li>개인정보, 법적 책임, 이해관계자 데이터 접근 문제를 설계 단계에서 미리 정리했습니다.</li>
         </ul>
-        <a class="link" href="https://generic-check.vercel.app/" target="_blank" rel="noopener">라이브 사이트 보기 &rarr;</a>
+        <a class="visit" href="https://generic-check.vercel.app/" target="_blank" rel="noopener">generic-check.vercel.app</a>
+      </div>
+      <div class="shot-col">
+        <div class="frame">
+          <img class="main-shot" id="gc-main" src="../assets/genericcheck-home.png" alt="GenericCheck 홈페이지" data-gallery="gc" data-idx="0">
+        </div>
+        <div class="frame-cap"><span>generic-check.vercel.app</span><span>클릭하면 크게 보기</span></div>
+        <div class="thumbs" data-for="gc-main">
+          <button class="thumb active" data-src="../assets/genericcheck-home.png" data-cap="GenericCheck 홈 — 내 제네릭, 실제로 어느 회사가 만들었을까?" aria-label="홈페이지 보기"><img src="../assets/genericcheck-home.png" alt=""></button>
+          <button class="thumb" data-src="../assets/genericcheck-drug.png" data-cap="약물 상세 페이지 — NTI(치료역이 좁은 약물) 안전 경고 포함 (레보티록신)" aria-label="약물 페이지 보기"><img src="../assets/genericcheck-drug.png" alt=""></button>
+          <button class="thumb" data-src="../assets/genericcheck-makers.png" data-cap="제조사 비교 화면 — 제조사별 환자 리포트" aria-label="제조사 비교 보기"><img src="../assets/genericcheck-makers.png" alt=""></button>
+        </div>
       </div>
     </div>
 
     <!-- FactCheckMate -->
-    <div class="proj flip reveal">
-      <div class="shot-col">
-        <div class="browser">
-          <div class="browser-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="browser-url">factcheckmate.vercel.app</span></div>
-          <img class="main-shot" id="fc-main" src="../assets/factcheckmate-kr.png" alt="FactCheckMate 한국판" data-gallery="fc" data-idx="0">
-        </div>
-        <div class="thumbs" data-for="fc-main">
-          <button class="thumb active" data-src="../assets/factcheckmate-kr.png" data-cap="한국판 — 건강식품·화장품 광고 문구를 한국 광고 기준에 맞춰 점검" aria-label="한국판 보기"><img src="../assets/factcheckmate-kr.png" alt=""></button>
-          <button class="thumb" data-src="../assets/factcheckmate-us.png" data-cap="미국판 — FDA/FTC 기준 점검, 0–100 기만 위험 점수" aria-label="미국판 보기"><img src="../assets/factcheckmate-us.png" alt=""></button>
-        </div>
-        <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg>스크린샷을 클릭하면 크게 볼 수 있습니다</div>
-      </div>
+    <div class="proj flip">
       <div class="txt-col">
-        <div class="tags"><span class="tag">규제</span><span class="tag">광고 심의</span><span class="tag alt">라이브 베타</span></div>
+        <div class="meta">규제 &middot; 광고 심의 &middot; <em>라이브 베타</em></div>
         <h3>FactCheckMate</h3>
         <div class="sub">한&middot;미 양국 기준 광고 문구 점검 도구</div>
         <p>건강기능식품&middot;화장품 광고 문구를 미국(FDA/FTC)과 한국 광고 기준에 맞춰 구절 단위로 점검합니다. 소비자가 쓸 만한 도구가 없길래 직접 만들었습니다.</p>
         <ul>
-          <li>3단계 파이프라인: 규칙 스캔 &rarr; AI 맥락 분석 &rarr; FDA/FTC&middot;한국 법령 출처 대조 검증.</li>
+          <li>3단계 파이프라인: 규칙 스캔, AI 맥락 분석, FDA/FTC&middot;한국 법령 출처 대조 검증.</li>
           <li>심의 결과를 0&ndash;100 위험 점수로 수치화해 근거를 추적할 수 있게 했고, 미국의 구조/기능 표시와 의약품 표방을 가르는 기준(21 CFR 101.93)을 로직으로 구현했습니다.</li>
           <li>소비자와 판매자, 두 사용자군을 위해 설계했고 비공개 결과&middot;동의 절차 같은 법적 안전장치를 넣었습니다.</li>
         </ul>
-        <a class="link" href="https://factcheckmate.vercel.app/" target="_blank" rel="noopener">라이브 사이트 보기 &rarr;</a>
+        <a class="visit" href="https://factcheckmate.vercel.app/" target="_blank" rel="noopener">factcheckmate.vercel.app</a>
+      </div>
+      <div class="shot-col">
+        <div class="frame">
+          <img class="main-shot" id="fc-main" src="../assets/factcheckmate-kr.png" alt="FactCheckMate 한국판" data-gallery="fc" data-idx="0">
+        </div>
+        <div class="frame-cap"><span>factcheckmate.vercel.app</span><span>클릭하면 크게 보기</span></div>
+        <div class="thumbs" data-for="fc-main">
+          <button class="thumb active" data-src="../assets/factcheckmate-kr.png" data-cap="한국판 — 건강식품·화장품 광고 문구를 한국 광고 기준에 맞춰 점검" aria-label="한국판 보기"><img src="../assets/factcheckmate-kr.png" alt=""></button>
+          <button class="thumb" data-src="../assets/factcheckmate-us.png" data-cap="미국판 — FDA/FTC 기준 점검, 0–100 기만 위험 점수" aria-label="미국판 보기"><img src="../assets/factcheckmate-us.png" alt=""></button>
+        </div>
       </div>
     </div>
 
     <!-- Horang -->
-    <div class="proj reveal">
-      <div class="shot-col">
-        <div class="browser">
-          <div class="browser-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="browser-url">threads.net/@meddit_by.horang</span></div>
-          <img class="main-shot" id="hr-main" src="../assets/horang-threads.png" alt="호랑약사 Threads 채널" data-gallery="hr" data-idx="0" style="aspect-ratio:auto;max-height:420px">
-        </div>
-        <div class="zoom-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M11 8v6M8 11h6"/></svg>스크린샷을 클릭하면 크게 볼 수 있습니다</div>
-      </div>
+    <div class="proj">
       <div class="txt-col">
-        <div class="tags"><span class="tag">헬스 커뮤니케이션</span><span class="tag">AI 파이프라인</span></div>
+        <div class="meta">헬스 커뮤니케이션 &middot; AI 파이프라인</div>
         <h3>호랑약사</h3>
         <div class="sub">멀티 에이전트 기반, 근거 중심 건강 콘텐츠 시스템</div>
         <p>LangGraph 멀티 에이전트 파이프라인으로 한국 독자를 위한 근거 기반 웰니스 팩트체크 콘텐츠를 만듭니다. 한&middot;미 규제 지식을 실제 건강기능식품 광고 사례에 적용합니다.</p>
         <ul>
-          <li>5개 에이전트 파이프라인(트렌드 스카우트 &rarr; 카피라이터 &rarr; 프로듀서 &rarr; 배포 &rarr; 분석)에 컴플라이언스 체크를 내장했습니다.</li>
+          <li>5개 에이전트 파이프라인(트렌드 스카우트, 카피라이터, 프로듀서, 배포, 분석)에 컴플라이언스 체크를 내장했습니다.</li>
           <li>공개 Threads 채널로 발행하며, 모든 주장에 1차 근거를 답니다.</li>
         </ul>
-        <a class="link" href="https://www.threads.net/@meddit_by.horang" target="_blank" rel="noopener">Threads에서 @meddit_by.horang 보기 &rarr;</a>
+        <a class="visit" href="https://www.threads.net/@meddit_by.horang" target="_blank" rel="noopener">threads.net/@meddit_by.horang</a>
+      </div>
+      <div class="shot-col">
+        <div class="frame">
+          <img class="main-shot" id="hr-main" src="../assets/horang-threads.png" alt="호랑약사 Threads 채널" data-gallery="hr" data-idx="0" style="aspect-ratio:auto;max-height:400px;width:100%;object-fit:cover">
+        </div>
+        <div class="frame-cap"><span>threads.net/@meddit_by.horang</span><span>클릭하면 크게 보기</span></div>
       </div>
     </div>
 
-    <!-- Award band -->
-    <div class="award-band reveal">
-      <div class="medal">🥈</div>
-      <div class="body">
-        <div class="sub">2021 America's Got Regulatory Science Talent — UMB CERSI / FDA — 2위</div>
-        <h3>Braille-iant</h3>
+    <!-- Award -->
+    <div class="award">
+      <div class="label">2021 &middot; UMB CERSI / FDA<br>2위</div>
+      <div>
+        <h3>Braille-iant — America's Got Regulatory Science Talent</h3>
         <p>시각장애 환자를 위한 점자 오버레이 보조 처방 라벨 콘셉트를 직접 제안하고 4인 팀을 이끌었습니다. FDA 규제과학혁신실(ORSI)에서 발표해 2위를 받았습니다.</p>
+        <a href="https://www.fda.gov/science-research/advancing-regulatory-science/2021-winners-americas-got-regulatory-science-talent-competition-present-fda" target="_blank" rel="noopener">FDA.gov에서 수상 내역 보기</a>
       </div>
-      <a class="btn btn-ghost" href="https://www.fda.gov/science-research/advancing-regulatory-science/2021-winners-americas-got-regulatory-science-talent-competition-present-fda" target="_blank" rel="noopener">FDA.gov에서 보기</a>
     </div>
 
   </div>
 </section>
 
-<section id="experience" style="background:#f5f3ed;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+<section id="experience">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="rule"></div>
-      <h2>경력</h2>
-      <p>산업, 연구, 임상 현장을 하나로 잇는 주제: 근거와 프로세스의 빈틈을 의사결정과 시스템으로 바꾸는 일.</p>
-    </div>
-    <div class="xp">
+    <div class="sec-head"><span class="no">02</span><h2>경력</h2></div>
+    <p class="sec-intro">산업, 연구, 임상 현장을 하나로 잇는 주제: 근거와 프로세스의 빈틈을 의사결정과 시스템으로 바꾸는 일.</p>
 
-      <div class="xp-item reveal">
-        <div class="xp-top"><h3>Walgreens Centralized Services</h3><span class="when">2025년 8월 – 현재 · 캘리포니아 브레아</span></div>
+    <div class="xp-row">
+      <div class="xp-when">2025.08 — 현재<br>캘리포니아 브레아</div>
+      <div class="xp-body">
+        <h3>Walgreens Centralized Services</h3>
         <div class="role">약사</div>
         <p>캘리포니아&middot;워싱턴주 소매 약국을 위한 중앙화 사전 라벨 검수(하루 400건 이상)를 담당하고 있습니다. 전문의약품과 주사제 처방 경험을 포함합니다.</p>
       </div>
+    </div>
 
-      <div class="xp-item reveal">
-        <div class="xp-top"><h3>Kaiser Permanente <span style="font-weight:400;font-size:15px;color:var(--muted)">(RxRelief 파견)</span></h3><span class="when">2025년 11월; 2026년 1–2월 · 캘리포니아 다우니</span></div>
+    <div class="xp-row">
+      <div class="xp-when">2025.11; 2026.01–02<br>캘리포니아 다우니</div>
+      <div class="xp-body">
+        <h3>Kaiser Permanente</h3> <span class="org-note">RxRelief 파견</span>
         <div class="role">계약 임상약사</div>
         <p>약국 두 곳에서 주 60시간 수준의 고강도 커버리지를 소화했습니다. ePIMS로 처방을 검증하고, EPIC 차트 리뷰와 의료진 약물정보 지원으로 임상 질의를 해결했습니다.</p>
       </div>
+    </div>
 
-      <div class="xp-item reveal">
-        <div class="xp-top"><h3>Nature Medic</h3><span class="when">2022년 9월 – 2025년 1월 · 캘리포니아 토런스</span></div>
+    <div class="xp-row">
+      <div class="xp-when">2022.09 — 2025.01<br>캘리포니아 토런스</div>
+      <div class="xp-body">
+        <h3>Nature Medic</h3>
         <div class="role">과학 커뮤니케이션 컨설턴트 (Per-Diem)</div>
         <ul>
           <li>FDA/FTC 컴플라이언스를 위한 실증&middot;면책문구 검토 프로세스를 만들어 홍보물 50건 이상을 심사하고, 3개 부서 직원을 교육했습니다.</li>
@@ -351,9 +301,12 @@ footer{padding:0 0 44px;text-align:center;font-size:13px;color:var(--muted)}
           <li>규제 경계를 실무 가이드라인으로 바꿔 근거 없는 효능 주장 리스크를 줄였습니다.</li>
         </ul>
       </div>
+    </div>
 
-      <div class="xp-item reveal">
-        <div class="xp-top"><h3>Fullerton Medical Pharmacy</h3><span class="when">2022년 7월 – 2025년 8월 · 캘리포니아 풀러턴</span></div>
+    <div class="xp-row">
+      <div class="xp-when">2022.07 — 2025.08<br>캘리포니아 풀러턴</div>
+      <div class="xp-body">
+        <h3>Fullerton Medical Pharmacy</h3>
         <div class="role">약국 약사</div>
         <ul>
           <li>PBM 재협상과 워크플로 재설계로 적자였던 약국을 흑자로 전환하고, 일일 처방량을 약 25% 키웠습니다.</li>
@@ -361,44 +314,50 @@ footer{padding:0 0 44px;text-align:center;font-size:13px;color:var(--muted)}
           <li>약국 관리 플랫폼을 세 차례 전환하며 직원 6명 이상을 교육했습니다.</li>
         </ul>
       </div>
+    </div>
 
-      <div class="xp-item past reveal">
-        <div class="xp-top"><h3>Johns Hopkins Hospital</h3><span class="when">2021년 7월 – 2022년 3월 · 메릴랜드 볼티모어</span></div>
+    <div class="xp-row">
+      <div class="xp-when">2021.07 — 2022.03<br>메릴랜드 볼티모어</div>
+      <div class="xp-body">
+        <h3>Johns Hopkins Hospital</h3>
         <div class="role">임상 트랙 약학 익스턴 (Advanced Practice)</div>
         <ul>
           <li>골수이식 후 불응성 CRS에 대한 Anakinra&middot;Siltuximab 근거 리뷰를 작성해 P&amp;T 위원회 검토를 받았습니다.</li>
           <li>종양 생물학적제제와 이식 보조요법을 중심으로 의료진 약물정보 질의 30건 이상을 해결했습니다.</li>
         </ul>
       </div>
+    </div>
 
-      <div class="xp-item past reveal">
-        <div class="xp-top"><h3>P-SHOR, University of Maryland Baltimore</h3><span class="when">2022년 2–3월 · 메릴랜드 볼티모어</span></div>
+    <div class="xp-row">
+      <div class="xp-when">2022.02 — 03<br>메릴랜드 볼티모어</div>
+      <div class="xp-body">
+        <h3>P-SHOR, University of Maryland Baltimore</h3>
         <div class="role">보건경제&middot;성과연구(HEOR) 익스턴</div>
         <p>MRD 검사의 임상&middot;약물경제성 근거를 검토하는 타당성 분석을 수행하고, IRB 연구계획서의 배경&middot;목적&middot;방법론 파트를 작성했습니다.</p>
       </div>
+    </div>
 
-      <div class="xp-item past reveal">
-        <div class="xp-top"><h3>M-CERSI <span style="font-weight:400;font-size:15px;color:var(--muted)">(메릴랜드 규제과학혁신센터)</span></h3><span class="when">2020년 9월 – 2021년 5월 · 메릴랜드 볼티모어</span></div>
+    <div class="xp-row">
+      <div class="xp-when">2020.09 — 2021.05<br>메릴랜드 볼티모어</div>
+      <div class="xp-body">
+        <h3>M-CERSI</h3> <span class="org-note">메릴랜드 규제과학혁신센터</span>
         <div class="role">대학원 연구조교</div>
         <ul>
           <li>PRISMA 프레임워크로 Tropicamide 관련 논문 300편 이상을 검토해 FDA 503B 벌크 리스트 결정의 근거를 구축했습니다.</li>
           <li>FDA 소속 선임 연구자들에게 의사결정용 보고서를 전달해 조제시설 리스트 결정에 기여했습니다.</li>
         </ul>
       </div>
-
     </div>
+
   </div>
 </section>
 
 <section id="skills">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="rule"></div>
-      <h2>역량</h2>
-    </div>
+    <div class="sec-head"><span class="no">03</span><h2>역량</h2></div>
     <div class="skill-grid">
-      <div class="skill reveal">
-        <h3><span class="dot-s"></span>규제 &amp; 컴플라이언스</h3>
+      <div class="skill">
+        <h3>규제 &amp; 컴플라이언스</h3>
         <ul>
           <li>GCP &amp; ICH 가이드라인</li>
           <li>IND / NDA / ANDA / BLA &amp; eCTD</li>
@@ -407,8 +366,8 @@ footer{padding:0 0 44px;text-align:center;font-size:13px;color:var(--muted)}
           <li>인간대상연구 / GDPR (CITI, NIH 수료)</li>
         </ul>
       </div>
-      <div class="skill reveal d1">
-        <h3><span class="dot-s"></span>분석 &amp; 리서치</h3>
+      <div class="skill">
+        <h3>분석 &amp; 리서치</h3>
         <ul>
           <li>체계적 문헌고찰 (PRISMA)</li>
           <li>PubMed / Embase / Covidence</li>
@@ -417,8 +376,8 @@ footer{padding:0 0 44px;text-align:center;font-size:13px;color:var(--muted)}
           <li>임상약리 &amp; PK/PD 해석</li>
         </ul>
       </div>
-      <div class="skill reveal d2">
-        <h3><span class="dot-s"></span>컨설팅 &amp; 커뮤니케이션</h3>
+      <div class="skill">
+        <h3>컨설팅 &amp; 커뮤니케이션</h3>
         <ul>
           <li>니즈 발굴 &amp; 솔루션 스코핑</li>
           <li>부서 간 이해관계자 조율</li>
@@ -427,13 +386,13 @@ footer{padding:0 0 44px;text-align:center;font-size:13px;color:var(--muted)}
           <li>이중언어 메디컬 라이팅 (EN/KR)</li>
         </ul>
       </div>
-      <div class="skill reveal d3">
-        <h3><span class="dot-s"></span>테크니컬</h3>
+      <div class="skill">
+        <h3>테크니컬</h3>
         <ul>
           <li>AI 기반 개발 (Claude Code, Codex)</li>
           <li>LLM 파이프라인 설계 (LangGraph)</li>
           <li>Zotero / EndNote</li>
-          <li>Microsoft Office / Teams · Google Workspace</li>
+          <li>Microsoft Office / Teams, Google Workspace</li>
           <li>Adobe Acrobat Pro</li>
         </ul>
       </div>
@@ -441,53 +400,60 @@ footer{padding:0 0 44px;text-align:center;font-size:13px;color:var(--muted)}
   </div>
 </section>
 
-<section id="education" style="background:#f5f3ed;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+<section id="education">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="rule"></div>
-      <h2>학력 &amp; 교육</h2>
-    </div>
-    <div class="edu">
-      <div class="card reveal">
+    <div class="sec-head"><span class="no">04</span><h2>학력 &amp; 교육</h2></div>
+
+    <div class="xp-row">
+      <div class="xp-when">메릴랜드 볼티모어</div>
+      <div class="xp-body">
         <h3>University of Maryland, Baltimore</h3>
-        <div class="sub">PharmD &amp; 규제과학 석사 (복수학위)</div>
-        <p>석사 과정: IND/NDA/ANDA/BLA 제출 · eCTD · 임상시험 설계 · ICH-GCP &amp; IB 작성 · IRB · CMC · 약물감시 &amp; 시판 후 조사.</p>
+        <div class="role">PharmD &amp; 규제과학 석사 (복수학위)</div>
+        <p>석사 과정: IND/NDA/ANDA/BLA 제출, eCTD, 임상시험 설계, ICH-GCP &amp; IB 작성, IRB, CMC, 약물감시 &amp; 시판 후 조사.</p>
       </div>
-      <div class="card reveal d1">
+    </div>
+
+    <div class="xp-row">
+      <div class="xp-when">캐나다 몬트리올</div>
+      <div class="xp-body">
         <h3>McGill University</h3>
-        <div class="sub">약리학 중심 학부 과정 · 캐나다 몬트리올</div>
+        <div class="role">약리학 중심 학부 과정</div>
         <p>University of Maryland, Baltimore로 편입.</p>
       </div>
-      <div class="card reveal d2">
-        <h3>수료 &amp; 프로그램</h3>
-        <div class="sub">지속적인 전문성 개발</div>
+    </div>
+
+    <div class="xp-row">
+      <div class="xp-when">수료 프로그램</div>
+      <div class="xp-body">
         <ul>
-          <li><b>McKinsey Forward Program</b> — 문제 해결 프레임워크, 데이터 기반 분석, 이해관계자 커뮤니케이션</li>
-          <li><b>CITI Program</b> — GCP &amp; ICH; GDPR &amp; 인간대상연구</li>
-          <li><b>NIH Training</b> — 임상연구, 임상약리, 연구윤리 &amp; 규정</li>
-          <li><b>서울대학교 임상약리학</b> — 학생 선택실습</li>
+          <li><strong>McKinsey Forward Program</strong> — 문제 해결 프레임워크, 데이터 기반 분석, 이해관계자 커뮤니케이션</li>
+          <li><strong>CITI Program</strong> — GCP &amp; ICH; GDPR &amp; 인간대상연구</li>
+          <li><strong>NIH Training</strong> — 임상연구, 임상약리, 연구윤리 &amp; 규정</li>
+          <li><strong>서울대학교 임상약리학</strong> — 학생 선택실습</li>
         </ul>
       </div>
     </div>
+
   </div>
 </section>
 
-<section id="contact" style="padding-bottom:0">
+<div class="contact" id="contact">
   <div class="wrap">
-    <div class="contact-band reveal">
-      <h2>이야기 나눠요.</h2>
-      <p>규제 전문성과 만드는 능력이 동시에 필요한 자리를 찾고 있습니다. 생명과학 컨설팅, 헬스테크, 메디컬 어페어, 약물감시 분야라면 더 반갑습니다. 우리 팀 이야기다 싶으면 편하게 연락 주세요.</p>
-      <div class="contact-links">
-        <a class="btn btn-primary" href="mailto:jmhan9417@gmail.com">jmhan9417@gmail.com</a>
-        <a class="btn btn-ghost" href="https://www.linkedin.com/in/minseok-han/" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn btn-ghost" href="https://search.dca.ca.gov/details/7200/RPH/87689/59cffe4003b66c6ac7c9e685a639e9fd" target="_blank" rel="noopener">캘리포니아 약사 면허 #87689 확인</a>
-      </div>
+    <h2>이야기 <span class="amp">나눠요.</span></h2>
+    <p>규제 전문성과 만드는 능력이 동시에 필요한 자리를 찾고 있습니다. 생명과학 컨설팅, 헬스테크, 메디컬 어페어, 약물감시 분야라면 더 반갑습니다. 우리 팀 이야기다 싶으면 편하게 연락 주세요.</p>
+    <div class="links">
+      <a href="mailto:jmhan9417@gmail.com">jmhan9417@gmail.com</a>
+      <a href="https://www.linkedin.com/in/minseok-han/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://search.dca.ca.gov/details/7200/RPH/87689/59cffe4003b66c6ac7c9e685a639e9fd" target="_blank" rel="noopener">캘리포니아 약사 면허 #87689 확인</a>
     </div>
   </div>
-</section>
+</div>
 
 <footer>
-  <div class="wrap">한민석 Minseok "Joey" Han · 캘리포니아 풀러턴 · PharmD, RPh, MS Regulatory Science</div>
+  <div class="wrap foot-inner">
+    <span>한민석 Minseok "Joey" Han — PharmD, RPh, MS Regulatory Science</span>
+    <span>Fullerton, California</span>
+  </div>
 </footer>
 
 <!-- Lightbox -->
@@ -500,28 +466,9 @@ footer{padding:0 0 44px;text-align:center;font-size:13px;color:var(--muted)}
 </div>
 
 <script>
-// ---------- scroll reveal ----------
-const io = new IntersectionObserver((entries)=>{
-  for (const e of entries) if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-},{ threshold:.12, rootMargin:'0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-// ---------- animated counters ----------
-const cio = new IntersectionObserver((entries)=>{
-  for (const e of entries){
-    if (!e.isIntersecting) continue;
-    const el = e.target, to = +el.dataset.to, dur = 1100, t0 = performance.now();
-    const step = (t)=>{ const p = Math.min((t-t0)/dur,1); el.textContent = Math.round(to*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(step); };
-    requestAnimationFrame(step); cio.unobserve(el);
-  }
-},{ threshold:.6 });
-document.querySelectorAll('.count').forEach(el=>cio.observe(el));
-
-// ---------- galleries (thumbnail switching) ----------
 const galleries = {};
 document.querySelectorAll('.thumbs').forEach(group=>{
-  const mainId = group.dataset.for;
-  const main = document.getElementById(mainId);
+  const main = document.getElementById(group.dataset.for);
   const gname = main.dataset.gallery;
   galleries[gname] = [];
   const thumbs = [...group.querySelectorAll('.thumb')];
@@ -531,7 +478,7 @@ document.querySelectorAll('.thumbs').forEach(group=>{
       thumbs.forEach(t=>t.classList.remove('active'));
       th.classList.add('active');
       main.classList.add('fade');
-      setTimeout(()=>{ main.src = th.dataset.src; main.dataset.idx = i; main.onload = ()=>main.classList.remove('fade'); }, 180);
+      setTimeout(()=>{ main.src = th.dataset.src; main.dataset.idx = i; main.onload = ()=>main.classList.remove('fade'); }, 150);
     });
   });
 });
@@ -540,7 +487,6 @@ document.querySelectorAll('.main-shot').forEach(img=>{
   if (!galleries[g]) galleries[g] = [{ src: img.getAttribute('src'), cap: img.alt }];
 });
 
-// ---------- lightbox ----------
 const lb = document.getElementById('lightbox');
 const lbImg = document.getElementById('lb-img');
 const lbCap = document.getElementById('lb-cap');
@@ -551,8 +497,8 @@ function render(){
   const item = galleries[cur.g][cur.i];
   lbImg.src = item.src; lbCap.textContent = item.cap || '';
   const multi = galleries[cur.g].length > 1;
-  lb.querySelector('.lb-prev').style.display = multi ? 'flex' : 'none';
-  lb.querySelector('.lb-next').style.display = multi ? 'flex' : 'none';
+  lb.querySelector('.lb-prev').style.display = multi ? 'block' : 'none';
+  lb.querySelector('.lb-next').style.display = multi ? 'block' : 'none';
 }
 function nav(d){ const n = galleries[cur.g].length; cur.i = (cur.i + d + n) % n; render(); }
 document.querySelectorAll('.main-shot').forEach(img=>{
