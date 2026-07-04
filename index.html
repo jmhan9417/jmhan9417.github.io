@@ -9,45 +9,45 @@
 <link rel="alternate" hreflang="ko" href="https://jmhan9417.github.io/ko/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,400;0,9..144,560;1,9..144,340&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#f6f3ec;
-  --ink:#1c1917;
-  --ink-2:#57514a;
-  --hairline:#cfc8b8;
-  --hairline-strong:#1c1917;
-  --accent:#96361f;
+  --paper:#fcfcfa;
+  --ink:#1a2129;
+  --ink-2:#4d5866;
+  --hairline:#d9dce0;
+  --hairline-strong:#1a2129;
+  --accent:#1a4480;
   --sans:'IBM Plex Sans',sans-serif;
   --mono:'IBM Plex Mono',monospace;
-  --serif:'Fraunces',Georgia,serif;
+  --serif:'IBM Plex Serif',Georgia,serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--sans);background:var(--paper);color:var(--ink);font-size:16px;line-height:1.65}
-a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
-a:hover{color:var(--accent)}
-::selection{background:#e8d5c4}
+a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:#0f2d58}
+::selection{background:#d7e3f4}
 .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
 .mono{font-family:var(--mono)}
 
 /* masthead */
 .masthead{border-bottom:1px solid var(--hairline-strong)}
 .masthead-inner{display:flex;justify-content:space-between;align-items:baseline;padding:20px 0}
-.masthead .name{font-family:var(--serif);font-weight:560;font-size:18px;text-decoration:none}
+.masthead .name{font-family:var(--serif);font-weight:600;font-size:17px;text-decoration:none;color:var(--ink)}
 .masthead nav{display:flex;gap:22px;font-family:var(--mono);font-size:12.5px}
 .masthead nav a{text-decoration:none;color:var(--ink-2)}
 .masthead nav a:hover{color:var(--accent)}
-.masthead nav .lang{color:var(--ink);border-bottom:1px solid var(--accent)}
+.masthead nav .lang{color:var(--accent);border-bottom:1px solid var(--accent)}
 @media(max-width:680px){.masthead nav a:not(.lang){display:none}}
 
 /* hero */
 .hero{padding:72px 0 64px;border-bottom:1px solid var(--hairline)}
 .hero .kicker{font-family:var(--mono);font-size:13px;color:var(--ink-2);margin-bottom:20px}
 .hero .kicker a{color:var(--ink-2)}
-.hero h1{font-family:var(--serif);font-weight:560;font-size:clamp(44px,7.4vw,84px);line-height:1.02;letter-spacing:-.015em;margin-bottom:30px;font-optical-sizing:auto}
-.hero h1 .amp{font-style:italic;font-weight:340;color:var(--accent)}
-.hero .lede{max-width:640px;font-size:17.5px;color:var(--ink-2)}
+.hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(32px,4.6vw,46px);line-height:1.15;letter-spacing:-.005em;margin-bottom:10px}
+.hero .subtitle{font-size:18px;color:var(--ink-2);margin-bottom:28px;max-width:640px}
+.hero .lede{max-width:640px;font-size:16.5px;color:var(--ink-2)}
 .hero .lede strong{color:var(--ink);font-weight:600}
 .hero .lede p+p{margin-top:14px}
 
@@ -62,7 +62,7 @@ a:hover{color:var(--accent)}
 section{padding:76px 0 30px}
 .sec-head{display:flex;align-items:baseline;gap:18px;border-top:2px solid var(--hairline-strong);padding-top:18px;margin-bottom:12px}
 .sec-head .no{font-family:var(--mono);font-size:13px;color:var(--accent)}
-.sec-head h2{font-family:var(--serif);font-weight:560;font-size:30px;letter-spacing:-.01em}
+.sec-head h2{font-family:var(--serif);font-weight:600;font-size:24px;letter-spacing:-.005em}
 .sec-intro{color:var(--ink-2);max-width:620px;margin-bottom:30px;font-size:15.5px}
 
 /* projects */
@@ -72,7 +72,7 @@ section{padding:76px 0 30px}
 @media(max-width:860px){.proj{grid-template-columns:1fr;gap:24px}.proj.flip .shot-col{order:0}}
 .proj .meta{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);margin-bottom:10px}
 .proj .meta em{font-style:normal;color:var(--accent)}
-.proj h3{font-family:var(--serif);font-weight:560;font-size:32px;letter-spacing:-.01em;margin-bottom:4px}
+.proj h3{font-family:var(--serif);font-weight:600;font-size:24px;letter-spacing:-.005em;margin-bottom:4px}
 .proj .sub{font-size:15px;color:var(--ink-2);margin-bottom:16px}
 .proj p{font-size:15.5px;margin-bottom:14px}
 .proj p i{font-family:var(--serif);font-style:italic}
@@ -96,7 +96,7 @@ section{padding:76px 0 30px}
 .award{border-top:1px solid var(--hairline);padding:40px 0 48px;display:grid;grid-template-columns:220px 1fr;gap:18px}
 @media(max-width:640px){.award{grid-template-columns:1fr}}
 .award .label{font-family:var(--mono);font-size:12.5px;color:var(--accent)}
-.award h3{font-family:var(--serif);font-weight:560;font-size:24px;margin-bottom:6px}
+.award h3{font-family:var(--serif);font-weight:600;font-size:19px;margin-bottom:6px}
 .award p{font-size:15px;color:var(--ink-2);max-width:560px;margin-bottom:10px}
 .award a{font-size:14.5px}
 
@@ -105,7 +105,7 @@ section{padding:76px 0 30px}
 .xp-row:first-of-type{border-top:none}
 @media(max-width:640px){.xp-row{grid-template-columns:1fr;gap:6px}}
 .xp-when{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);padding-top:5px}
-.xp-body h3{font-family:var(--serif);font-weight:560;font-size:21px;display:inline}
+.xp-body h3{font-family:var(--serif);font-weight:600;font-size:18px;display:inline}
 .xp-body .org-note{font-size:14px;color:var(--ink-2)}
 .xp-body .role{font-size:14px;font-weight:600;color:var(--accent);margin:2px 0 8px}
 .xp-body p,.xp-body li{font-size:14.5px;color:var(--ink-2)}
@@ -123,8 +123,7 @@ section{padding:76px 0 30px}
 
 /* contact */
 .contact{padding:90px 0 40px}
-.contact h2{font-family:var(--serif);font-weight:560;font-size:clamp(38px,6vw,64px);letter-spacing:-.015em;margin-bottom:18px}
-.contact h2 .amp{font-style:italic;font-weight:340;color:var(--accent)}
+.contact h2{font-family:var(--serif);font-weight:600;font-size:clamp(26px,3.6vw,34px);letter-spacing:-.005em;margin-bottom:16px}
 .contact p{max-width:560px;color:var(--ink-2);margin-bottom:26px}
 .contact .links{display:flex;gap:30px;flex-wrap:wrap;font-size:15.5px;font-weight:500}
 footer{border-top:1px solid var(--hairline-strong);margin-top:70px}
@@ -162,9 +161,10 @@ footer{border-top:1px solid var(--hairline-strong);margin-top:70px}
 <div class="hero" id="top">
   <div class="wrap">
     <div class="kicker">PharmD, RPh &middot; MS Regulatory Science &middot; <a href="https://search.dca.ca.gov/details/7200/RPH/87689/59cffe4003b66c6ac7c9e685a639e9fd" target="_blank" rel="noopener">California Pharmacist License #87689</a> &middot; Fullerton, CA</div>
-    <h1>Minseok &ldquo;Joey&rdquo; Han<br>finds the gap, <span class="amp">then builds the fix.</span></h1>
+    <h1>Minseok &ldquo;Joey&rdquo; Han</h1>
+    <div class="subtitle">Pharmacist-scientist working at the intersection of regulatory science, evidence, and software.</div>
     <div class="lede">
-      <p>Bilingual (English/Korean) pharmacist-scientist. I dig into operations, process gaps, and regulatory data to find improvement opportunities — <strong>then I build the solution myself.</strong></p>
+      <p>Bilingual (English/Korean). I dig into operations, process gaps, and regulatory data to find improvement opportunities — <strong>then I build the solution myself.</strong></p>
       <p>Two live regulatory-tech products shipped end to end. Evidence contributed to an FDA compounding-list decision. One independent pharmacy turned from operating loss to profit.</p>
     </div>
     <dl class="facts">
@@ -440,7 +440,7 @@ footer{border-top:1px solid var(--hairline-strong);margin-top:70px}
 
 <div class="contact" id="contact">
   <div class="wrap">
-    <h2>Let's <span class="amp">talk.</span></h2>
+    <h2>Contact</h2>
     <p>I'm looking for roles where regulatory depth meets building — life sciences consulting, health tech, medical affairs, and drug safety. If that sounds like your team, I'd love to hear from you.</p>
     <div class="links">
       <a href="mailto:jmhan9417@gmail.com">jmhan9417@gmail.com</a>
