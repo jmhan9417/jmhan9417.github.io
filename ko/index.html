@@ -95,6 +95,18 @@ section{padding:76px 0 30px}
 .proj li::before{content:"—";position:absolute;left:0;color:var(--accent)}
 .proj .visit{font-size:15px;font-weight:500}
 
+/* case study */
+.case-study{border-top:1px solid var(--hairline-strong);border-bottom:1px solid var(--hairline);padding:34px 0 38px;margin:2px 0 6px}
+.case-study .case-kicker{font-family:var(--sans);font-size:13px;font-weight:600;color:var(--accent);margin-bottom:8px}
+.case-study h3{font-family:var(--serif);font-size:21px;font-weight:600;letter-spacing:-.005em;margin-bottom:8px}
+.case-study .case-lede{max-width:720px;color:var(--ink-2);font-size:15.5px;margin-bottom:22px}
+.case-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}
+.case-item{border-top:1px solid var(--hairline);padding-top:12px}
+.case-item h4{font-family:var(--sans);font-size:13px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.case-item p{font-size:14px;color:var(--ink-2);line-height:1.65;margin:0}
+@media(max-width:960px){.case-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.case-grid{grid-template-columns:1fr}}
+
 /* image frames */
 .frame{border:1px solid var(--ink);background:#fff}
 .frame img.main-shot{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;cursor:zoom-in;transition:opacity .2s ease}
@@ -216,6 +228,35 @@ footer{border-top:1px solid var(--hairline-strong);margin-top:70px}
           <button class="thumb active" data-src="../assets/genericcheck-home.png" data-cap="GenericCheck 홈 — 내 제네릭, 실제로 어느 회사가 만들었을까?" aria-label="홈페이지 보기"><img src="../assets/genericcheck-home.png" alt=""></button>
           <button class="thumb" data-src="../assets/genericcheck-drug.png" data-cap="약물 상세 페이지 — NTI(치료역이 좁은 약물) 안전 경고 포함 (레보티록신)" aria-label="약물 페이지 보기"><img src="../assets/genericcheck-drug.png" alt=""></button>
           <button class="thumb" data-src="../assets/genericcheck-makers.png" data-cap="제조사 비교 화면 — 제조사별 환자 리포트" aria-label="제조사 비교 보기"><img src="../assets/genericcheck-makers.png" alt=""></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- GenericCheck case study -->
+    <div class="case-study" id="genericcheck-case-study">
+      <div class="case-kicker">케이스 스터디 &middot; GenericCheck</div>
+      <h3>약국에서 흔히 나오는 질문을 제조사 단위 환자안전 시스템으로 바꾼 과정</h3>
+      <p class="case-lede">GenericCheck는 먼저 의사결정의 빈틈을 정의하고, 그다음 숨겨진 변수를 보이게 만드는 최소한의 데이터 제품으로 설계했습니다.</p>
+      <div class="case-grid">
+        <div class="case-item">
+          <h4>문제</h4>
+          <p>대체조제는 성분명은 알려주지만, 환자가 실제로 받은 병의 제조사별 복용 경험은 거의 드러나지 않습니다.</p>
+        </div>
+        <div class="case-item">
+          <h4>규제 프레이밍</h4>
+          <p>의학적 조언이 아니라 투명성과 신호 탐지를 돕는 도구로 잡고, Orange Book TE 코드, FDA 리콜 맥락, NTI 안전장치를 넣었습니다.</p>
+        </div>
+        <div class="case-item">
+          <h4>데이터 모델</h4>
+          <p>의약품, 제조사, 환자 리포트, MedDRA Preferred Term, 리콜 기록, 공개 승인 상태를 하나의 검토 가능한 근거층으로 묶었습니다.</p>
+        </div>
+        <div class="case-item">
+          <h4>만든 것</h4>
+          <p>175개 의약품 검색, 제조사 비교, NTI 경고, 리콜 연동, 개인정보 보호형 리포팅을 갖춘 라이브 레지스트리를 만들었습니다.</p>
+        </div>
+        <div class="case-item">
+          <h4>의미</h4>
+          <p>흩어진 경험담을 약사, 환자, 향후 RWE 팀이 해석할 수 있는 구조화된 근거로 바꿉니다.</p>
         </div>
       </div>
     </div>
