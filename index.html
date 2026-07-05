@@ -95,6 +95,18 @@ section{padding:76px 0 30px}
 .proj li::before{content:"—";position:absolute;left:0;color:var(--accent)}
 .proj .visit{font-size:15px;font-weight:500}
 
+/* case study */
+.case-study{border-top:1px solid var(--hairline-strong);border-bottom:1px solid var(--hairline);padding:34px 0 38px;margin:2px 0 6px}
+.case-study .case-kicker{font-family:var(--mono);font-size:12.5px;color:var(--accent);margin-bottom:8px}
+.case-study h3{font-family:var(--serif);font-size:22px;font-weight:600;letter-spacing:-.005em;margin-bottom:8px}
+.case-study .case-lede{max-width:720px;color:var(--ink-2);font-size:15.5px;margin-bottom:22px}
+.case-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}
+.case-item{border-top:1px solid var(--hairline);padding-top:12px}
+.case-item h4{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--ink);margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em}
+.case-item p{font-size:14px;color:var(--ink-2);line-height:1.58;margin:0}
+@media(max-width:960px){.case-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.case-grid{grid-template-columns:1fr}}
+
 /* image frames */
 .frame{border:1px solid var(--ink);background:#fff}
 .frame img.main-shot{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;cursor:zoom-in;transition:opacity .2s ease}
@@ -218,6 +230,35 @@ footer{border-top:1px solid var(--hairline-strong);margin-top:70px}
           <button class="thumb active" data-src="assets/genericcheck-home.png" data-cap="GenericCheck — homepage: who actually made your generic?" aria-label="View homepage"><img src="assets/genericcheck-home.png" alt=""></button>
           <button class="thumb" data-src="assets/genericcheck-drug.png" data-cap="Drug page with narrow-therapeutic-index safety warning (levothyroxine)" aria-label="View drug page"><img src="assets/genericcheck-drug.png" alt=""></button>
           <button class="thumb" data-src="assets/genericcheck-makers.png" data-cap="Manufacturer comparison — patient reports per maker" aria-label="View manufacturers view"><img src="assets/genericcheck-makers.png" alt=""></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- GenericCheck case study -->
+    <div class="case-study" id="genericcheck-case-study">
+      <div class="case-kicker">Case study &middot; GenericCheck</div>
+      <h3>From a routine pharmacy question to a manufacturer-level patient-safety system</h3>
+      <p class="case-lede">I treated GenericCheck as a consulting-style problem: define the decision gap first, then build the smallest credible data product that makes the hidden variable visible.</p>
+      <div class="case-grid">
+        <div class="case-item">
+          <h4>Problem</h4>
+          <p>Generic substitution tells patients the active ingredient, but not the manufacturer-level experience behind the bottle they actually receive.</p>
+        </div>
+        <div class="case-item">
+          <h4>Regulatory framing</h4>
+          <p>Positioned the tool as transparency and signal triage, not medical advice, using Orange Book TE codes, FDA recall context, and NTI-specific safeguards.</p>
+        </div>
+        <div class="case-item">
+          <h4>Data model</h4>
+          <p>Mapped drugs, manufacturers, patient reports, MedDRA Preferred Terms, recall records, and publication status into one reviewable evidence layer.</p>
+        </div>
+        <div class="case-item">
+          <h4>What I built</h4>
+          <p>A live 175-drug registry with searchable drug pages, manufacturer comparisons, NTI warnings, recall integration, and privacy-first reporting.</p>
+        </div>
+        <div class="case-item">
+          <h4>Why it matters</h4>
+          <p>It turns scattered anecdotes into structured evidence that pharmacists, patients, and future RWE teams can reason from.</p>
         </div>
       </div>
     </div>
