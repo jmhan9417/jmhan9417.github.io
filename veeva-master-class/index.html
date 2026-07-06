@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Veeva Master Class Interview Simulator | R&D Business Consultant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --navy:#1a3a63; --navy-deep:#12294a; --ink:#1f2733; --slate:#5a6675;
+    --line:#e2e6ec; --paper:#f6f7f9; --card:#ffffff;
+    --accent:#1d4ed8; --accent-soft:#eaf0fe;
+    --green:#127a4b; --green-soft:#e5f4ec;
+    --amber:#9a6a12; --amber-soft:#fbf1dd;
+    --red:#a52833; --red-soft:#fbe9ea;
+    --shadow:0 1px 2px rgba(16,24,40,.05), 0 8px 24px rgba(16,24,40,.06);
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.55;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:"IBM Plex Serif",Georgia,serif;color:var(--navy-deep);line-height:1.25;margin:0}
+  a{color:var(--accent);text-decoration:none}
+  button{font-family:inherit}
+
+  /* Header */
+  header.top{position:sticky;top:0;z-index:40;color:#eaf0f8;border-bottom:1px solid #0d1f38;background:linear-gradient(180deg,#12294a,#173257)}
+  .top-inner{max-width:1180px;margin:0 auto;padding:14px 22px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between}
+  .brand{display:flex;flex-direction:column;gap:2px}
+  .brand h1{color:#fff;font-size:19px;font-weight:600;letter-spacing:.2px}
+  .brand span{color:#a9bcd6;font-size:12.5px;font-weight:500}
+  .meters{display:flex;gap:16px;flex-wrap:wrap}
+  .meter{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:9px 14px;min-width:186px}
+  .meter{min-width:196px}
+  .meter .mlabel{display:flex;gap:12px;justify-content:space-between;align-items:baseline;font-size:11px;color:#c4d3e8;letter-spacing:.3px;text-transform:uppercase;font-weight:600;white-space:nowrap}
+  .meter .mval{font-size:15px;color:#fff;font-weight:700;font-family:"IBM Plex Serif",serif}
+  .bar{height:7px;background:rgba(255,255,255,.14);border-radius:99px;margin-top:7px;overflow:hidden}
+  .bar > i{display:block;height:100%;border-radius:99px;transition:width .5s cubic-bezier(.2,.7,.2,1)}
+  .bar.k > i{background:linear-gradient(90deg,#5aa9ff,#8ec5ff)}
+  .bar.r > i{background:linear-gradient(90deg,#43c78a,#8be0b4)}
+
+  /* Layout */
+  .wrap{max-width:1180px;margin:0 auto;padding:22px;display:grid;grid-template-columns:248px 1fr;gap:22px;align-items:start}
+  nav.side{position:sticky;top:96px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:10px;box-shadow:var(--shadow)}
+  nav.side .navhdr{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--slate);font-weight:700;padding:8px 10px 4px}
+  .navbtn{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:none;background:transparent;color:var(--ink);padding:9px 10px;border-radius:9px;font-size:13.5px;cursor:pointer;font-weight:500;transition:background .15s}
+  .navbtn:hover{background:#f1f4f8}
+  .navbtn.active{background:var(--accent-soft);color:var(--navy-deep);font-weight:600}
+  .navbtn .num{flex:0 0 22px;height:22px;border-radius:6px;background:#eef1f5;color:var(--slate);font-size:11.5px;font-weight:700;display:grid;place-items:center;font-family:"IBM Plex Serif",serif}
+  .navbtn.active .num{background:var(--accent);color:#fff}
+  .navbtn .dot{margin-left:auto;font-size:12px;color:var(--green)}
+
+  main{min-width:0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px;margin-bottom:20px}
+  .eyebrow{font-size:11.5px;text-transform:uppercase;letter-spacing:.7px;font-weight:700;color:var(--accent)}
+  .card h2{font-size:23px;margin:6px 0 4px}
+  .card .sub{color:var(--slate);font-size:14px;margin-bottom:2px}
+
+  .brief{background:linear-gradient(180deg,#fbfcfe,#f3f6fb);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:12px;padding:18px 20px;margin:18px 0 6px}
+  .brief .btag{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--navy);margin-bottom:8px}
+  .brief p{margin:0 0 10px;font-size:14.5px;color:#2b3542}
+  .brief p:last-child{margin-bottom:0}
+  .brief .we{background:#fff;border:1px dashed var(--line);border-radius:9px;padding:12px 14px;font-size:13.8px}
+  .brief .we b{color:var(--navy-deep)}
+
+  .concept-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+  .chip{background:#eef1f5;color:#3a4657;border:1px solid var(--line);border-radius:99px;padding:4px 11px;font-size:12px;font-weight:600;cursor:pointer}
+  .chip:hover{background:var(--accent-soft);border-color:#c9d9fb}
+
+  .drill{border:1px solid var(--line);border-radius:12px;padding:18px;margin-top:16px;background:#fff}
+  .drill .dhead{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+  .kind{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;padding:3px 9px;border-radius:6px}
+  .kind.know{background:var(--accent-soft);color:#1442ad}
+  .kind.scen{background:#ece7fb;color:#5a3fb0}
+  .qmeta{margin-left:auto;font-size:12px;color:var(--slate)}
+  .speaker{font-size:12.5px;color:var(--slate);font-style:italic;margin:2px 0 8px}
+  .qtext{font-size:15.5px;font-weight:600;color:var(--ink);margin:6px 0 14px}
+  .qtext.scenq{font-weight:600}
+  .opts{display:flex;flex-direction:column;gap:10px}
+  .opt{position:relative;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:12px 14px 12px 42px;font-size:14px;color:#2b3542;cursor:pointer;transition:border-color .15s,background .15s;width:100%}
+  .opt:hover{border-color:#c9d9fb;background:#fbfcff}
+  .opt .mk{position:absolute;left:12px;top:12px;width:20px;height:20px;border-radius:50%;border:1.5px solid #c4ccd6;display:grid;place-items:center;font-size:12px;font-weight:700;color:#8a94a2;background:#fff}
+  .opt.chosen{border-color:var(--accent)}
+  .opt.disabled{cursor:default}
+  .opt.reveal-strong{border-color:var(--green);background:var(--green-soft)}
+  .opt.reveal-weak{border-color:var(--amber);background:var(--amber-soft)}
+  .opt.reveal-trap{border-color:var(--red);background:var(--red-soft)}
+  .opt.reveal-correct{border-color:var(--green);background:var(--green-soft)}
+  .opt.reveal-wrong{border-color:var(--red);background:var(--red-soft)}
+  .opt .mk.strong,.opt .mk.correct{border-color:var(--green);color:#fff;background:var(--green)}
+  .opt .mk.weak{border-color:var(--amber);color:#fff;background:var(--amber)}
+  .opt .mk.trap,.opt .mk.wrong{border-color:var(--red);color:#fff;background:var(--red)}
+  .tier-tag{display:inline-block;margin-left:8px;font-size:10.5px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;padding:2px 7px;border-radius:5px;vertical-align:middle}
+  .tier-tag.strong{background:var(--green);color:#fff}
+  .tier-tag.weak{background:var(--amber);color:#fff}
+  .tier-tag.trap{background:var(--red);color:#fff}
+  .tier-tag.correct{background:var(--green);color:#fff}
+  .tier-tag.wrong{background:var(--red);color:#fff}
+  .fb{margin-top:8px;font-size:13.2px;color:#37424f;background:#fff;border-top:1px dashed var(--line);padding-top:9px;display:none}
+  .opt.show-fb .fb{display:block}
+  .pts{font-size:12px;font-weight:700;color:var(--slate);margin-left:6px}
+
+  .banner{margin-top:14px;border-radius:10px;padding:12px 15px;font-size:13.5px;display:none;align-items:center;gap:10px}
+  .banner.show{display:flex}
+  .banner.strong{background:var(--green-soft);color:#0d5c39;border:1px solid #b7e2ca}
+  .banner.weak{background:var(--amber-soft);color:#7a5310;border:1px solid #ecd7a6}
+  .banner.trap{background:var(--red-soft);color:#8a1f28;border:1px solid #eebfc3}
+  .banner.correct{background:var(--green-soft);color:#0d5c39;border:1px solid #b7e2ca}
+  .banner.wrong{background:var(--red-soft);color:#8a1f28;border:1px solid #eebfc3}
+
+  /* Home */
+  .hero h2{font-size:27px}
+  .lede{font-size:15.5px;color:#39434f;max-width:66ch}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px}
+  .mini{border:1px solid var(--line);border-radius:11px;padding:15px 16px;background:#fbfcfe}
+  .mini h4{font-size:14.5px;margin-bottom:6px}
+  .mini p{margin:0;font-size:13.4px;color:var(--slate)}
+  .steps{counter-reset:s;margin:10px 0 0;padding:0;list-style:none}
+  .steps li{position:relative;padding:10px 0 10px 40px;border-bottom:1px solid var(--line);font-size:14px}
+  .steps li:last-child{border-bottom:none}
+  .steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:9px;width:26px;height:26px;border-radius:8px;background:var(--accent-soft);color:#1442ad;font-weight:700;display:grid;place-items:center;font-family:"IBM Plex Serif",serif;font-size:13px}
+  .legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .lg{display:flex;align-items:center;gap:8px;font-size:13px;border:1px solid var(--line);border-radius:9px;padding:8px 12px;background:#fff}
+  .lg b{font-family:"IBM Plex Serif",serif}
+  .sw{width:12px;height:12px;border-radius:3px}
+  .callout{background:var(--accent-soft);border:1px solid #cddcfb;border-radius:11px;padding:14px 16px;font-size:13.6px;color:#1b3566;margin-top:14px}
+
+  /* Glossary */
+  .gtools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:16px 0}
+  .search{flex:1;min-width:220px;display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:10px;padding:9px 12px;background:#fff}
+  .search input{border:none;outline:none;font-size:14px;width:100%;color:var(--ink);font-family:inherit}
+  .filters{display:flex;gap:7px;flex-wrap:wrap}
+  .fbtn{border:1px solid var(--line);background:#fff;color:#3a4657;border-radius:99px;padding:6px 12px;font-size:12.5px;font-weight:600;cursor:pointer}
+  .fbtn.active{background:var(--navy-deep);color:#fff;border-color:var(--navy-deep)}
+  .gitem{border:1px solid var(--line);border-radius:11px;padding:15px 17px;margin-bottom:11px;background:#fff}
+  .gitem h4{font-size:15.5px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .gcat{font-size:10.5px;font-weight:800;letter-spacing:.4px;text-transform:uppercase;padding:2px 8px;border-radius:5px;background:#eef1f5;color:#54606f}
+  .gitem .def{font-size:14px;color:#2b3542;margin:7px 0}
+  .gitem .ex{font-size:13.2px;color:var(--slate);background:#fbfcfe;border-left:3px solid var(--line);padding:8px 12px;border-radius:0 8px 8px 0}
+  .gitem .ex b{color:var(--navy)}
+  .empty{color:var(--slate);font-size:14px;padding:18px;text-align:center}
+
+
+  .casegrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+  .casebox{border:1px solid var(--line);border-radius:11px;background:#fbfcfe;padding:14px 16px}
+  .casebox h4{font-size:14.5px;margin-bottom:8px;color:var(--navy-deep)}
+  .casebox ul{margin:0;padding-left:18px;color:#3a4657;font-size:13.6px}
+  .casebox li{margin:6px 0}
+  .case-table{width:100%;border-collapse:collapse;font-size:13.4px;margin-top:10px;overflow:hidden;border-radius:10px}
+  .case-table th,.case-table td{border:1px solid var(--line);padding:10px 11px;text-align:left;vertical-align:top}
+  .case-table th{background:#eef3fb;color:var(--navy-deep);font-weight:700}
+  .case-table td{background:#fff}
+  @media (max-width:880px){.casegrid{grid-template-columns:1fr}}
+
+  .foot{max-width:1180px;margin:0 auto;padding:6px 22px 34px;color:#9aa4b1;font-size:12px}
+  .ghost{border:1px solid var(--line);background:#fff;color:var(--slate);border-radius:9px;padding:7px 13px;font-size:12.5px;font-weight:600;cursor:pointer}
+  .ghost:hover{background:#f1f4f8;color:var(--ink)}
+
+  @media (max-width:880px){
+    .wrap{grid-template-columns:1fr;padding:16px}
+    nav.side{position:static}
+    .grid2{grid-template-columns:1fr}
+    header.top{position:static}
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <h1>Veeva Master Class Simulator</h1>
+      <span>R&amp;D Business Consultant &nbsp;&middot;&nbsp; Learn the fundamentals, then drill under pressure</span>
+    </div>
+    <div class="meters">
+      <div class="meter">
+        <div class="mlabel"><span>Knowledge</span><span class="mval" id="kPct">0%</span></div>
+        <div class="bar k"><i id="kBar" style="width:0%"></i></div>
+      </div>
+      <div class="meter">
+        <div class="mlabel"><span>Interview Readiness</span><span class="mval" id="rPct">0%</span></div>
+        <div class="bar r"><i id="rBar" style="width:0%"></i></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="side" id="side"></nav>
+  <main id="main"></main>
+</div>
+<div class="foot" id="foot"></div>
+
+<script>
+/* =====================================================================
+   DATA. Edit here to change every level, drill, and glossary entry.
+   All learner content is written in plain professional English.
+   Scenario tiers: strong = 10 pts, weak = 5 pts, trap = 0 pts.
+   ===================================================================== */
+
+const DATA = {
+  levels: [
+    /* ---------- LEVEL 1 ---------- */
+    {
+      title: "Structured Thinking: MECE and Issue Trees",
+      subtitle: "Break any problem into clean, testable pieces",
+      concepts: ["MECE","Issue tree","Framework","Driver tree"],
+      brief: [
+        "MECE stands for Mutually Exclusive, Collectively Exhaustive. A set of buckets is Mutually Exclusive when nothing falls into two buckets at once, and Collectively Exhaustive when the buckets together cover everything with no gaps. Consultants prize MECE because it prevents both double-counting and blind spots, which is how you keep an analysis trustworthy.",
+        "An issue tree is a MECE breakdown built specifically for the problem in front of you. You take the core question, split it into a few non-overlapping drivers, then split each of those again until you reach something you can actually measure or test. A framework, by contrast, is a pre-made template such as a generic profit or market-entry model that you borrow. Frameworks are fast, but they often fit the problem loosely. A strong consultant usually builds a bespoke issue tree rather than forcing a stock framework onto a client situation."
+      ],
+      worked: "A sponsor asks why a clinical trial is enrolling patients too slowly. A weak answer lists random ideas. A MECE issue tree splits enrollment into number of active sites, times patients screened per site, times screen-to-enroll conversion rate. Every possible cause now lives under exactly one branch, so you can investigate methodically instead of guessing.",
+      drills: [
+        { type:"knowledge", q:"A consultant splits a hospital pharmacy's costs into: (a) drug purchasing, (b) staff labor, (c) high-cost specialty drugs, (d) other overhead. Is this split MECE?",
+          options:[
+            {text:"No. It is not mutually exclusive.", correct:true, fb:"Correct. High-cost specialty drugs are a subset of drug purchasing, so those two buckets overlap and the split double-counts. A MECE version would be purchasing, labor, and overhead, with specialty as a sub-branch under purchasing."},
+            {text:"Yes. It is fully MECE.", correct:false, fb:"Not quite. Specialty drugs already sit inside drug purchasing, so the buckets overlap. Overlap breaks the Mutually Exclusive half of MECE."},
+            {text:"Yes, because the 'other overhead' bucket makes it exhaustive.", correct:false, fb:"An 'other' bucket can help with the exhaustive half, but it does nothing about the overlap between specialty drugs and purchasing, which is the actual problem here."}
+          ]},
+        { type:"knowledge", q:"Which statement about issue trees versus frameworks is true?",
+          options:[
+            {text:"An issue tree is built for the specific problem; a framework is a reusable, pre-made template.", correct:true, fb:"Correct. Issue trees are custom-built and tend to fit the situation exactly. Frameworks are borrowed templates that are fast but often fit loosely."},
+            {text:"They are two names for the same thing.", correct:false, fb:"They are related but not the same. One is bespoke to the problem, the other is a stock template."},
+            {text:"A framework is always more rigorous than an issue tree.", correct:false, fb:"Often the reverse. A stock framework forced onto a client problem can miss the real drivers that a bespoke issue tree would catch."}
+          ]},
+        { type:"scenario", speaker:"Practice Leader", q:"A sponsor's clinical trial is enrolling patients far too slowly. Take a moment. How would you structure this problem?",
+          options:[
+            {tier:"strong", fb:"This is the structured, hypothesis-ready thinking Veeva rewards. It is bespoke, MECE, testable, and it resists jumping to a solution.", text:"I would build an issue tree. Enrollment equals number of active sites, times patients screened per site, times screen-to-enroll conversion rate. I would test each branch to find where the drop-off is before recommending anything."},
+            {tier:"weak", fb:"It shows effort but not structure. The factors overlap, nothing is prioritized, and there is no clear tree to test against.", text:"There could be many reasons: the protocol, the sites, the patients, the competition. I would look into all of them."},
+            {tier:"trap", fb:"Jumping to a solution before structuring the problem is the classic trap. Adding sites is useless if the real bottleneck is conversion. Veeva screens for people who analyze before they prescribe.", text:"They should add more trial sites and run more patient advertising."}
+          ]},
+        { type:"scenario", speaker:"Practice Leader", q:"Give me a MECE way to break down a pharmacy's total prescription volume.",
+          options:[
+            {tier:"strong", fb:"Clean and MECE. Every prescription is either new or a refill, with no overlap and no gap.", text:"New prescriptions and refills. Every script is one or the other, nothing overlaps, and nothing is left out."},
+            {tier:"weak", fb:"Brand, generic, and specialty is a common split, but specialty drugs can themselves be brand or generic, so the buckets overlap. It is close but not clean.", text:"Brand-name, generic, and specialty prescriptions."},
+            {tier:"trap", fb:"These categories overlap heavily. A single script could be profitable and insured and from a frequent customer all at once, so this is not a real breakdown.", text:"Profitable scripts, insured scripts, and frequent-customer scripts."}
+          ]}
+      ]
+    },
+
+    /* ---------- LEVEL 2 ---------- */
+    {
+      title: "Hypothesis-Driven Problem Solving and the So-What",
+      subtitle: "Move fast with a testable answer, and always land the implication",
+      concepts: ["Hypothesis-driven","So-what","Synthesis vs summary","80/20"],
+      brief: [
+        "Hypothesis-driven problem solving means you start with a best-guess answer and then test it, instead of boiling the ocean by analyzing everything. You form a clear, falsifiable statement such as 'enrollment is slow mainly because screen-to-enroll conversion is low at three large sites,' then you go pull only the data that would confirm or kill that hypothesis. This keeps the work fast and focused, which is how consultants operate under tight timelines.",
+        "The so-what is the decision-relevant implication of a fact. Data on its own is inert. Synthesis turns it into a conclusion the client can act on. Beginners tend to summarize, meaning they restate what the numbers say. Experts synthesize, meaning they tell you what the numbers mean and what to do next. The 80/20 rule is the habit of spending your energy on the 20 percent of drivers that explain 80 percent of the outcome."
+      ],
+      worked: "The fact is 'Site A converts 8 percent of screened patients while Sites B and C convert 30 percent.' A summary repeats that. The so-what is: 'Site A's screening funnel is the bottleneck, so fixing its eligibility pre-check would lift total enrollment more than adding new sites, and that is where we should focus first.' The synthesis names the driver, ranks the action, and points to a next step.",
+      drills: [
+        { type:"knowledge", q:"A safety team clears about 500 cases per associate per year, but one site clears only 300 per associate. What is the so-what?",
+          options:[
+            {text:"That site is understaffed or has a process bottleneck, so it is the first place to investigate for added capacity.", correct:true, fb:"Correct. This names the likely driver and points to an action, which is synthesis."},
+            {text:"That site clears 300 cases per associate per year.", correct:false, fb:"That just restates the fact. Restating is a summary, not a so-what."},
+            {text:"The whole team is failing and should be replaced.", correct:false, fb:"That over-reaches. One low site does not mean the whole team is failing, and you have not diagnosed the cause yet."}
+          ]},
+        { type:"knowledge", q:"Which is the best one-line definition of hypothesis-driven problem solving?",
+          options:[
+            {text:"Start with a likely answer, then test it with targeted data.", correct:true, fb:"Correct. You lead with a falsifiable best guess and gather only the data that confirms or kills it."},
+            {text:"Analyze every possible factor exhaustively before forming any view.", correct:false, fb:"That is boiling the ocean, which is the opposite of hypothesis-driven work. It is thorough but slow and unfocused."},
+            {text:"Ask the client what they think the answer is and go with that.", correct:false, fb:"A hypothesis is your own testable guess, not a handoff of the thinking to the client."}
+          ]},
+        { type:"scenario", speaker:"Practice Leader", q:"Here is the data: Site A converts 8 percent of screened patients, Sites B and C convert 30 percent. So what?",
+          options:[
+            {tier:"strong", fb:"This is a real so-what. It names the bottleneck, ranks the highest-leverage action, and gives a next step.", text:"Site A's screening funnel is the bottleneck. Fixing its eligibility pre-check would lift total enrollment more than adding new sites, so I would focus there first."},
+            {tier:"weak", fb:"This is a summary, not a so-what. It restates the numbers without telling the client what to do.", text:"Site A is converting much lower than Sites B and C."},
+            {tier:"trap", fb:"This over-reaches beyond the data. Low conversion could be a fixable process issue; you have not diagnosed the cause, so recommending a shutdown is premature.", text:"Site A is failing and should be shut down."}
+          ]},
+        { type:"scenario", speaker:"Practice Leader", q:"A client's safety case backlog keeps growing and you have limited time. How would you approach it?",
+          options:[
+            {tier:"strong", fb:"Focused and hypothesis-driven. You lead with a testable cause and pull only the data that settles it.", text:"I would go hypothesis-driven. My lead hypothesis is that intake volume rose faster than processing capacity at one step. I would pull just the volume trend and per-step cycle times to confirm or kill that before widening."},
+            {tier:"weak", fb:"Thorough but slow. Gathering everything before forming a view is boiling the ocean, and the timeline will not allow it.", text:"I would gather all available data on every part of the safety process and analyze it fully before deciding anything."},
+            {tier:"trap", fb:"This assumes the answer with no test. A backlog can come from a process or system issue, not just headcount, so prescribing hiring first is a guess dressed up as a conclusion.", text:"Backlogs are always a staffing problem, so I would tell them to hire more associates."}
+          ]}
+      ]
+    },
+
+    /* ---------- LEVEL 3 ---------- */
+    {
+      title: "The Case Exercise: Estimation and Quantification",
+      subtitle: "Reach a defensible number and keep it honest",
+      concepts: ["Market sizing","Back-of-envelope","Segmentation","Sanity check"],
+      brief: [
+        "Veeva's take-home case exercise gives you a real customer scenario and about a week to build and present a solution. Interviewers are not grading whether your final number is exactly right. They are grading how you structure the problem, how you reason with numbers, and how clearly you communicate.",
+        "Estimation, also called market sizing, is the skill of reaching a defensible number when you lack perfect data. You build it top-down or bottom-up from a few stated assumptions, then sanity-check the result. The rule is simple: make every assumption explicit, keep the math clean, and flag where a real project would replace your guess with actual data. A sanity check compares your answer against a second, independent angle, so a mismatch is a signal to recheck, not to hide."
+      ],
+      worked: "Estimate the yearly volume of adverse-event case reports a mid-size pharma safety team processes. Bottom-up: 15 marketed products, times about 400 reports per product per year, gives about 6,000 cases. Sanity-check against headcount: if one associate handles about 500 cases a year, 6,000 cases implies a team of about 12, which is plausible for mid-size. State the assumptions, show the arithmetic, and label it an estimate. In a case exercise, a clearly structured estimate with honest assumptions beats a falsely precise number every time.",
+      drills: [
+        { type:"knowledge", q:"You must estimate annual adverse-event reports for a mid-size pharma. Which approach is most defensible?",
+          options:[
+            {text:"Build bottom-up from products times reports per product, then sanity-check against team headcount.", correct:true, fb:"Correct. Explicit assumptions plus a second angle to check the result is exactly what interviewers want to see."},
+            {text:"State a round number that sounds reasonable and move on.", correct:false, fb:"An unbuilt number cannot be defended when the interviewer probes it, which they will."},
+            {text:"Recall the exact figure from memory and present it as fact.", correct:false, fb:"Presenting an unverifiable figure as fact is the honesty trap. An estimate you can show your work on is stronger and safer."}
+          ]},
+        { type:"knowledge", q:"Your sizing yields 6,000 cases per year, which would need about 12 associates. The client actually has 3. What should you do?",
+          options:[
+            {text:"Flag the mismatch and revisit an assumption. A failed sanity check means recheck, not ignore.", correct:true, fb:"Correct. A large gap between two angles tells you an assumption is off. Naming it openly is the mark of a careful analyst."},
+            {text:"Keep your number. The assumptions were fine.", correct:false, fb:"A four-times gap is a red flag, not noise. Ignoring it means presenting a number you have reason to doubt."},
+            {text:"Quietly lower the number to whatever matches 3 people.", correct:false, fb:"Back-solving to a tidy answer without explaining why hides the reasoning and can bury a real insight about the client's capacity."}
+          ]},
+        { type:"scenario", speaker:"Practice Leader", q:"For the take-home case you get a customer scenario and one week. How will you use the time?",
+          options:[
+            {tier:"strong", fb:"This is the structure interviewers reward: frame first, assumptions stated, focused analysis, answer-first deck, estimates labeled as estimates.", text:"I will structure the problem first with a MECE tree, state my assumptions, run focused analysis on the key driver, and build an answer-first deck with a clear recommendation and the reasoning behind it. I will label any estimate as an estimate."},
+            {tier:"weak", fb:"Volume is not structure. A data dump that tries to look thorough usually buries the recommendation the client actually needs.", text:"I will gather as much data as possible and put everything I find into the deck so it looks thorough."},
+            {tier:"trap", fb:"Fabricated precision is the trap. Interviewers probe your numbers, and honest assumptions beat confident guesses dressed up as facts.", text:"I will present precise market figures and ROI numbers to look authoritative, even where I have to fill gaps with confident guesses."}
+          ]},
+        { type:"scenario", speaker:"Practice Leader", q:"Roughly how many marketed products would generate 6,000 adverse-event reports a year, and would you trust that number?",
+          options:[
+            {tier:"strong", fb:"Clean math, a sanity check, and an honest label. That is the full package.", text:"At about 400 reports per product per year, that is roughly 15 products. I would sanity-check it against safety-team headcount and call it an estimate, not a fact."},
+            {tier:"weak", fb:"The math is right, but with no sanity check and no honesty flag it reads as less careful than it could.", text:"About 15 products. That is my answer."},
+            {tier:"trap", fb:"False precision plus a made-up standard. 'Exactly' and 'the industry standard figure' are both claims you cannot support.", text:"Exactly 15 products. That is the industry standard figure."}
+          ]}
+      ]
+    },
+
+    /* ---------- LEVEL 4 ---------- */
+    {
+      title: "Top-Down Communication (Pyramid Principle)",
+      subtitle: "Lead with the answer, then support it",
+      concepts: ["Pyramid principle","Answer-first","Signposting"],
+      brief: [
+        "Top-down communication, also called the Pyramid Principle, means you lead with your answer and then support it. You state the recommendation first, give the two or three reasons that back it, and only then go into detail if asked. This is the opposite of how most people naturally talk, which is to walk through the history and build up to a conclusion at the end.",
+        "Consultants communicate answer-first because senior stakeholders are busy and want the punchline immediately. Leading with the conclusion also proves you can tell what matters from what does not. Signposting is the habit of telling the listener your structure before you fill it in. For example: 'I have three reasons; the first is cost, the second is timeline, the third is risk.' The listener can now follow you without effort."
+      ],
+      worked: "A partner asks whether a client should consolidate two trial-management systems. Weak and bottom-up: 'Well, in 2021 they bought Company X, which had its own system, and then...' Strong and top-down: 'Yes, consolidate onto one system. Three reasons: it cuts duplicate license cost by roughly a third, it removes a manual reconciliation step that delays reporting, and it lowers audit risk. I can walk through any of those.' Same facts, far more credible delivery.",
+      drills: [
+        { type:"knowledge", q:"Which opening is top-down?",
+          options:[
+            {text:"'Consolidate to one system. Three reasons: cost, reporting speed, and audit risk.'", correct:true, fb:"Correct. The answer comes first, followed by signposted supporting reasons."},
+            {text:"'Let me start with some background from 2021 when they made an acquisition, and then...'", correct:false, fb:"That is bottom-up. It buries the recommendation at the end and makes the listener wait for the point."},
+            {text:"'It depends on a lot of factors, so let me think out loud for a while.'", correct:false, fb:"That opens with hedging and no headline, which reads as unstructured."}
+          ]},
+        { type:"knowledge", q:"What does signposting do?",
+          options:[
+            {text:"Tells the listener your structure before the details, so they can follow easily.", correct:true, fb:"Correct. Naming the structure up front lets the listener track exactly where you are."},
+            {text:"Adds more data to prove you did the work.", correct:false, fb:"Signposting is about structure, not volume. More data does not make you easier to follow."},
+            {text:"Delays the recommendation until the end for suspense.", correct:false, fb:"That is the opposite of what you want. Consultants lead with the recommendation, not withhold it."}
+          ]},
+        { type:"scenario", speaker:"Practice Leader", q:"Walk me through your recommendation on the system consolidation.",
+          options:[
+            {tier:"strong", fb:"Answer first, three signposted reasons, and an offer to go deeper. Exactly the pyramid.", text:"Consolidate to one system. Three reasons: it cuts duplicate license cost, it removes a manual reconciliation step that delays reporting, and it lowers audit risk. I can go deeper on any of the three."},
+            {tier:"weak", fb:"Bottom-up storytelling. The recommendation is buried at the end and the listener has to dig for it.", text:"So they have two systems from an old acquisition, and over time that created some issues, and eventually I think it points toward consolidating."},
+            {tier:"trap", fb:"Confident but unsupported. A sweeping 'fix everything' claim invites a challenge you cannot back up.", text:"Consolidate. It will save them millions and fix everything."}
+          ]},
+        { type:"scenario", speaker:"Practice Leader", q:"Give me the headline first. Should the client outsource their eTMF administration?",
+          options:[
+            {tier:"strong", fb:"Headline, two signposted reasons, and a clear trigger to revisit. Bounded and credible.", text:"No, keep it in-house for now. Two reasons: the volume does not yet justify a vendor, and audit exposure is lower with direct control. I would revisit if study count doubles."},
+            {tier:"weak", fb:"No headline. Laying out every pro and con without a view makes the listener do your job.", text:"There are pros and cons on both sides, so let me lay them all out and then we can decide together."},
+            {tier:"trap", fb:"A bandwagon claim with no client-specific reasoning. 'Everyone is doing it' is not analysis.", text:"Definitely outsource. Everyone is doing it these days."}
+          ]}
+      ]
+    },
+
+    /* ---------- LEVEL 5 ---------- */
+    {
+      title: "Veeva Domain: Life Sciences R&D and the Vault Suite",
+      subtitle: "Speak the language of a pharma R&D client",
+      concepts: ["Veeva (PBC)","Veeva Vault","Development Cloud","Vault Clinical","Vault Regulatory (RIM)","eCTD","Vault Quality","Vault Safety","GxP","21 CFR Part 11","ICH-GCP"],
+      brief: [
+        "Veeva Systems is the leading cloud-software company for the life sciences industry, and it is a Public Benefit Corporation, which means 'do the right thing' is written into how it operates. Its flagship platform is Veeva Vault, a content-and-data cloud that runs the regulated work of drug companies. The R&D side is called Development Cloud, and it has four pillars you should know.",
+        "Vault Clinical runs clinical trials: CTMS tracks study operations, and the eTMF holds the trial master file of required documents. Vault Regulatory, often called RIM for Regulatory Information Management, manages submissions to health authorities, including publishing in the eCTD format the FDA requires. Vault Quality runs the quality management system for deviations, CAPAs, and controlled documents. Vault Safety handles pharmacovigilance, meaning adverse-event case intake and reporting. All of this sits on top of GxP, the Good Practice regulations, and 21 CFR Part 11, the FDA rule governing electronic records and signatures, which is why audit trails and e-signatures matter so much."
+      ],
+      worked: "A client says regulatory submissions take too long. The relevant pillar is Vault Regulatory, or RIM, and the likely levers are duplicated data entry across systems and manual document assembly for eCTD. Naming the right pillar and the right regulation is how you show a life sciences client that you speak their language.",
+      drills: [
+        { type:"knowledge", q:"A client's regulatory submissions to the FDA are slow and disorganized. Which Vault application is most relevant?",
+          options:[
+            {text:"Vault Regulatory (RIM), which manages submissions and eCTD publishing.", correct:true, fb:"Correct. Regulatory Information Management is the submissions and eCTD pillar."},
+            {text:"Vault Safety, which handles adverse-event cases.", correct:false, fb:"Vault Safety is pharmacovigilance, not submissions. Different problem, different pillar."},
+            {text:"Vault Clinical, which runs trial operations.", correct:false, fb:"Vault Clinical covers CTMS and the eTMF for running trials, not health-authority submissions."}
+          ]},
+        { type:"knowledge", q:"What is 21 CFR Part 11?",
+          options:[
+            {text:"The FDA rule governing electronic records and electronic signatures, which requires audit trails.", correct:true, fb:"Correct. It is why validated systems, audit trails, and e-signatures are central to life sciences software."},
+            {text:"A European privacy regulation for patient data.", correct:false, fb:"That describes GDPR, which is a different regime. Part 11 is FDA electronic-records rule."},
+            {text:"A Veeva product tier.", correct:false, fb:"It is a federal regulation, not a product. Veeva builds to comply with it."}
+          ]},
+        { type:"scenario", speaker:"Client, VP of R&D Operations", q:"Our regulatory submissions take too long. What would you look at?",
+          options:[
+            {tier:"strong", fb:"Right domain, process-first, and honest that a real diagnosis needs discovery. This is how you earn a life sciences client's trust.", text:"This sits in the RIM space. Before promising anything, I would map the submission process to find where time is lost, likely duplicated data entry across systems and manual document assembly for eCTD. I would confirm with a short discovery, then target the biggest bottleneck."},
+            {tier:"weak", fb:"Generic. No domain specifics and no method, so it sounds like anyone could have said it.", text:"I would help you optimize the process and make it more efficient overall."},
+            {tier:"trap", fb:"Over-promising a specific number before any diagnosis is the trap. A life sciences leader will immediately ask how you got 40 percent, and you will have no answer.", text:"I can cut your submission timeline by 40 percent."}
+          ]},
+        { type:"scenario", speaker:"Client, Head of Drug Safety", q:"Your background is pharmacy and regulatory science. Why does that fit an R&D consulting role here?",
+          options:[
+            {tier:"strong", fb:"Accurate and specific. It connects a real credential to the exact domain Veeva's R&D clients work in.", text:"My MS in Regulatory Science covers the R&D domain Veeva serves: IND and NDA submissions, eCTD, ICH-GCP, and pharmacovigilance. I can speak a submissions or safety client's language on day one, and I pair that with hands-on process and data work."},
+            {tier:"weak", fb:"True but generic. Knowing medicine broadly does not connect to R&D operations or Veeva's domain.", text:"I am a pharmacist, so I know a lot about medicine and healthcare in general."},
+            {tier:"trap", fb:"Overclaiming product mastery you do not have. It is easily exposed and it contradicts the whole premise of a training program.", text:"I already know Veeva Vault inside and out and could run engagements unsupervised."}
+          ]}
+      ]
+    },
+
+    /* ---------- LEVEL 6 ---------- */
+    {
+      title: "Fit and Integrity: STAR plus Honesty",
+      subtitle: "Where the precise honest answer outscores the confident inflated one",
+      concepts: ["STAR method","STAR plus Reflection","Integrity (PBC)","Intellectual honesty","Shipped vs designed"],
+      brief: [
+        "Veeva runs a job-history interview and rewards specific, honest storytelling. The tool for that is STAR: Situation, the context; Task, your responsibility; Action, what you personally did; and Result, the measurable outcome. A strong answer spends most of its time on Action and gives a concrete Result. Adding a brief Reflection at the end, meaning what you learned, turns a good story into a memorable one.",
+        "The harder skill is intellectual honesty. Veeva is a Public Benefit Corporation and states plainly that it wants high-integrity people. It even calls accepting an offer while still interviewing elsewhere an ethical violation. In that culture, a precise honest answer outscores a confident inflated one, and here is why. First, consultants get staffed on client work where an exposed exaggeration destroys trust instantly. Second, a case exercise and reference checks surface anything you cannot back up. Third, being able to say exactly what is shipped versus what is still in design, or what you did versus what your team did, is itself the core consulting skill of accurate scoping."
+      ],
+      worked: "If a project has a live core feature and a second feature still on a development branch, the strong answer is: 'the core is deployed and I validated it with a live demonstration; the second feature is built but not yet released.' That sentence earns more points than claiming the whole thing is done, because it proves you can be trusted with the truth.",
+      drills: [
+        { type:"knowledge", q:"Which STAR answer is strongest?",
+          options:[
+            {text:"A brief Situation and Task, most of the time on the specific Actions you personally took, and a quantified Result.", correct:true, fb:"Correct. Weight the answer toward your own Actions and end on a concrete Result."},
+            {text:"A long, detailed Situation and a vague Result at the end.", correct:false, fb:"Front-loading context and ending vaguely wastes the interviewer's attention and hides your contribution."},
+            {text:"Mostly what the team accomplished, with little on your own role.", correct:false, fb:"STAR is about what you did. If the interviewer cannot tell what you personally contributed, the story does not score."}
+          ]},
+        { type:"knowledge", q:"Veeva is a Public Benefit Corporation that prizes integrity. Which behavior best signals that value?",
+          options:[
+            {text:"Stating exactly what you shipped versus what is still in design.", correct:true, fb:"Correct. Precise scoping is honesty in action, and it is also the consulting skill itself."},
+            {text:"Rounding your results up so they sound more impressive.", correct:false, fb:"Inflation is exactly what a do-the-right-thing culture screens out, and it unravels under questioning."},
+            {text:"Claiming credit for a teammate's workstream to seem more senior.", correct:false, fb:"Taking others' credit is an integrity red flag and a fast way to lose a reference check."}
+          ]},
+        { type:"scenario", speaker:"Practice Leader", q:"Tell me about the tools you built. What is actually live right now?",
+          options:[
+            {tier:"strong", fb:"This is the answer that scores highest at a Public Benefit Corporation. It is precise about shipped versus beta, names your true contribution, and does not inflate usage. An honest scope statement is itself the consulting skill of accurate scoping, and nothing here can be punctured by a follow-up question. This is why honesty outscores confidence.", text:"I built two, GenericCheck and FactCheckMate, using AI development tools. The core of each is deployed and I validated the concept with live demonstrations. They are in beta, so I am not claiming an active user base yet. My real contribution was the regulatory data model and the risk-scoring logic, not raw software engineering."},
+            {tier:"weak", fb:"True but vague. It wastes the chance to show domain depth and gives the interviewer nothing specific to score.", text:"I built a couple of healthcare web apps that do some regulatory checking."},
+            {tier:"trap", fb:"This is the confident-but-inflated answer, and it scores lowest. The apps are in beta with no such user base, and 'coded it all myself' oversells AI-assisted work. At a company that calls integrity a core value, an exaggeration a reference check or case exercise would expose is disqualifying. The honest version beats this one every time, because being trusted with the truth is worth more than sounding impressive.", text:"I built and launched two full production platforms with thousands of users and a complete engineering stack I coded all myself."}
+          ]},
+        { type:"scenario", speaker:"Practice Leader", q:"I see McKinsey Forward on your resume. Tell me about that.",
+          options:[
+            {tier:"strong", fb:"Correct and disarming. You remove any chance of a misread, then convert the credential into evidence of skill. Naming exactly what something is, and is not, is the honesty Veeva rewards.", text:"It is McKinsey's open online professional-development program, not a role at the firm. I completed it to build structured problem-solving, data-driven analysis, and stakeholder communication, and I have been applying that structure to my own projects."},
+            {tier:"weak", fb:"Not wrong, but it leaves the nature of the program fuzzy and could be misheard as employment.", text:"It is a McKinsey program I did to help me get into consulting."},
+            {tier:"trap", fb:"This phrasing invites the interviewer to assume you worked at McKinsey, which is not true. Even an unintentional overclaim on a credential unravels in a reference check and signals exactly the wrong thing at a do-the-right-thing company. The precise version scores higher.", text:"I trained with McKinsey and worked on their consulting engagements directly."}
+          ]}
+      ]
+    },
+
+    /* ---------- LEVEL 7 ---------- */
+    {
+      title: "Your Story Bank",
+      subtitle: "Drill your real material so the honest, structured version comes out under pressure",
+      concepts: ["Transferable evidence","Answer-first","Own contribution","Intellectual honesty"],
+      brief: [
+        "This level drills your own material so the honest, structured version comes out under pressure. You are pivoting into consulting from pharmacy practice, and that is exactly who the Master Class is built for, so you never need to apologize for it. Your job is to convert real experience into evidence the interviewer can score.",
+        "Your three strongest and most defensible assets are: a business turnaround, where you helped drive Fullerton Medical Pharmacy from an operating loss to profitability, growing daily volume by roughly 25 percent through PBM renegotiation and workflow redesign; a regulatory-science foundation, a dual PharmD and MS in Regulatory Science with coursework in IND and NDA submissions, eCTD, ICH-GCP, and pharmacovigilance; and two shipped tools, GenericCheck and FactCheckMate, built with AI development tools and validated with live demonstrations. For each story, lead with the answer, quantify honestly, and name your own contribution precisely."
+      ],
+      worked: "Where a metric is real, use it. Where something is in beta or was a team effort, say so, because that precision reads as strength here, not weakness. The drills below reward the version an interviewer could verify, and they penalize the inflated version a reference check would puncture.",
+      drills: [
+        { type:"scenario", speaker:"Practice Leader", q:"You have no full-time consulting or pharma-industry experience. Why should we take you into the Master Class?",
+          options:[
+            {tier:"strong", fb:"Honest, confident, and evidence-based. It reframes the gap as the premise of the program and backs it with specific, verifiable wins. This is the strongest possible answer to the resume risk, and the honesty is what makes it land.", text:"That is exactly what this program is designed for, so I will answer with transferable evidence rather than apologize. I helped drive an independent pharmacy from an operating loss to profitability through PBM renegotiation and workflow redesign, which is real operations and business improvement. My MS in Regulatory Science gives me the R&D domain, and I have shipped two regulatory tools end to end. I am pivoting on purpose, with a track record of solving messy operational problems."},
+            {tier:"weak", fb:"Enthusiasm without evidence. Every candidate says this, so it gives the interviewer nothing to score.", text:"I am a fast learner and genuinely passionate about consulting, so I would work hard to catch up quickly."},
+            {tier:"trap", fb:"Overstating equivalence is the trap. Retail pharmacy is not consulting, and claiming it is invites a puncturing follow-up. The honest transferable-skills framing is both truer and stronger.", text:"Honestly I do have the experience. My pharmacy work is basically the same as consulting already."}
+          ]},
+        { type:"scenario", speaker:"Practice Leader", q:"Walk me through the Fullerton Medical Pharmacy turnaround.",
+          options:[
+            {tier:"strong", fb:"Answer-first, quantified, and precise about what you owned versus shared. That honesty note actually strengthens it.", text:"Headline first: I helped take Fullerton Medical Pharmacy from an operating loss to profitability, with daily volume up about 25 percent. The two biggest levers were renegotiating PBM reimbursement terms and redesigning the workflow, including an iPad intake system I built that automated data capture. I owned the process redesign, and the PBM piece was a shared effort with the owner."},
+            {tier:"weak", fb:"Vague and unquantified. There is a real 25 percent figure and a real mechanism, so use them.", text:"I did a lot to improve the pharmacy and things got much better while I was there."},
+            {tier:"trap", fb:"Inflated on both the number and the sole-credit claim. The real figures are strong enough, and exaggeration only creates risk under questioning.", text:"I single-handedly doubled the pharmacy's revenue and rebuilt every system by myself."}
+          ]},
+        { type:"scenario", speaker:"Practice Leader", q:"Tell me about the FDA award on your resume.",
+          options:[
+            {tier:"strong", fb:"Exactly the right level of precision. You name the real placement and venue without letting it inflate into 'an FDA award' or an adopted product. Leading a team to a national placement is impressive on its own.", text:"To be precise, it was second place in America's Got Regulatory Science Talent, a competition run by the UMB regulatory-science center with the FDA. I originated and led a four-person team on Braille-iant, a Braille-overlay auxiliary prescription label, and we presented it at the FDA Office of Regulatory Science and Innovation."},
+            {tier:"weak", fb:"Loose. 'Won an FDA award' overstates a second-place competition finish and could mislead the interviewer.", text:"I won an FDA award for a Braille prescription label idea I came up with."},
+            {tier:"trap", fb:"Two overstatements: it was a competition placement, not an FDA-issued award, and there was no adoption. This is the kind of claim that collapses the moment someone looks it up. Precision wins.", text:"The FDA gave my invention an award and adopted my Braille label design."}
+          ]},
+        { type:"scenario", speaker:"Practice Leader", q:"Why Veeva, and why the R&D practice specifically?",
+          options:[
+            {tier:"strong", fb:"Specific, accurate, and self-aware. It ties the practice area to a real credential and gives an honest motivation, which is far more convincing than generic praise.", text:"Two honest reasons. First, R&D is my actual domain: my regulatory-science training is in submissions, GCP, and pharmacovigilance, which is what your R&D clients live in. Second, the way Veeva combines software, data, and consulting matches how I already work, since I build data-driven tools to fix real process problems. I also do my best work in varied, client-facing settings, which this role has plenty of."},
+            {tier:"weak", fb:"Generic. Nothing here is specific to the R&D practice or to you, so it could be said about any firm.", text:"Veeva is a great, fast-growing company and consulting is a strong career move for me."},
+            {tier:"trap", fb:"Prestige-and-pay-only answers read as a flight risk and miss the mission, which lands badly at a Public Benefit Corporation that screens for people who care about the industry.", text:"Veeva is the biggest name and the pay and prestige are the best, so it is my top choice."}
+          ]}
+      ]
+    }
+
+    ,
+    /* ---------- LEVEL 8 ---------- */
+    {
+      title: "Full Case Study: Safety Backlog Transformation",
+      subtitle: "Practice the take-home case from prompt to recommendation deck",
+      concepts: ["Case prompt","Issue tree","Capacity model","Recommendation slide","Implementation roadmap","Risks and mitigations"],
+      brief: [
+        "A Veeva case exercise is not a trivia test. It is a simulation of client work: you receive an ambiguous business problem, structure it, make reasonable assumptions, analyze the drivers, and present a recommendation. The strongest candidates do not try to sound like they already know the client's answer. They show a disciplined process: clarify the objective, build a MECE issue tree, test the highest-leverage drivers, quantify enough to support the recommendation, and explain tradeoffs honestly.",
+        "This level uses a hypothetical R&D client case about a pharmacovigilance backlog. The client is a mid-size biotech with marketed products and active trials. Safety cases are arriving faster than the team can process them, creating regulatory-timeline and audit-readiness risk. Your job is not simply to say 'buy software' or 'hire more people.' Your job is to separate demand, capacity, rework, workflow, and governance. Then you recommend a phased operating-model and system path that solves the bottleneck without promising unrealistic improvement. That is the exact consulting muscle Veeva is testing."
+      ],
+      worked: "Prompt: A biotech receives 1,200 adverse-event cases per month. Eight associates process about 120 cases each per month, giving 960 monthly capacity. Backlog grows by about 240 cases per month. If duplicate entry and rework consume about 20 percent of productive time, removing most of that waste could lift effective capacity to about 1,150 cases. Triage rules and cleaner intake can close the remaining gap. Recommendation: pilot workflow redesign and safety-system standardization before a big-bang rollout, with weekly backlog, cycle-time, and quality metrics.",
+      drills: [
+        { type:"knowledge", q:"In the safety-backlog case, which formula frames the core problem most cleanly?",
+          options:[
+            {text:"Backlog change equals incoming cases minus processed cases.", correct:true, fb:"Correct. This formula cleanly separates demand from capacity and creates a measurable backbone for the case."},
+            {text:"Backlog equals employee morale plus system complexity.", correct:false, fb:"Morale and system complexity may matter, but that is not the governing equation. The core flow is cases in versus cases out."},
+            {text:"Backlog equals number of software tools times number of users.", correct:false, fb:"Tool count can create friction, but it does not directly define backlog. Start with the flow equation, then diagnose why processing capacity is low."}
+          ]},
+        { type:"knowledge", q:"Which issue-tree split is most MECE for diagnosing the backlog?",
+          options:[
+            {text:"Demand volume, processing capacity, rework quality, workflow and systems, governance and triage.", correct:true, fb:"Correct. These buckets separate where work comes from, how much can be processed, how much is wasted, what tools slow it down, and how the work is managed."},
+            {text:"Software, people, bad data, and Veeva Vault.", correct:false, fb:"This is too loose. Veeva Vault is a potential solution, not a diagnostic bucket, and bad data overlaps with rework and workflow."},
+            {text:"Hire more staff, automate everything, and outsource the work.", correct:false, fb:"Those are solution options, not a problem structure. A consultant diagnoses before choosing a fix."}
+          ]},
+        { type:"scenario", speaker:"Practice Leader", q:"The client asks whether they should buy a new safety system immediately. What is your answer?",
+          options:[
+            {tier:"strong", fb:"This is the consulting answer. It avoids both software-first and staffing-first bias, and it gives a phased path tied to data.", text:"Not immediately as the first answer. I would first quantify whether the bottleneck is demand, processing capacity, rework, or triage. If duplicate entry and manual routing are the biggest drivers, then a safety-system standardization path is likely right, but I would recommend a pilot workflow redesign before a big-bang rollout."},
+            {tier:"weak", fb:"It is safe but too generic. You need a sharper diagnostic path and a clearer recommendation logic.", text:"It depends on the details. I would review the current process and then decide if a new system is needed."},
+            {tier:"trap", fb:"This is the vendor-first trap. Veeva consultants work around software and data, but they still need to diagnose the business problem before prescribing the tool.", text:"Yes. A new system should solve the problem, so I would recommend moving to Veeva Safety right away."}
+          ]},
+        { type:"scenario", speaker:"Practice Leader", q:"How would you turn your case analysis into a 5-slide recommendation deck?",
+          options:[
+            {tier:"strong", fb:"This is a real deck spine: answer, evidence, operating model, roadmap, risk controls. It shows you understand both analysis and client communication.", text:"Slide 1: recommendation and expected impact. Slide 2: issue tree and current bottleneck. Slide 3: capacity math showing cases in versus cases out. Slide 4: future-state workflow with triage, ownership, and system changes. Slide 5: phased roadmap with risks, mitigations, and metrics."},
+            {tier:"weak", fb:"Better than nothing, but it is not a deck structure. The listener still cannot see the storyline or decision path.", text:"I would include background, current process, analysis, and next steps."},
+            {tier:"trap", fb:"A feature tour is not a recommendation deck. The case is not asking whether you can list product features; it is asking whether you can solve the client's business problem.", text:"I would make most of the deck a detailed list of Veeva Safety features and screenshots."}
+          ]}
+      ]
+    }
+
+  ],
+
+  caseStudy: {
+    title: "Case Study Lab: Pharmacovigilance Backlog Transformation",
+    subtitle: "A complete Veeva-style practice case, from ambiguous prompt to answer-first deck",
+    prompt: "A mid-size biotech has 4 marketed products and 12 active clinical trials. Its safety team receives about 1,200 adverse-event cases per month. Eight safety associates process about 120 cases each per month. Backlog is growing, late follow-ups are increasing, and leadership asks whether to implement a new safety system, hire more people, or outsource case processing.",
+    facts: [
+      "Client objective: reduce backlog growth, protect regulatory timelines, and improve audit readiness within 6 months.",
+      "Known data: 1,200 incoming cases per month, 8 associates, 120 cases processed per associate per month.",
+      "Initial capacity: 8 associates times 120 cases equals 960 cases processed per month.",
+      "Backlog growth: 1,200 cases in minus 960 cases out equals 240 cases added per month.",
+      "Hypothesis: the bottleneck is not only headcount. Manual intake, duplicate data entry, and weak triage reduce effective processing capacity."
+    ],
+    issueTree: [
+      {branch:"Demand", tests:"How many cases arrive by product, source, seriousness, geography, and clinical-trial versus post-market origin?"},
+      {branch:"Capacity", tests:"How many cases can each associate process by case type, and where do handoffs slow work down?"},
+      {branch:"Quality and rework", tests:"How often are cases reopened because of missing fields, coding errors, or follow-up gaps?"},
+      {branch:"Workflow and systems", tests:"Where does manual entry, duplicate entry, or lack of integration create avoidable cycle time?"},
+      {branch:"Governance and triage", tests:"Are serious and time-sensitive cases prioritized correctly, with clear owners and escalation paths?"}
+    ],
+    mathRows: [
+      {item:"Incoming cases", math:"1,200 per month", implication:"This is the demand side of the queue."},
+      {item:"Current capacity", math:"8 associates times 120 cases = 960 per month", implication:"The team is under capacity by 240 cases per month."},
+      {item:"Backlog growth", math:"1,200 minus 960 = 240 cases per month", implication:"Without intervention, the problem worsens every month."},
+      {item:"Waste hypothesis", math:"20 percent productive time lost to duplicate entry and rework", implication:"Workflow redesign could recover meaningful capacity without immediately hiring."},
+      {item:"Pilot target", math:"Reduce rework plus duplicate entry by about half", implication:"A focused pilot can test whether system and process changes close most of the gap before full rollout."}
+    ],
+    recommendation: [
+      "Do not start with a big-bang software rollout or a pure hiring plan. Diagnose and pilot first.",
+      "Run a 4-week discovery and workflow pilot focused on intake standardization, triage rules, duplicate-entry removal, and ownership clarity.",
+      "If the pilot proves manual workflow is the bottleneck, pursue safety-system standardization and integration as the scale path.",
+      "Use weekly metrics: incoming cases, processed cases, backlog size, cycle time by seriousness, rework rate, and overdue regulatory follow-ups."
+    ],
+    deck: [
+      {slide:"1. Recommendation", content:"Pilot workflow redesign and safety-system standardization before a full rollout. Expected benefit: stop backlog growth and reduce audit-risk exposure."},
+      {slide:"2. Problem framing", content:"Backlog is a queueing problem: cases in exceed cases out. The issue tree separates demand, capacity, quality, workflow, and governance."},
+      {slide:"3. Key analysis", content:"Current capacity is 960 cases per month versus 1,200 incoming. The 240-case monthly gap may be partly recoverable through rework and duplicate-entry reduction."},
+      {slide:"4. Future-state model", content:"Standardized intake, triage rules, clear ownership, fewer manual handoffs, and system-backed audit trails."},
+      {slide:"5. Roadmap and risks", content:"4-week diagnostic pilot, 8-week workflow rollout, system-standardization decision gate, then phased implementation. Risks: adoption, data quality, validation burden, and regulatory-timeline continuity."}
+    ],
+    traps: [
+      "Trap 1: recommending software before diagnosing the bottleneck.",
+      "Trap 2: promising a specific percentage improvement without evidence.",
+      "Trap 3: treating pharmacovigilance as generic operations and ignoring regulatory timelines.",
+      "Trap 4: building a deck full of product features instead of a decision-ready recommendation.",
+      "Trap 5: hiding assumptions instead of labeling them clearly."
+    ]
+  },
+
+  glossary: [
+    {term:"MECE", cat:"Consulting Method", def:"Mutually Exclusive, Collectively Exhaustive. Buckets that do not overlap and together leave no gaps. The test of a trustworthy breakdown.", ex:"Splitting prescriptions into new and refills is MECE. Splitting into brand, generic, and specialty is not, because specialty overlaps brand and generic."},
+    {term:"Issue tree", cat:"Consulting Method", def:"A MECE breakdown built for the specific problem, split down until each branch is measurable or testable.", ex:"Enrollment equals active sites, times patients screened per site, times conversion rate."},
+    {term:"Framework", cat:"Consulting Method", def:"A pre-made, reusable template such as a generic profit or market-entry model. Fast to apply but often fits a client situation loosely.", ex:"Reaching for a stock profit framework when the real question is why one trial site converts poorly."},
+    {term:"Driver tree", cat:"Consulting Method", def:"An issue tree whose branches are the quantitative drivers of an outcome, so you can see which lever moves the result most.", ex:"Total revenue equals volume times price times mix, each of which can be pulled apart further."},
+    {term:"Hypothesis-driven", cat:"Consulting Method", def:"Start with a likely, falsifiable answer, then gather only the data that would confirm or kill it. The opposite of boiling the ocean.", ex:"Lead hypothesis: the backlog grew because intake outpaced one processing step. Then pull just that step's cycle time."},
+    {term:"80/20", cat:"Consulting Method", def:"The Pareto habit of focusing on the roughly 20 percent of drivers that explain about 80 percent of the outcome.", ex:"Two of eight sites drive most of the enrollment shortfall, so fix those first."},
+    {term:"Market sizing", cat:"Consulting Method", def:"Reaching a defensible estimate from a few explicit assumptions, built top-down or bottom-up, when perfect data is unavailable.", ex:"15 products times 400 reports each gives about 6,000 adverse-event cases a year."},
+    {term:"Back-of-envelope", cat:"Consulting Method", def:"Quick, clean arithmetic done to a reasonable order of magnitude, with the assumptions stated openly.", ex:"Round numbers and simple multiplication to reach a ballpark you can defend."},
+    {term:"Segmentation", cat:"Consulting Method", def:"Dividing a population into meaningful, non-overlapping groups so each can be analyzed on its own terms.", ex:"Sorting trial sites into high, medium, and low converters before diagnosing the laggards."},
+    {term:"Sanity check", cat:"Consulting Method", def:"Testing an answer against a second, independent angle. A mismatch is a signal to recheck an assumption, not to hide it.", ex:"6,000 cases would need about 12 associates. The client has 3, so an assumption is off."},
+    {term:"So-what", cat:"Communication", def:"The decision-relevant implication of a fact. It names the driver, ranks the action, and points to a next step.", ex:"Site A is the bottleneck, so fixing its pre-check lifts enrollment more than adding sites."},
+    {term:"Synthesis vs summary", cat:"Communication", def:"A summary restates what the data says. Synthesis says what the data means and what to do about it.", ex:"Summary: Site A converts lower. Synthesis: Site A's funnel is the bottleneck to fix first."},
+    {term:"Pyramid principle", cat:"Communication", def:"Communicate answer-first: state the conclusion, then the two or three reasons, then detail only if asked.", ex:"'Consolidate to one system. Three reasons: cost, reporting speed, audit risk.'"},
+    {term:"Answer-first", cat:"Communication", def:"Leading with the recommendation before the supporting reasoning, so a busy stakeholder gets the point immediately.", ex:"'No, keep it in-house for now,' before explaining why."},
+    {term:"Signposting", cat:"Communication", def:"Telling the listener your structure before the details, so they can follow you without effort.", ex:"'I have three reasons; the first is cost, the second is timeline, the third is risk.'"},
+    {term:"Veeva (PBC)", cat:"Veeva Domain", def:"Veeva Systems, the leading cloud-software company for life sciences, and a Public Benefit Corporation that builds do-the-right-thing into its charter.", ex:"Being a PBC is why Veeva screens so hard for integrity and honesty."},
+    {term:"Veeva Vault", cat:"Veeva Domain", def:"Veeva's content-and-data cloud that runs the regulated documents and data of drug companies across the product lifecycle.", ex:"A single platform holding trial documents, submissions, quality records, and safety cases."},
+    {term:"Development Cloud", cat:"Veeva Domain", def:"The R&D side of Veeva Vault, spanning Clinical, Regulatory, Quality, and Safety applications.", ex:"The suite an R&D Business Consultant most often works across."},
+    {term:"Vault Clinical", cat:"Veeva Domain", def:"The clinical-trial applications: CTMS for study operations and the eTMF for the trial master file of required documents.", ex:"Tracking site activity and storing every required trial document in one place."},
+    {term:"Vault Regulatory (RIM)", cat:"Veeva Domain", def:"Regulatory Information Management. Manages health-authority submissions and registrations, including eCTD publishing.", ex:"The right pillar when a client's FDA submissions are slow or disorganized."},
+    {term:"eCTD", cat:"Veeva Domain", def:"Electronic Common Technical Document, the standardized electronic format the FDA requires for regulatory submissions.", ex:"Assembling an NDA into the eCTD structure for FDA review."},
+    {term:"Vault Quality", cat:"Veeva Domain", def:"The quality management applications: deviations, CAPAs, controlled documents, and training records.", ex:"Logging a manufacturing deviation and driving the corrective action to closure."},
+    {term:"Vault Safety", cat:"Veeva Domain", def:"The pharmacovigilance applications: adverse-event case intake, processing, and regulatory reporting.", ex:"Receiving an adverse-event report, coding it, and filing it within required timelines."},
+    {term:"GxP", cat:"Regulatory", def:"The family of Good Practice regulations (GCP, GLP, GMP, and others) that govern quality and integrity across regulated life sciences work.", ex:"A validated system with audit trails so trial data holds up to GxP inspection."},
+    {term:"21 CFR Part 11", cat:"Regulatory", def:"The FDA rule governing electronic records and electronic signatures, requiring audit trails, access controls, and validated systems.", ex:"Why e-signatures and complete audit trails are core to Veeva's software."},
+    {term:"ICH-GCP", cat:"Regulatory", def:"The international Good Clinical Practice standard for designing, conducting, and reporting clinical trials ethically and reliably.", ex:"Ensuring informed consent and accurate source data across trial sites."},
+    {term:"MedDRA", cat:"Regulatory", def:"The Medical Dictionary for Regulatory Activities, a standardized terminology for coding adverse events and medical conditions.", ex:"Coding a reported symptom to a MedDRA Preferred Term for consistent safety analysis."},
+    {term:"Orange Book", cat:"Regulatory", def:"The FDA publication listing approved drugs with therapeutic-equivalence codes that indicate whether a generic is substitutable for a brand.", ex:"Grounding a generic-equivalence check in the Orange Book's equivalence codes."},
+    {term:"IND / NDA / BLA / ANDA", cat:"Regulatory", def:"Core FDA application types: IND to begin trials, NDA for a new drug, BLA for a biologic, and ANDA for a generic.", ex:"An MS in Regulatory Science covers preparing and structuring these submissions."},
+    {term:"STAR method", cat:"Fit and Behavioral", def:"A behavioral-answer structure: Situation, Task, Action, Result. Weight most of the answer on your own Action and end on a concrete Result.", ex:"Brief context, then what you specifically did, then the 25 percent volume gain."},
+    {term:"STAR plus Reflection", cat:"Fit and Behavioral", def:"STAR with a short closing on what you learned, which turns a good story into a memorable one.", ex:"Ending a turnaround story with the lesson about how PBM terms drive pharmacy margin."},
+    {term:"Integrity (PBC)", cat:"Fit and Behavioral", def:"Veeva's stated core value as a Public Benefit Corporation. It even calls accepting an offer while still interviewing an ethical violation.", ex:"Choosing the precise, verifiable answer over the impressive-sounding one."},
+    {term:"Intellectual honesty", cat:"Fit and Behavioral", def:"Saying exactly what is true, including limits, so a follow-up question or reference check can only confirm you.", ex:"'The core is deployed; the second feature is built but not yet released.'"},
+    {term:"Shipped vs designed", cat:"Fit and Behavioral", def:"Distinguishing what is actually live and validated from what is architected or planned. Precise scoping is itself a consulting skill.", ex:"GenericCheck's core is shipped and in beta, with the data model as your real contribution."}
+
+    ,
+    {term:"Problem statement", cat:"Consulting Method", def:"A one-sentence description of what must be solved, for whom, by when, and why it matters.", ex:"Reduce the safety backlog within 6 months while preserving regulatory compliance."},
+    {term:"Client objective", cat:"Consulting Method", def:"The outcome the client cares about, written as a business decision or measurable target.", ex:"Stop backlog growth and protect regulatory reporting timelines."},
+    {term:"Workplan", cat:"Consulting Method", def:"The sequence of analyses, interviews, data pulls, and deliverables needed to answer the case question.", ex:"Week 1 process map, week 2 data pull, week 3 pilot design, week 4 recommendation deck."},
+    {term:"Root cause", cat:"Consulting Method", def:"The underlying driver that creates the visible symptom. Solving symptoms without root cause usually fails.", ex:"The symptom is backlog. The root cause may be duplicate entry plus weak triage, not just low headcount."},
+    {term:"KPI", cat:"Consulting Method", def:"Key Performance Indicator, the metric used to track whether an operation is improving.", ex:"Backlog size, case cycle time, rework rate, and overdue follow-ups."},
+    {term:"Leading metric", cat:"Consulting Method", def:"A metric that moves before the final outcome and helps predict it.", ex:"Daily intake completeness predicts future rework and cycle time."},
+    {term:"Lagging metric", cat:"Consulting Method", def:"A metric that confirms what already happened.", ex:"Monthly backlog size confirms whether the system improved, but only after the fact."},
+    {term:"Benchmarking", cat:"Consulting Method", def:"Comparing performance against another site, peer group, historical baseline, or standard to identify a gap.", ex:"Site A converts 8 percent of patients while Sites B and C convert 30 percent."},
+    {term:"Operating model", cat:"Consulting Method", def:"How work gets done: roles, responsibilities, process flow, governance, metrics, and tools.", ex:"A safety operating model defines who triages cases, who codes them, who follows up, and who escalates overdue reports."},
+    {term:"RACI", cat:"Consulting Method", def:"A responsibility matrix: Responsible, Accountable, Consulted, Informed. It prevents role confusion.", ex:"Safety associate is Responsible for coding, safety lead is Accountable for quality release."},
+    {term:"Stakeholder map", cat:"Consulting Method", def:"A view of who is affected, who decides, who influences, and who may resist change.", ex:"Drug safety, regulatory affairs, clinical operations, quality, IT validation, and medical affairs all touch safety workflow."},
+    {term:"Change management", cat:"Consulting Method", def:"The actions that help people adopt a new process or system: communication, training, champions, governance, and feedback loops.", ex:"Piloting a new triage workflow with two products before rolling it across the portfolio."},
+    {term:"Implementation roadmap", cat:"Consulting Method", def:"A phased plan showing what happens when, who owns it, and what decision gates control the next phase.", ex:"Discovery, pilot, standardize, validate, rollout, measure."},
+    {term:"Risk and mitigation", cat:"Consulting Method", def:"A credible plan names what could go wrong and what you will do to reduce that risk.", ex:"Risk: adoption failure. Mitigation: train super-users and track compliance weekly."},
+    {term:"Decision gate", cat:"Consulting Method", def:"A point where the team decides whether to continue, change, or stop based on evidence.", ex:"Scale safety-system standardization only if the workflow pilot reduces rework."},
+    {term:"Executive summary", cat:"Communication", def:"A short, answer-first page that gives the recommendation, evidence, impact, and next steps.", ex:"Pilot workflow redesign now, decide on system rollout after 4 weeks of data."},
+    {term:"Recommendation slide", cat:"Communication", def:"The slide that states what the client should do and why, usually at the start of the deck.", ex:"Do not start with big-bang rollout. Pilot the workflow, then scale the system path."},
+    {term:"Appendix", cat:"Communication", def:"Backup detail that supports the story but would distract from the main recommendation if placed up front.", ex:"Full assumption table, interview notes, and detailed process map."},
+    {term:"Clinical operations", cat:"Veeva Domain", def:"The function that plans and runs clinical trials, including sites, milestones, enrollment, monitoring, and trial documents.", ex:"A slow site-activation process is a clinical-operations issue."},
+    {term:"Protocol", cat:"Veeva Domain", def:"The clinical-trial plan that defines objectives, endpoints, eligibility, procedures, visits, and analysis.", ex:"Strict eligibility criteria can reduce screen-to-enroll conversion."},
+    {term:"Enrollment funnel", cat:"Veeva Domain", def:"The movement from potential patient to screened patient to enrolled participant.", ex:"Active sites times screened patients per site times conversion rate."},
+    {term:"Site activation", cat:"Veeva Domain", def:"The work needed before a trial site can enroll patients: contracting, regulatory documents, training, and system access.", ex:"If many sites are selected but not active, site activation is the bottleneck."},
+    {term:"CTMS", cat:"Veeva Domain", def:"Clinical Trial Management System, used to manage trial operations, milestones, sites, monitoring, and study activity.", ex:"Vault CTMS tracks which sites are active and where monitoring is delayed."},
+    {term:"eTMF", cat:"Veeva Domain", def:"Electronic Trial Master File, the required document repository proving the trial was conducted properly.", ex:"Missing informed-consent or site-training documents create inspection risk."},
+    {term:"RIM", cat:"Veeva Domain", def:"Regulatory Information Management, the system and process for managing submissions, registrations, commitments, and health-authority interactions.", ex:"Vault RIM supports submission planning and eCTD publishing."},
+    {term:"QMS", cat:"Veeva Domain", def:"Quality Management System, the process and tools for deviations, CAPAs, change control, controlled documents, and training.", ex:"A late safety report may trigger a deviation and CAPA."},
+    {term:"CAPA", cat:"Regulatory", def:"Corrective and Preventive Action. Corrective action fixes the current issue, preventive action stops recurrence.", ex:"Corrective: clear overdue cases. Preventive: standardize intake and triage rules."},
+    {term:"Deviation", cat:"Regulatory", def:"A departure from an approved procedure, requirement, or expected process that must be documented and assessed.", ex:"Missing a regulatory safety-reporting timeline may be logged as a deviation."},
+    {term:"ICSR", cat:"Regulatory", def:"Individual Case Safety Report, the structured report for one adverse-event case.", ex:"A serious unexpected adverse reaction becomes an ICSR with required reporting timelines."},
+    {term:"E2B", cat:"Regulatory", def:"The ICH electronic standard for transmitting individual safety case reports between companies and regulators.", ex:"A safety system may generate E2B files for regulatory submission."},
+    {term:"Seriousness", cat:"Regulatory", def:"A safety classification based on outcomes such as death, life-threatening event, hospitalization, disability, congenital anomaly, or other medically important condition.", ex:"A serious case needs faster triage and regulatory attention."},
+    {term:"Expectedness", cat:"Regulatory", def:"Whether an adverse event is already described in the product's reference safety information or labeling.", ex:"A serious unexpected event may trigger expedited reporting."},
+    {term:"Signal detection", cat:"Regulatory", def:"The process of identifying patterns in safety data that may suggest a new or changed risk.", ex:"A cluster of similar MedDRA-coded events can become a signal for review."},
+    {term:"Aggregate safety report", cat:"Regulatory", def:"A periodic report summarizing safety data across cases and time, such as a PSUR or PBRER.", ex:"Case-level ICSR data rolls up into aggregate safety reporting."},
+    {term:"Computer system validation", cat:"Regulatory", def:"Documented evidence that a regulated software system performs as intended and stays controlled over time.", ex:"A new safety workflow must be validated before regulated use."},
+    {term:"Audit trail", cat:"Regulatory", def:"A secure record of who did what, when, and why in a regulated system.", ex:"Part 11 compliance depends on complete audit trails and controlled e-signatures."},
+    {term:"Role-based access", cat:"Regulatory", def:"System permissions assigned by job role so users can only perform appropriate actions.", ex:"A case processor can code events, while a safety lead can medically review and approve."},
+    {term:"SOP", cat:"Regulatory", def:"Standard Operating Procedure, the controlled document that defines how regulated work must be performed.", ex:"The safety-case intake SOP defines required fields, triage rules, and escalation timing."}
+
+  ]
+};
+
+/* =====================================================================
+   APP LOGIC
+   ===================================================================== */
+const STORE_KEY = "veeva-master-class-sim-v1";
+let state = { view:"home", answers:{} };
+try { const s = JSON.parse(localStorage.getItem(STORE_KEY)); if (s && s.answers) state.answers = s.answers; } catch(e){}
+
+const PTS = { strong:10, weak:5, trap:0 };
+
+function save(){ localStorage.setItem(STORE_KEY, JSON.stringify({answers:state.answers})); }
+
+function allKnowledge(){ let a=[]; DATA.levels.forEach((l,li)=>l.drills.forEach((d,di)=>{ if(d.type==="knowledge") a.push({li,di,d}); })); return a; }
+function allScenario(){ let a=[]; DATA.levels.forEach((l,li)=>l.drills.forEach((d,di)=>{ if(d.type==="scenario") a.push({li,di,d}); })); return a; }
+function keyOf(li,di){ return "l"+li+"-"+di; }
+
+function computeKnowledge(){
+  const ks = allKnowledge(); let correct=0;
+  ks.forEach(({li,di,d})=>{ const idx=state.answers[keyOf(li,di)]; if(idx!=null && d.options[idx] && d.options[idx].correct) correct++; });
+  return { correct, total:ks.length, pct: ks.length? Math.round(correct/ks.length*100):0 };
+}
+function computeReadiness(){
+  const ss = allScenario(); let earned=0, max=0;
+  ss.forEach(({li,di,d})=>{ max+=PTS.strong; const idx=state.answers[keyOf(li,di)]; if(idx!=null && d.options[idx]) earned += PTS[d.options[idx].tier]; });
+  return { earned, max, pct: max? Math.round(earned/max*100):0 };
+}
+function levelDone(li){
+  const l=DATA.levels[li]; return l.drills.every((d,di)=> state.answers[keyOf(li,di)]!=null);
+}
+
+function updateMeters(){
+  const k=computeKnowledge(), r=computeReadiness();
+  document.getElementById("kPct").textContent=k.pct+"%";
+  document.getElementById("rPct").textContent=r.pct+"%";
+  document.getElementById("kBar").style.width=k.pct+"%";
+  document.getElementById("rBar").style.width=r.pct+"%";
+}
+
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+/* ---------- Sidebar ---------- */
+function renderSide(){
+  const side=document.getElementById("side");
+  let h='<div class="navhdr">Simulator</div>';
+  h+=navBtn("home","Overview","",state.view==="home");
+  h+=navBtn("case","Case Study Lab","C",state.view==="case");
+  h+='<div class="navhdr" style="margin-top:6px">Levels</div>';
+  DATA.levels.forEach((l,i)=>{
+    const active = state.view==="level-"+i;
+    const done = levelDone(i);
+    h+=`<button class="navbtn ${active?'active':''}" data-view="level-${i}">
+        <span class="num">${i+1}</span>
+        <span style="flex:1">${esc(l.title.split(":")[0])}</span>
+        ${done?'<span class="dot">&#10003;</span>':''}
+      </button>`;
+  });
+  h+='<div class="navhdr" style="margin-top:6px">Reference</div>';
+  h+=navBtn("glossary","Glossary and Knowledge Base","&#9776;",state.view==="glossary");
+  h+='<div style="padding:10px 6px 4px"><button class="ghost" id="resetBtn" style="width:100%">Reset progress</button></div>';
+  side.innerHTML=h;
+  side.querySelectorAll("[data-view]").forEach(b=> b.onclick=()=>{ state.view=b.getAttribute("data-view"); render(); window.scrollTo({top:0,behavior:"smooth"}); });
+  const rb=document.getElementById("resetBtn"); if(rb) rb.onclick=()=>{ if(confirm("Clear all answers and reset both meters to 0 percent?")){ state.answers={}; save(); render(); } };
+}
+function navBtn(view,label,icon,active){
+  return `<button class="navbtn ${active?'active':''}" data-view="${view}"><span class="num">${icon||'&#9679;'}</span><span style="flex:1">${label}</span></button>`;
+}
+
+/* ---------- Main router ---------- */
+function render(){
+  renderSide(); updateMeters();
+  const m=document.getElementById("main");
+  if(state.view==="home") m.innerHTML=renderHome();
+  else if(state.view==="case"){ m.innerHTML=renderCaseLab(); wireCaseLab(); }
+  else if(state.view==="glossary"){ m.innerHTML=renderGlossaryShell(); wireGlossary(); }
+  else if(state.view.startsWith("level-")){ const i=+state.view.split("-")[1]; m.innerHTML=renderLevel(i); wireLevel(i); }
+  renderFoot();
+}
+
+function renderFoot(){
+  document.getElementById("foot").innerHTML =
+    "Built for Minseok \"Joey\" Han, PharmD, MS Regulatory Science &nbsp;&middot;&nbsp; Practice tool only. Every model answer is grounded in your real, verifiable resume. Nothing here should be memorized as a script; internalize the reasoning and answer in your own words.";
+}
+
+/* ---------- Home ---------- */
+function renderHome(){
+  const k=computeKnowledge(), r=computeReadiness();
+  return `
+  <div class="card hero">
+    <div class="eyebrow">Learn, then drill</div>
+    <h2>Veeva Business Consultant, R&amp;D Practice</h2>
+    <p class="lede">This simulator teaches the real fundamentals a life sciences consultant needs, then drills you on Veeva-specific interview scenarios with scored feedback. You leave knowing the material, not just having seen the right answers. Two meters track your progress: <b>Knowledge</b> measures whether you understand the concepts, and <b>Interview Readiness</b> measures whether you can perform them under pressure.</p>
+    <div class="grid2" style="margin-top:16px">
+      <div class="mini"><h4>Knowledge ${k.pct}%</h4><p>${k.correct} of ${k.total} knowledge checks answered correctly. These verify you understand each concept the moment after it is taught.</p></div>
+      <div class="mini"><h4>Interview Readiness ${r.pct}%</h4><p>${r.earned} of ${r.max} scenario points earned. These reward the answer a real interviewer would score highest.</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">The real process</div>
+    <h2 style="font-size:20px;margin-bottom:2px">How Veeva actually interviews Master Class candidates</h2>
+    <p class="sub" style="margin-bottom:6px">Sourced from Veeva's own Master Class and Business Consultant postings. The practice is built to be fast, respectful, and honest.</p>
+    <ol class="steps">
+      <li><b>Application.</b> Submit your resume, a short cover letter of questions, and a third-party personality assessment.</li>
+      <li><b>Decision within about a week.</b> Veeva emails whether you advance.</li>
+      <li><b>45-minute interview with a practice leader.</b> A conversation about how you think.</li>
+      <li><b>Job-history interview.</b> A structured walk through your real experience. This is where STAR and honesty matter most.</li>
+      <li><b>Take-home case exercise.</b> A real customer scenario with about one week to build and present a solution.</li>
+      <li><b>Offer or decline within about a week.</b> Starting salary is 130,000 dollars, with a review and equity after a strong first year.</li>
+    </ol>
+    <div class="callout"><b>What Veeva rewards:</b> a problem-solving mindset that anticipates issues early, a process-and-data orientation, a high work ethic, and above all high integrity. Veeva is a Public Benefit Corporation and calls accepting an offer while still interviewing an ethical violation. That is why honesty is a scored virtue throughout this tool.</div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">How scoring works</div>
+    <h2 style="font-size:20px;margin-bottom:8px">Two drill types, two meters</h2>
+    <div class="grid2">
+      <div class="mini"><h4>Knowledge check</h4><p>A fast, unambiguous question that verifies you understood the brief. Right or wrong, with an explanation. Feeds the Knowledge meter.</p></div>
+      <div class="mini"><h4>Application scenario</h4><p>An interviewer asks a real Veeva question. Three answers: one strong, one weak, one trap. Feeds the Interview Readiness meter.</p></div>
+    </div>
+    <div class="legend">
+      <div class="lg"><span class="sw" style="background:var(--green)"></span><b>Strong</b> &nbsp;10 pts &middot; structured, precise, honest</div>
+      <div class="lg"><span class="sw" style="background:var(--amber)"></span><b>Weak</b> &nbsp;5 pts &middot; vague or unstructured</div>
+      <div class="lg"><span class="sw" style="background:var(--red)"></span><b>Trap</b> &nbsp;0 pts &middot; inflated or off-method</div>
+    </div>
+    <p style="font-size:13.5px;color:var(--slate);margin-top:14px">In several drills, the precise honest answer beats the confident inflated one on purpose. The feedback explains why honesty scores higher: at a Public Benefit Corporation, on client work, and under a case exercise and reference checks, an exaggeration you cannot back up is a liability, and accurate scoping is itself the skill.</p>
+    <div style="margin-top:16px"><button class="ghost" id="startBtn" style="background:var(--accent);color:#fff;border-color:var(--accent);padding:10px 18px;font-size:14px">Start Level 1</button></div>
+  </div>`;
+}
+
+/* ---------- Level ---------- */
+function renderLevel(i){
+  const l=DATA.levels[i];
+  let h=`<div class="card">
+    <div class="eyebrow">Level ${i+1} of ${DATA.levels.length}</div>
+    <h2>${esc(l.title)}</h2>
+    <p class="sub">${esc(l.subtitle)}</p>
+    <div class="brief">
+      <div class="btag">Teaching brief</div>
+      ${l.brief.map(p=>`<p>${esc(p)}</p>`).join("")}
+      <div class="we"><b>Worked example.</b> ${esc(l.worked)}</div>
+    </div>
+    <div class="concept-chips">
+      ${l.concepts.map(c=>`<span class="chip" data-term="${esc(c)}">${esc(c)}</span>`).join("")}
+    </div>
+  </div>`;
+
+  l.drills.forEach((d,di)=>{ h+=renderDrill(i,di,d); });
+
+  const done=levelDone(i);
+  h+=`<div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
+      <div style="font-size:14px;color:${done?'var(--green)':'var(--slate)'}">${done?'&#10003; Level complete. Your answers are saved.':'Answer every drill to complete this level. Progress saves automatically.'}</div>
+      <div style="display:flex;gap:10px">
+        ${i>0?`<button class="ghost" data-goto="level-${i-1}">Previous</button>`:''}
+        ${i<DATA.levels.length-1?`<button class="ghost" data-goto="level-${i+1}" style="background:var(--accent);color:#fff;border-color:var(--accent)">Next level</button>`:`<button class="ghost" data-goto="glossary" style="background:var(--accent);color:#fff;border-color:var(--accent)">Open Glossary</button>`}
+      </div>
+    </div>`;
+  return h;
+}
+
+function renderDrill(li,di,d){
+  const key=keyOf(li,di);
+  const chosen=state.answers[key];
+  const answered = chosen!=null;
+  const isK = d.type==="knowledge";
+  let opts="";
+  d.options.forEach((o,oi)=>{
+    let cls="opt", mk="", tag="", fbShown="";
+    const letter=String.fromCharCode(65+oi);
+    if(answered){
+      cls+=" disabled show-fb";
+      if(isK){
+        if(o.correct){ cls+=" reveal-correct"; mk="correct"; tag=`<span class="tier-tag correct">Correct</span>`; }
+        else if(oi===chosen){ cls+=" reveal-wrong"; mk="wrong"; tag=`<span class="tier-tag wrong">Your pick</span>`; }
+      } else {
+        cls+=" reveal-"+o.tier; mk=o.tier;
+        const label=o.tier==="strong"?"Strong":o.tier==="weak"?"Weak":"Trap";
+        tag=`<span class="tier-tag ${o.tier}">${label}</span>`;
+        if(oi===chosen) tag+=`<span class="pts">your pick, ${PTS[o.tier]} pts</span>`;
+      }
+      if(oi===chosen) cls+=" chosen";
+      fbShown=`<div class="fb">${esc(o.fb)}</div>`;
+    }
+    const mkContent = answered ? (isK ? (o.correct?"&#10003;":(oi===chosen?"&#10007;":letter)) : (o.tier==="strong"?"&#10003;":o.tier==="trap"?"&#10007;":"~")) : letter;
+    opts+=`<button class="${cls}" data-li="${li}" data-di="${di}" data-oi="${oi}" ${answered?'disabled':''}>
+        <span class="mk ${answered?mk:''}">${mkContent}</span>
+        <span>${esc(o.text)}${tag}</span>
+        ${fbShown}
+      </button>`;
+  });
+
+  let banner="";
+  if(answered){
+    if(isK){
+      const ok=d.options[chosen].correct;
+      banner=`<div class="banner ${ok?'correct':'wrong'} show">${ok?'&#10003; Correct.':'&#10007; Not quite.'} Knowledge meter updated. Review the highlighted answer above.</div>`;
+    } else {
+      const t=d.options[chosen].tier;
+      const msg = t==="strong"?"Strong answer. Full 10 points. This is what a Veeva interviewer wants to hear.":t==="weak"?"Weak answer. 5 points. It is not wrong, but it is not scoring. See the strong option.":"Trap answer. 0 points. Read why the honest, structured option outscores this one.";
+      banner=`<div class="banner ${t} show">${msg}</div>`;
+    }
+    banner+=`<div style="margin-top:10px"><button class="ghost" data-retry="${key}">Try this drill again</button></div>`;
+  }
+
+  return `<div class="card" style="padding:0">
+    <div class="drill" style="margin:0;border:none">
+      <div class="dhead">
+        <span class="kind ${isK?'know':'scen'}">${isK?'Knowledge check':'Application scenario'}</span>
+        <span class="qmeta">${isK?'Concept comprehension':'Interviewer question &middot; choose the best answer'}</span>
+      </div>
+      ${!isK && d.speaker?`<div class="speaker">${esc(d.speaker)} asks:</div>`:''}
+      <div class="qtext ${isK?'':'scenq'}">${esc(d.q)}</div>
+      <div class="opts">${opts}</div>
+      ${banner}
+    </div>
+  </div>`;
+}
+
+function wireLevel(i){
+  const m=document.getElementById("main");
+  m.querySelectorAll(".opt:not([disabled])").forEach(b=>{
+    b.onclick=()=>{
+      const li=+b.getAttribute("data-li"), di=+b.getAttribute("data-di"), oi=+b.getAttribute("data-oi");
+      state.answers[keyOf(li,di)]=oi; save(); render();
+      setTimeout(()=>{ const t=document.querySelector(`.card [data-di="${di}"]`); },0);
+    };
+  });
+  m.querySelectorAll("[data-retry]").forEach(b=>{ b.onclick=()=>{ delete state.answers[b.getAttribute("data-retry")]; save(); render(); }; });
+  m.querySelectorAll("[data-goto]").forEach(b=>{ b.onclick=()=>{ state.view=b.getAttribute("data-goto"); render(); window.scrollTo({top:0,behavior:"smooth"}); }; });
+  m.querySelectorAll(".chip[data-term]").forEach(c=>{ c.onclick=()=>{ state.view="glossary"; state.glossaryQuery=c.getAttribute("data-term"); render(); window.scrollTo({top:0,behavior:"smooth"}); }; });
+  const sb=document.getElementById("startBtn"); if(sb) sb.onclick=()=>{ state.view="level-0"; render(); window.scrollTo({top:0}); };
+}
+
+
+/* ---------- Case Study Lab ---------- */
+function renderCaseLab(){
+  const c=DATA.caseStudy;
+  return `<div class="card hero">
+    <div class="eyebrow">Take-home case practice</div>
+    <h2>${esc(c.title)}</h2>
+    <p class="lede">${esc(c.subtitle)}</p>
+    <div class="brief" style="margin-top:18px">
+      <div class="btag">Case prompt</div>
+      <p>${esc(c.prompt)}</p>
+    </div>
+    <div class="callout"><b>How to use this lab:</b> Read the prompt, then practice saying the issue tree and recommendation out loud. Then complete Level 8 to drill the same case under interview pressure.</div>
+    <div style="margin-top:16px"><button class="ghost" id="caseStart" style="background:var(--accent);color:#fff;border-color:var(--accent);padding:10px 18px;font-size:14px">Practice Level 8</button></div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Facts and hypothesis</div>
+    <h2 style="font-size:20px">What you know at the start</h2>
+    <div class="casegrid">
+      <div class="casebox"><h4>Known facts</h4><ul>${c.facts.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+      <div class="casebox"><h4>Answer-first hypothesis</h4><ul>
+        <li>The backlog is a queueing problem: monthly case intake exceeds monthly processing capacity.</li>
+        <li>The best first answer is not pure hiring or pure software. Diagnose capacity loss, rework, and triage first.</li>
+        <li>If manual workflow is the bottleneck, a standardized safety workflow and system path becomes the scale solution.</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Issue tree</div>
+    <h2 style="font-size:20px">MECE diagnostic structure</h2>
+    <table class="case-table"><thead><tr><th>Branch</th><th>What to test</th></tr></thead><tbody>
+      ${c.issueTree.map(r=>`<tr><td><b>${esc(r.branch)}</b></td><td>${esc(r.tests)}</td></tr>`).join("")}
+    </tbody></table>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Capacity math</div>
+    <h2 style="font-size:20px">Minimum quantification needed for the case</h2>
+    <table class="case-table"><thead><tr><th>Item</th><th>Math</th><th>Implication</th></tr></thead><tbody>
+      ${c.mathRows.map(r=>`<tr><td><b>${esc(r.item)}</b></td><td>${esc(r.math)}</td><td>${esc(r.implication)}</td></tr>`).join("")}
+    </tbody></table>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Recommendation</div>
+    <h2 style="font-size:20px">What to say to the client</h2>
+    <div class="casegrid">
+      <div class="casebox"><h4>Recommendation logic</h4><ul>${c.recommendation.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+      <div class="casebox"><h4>Traps to avoid</h4><ul>${c.traps.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Deck spine</div>
+    <h2 style="font-size:20px">A 5-slide answer-first deck</h2>
+    <table class="case-table"><thead><tr><th>Slide</th><th>Content</th></tr></thead><tbody>
+      ${c.deck.map(r=>`<tr><td><b>${esc(r.slide)}</b></td><td>${esc(r.content)}</td></tr>`).join("")}
+    </tbody></table>
+    <div class="callout"><b>Practice prompt:</b> In 60 seconds, say the Slide 1 recommendation, the backlog math, and the phased roadmap. If you can do that clearly, you are interview-ready for this case pattern.</div>
+  </div>`;
+}
+function wireCaseLab(){
+  const b=document.getElementById("caseStart");
+  if(b) b.onclick=()=>{ state.view="level-"+(DATA.levels.length-1); render(); window.scrollTo({top:0,behavior:"smooth"}); };
+}
+
+/* ---------- Glossary ---------- */
+const CATS = ["All","Consulting Method","Communication","Veeva Domain","Regulatory","Fit and Behavioral"];
+function renderGlossaryShell(){
+  const q = state.glossaryQuery || "";
+  return `<div class="card">
+    <div class="eyebrow">Persistent reference</div>
+    <h2>Glossary and Knowledge Base</h2>
+    <p class="sub">Every term and framework taught across all levels, with a definition and one example each. Search or filter anytime.</p>
+    <div class="gtools">
+      <label class="search">
+        <span style="color:var(--slate)">&#128269;</span>
+        <input id="gsearch" type="text" placeholder="Search terms, definitions, or examples" value="${esc(q)}" />
+      </label>
+      <div class="filters" id="gfilters">
+        ${CATS.map(c=>`<button class="fbtn ${(state.glossaryCat||'All')===c?'active':''}" data-cat="${esc(c)}">${c}</button>`).join("")}
+      </div>
+    </div>
+    <div id="glist"></div>
+  </div>`;
+}
+function glossaryList(){
+  const q=(document.getElementById("gsearch")?.value || state.glossaryQuery || "").trim().toLowerCase();
+  const cat=state.glossaryCat||"All";
+  const items=DATA.glossary.filter(g=>{
+    const catOk = cat==="All" || g.cat===cat;
+    const s=(g.term+" "+g.def+" "+g.ex+" "+g.cat).toLowerCase();
+    return catOk && (q==="" || s.includes(q));
+  });
+  const el=document.getElementById("glist");
+  if(!items.length){ el.innerHTML=`<div class="empty">No terms match that search. Try a shorter keyword or clear the filter.</div>`; return; }
+  el.innerHTML=items.map(g=>`
+    <div class="gitem">
+      <h4>${esc(g.term)} <span class="gcat">${esc(g.cat)}</span></h4>
+      <div class="def">${esc(g.def)}</div>
+      <div class="ex"><b>Example.</b> ${esc(g.ex)}</div>
+    </div>`).join("");
+}
+function wireGlossary(){
+  glossaryList();
+  const s=document.getElementById("gsearch");
+  if(s){ s.oninput=()=>{ state.glossaryQuery=s.value; glossaryList(); }; s.focus(); s.setSelectionRange(s.value.length,s.value.length); }
+  document.querySelectorAll("#gfilters .fbtn").forEach(b=>{ b.onclick=()=>{ state.glossaryCat=b.getAttribute("data-cat"); render(); }; });
+}
+
+render();
+</script>
+</body>
+</html>
