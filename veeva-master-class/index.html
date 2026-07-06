@@ -148,6 +148,15 @@
   .casebtn{border:1px solid var(--line);background:#fff;color:#334155;border-radius:999px;padding:8px 12px;font-size:12.5px;font-weight:700;cursor:pointer}
   .casebtn.active{background:var(--navy-deep);color:#fff;border-color:var(--navy-deep)}
   .casebox{border:1px solid var(--line);border-radius:11px;background:#fbfcfe;padding:14px 16px}
+  .persona-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
+  .persona-card{display:grid;grid-template-columns:58px 1fr;gap:14px;border:1px solid var(--line);border-radius:13px;background:#fff;padding:16px;box-shadow:var(--shadow)}
+  .avatar{width:54px;height:54px;border-radius:16px;background:linear-gradient(135deg,var(--navy),#4f6fa3);color:#fff;display:grid;place-items:center;font-family:"IBM Plex Serif",serif;font-weight:700;font-size:18px}
+  .persona-card h4{font-size:15.5px;margin:0 0 2px}
+  .persona-role{font-size:12.5px;color:var(--accent);font-weight:700;margin-bottom:6px}
+  .persona-tone{font-size:13px;color:var(--slate);margin-bottom:8px}
+  .persona-card ul{margin:0;padding-left:17px;font-size:13px;color:#3a4657}
+  .persona-prompt{grid-column:1/-1;background:#f8fafc;border-left:3px solid var(--accent);border-radius:0 9px 9px 0;padding:9px 11px;font-size:13.2px;color:#2b3542}
+  @media (max-width:880px){.persona-grid{grid-template-columns:1fr}}
   .casebox h4{font-size:14.5px;margin-bottom:8px;color:var(--navy-deep)}
   .casebox ul{margin:0;padding-left:18px;color:#3a4657;font-size:13.6px}
   .casebox li{margin:6px 0}
@@ -771,6 +780,335 @@ const DATA = {
             }
       ]
 }
+,{
+      "title": "Life Sciences Industry Map",
+      "subtitle": "Know how pharma and biotech create, protect, and lose value",
+      "concepts": [
+            "Drug lifecycle",
+            "Patent cliff",
+            "LOE",
+            "Sponsor",
+            "CRO",
+            "Payer",
+            "PBM",
+            "HCP",
+            "Patient journey",
+            "Value chain"
+      ],
+      "brief": [
+            "Life science consulting starts with understanding where value comes from. A pharma or biotech company creates value by discovering, developing, approving, launching, and managing medical products. The drug lifecycle runs from discovery to preclinical testing, IND submission, Phase 1 safety, Phase 2 dose and efficacy, Phase 3 confirmatory trials, NDA or BLA submission, approval, launch, post-marketing safety, and lifecycle management. Each stage has different risks, timelines, and economics. Early discovery has scientific uncertainty. Clinical development has patient recruitment, endpoint, and operational risk. Launch has payer, HCP, and patient-access risk.",
+            "Value is protected by patents, regulatory exclusivity, data exclusivity, brand trust, clinical differentiation, supply reliability, and payer access. Value is lost through loss of exclusivity, generic or biosimilar entry, failed trials, safety signals, slow launch uptake, poor reimbursement, manufacturing issues, or competitor data. A consultant does not need to be a bench scientist, but must know which business question belongs to which part of the lifecycle. A clinical enrollment issue, a regulatory submission delay, and a market-access rejection are all life sciences problems, but they live in different parts of the value chain and need different structures."
+      ],
+      "worked": "A biotech asks why its expected launch value fell. First ask where the value leaked. Was the clinical profile weaker than expected, delaying uptake? Did FDA require more data, delaying approval? Did payers restrict access, lowering treated patients? Did a competitor launch first? This is a value-chain diagnosis, not a generic revenue problem.",
+      "drills": [
+            {
+                  "type": "knowledge",
+                  "q": "Which sequence best represents the high-level drug lifecycle?",
+                  "options": [
+                        {
+                              "text": "Discovery, preclinical, IND, Phase 1, Phase 2, Phase 3, NDA or BLA, approval, launch, post-marketing.",
+                              "correct": true,
+                              "fb": "Correct. This is the backbone a consultant should know before discussing R&D or launch cases."
+                        },
+                        {
+                              "text": "Launch, Phase 1, IND, payer access, discovery, NDA.",
+                              "correct": false,
+                              "fb": "The order is scrambled. Launch and payer access come after clinical development and approval."
+                        },
+                        {
+                              "text": "Discovery, commercial launch, preclinical, approval, safety reporting.",
+                              "correct": false,
+                              "fb": "Commercial launch does not happen before preclinical and approval. Keep the lifecycle order clean."
+                        }
+                  ]
+            },
+            {
+                  "type": "knowledge",
+                  "q": "What is loss of exclusivity?",
+                  "options": [
+                        {
+                              "text": "The point when patent or regulatory protection weakens and generic or biosimilar competition can enter.",
+                              "correct": true,
+                              "fb": "Correct. LOE often causes major revenue erosion and is a core strategic issue in pharma."
+                        },
+                        {
+                              "text": "The point when a drug loses FDA approval because of a safety issue.",
+                              "correct": false,
+                              "fb": "That can happen, but it is not what LOE means. LOE usually refers to market protection ending."
+                        },
+                        {
+                              "text": "The point when a company loses access to a clinical trial site.",
+                              "correct": false,
+                              "fb": "That is a trial-operations issue, not loss of exclusivity."
+                        }
+                  ]
+            },
+            {
+                  "type": "scenario",
+                  "speaker": "Practice Leader",
+                  "q": "A client says their asset's expected value dropped by 35 percent. How do you start?",
+                  "options": [
+                        {
+                              "tier": "strong",
+                              "fb": "This is the right industry-first structure. You diagnose which part of the lifecycle changed before building a financial model.",
+                              "text": "I would first locate the value leak across the lifecycle: clinical profile, regulatory timeline, launch timing, payer access, competitive entry, safety risk, or LOE assumptions. Then I would quantify which driver changed the forecast most."
+                        },
+                        {
+                              "tier": "weak",
+                              "fb": "Revenue and cost matter, but the answer is too generic. Life sciences value has lifecycle-specific drivers you should name.",
+                              "text": "I would look at revenue and cost assumptions to see which changed."
+                        },
+                        {
+                              "tier": "trap",
+                              "fb": "You jumped to a solution without locating the driver. A price increase may be impossible if payers are already restricting access.",
+                              "text": "I would recommend increasing price to recover the lost value."
+                        }
+                  ]
+            },
+            {
+                  "type": "scenario",
+                  "speaker": "Practice Leader",
+                  "q": "Why does patent cliff matter in life science consulting?",
+                  "options": [
+                        {
+                              "tier": "strong",
+                              "fb": "This connects legal exclusivity to business strategy and consulting work.",
+                              "text": "Because revenue can erode quickly after exclusivity ends, so companies need lifecycle management, new indications, formulation strategy, portfolio replacement, or launch sequencing before LOE hits."
+                        },
+                        {
+                              "tier": "weak",
+                              "fb": "True but shallow. The interviewer wants the business implication, not just the definition.",
+                              "text": "It matters because patents eventually expire."
+                        },
+                        {
+                              "tier": "trap",
+                              "fb": "Incorrect. Patent cliffs usually intensify generic or biosimilar competition rather than blocking it.",
+                              "text": "It matters because it prevents generic competition from entering."
+                        }
+                  ]
+            }
+      ]
+},
+{
+      "title": "Functional Fluency Across Pharma",
+      "subtitle": "Recognize which function owns which problem",
+      "concepts": [
+            "Clinical Operations",
+            "Regulatory Affairs",
+            "Pharmacovigilance",
+            "Quality",
+            "Medical Affairs",
+            "Commercial",
+            "Market Access",
+            "HEOR",
+            "RWE",
+            "Manufacturing"
+      ],
+      "brief": [
+            "A life science consultant rarely solves an abstract pharma problem. The problem belongs to a function, and each function has its own language, systems, metrics, and decision-makers. Clinical Operations runs trials: protocols, sites, enrollment, monitoring, CTMS, and eTMF. Regulatory Affairs manages health-authority strategy, submissions, labeling, commitments, and RIM. Pharmacovigilance manages adverse events, ICSRs, signal detection, aggregate reports, and safety systems. Quality manages GxP, deviations, CAPA, audits, training, and validation.",
+            "Commercial and Medical are different. Commercial focuses on launch strategy, segmentation, targeting, field force, omnichannel, CRM, and demand generation. Medical Affairs focuses on scientific exchange, KOL engagement, evidence communication, publications, medical information, and MSL activity. Market Access handles payer value, formulary, pricing, reimbursement, prior authorization, and patient affordability. HEOR and RWE generate evidence on outcomes, burden, resource use, and value using trials, claims, EHR, registries, or other data. A strong consultant quickly names the function, the metric, and the likely system or operating-model lever."
+      ],
+      "worked": "If a product has strong clinical data but poor uptake, do not assume the clinical team owns the problem. It may be market access if payers restrict coverage, commercial if HCP awareness is low, medical affairs if scientific objections remain unresolved, or supply if patients cannot obtain therapy. Functional fluency prevents misdiagnosis.",
+      "drills": [
+            {
+                  "type": "knowledge",
+                  "q": "Which function primarily owns adverse-event case processing and signal detection?",
+                  "options": [
+                        {
+                              "text": "Pharmacovigilance or Drug Safety.",
+                              "correct": true,
+                              "fb": "Correct. PV owns adverse-event processing, ICSR workflows, safety reporting, and signal detection."
+                        },
+                        {
+                              "text": "Market Access.",
+                              "correct": false,
+                              "fb": "Market Access handles payer and reimbursement strategy, not adverse-event case processing."
+                        },
+                        {
+                              "text": "Commercial Sales.",
+                              "correct": false,
+                              "fb": "Commercial teams may receive reports, but PV owns the regulated safety process."
+                        }
+                  ]
+            },
+            {
+                  "type": "knowledge",
+                  "q": "Which function is most directly concerned with formulary access, reimbursement, and prior authorization?",
+                  "options": [
+                        {
+                              "text": "Market Access.",
+                              "correct": true,
+                              "fb": "Correct. Market Access focuses on payer coverage, reimbursement, affordability, and access restrictions."
+                        },
+                        {
+                              "text": "Clinical Operations.",
+                              "correct": false,
+                              "fb": "Clinical Ops runs trials. It does not own payer formulary decisions."
+                        },
+                        {
+                              "text": "Quality Assurance.",
+                              "correct": false,
+                              "fb": "Quality owns controlled processes and compliance, not reimbursement."
+                        }
+                  ]
+            },
+            {
+                  "type": "scenario",
+                  "speaker": "Practice Leader",
+                  "q": "A launch is underperforming. The clinical profile is strong, but prescriptions are low. What functional hypotheses do you test?",
+                  "options": [
+                        {
+                              "tier": "strong",
+                              "fb": "This is the right multi-function diagnostic. You do not assume one owner too early.",
+                              "text": "I would test payer access, HCP awareness and targeting, medical objections, patient affordability, diagnosis and referral flow, and supply availability. Then I would quantify which barrier explains the largest gap from forecast."
+                        },
+                        {
+                              "tier": "weak",
+                              "fb": "Commercial may be part of it, but this ignores payer, medical, patient, and supply barriers.",
+                              "text": "I would focus on whether the sales team is calling on enough physicians."
+                        },
+                        {
+                              "tier": "trap",
+                              "fb": "More spend without barrier diagnosis can waste money. If payer access is blocked, advertising will not fix it.",
+                              "text": "I would increase marketing spend immediately to create more demand."
+                        }
+                  ]
+            },
+            {
+                  "type": "scenario",
+                  "speaker": "Client, Chief Medical Officer",
+                  "q": "We have a strong publication plan, but field teams still hear scientific objections. Who needs to be involved?",
+                  "options": [
+                        {
+                              "tier": "strong",
+                              "fb": "This separates Medical Affairs from Commercial while recognizing coordination is needed.",
+                              "text": "Medical Affairs should own the scientific exchange and objection themes, with MSL feedback, medical information, publications, and evidence gaps connected. Commercial can share field patterns, but the scientific response should stay medically governed."
+                        },
+                        {
+                              "tier": "weak",
+                              "fb": "It is partly true but too narrow. Publications alone may not close real-world scientific objections.",
+                              "text": "The publications team should publish more papers."
+                        },
+                        {
+                              "tier": "trap",
+                              "fb": "This risks compliance issues. Scientific exchange should not become sales scripting.",
+                              "text": "Sales should be trained to answer all scientific objections directly with stronger claims."
+                        }
+                  ]
+            }
+      ]
+},
+{
+      "title": "Stakeholders, Incentives, and Client Conversations",
+      "subtitle": "Consulting answers improve when you know what each stakeholder cares about",
+      "concepts": [
+            "Sponsor",
+            "CRO",
+            "Site",
+            "Investigator",
+            "FDA",
+            "EMA",
+            "Payer",
+            "PBM",
+            "KOL",
+            "MSL",
+            "Patient",
+            "Provider"
+      ],
+      "brief": [
+            "Life science consulting is stakeholder-heavy because drug development and commercialization involve many parties with different incentives. A sponsor wants development speed, compliance, evidence quality, launch success, and portfolio value. A CRO wants clear scope, operational feasibility, and profitable delivery. A trial site wants manageable workload, patient flow, fast payments, and low administrative burden. Regulators want safety, efficacy, quality, and reliable evidence. Payers want clinical value, budget control, and evidence that a therapy improves outcomes enough to justify cost.",
+            "Providers and patients sit at the adoption edge. HCPs care about efficacy, safety, workflow, patient fit, access, and trust. Patients care about outcomes, side effects, affordability, convenience, and support. KOLs influence scientific credibility. MSLs support scientific exchange. PBMs and payers shape access. If you ignore incentives, you may recommend a solution that looks good in a spreadsheet but fails in the real world. In client conversations, ask: who owns the decision, who feels the pain, who must change behavior, who can block adoption, and whose metric defines success?"
+      ],
+      "worked": "A trial-enrollment case may look like a math problem, but stakeholder incentives explain the bottleneck. Sites may not screen because coordinators are overloaded. Patients may decline because visit burden is high. Investigators may prefer a competing study. The sponsor may think the issue is advertising, while the real solution is site support and protocol-fit triage.",
+      "drills": [
+            {
+                  "type": "knowledge",
+                  "q": "In a trial-enrollment case, why should you interview site coordinators?",
+                  "options": [
+                        {
+                              "text": "They often know the operational bottlenecks, patient objections, and workflow burden that sponsor dashboards miss.",
+                              "correct": true,
+                              "fb": "Correct. Coordinators see the daily operational truth behind enrollment numbers."
+                        },
+                        {
+                              "text": "They decide FDA approval strategy.",
+                              "correct": false,
+                              "fb": "Regulatory strategy is not owned by site coordinators."
+                        },
+                        {
+                              "text": "They set payer coverage policy.",
+                              "correct": false,
+                              "fb": "Payers set coverage policy. Sites do not."
+                        }
+                  ]
+            },
+            {
+                  "type": "knowledge",
+                  "q": "Which stakeholder most directly controls formulary placement?",
+                  "options": [
+                        {
+                              "text": "Payer or PBM decision-makers, depending on the channel.",
+                              "correct": true,
+                              "fb": "Correct. Coverage and formulary control usually sit with payers and PBMs, not the sponsor alone."
+                        },
+                        {
+                              "text": "The FDA review division.",
+                              "correct": false,
+                              "fb": "FDA approval is different from payer coverage. Approval does not guarantee access."
+                        },
+                        {
+                              "text": "The MSL team.",
+                              "correct": false,
+                              "fb": "MSLs support scientific exchange, but they do not control formulary placement."
+                        }
+                  ]
+            },
+            {
+                  "type": "scenario",
+                  "speaker": "Client, Head of Clinical Operations",
+                  "q": "Our dashboard says Site 12 has low enrollment. What do you do before recommending replacement?",
+                  "options": [
+                        {
+                              "tier": "strong",
+                              "fb": "This shows stakeholder thinking. You combine metric review with the human workflow that explains the metric.",
+                              "text": "I would check whether Site 12 has low patient volume, high screen-fail rate, coordinator capacity issues, investigator engagement problems, contract or training gaps, or competing trials. I would talk to the site team before replacing them because the fix may be support, not termination."
+                        },
+                        {
+                              "tier": "weak",
+                              "fb": "This uses data but ignores the site-level operating reality behind the data.",
+                              "text": "I would compare Site 12's numbers with other sites and rank it lower."
+                        },
+                        {
+                              "tier": "trap",
+                              "fb": "Too fast and potentially harmful. Dropping a site can reduce capacity and damage relationships if the cause was fixable.",
+                              "text": "I would immediately replace the site because low enrollment means poor performance."
+                        }
+                  ]
+            },
+            {
+                  "type": "scenario",
+                  "speaker": "Practice Leader",
+                  "q": "A payer rejects favorable coverage for a drug with positive Phase 3 data. How do you structure the issue?",
+                  "options": [
+                        {
+                              "tier": "strong",
+                              "fb": "This recognizes that clinical approval and payer value are not the same thing.",
+                              "text": "I would separate clinical efficacy, comparative value versus standard of care, budget impact, patient subgroup clarity, real-world evidence gaps, contracting strategy, and administrative burden. Positive Phase 3 data may be necessary, but it may not answer the payer's value question."
+                        },
+                        {
+                              "tier": "weak",
+                              "fb": "Price may matter, but payer decisions are broader than price alone.",
+                              "text": "I would check whether the price is too high."
+                        },
+                        {
+                              "tier": "trap",
+                              "fb": "Wrong mental model. FDA approval does not force favorable reimbursement, and payers can restrict access.",
+                              "text": "If the FDA approved it, the payer should cover it, so I would push back on them."
+                        }
+                  ]
+            }
+      ]
+}
 
   ],
 
@@ -1150,6 +1488,81 @@ const DATA = {
       "Trap 5: missing the value of avoiding one month of trial delay."
     ]
   }
+  ],
+
+  personas: [
+  {
+    "name": "Dana Rizzo",
+    "role": "Veeva R&D Practice Leader",
+    "avatar": "DR",
+    "tone": "Direct, structured, low tolerance for fluff",
+    "tests": [
+      "Can you structure ambiguity?",
+      "Do you know R&D domain basics?",
+      "Can you defend assumptions without becoming defensive?"
+    ],
+    "prompt": "Give me the headline first. What is the client problem, and what would you test first?"
+  },
+  {
+    "name": "Priya Shah",
+    "role": "VP Pharmacovigilance Operations",
+    "avatar": "PS",
+    "tone": "Operational and compliance-focused",
+    "tests": [
+      "Do you understand ICSR workflow?",
+      "Can you balance capacity, quality, and regulatory timelines?",
+      "Can you avoid software-first answers?"
+    ],
+    "prompt": "My backlog keeps growing. Should I hire, outsource, or standardize the safety system?"
+  },
+  {
+    "name": "Miguel Alvarez",
+    "role": "Head of Regulatory Affairs",
+    "avatar": "MA",
+    "tone": "Detail-oriented, risk-aware",
+    "tests": [
+      "Do you understand RIM and eCTD?",
+      "Can you separate data governance from tooling?",
+      "Can you explain hard savings versus strategic value?"
+    ],
+    "prompt": "Submissions take too long because global product data is inconsistent. What do you do?"
+  },
+  {
+    "name": "Ellen Brooks",
+    "role": "Clinical Operations Lead",
+    "avatar": "EB",
+    "tone": "Practical, site-focused",
+    "tests": [
+      "Do you understand enrollment funnels?",
+      "Can you separate site activation from patient conversion?",
+      "Can you account for site burden?"
+    ],
+    "prompt": "We need 240 more patients in 8 months. More sites, more ads, or better screening?"
+  },
+  {
+    "name": "Samir Patel",
+    "role": "Market Access Director",
+    "avatar": "SP",
+    "tone": "Evidence and payer-value focused",
+    "tests": [
+      "Do you know approval is not access?",
+      "Can you structure payer objections?",
+      "Can you connect clinical evidence to value story?"
+    ],
+    "prompt": "Our drug is approved, but payer coverage is restrictive. What evidence or strategy is missing?"
+  },
+  {
+    "name": "Rachel Kim",
+    "role": "Medical Affairs Lead",
+    "avatar": "RK",
+    "tone": "Scientific, compliance-sensitive",
+    "tests": [
+      "Can you separate medical from commercial?",
+      "Do you understand KOL and MSL roles?",
+      "Can you avoid promotional overreach?"
+    ],
+    "prompt": "Field teams hear scientific objections after launch. How should Medical Affairs respond?"
+  }
 ],
 
   glossary: [
@@ -1278,7 +1691,57 @@ const DATA = {
 {"term": "Vault Registrations", "cat": "Veeva Domain", "def": "Veeva application area for tracking product registrations and market authorization data.", "ex": "Useful when global registration data are inconsistent across countries."},
 {"term": "Study startup", "cat": "Veeva Domain", "def": "The work needed to get a clinical trial site ready to enroll patients.", "ex": "Contracts, regulatory documents, training, and system access can all delay activation."},
 {"term": "Screen fail", "cat": "Veeva Domain", "def": "A patient who is screened for a trial but does not meet eligibility or cannot proceed.", "ex": "High screen-fail rate means media spend may create more work without enrollment."},
-{"term": "Cost per enrolled patient", "cat": "Finance", "def": "Total recruitment or activation spend divided by incremental patients enrolled.", "ex": "A 300,000 dollar pre-screening program that adds 48 patients costs 6,250 dollars per incremental enrollee."}
+{"term": "Cost per enrolled patient", "cat": "Finance", "def": "Total recruitment or activation spend divided by incremental patients enrolled.", "ex": "A 300,000 dollar pre-screening program that adds 48 patients costs 6,250 dollars per incremental enrollee."},
+{"term": "Drug lifecycle", "cat": "Industry", "def": "The path from discovery through preclinical, clinical trials, approval, launch, post-marketing, and lifecycle management.", "ex": "A regulatory-delay case and a launch-access case sit in different parts of the lifecycle."},
+{"term": "Discovery", "cat": "Industry", "def": "Early research to identify targets, compounds, mechanisms, or therapeutic approaches.", "ex": "Discovery risk is mainly scientific and translational."},
+{"term": "Preclinical", "cat": "Industry", "def": "Lab and animal work before human testing, including toxicology and pharmacology studies.", "ex": "Preclinical data supports an IND submission."},
+{"term": "IND", "cat": "Regulatory", "def": "Investigational New Drug application, which allows clinical testing in humans to begin in the US.", "ex": "An IND package includes preclinical, manufacturing, and protocol information."},
+{"term": "Phase 1", "cat": "Industry", "def": "First-in-human trials focused mainly on safety, tolerability, PK, and dose range.", "ex": "A Phase 1 oncology study may include dose escalation."},
+{"term": "Phase 2", "cat": "Industry", "def": "Clinical trials focused on dose, early efficacy, and continued safety in the target patient population.", "ex": "A Phase 2 signal can shape Phase 3 endpoint selection."},
+{"term": "Phase 3", "cat": "Industry", "def": "Large confirmatory trials designed to prove safety and efficacy for approval.", "ex": "Slow Phase 3 enrollment can delay the entire launch timeline."},
+{"term": "NDA", "cat": "Regulatory", "def": "New Drug Application for FDA approval of a small-molecule drug.", "ex": "A successful Phase 3 program supports an NDA submission."},
+{"term": "BLA", "cat": "Regulatory", "def": "Biologics License Application for FDA approval of a biologic product.", "ex": "Many monoclonal antibodies are approved through BLAs."},
+{"term": "Post-marketing", "cat": "Industry", "def": "The period after approval, when safety, effectiveness, access, and lifecycle strategy continue.", "ex": "PV case processing and signal detection are post-marketing obligations."},
+{"term": "Lifecycle management", "cat": "Industry", "def": "Strategies to extend or protect product value after launch.", "ex": "New indication, formulation, device, or adherence support before LOE."},
+{"term": "Loss of exclusivity", "cat": "Industry", "def": "The point when patent or regulatory protection weakens and generic or biosimilar competition can enter.", "ex": "LOE can trigger rapid revenue erosion."},
+{"term": "Patent cliff", "cat": "Industry", "def": "A period when one or more major products lose exclusivity, threatening company revenue.", "ex": "A client may need portfolio replacement or lifecycle strategy before a patent cliff."},
+{"term": "Generic", "cat": "Industry", "def": "A small-molecule product approved as therapeutically equivalent to a reference listed drug, usually through an ANDA.", "ex": "Generic entry often accelerates after LOE."},
+{"term": "Biosimilar", "cat": "Industry", "def": "A biological product that is highly similar to an already approved reference biologic, with no clinically meaningful differences.", "ex": "Biosimilar competition affects biologic lifecycle strategy."},
+{"term": "Sponsor", "cat": "Stakeholder", "def": "The company or organization responsible for initiating and overseeing a clinical trial or development program.", "ex": "A biotech sponsor may outsource trial operations to a CRO but remains accountable."},
+{"term": "CRO", "cat": "Stakeholder", "def": "Contract Research Organization, a vendor that supports clinical development activities.", "ex": "A CRO may manage site monitoring, data management, or trial operations."},
+{"term": "Trial site", "cat": "Stakeholder", "def": "A hospital, clinic, or research center that enrolls and treats patients in a clinical trial.", "ex": "Site burden can limit enrollment even when the sponsor advertises heavily."},
+{"term": "Investigator", "cat": "Stakeholder", "def": "A physician or researcher responsible for conducting a clinical trial at a site.", "ex": "Investigator engagement can affect enrollment and protocol adherence."},
+{"term": "Site coordinator", "cat": "Stakeholder", "def": "The operational person at a trial site who manages screening, scheduling, documents, and patient logistics.", "ex": "Coordinators often know why screening actually fails."},
+{"term": "FDA", "cat": "Stakeholder", "def": "US Food and Drug Administration, the regulator that reviews drugs, biologics, devices, labeling, safety, and quality.", "ex": "FDA approval does not automatically mean payer access."},
+{"term": "EMA", "cat": "Stakeholder", "def": "European Medicines Agency, the EU agency involved in centralized medicine evaluation.", "ex": "Global regulatory strategy may need both FDA and EMA planning."},
+{"term": "Payer", "cat": "Stakeholder", "def": "An organization that pays for healthcare, such as an insurer, Medicare plan, or health system.", "ex": "A payer may restrict coverage even after FDA approval."},
+{"term": "PBM", "cat": "Stakeholder", "def": "Pharmacy Benefit Manager, an intermediary that manages pharmacy benefits, formularies, rebates, and utilization controls.", "ex": "PBM formulary status can determine patient access to a drug."},
+{"term": "HCP", "cat": "Stakeholder", "def": "Healthcare professional, such as a physician, pharmacist, nurse, or advanced practitioner.", "ex": "HCP awareness and comfort affect uptake after launch."},
+{"term": "KOL", "cat": "Stakeholder", "def": "Key Opinion Leader, a respected clinician or researcher who influences medical practice and scientific interpretation.", "ex": "KOL feedback can clarify why physicians hesitate to adopt a therapy."},
+{"term": "MSL", "cat": "Stakeholder", "def": "Medical Science Liaison, a field-based medical affairs professional who supports scientific exchange with experts.", "ex": "MSLs gather insights and discuss evidence, not promotional sales claims."},
+{"term": "Patient journey", "cat": "Commercial", "def": "The path patients take from symptoms to diagnosis, treatment decision, access, adherence, and outcomes.", "ex": "A launch may fail because patients drop out before diagnosis or prior authorization."},
+{"term": "Segmentation and targeting", "cat": "Commercial", "def": "Dividing customers or HCPs into meaningful groups and prioritizing the highest-value or highest-need segments.", "ex": "Commercial teams may target high-volume specialists with relevant patient populations."},
+{"term": "Omnichannel", "cat": "Commercial", "def": "Coordinated customer engagement across field, email, web, congress, remote, and other channels.", "ex": "A launch plan may combine rep visits, webinars, medical content, and digital reminders."},
+{"term": "Launch strategy", "cat": "Commercial", "def": "The plan for bringing a product to market, including positioning, evidence, access, field model, education, and metrics.", "ex": "A strong launch strategy aligns clinical differentiation with payer value and HCP behavior."},
+{"term": "Market access", "cat": "Market Access", "def": "The function focused on payer coverage, pricing, reimbursement, affordability, and patient access.", "ex": "Restrictive prior authorization is a market-access barrier."},
+{"term": "Formulary", "cat": "Market Access", "def": "A payer or PBM list of covered drugs and their coverage conditions.", "ex": "Preferred formulary status can materially improve uptake."},
+{"term": "Prior authorization", "cat": "Market Access", "def": "A payer requirement that approval be obtained before a therapy is covered.", "ex": "High prior-authorization burden can reduce treated patients."},
+{"term": "Step therapy", "cat": "Market Access", "def": "A payer policy requiring patients to try one or more preferred therapies before another therapy is covered.", "ex": "Step therapy can delay access to a newer therapy."},
+{"term": "Gross-to-net", "cat": "Market Access", "def": "The difference between list price and net revenue after rebates, discounts, fees, and chargebacks.", "ex": "A drug can have high list price but lower net revenue after rebates."},
+{"term": "HEOR", "cat": "HEOR and Evidence", "def": "Health Economics and Outcomes Research, evidence work that studies value, outcomes, cost, burden, and resource use.", "ex": "HEOR supports payer value stories and reimbursement strategy."},
+{"term": "RWE", "cat": "HEOR and Evidence", "def": "Real-world evidence generated from data outside traditional randomized trials, such as claims, EHR, registries, or patient-reported data.", "ex": "RWE may support post-launch evidence generation or payer discussions."},
+{"term": "Claims data", "cat": "HEOR and Evidence", "def": "Administrative billing data that captures diagnoses, procedures, prescriptions, costs, and utilization.", "ex": "Claims can estimate treatment patterns but may lack clinical detail."},
+{"term": "EHR data", "cat": "HEOR and Evidence", "def": "Electronic health record data containing clinical observations, labs, notes, diagnoses, and treatments.", "ex": "EHR data may capture disease severity better than claims but can be messy."},
+{"term": "Registry", "cat": "HEOR and Evidence", "def": "A structured dataset tracking patients with a disease, exposure, or treatment over time.", "ex": "A registry can support long-term safety or outcomes evidence."},
+{"term": "Value story", "cat": "Market Access", "def": "The evidence-based argument that a product's clinical and economic value justifies coverage and use.", "ex": "A payer value story may combine efficacy, safety, unmet need, budget impact, and real-world outcomes."},
+{"term": "Budget impact model", "cat": "Market Access", "def": "A model estimating how adopting a therapy affects a payer's budget over a defined period.", "ex": "Even a cost-effective drug may face resistance if short-term budget impact is high."},
+{"term": "Cost-effectiveness", "cat": "HEOR and Evidence", "def": "Analysis comparing cost and health outcomes of alternatives, often using cost per QALY or similar measures.", "ex": "Some markets require cost-effectiveness evidence for reimbursement."},
+{"term": "QALY", "cat": "HEOR and Evidence", "def": "Quality-adjusted life year, a measure combining length and quality of life.", "ex": "A therapy may be evaluated by cost per QALY gained."},
+{"term": "Medical Affairs", "cat": "Commercial", "def": "The function responsible for scientific exchange, evidence communication, KOL engagement, publications, and medical information.", "ex": "Medical Affairs handles scientific objections through medically governed channels."},
+{"term": "Medical Information", "cat": "Commercial", "def": "The function that responds to unsolicited medical questions with accurate, balanced, and approved scientific information.", "ex": "A complex off-label question should route to Medical Information, not sales."},
+{"term": "Scientific exchange", "cat": "Commercial", "def": "Non-promotional discussion of scientific evidence, typically led by Medical Affairs or MSLs.", "ex": "MSLs discuss data with KOLs within compliance boundaries."},
+{"term": "Unmet need", "cat": "Industry", "def": "A gap where current therapies do not adequately address patient, clinician, or system needs.", "ex": "High unmet need can support priority development and strong launch positioning."},
+{"term": "Standard of care", "cat": "Industry", "def": "The usual accepted treatment approach for a disease or patient segment.", "ex": "Payers compare a new therapy against standard of care, not against placebo alone."}
   ]
 };
 
@@ -1327,6 +1790,7 @@ function renderSide(){
   let h='<div class="navhdr">Simulator</div>';
   h+=navBtn("home","Overview","",state.view==="home");
   h+=navBtn("case","Case Study Lab","C",state.view==="case");
+  h+=navBtn("roleplay","Stakeholder Roleplay","R",state.view==="roleplay");
   h+='<div class="navhdr" style="margin-top:6px">Levels</div>';
   DATA.levels.forEach((l,i)=>{
     const active = state.view==="level-"+i;
@@ -1354,6 +1818,7 @@ function render(){
   const m=document.getElementById("main");
   if(state.view==="home") m.innerHTML=renderHome();
   else if(state.view==="case"){ m.innerHTML=renderCaseLab(); wireCaseLab(); }
+  else if(state.view==="roleplay"){ m.innerHTML=renderRoleplay(); wireRoleplay(); }
   else if(state.view==="glossary"){ m.innerHTML=renderGlossaryShell(); wireGlossary(); }
   else if(state.view.startsWith("level-")){ const i=+state.view.split("-")[1]; m.innerHTML=renderLevel(i); wireLevel(i); }
   renderFoot();
@@ -1371,7 +1836,7 @@ function renderHome(){
   <div class="card hero">
     <div class="eyebrow">Learn, then drill</div>
     <h2>Veeva Business Consultant, R&amp;D Practice</h2>
-    <p class="lede">This simulator teaches the real fundamentals a life sciences consultant needs, then drills you on Veeva-specific interview scenarios, full case studies, finance/value models, and solution-mapping exercises with scored feedback. You leave knowing the material, not just having seen the right answers. Two meters track your progress: <b>Knowledge</b> measures whether you understand the concepts, and <b>Interview Readiness</b> measures whether you can perform them under pressure.</p>
+    <p class="lede">This simulator teaches the real fundamentals a life sciences consultant needs, then drills you on life science consulting fundamentals, Veeva-specific interview scenarios, full case studies, finance/value models, stakeholder roleplay, and solution-mapping exercises with scored feedback. You leave knowing the material, not just having seen the right answers. Two meters track your progress: <b>Knowledge</b> measures whether you understand the concepts, and <b>Interview Readiness</b> measures whether you can perform them under pressure.</p>
     <div class="grid2" style="margin-top:16px">
       <div class="mini"><h4>Knowledge ${k.pct}%</h4><p>${k.correct} of ${k.total} knowledge checks answered correctly. These verify you understand each concept the moment after it is taught.</p></div>
       <div class="mini"><h4>Interview Readiness ${r.pct}%</h4><p>${r.earned} of ${r.max} scenario points earned. These reward the answer a real interviewer would score highest.</p></div>
@@ -1592,11 +2057,42 @@ function renderCaseLab(){
 function wireCaseLab(){
   document.querySelectorAll('[data-case-index]').forEach(b=>{ b.onclick=()=>{ state.caseIndex=+b.getAttribute('data-case-index'); render(); window.scrollTo({top:0,behavior:'smooth'}); }; });
   const b=document.getElementById("caseStart");
-  if(b) b.onclick=()=>{ state.view="level-"+(DATA.levels.length-3); render(); window.scrollTo({top:0,behavior:"smooth"}); };
+  if(b) b.onclick=()=>{ const idx=DATA.levels.findIndex(l=>l.title.startsWith("Full Case Study")); state.view="level-"+(idx>=0?idx:0); render(); window.scrollTo({top:0,behavior:"smooth"}); };
 }
 
+
+/* ---------- Stakeholder Roleplay ---------- */
+function renderRoleplay(){
+  return `<div class="card hero">
+    <div class="eyebrow">Stakeholder roleplay</div>
+    <h2>Practice with fictional life science consulting personas</h2>
+    <p class="lede">These are fictional training personas, not real Veeva employees. Use them to rehearse how different stakeholders ask the same problem differently. The goal is to adjust your structure, language, and level of detail to the person in front of you.</p>
+    <div class="callout"><b>How to practice:</b> Pick one persona, answer the prompt in 90 seconds, then check whether your answer names the stakeholder's metric, incentive, decision risk, and next step. If a future visual roleplay mode needs human character art, this is where Higgsfield-generated fictional characters would fit.</div>
+  </div>
+  <div class="card">
+    <div class="eyebrow">Personas</div>
+    <h2 style="font-size:20px">Client and interviewer cards</h2>
+    <div class="persona-grid">
+      ${DATA.personas.map(p=>`<div class="persona-card">
+        <div class="avatar">${esc(p.avatar)}</div>
+        <div><h4>${esc(p.name)}</h4><div class="persona-role">${esc(p.role)}</div><div class="persona-tone">Tone: ${esc(p.tone)}</div><ul>${p.tests.map(t=>`<li>${esc(t)}</li>`).join("")}</ul></div>
+        <div class="persona-prompt"><b>Prompt:</b> ${esc(p.prompt)}</div>
+      </div>`).join("")}
+    </div>
+  </div>
+  <div class="card">
+    <div class="eyebrow">Response checklist</div>
+    <h2 style="font-size:20px">What a strong answer should include</h2>
+    <div class="casegrid">
+      <div class="casebox"><h4>Business structure</h4><ul><li>Headline first</li><li>MECE driver tree</li><li>Metric that defines success</li><li>Assumptions named clearly</li></ul></div>
+      <div class="casebox"><h4>Stakeholder fluency</h4><ul><li>What this stakeholder cares about</li><li>Who else must be involved</li><li>Compliance or adoption risk</li><li>Practical next step</li></ul></div>
+    </div>
+  </div>`;
+}
+function wireRoleplay(){}
+
 /* ---------- Glossary ---------- */
-const CATS = ["All","Consulting Method","Communication","Finance","Operations","Implementation","Veeva Domain","Regulatory","Fit and Behavioral"];
+const CATS = ["All","Industry","Stakeholder","Consulting Method","Communication","Finance","Operations","Implementation","Veeva Domain","Regulatory","Commercial","Market Access","HEOR and Evidence","Fit and Behavioral"];
 function renderGlossaryShell(){
   const q = state.glossaryQuery || "";
   return `<div class="card">
@@ -1644,4 +2140,4 @@ render();
 </body>
 </html>
 
-<!-- deploy-retry: veeva-v2-9e8bdda -->
+<!-- deploy-version: veeva-v3-general-life-science-consulting -->
