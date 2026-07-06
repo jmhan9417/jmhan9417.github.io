@@ -178,6 +178,75 @@
   @media (max-width:560px){
     .top-inner{padding:12px 14px}.wrap{padding:14px}.card,.hero{padding:22px}.card h2{font-size:22px}.meters{width:100%}.meter{flex:1;min-width:145px}.persona-card{grid-template-columns:1fr}.avatar{width:48px;height:48px}
   }
+  /* ===== v6 lofty + interactive ===== */
+  .ringm{display:flex;align-items:center;gap:11px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:16px;padding:8px 16px 8px 8px;min-width:150px}
+  .ring{width:46px;height:46px;transform:rotate(-90deg);flex:0 0 auto}
+  .ring circle{fill:none;stroke-width:4.5;stroke-linecap:round}
+  .ring .ring-bg{stroke:rgba(255,255,255,.16)}
+  .ring-fg{stroke-dasharray:119.38;stroke-dashoffset:119.38;transition:stroke-dashoffset .85s cubic-bezier(.2,.75,.2,1);filter:drop-shadow(0 0 4px rgba(109,178,255,.35))}
+  .ring-fg.kf{stroke:#6db2ff}
+  .ring-fg.rf{stroke:#45cf97;filter:drop-shadow(0 0 4px rgba(69,207,151,.35))}
+  .ringlab{display:flex;flex-direction:column;line-height:1.02}
+  .ringlab .mval{font-size:17px;color:#fff;font-weight:800;font-family:"IBM Plex Serif",serif}
+  .ringlab small{font-size:9.5px;color:#b9c8df;text-transform:uppercase;letter-spacing:.7px;font-weight:800}
+
+  main.view-enter{animation:viewIn .42s cubic-bezier(.2,.7,.2,1)}
+  @keyframes viewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .reveal{opacity:0;transform:translateY(16px)}
+  .reveal.in{opacity:1;transform:none;transition:opacity .55s ease var(--d,0ms),transform .6s cubic-bezier(.2,.7,.2,1) var(--d,0ms)}
+
+  .hero{background:
+    radial-gradient(circle at 88% -10%,rgba(47,114,200,.20),transparent 42%),
+    radial-gradient(circle at -5% 115%,rgba(42,157,143,.16),transparent 45%),
+    linear-gradient(135deg,#fffdf8 0%,#f7f2e7 48%,#eef4fb 100%)}
+  .hero:after{content:"";position:absolute;right:-120px;top:-130px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(47,114,200,.15),transparent 66%);animation:float1 12s ease-in-out infinite}
+  @keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(-14px,18px)}}
+
+  .cmap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(184px,1fr));gap:10px;margin-top:6px}
+  .cmap-item{position:relative;display:flex;align-items:center;gap:9px;text-align:left;border:1px solid var(--line);background:linear-gradient(180deg,#fff,#faf7f0);border-radius:13px;padding:11px 12px;cursor:pointer;transition:.16s;overflow:hidden}
+  .cmap-item:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(27,39,67,.10);border-color:#c6d8ef}
+  .cmap-item.done{border-color:#a9dcc4;background:linear-gradient(180deg,#f4fbf7,#eaf6ef)}
+  .cmap-num{flex:0 0 26px;height:26px;border-radius:8px;background:#ece7dc;color:#5d6675;font-weight:900;font-size:12px;display:grid;place-items:center;font-family:"IBM Plex Serif",serif}
+  .cmap-item.done .cmap-num{background:linear-gradient(135deg,var(--green),#2aa06f);color:#fff}
+  .cmap-t{flex:1;font-size:12.6px;font-weight:700;color:#2b3648;line-height:1.2}
+  .cmap-prog{font-size:10.5px;font-weight:800;color:var(--quiet);white-space:nowrap}
+  .cmap-item.done .cmap-prog{color:var(--green)}
+
+  .lvl-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+  .lvl-head-main{min-width:0}
+  .lvl-badge{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid var(--line2);background:var(--soft-blue);border-radius:14px;padding:9px 14px;min-width:66px}
+  .lvl-badge b{font-family:"IBM Plex Serif",serif;font-size:18px;color:var(--navy)}
+  .lvl-badge small{font-size:9.5px;text-transform:uppercase;letter-spacing:.5px;color:#5d6675;font-weight:800}
+  .lvl-badge.done{background:var(--soft-green);border-color:#a9dcc4}
+  .lvl-badge.done b{color:var(--green)}
+  .lvl-progress{height:7px;border-radius:99px;background:#ece7dc;margin:14px 0 2px;overflow:hidden}
+  .lvl-progress > i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--blue),var(--aqua));transition:width .6s cubic-bezier(.2,.7,.2,1)}
+  .kbd-hint{font-size:12px;color:var(--quiet);margin-top:10px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .kbd-hint kbd{font-family:inherit;font-size:11px;font-weight:800;background:#fff;border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:1px 7px;color:#3a4657}
+
+  .opt{transition:border-color .15s,background .15s,transform .12s,box-shadow .15s}
+  .opt:active{transform:scale(.994)}
+  .opt-key{position:absolute;right:12px;top:12px;font-family:inherit;font-size:11px;font-weight:800;color:#9aa4b1;background:#f4f1ea;border:1px solid var(--line);border-radius:6px;padding:1px 7px;transition:.15s}
+  .opt:hover .opt-key{color:var(--blue);border-color:#c6d8ef;background:#fff}
+  @keyframes pop{0%{transform:scale(.98)}60%{transform:scale(1.012)}100%{transform:scale(1)}}
+  .opt.just{animation:pop .32s ease}
+
+  .navbtn .navmini{margin-left:auto;font-size:10.5px;font-weight:800;color:var(--quiet);background:#ece7dc;border-radius:99px;padding:1px 7px}
+  .navbtn.active .navmini{background:#d7e4f6;color:var(--blue)}
+
+  .term-pop{position:absolute;z-index:60;max-width:320px;background:#fff;border:1px solid var(--line2);border-radius:14px;box-shadow:var(--shadow2);padding:14px 16px;font-size:13px;color:#2b3542;animation:viewIn .18s ease}
+  .term-pop h5{margin:0 0 4px;font-size:14px;font-family:"IBM Plex Serif",serif;color:var(--navy)}
+  .term-pop .tp-cat{font-size:9.5px;font-weight:900;letter-spacing:.5px;text-transform:uppercase;color:#5d6675;background:#f0ece4;border-radius:6px;padding:2px 7px;margin-left:6px}
+  .term-pop .tp-ex{margin-top:7px;font-size:12.3px;color:var(--muted);border-left:3px solid #d8cfc1;padding-left:9px}
+  .term-pop a.tp-link{display:inline-block;margin-top:9px;font-size:12px;font-weight:800}
+  .chip{transition:.15s}
+  .chip.hot{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+  @media (prefers-reduced-motion: reduce){
+    *,*:before,*:after{animation-duration:.001ms!important;transition-duration:.05ms!important}
+    .reveal{opacity:1!important;transform:none!important}
+  }
+
 </style>
 </head>
 <body>
@@ -188,13 +257,13 @@
       <span>R&amp;D Business Consultant &nbsp;&middot;&nbsp; Learn the fundamentals, then drill under pressure</span>
     </div>
     <div class="meters">
-      <div class="meter">
-        <div class="mlabel"><span>Knowledge</span><span class="mval" id="kPct">0%</span></div>
-        <div class="bar k"><i id="kBar" style="width:0%"></i></div>
+      <div class="meter ringm" title="Knowledge: concepts mastered through knowledge checks">
+        <svg class="ring" viewBox="0 0 44 44"><circle class="ring-bg" cx="22" cy="22" r="19"/><circle class="ring-fg kf" id="kRing" cx="22" cy="22" r="19"/></svg>
+        <div class="ringlab"><span class="mval" id="kPct">0%</span><small>Knowledge</small></div>
       </div>
-      <div class="meter">
-        <div class="mlabel"><span>Interview Readiness</span><span class="mval" id="rPct">0%</span></div>
-        <div class="bar r"><i id="rBar" style="width:0%"></i></div>
+      <div class="meter ringm" title="Interview Readiness: scenario points earned">
+        <svg class="ring" viewBox="0 0 44 44"><circle class="ring-bg" cx="22" cy="22" r="19"/><circle class="ring-fg rf" id="rRing" cx="22" cy="22" r="19"/></svg>
+        <div class="ringlab"><span class="mval" id="rPct">0%</span><small>Readiness</small></div>
       </div>
     </div>
   </div>
@@ -3286,13 +3355,9 @@ function levelDone(li){
   const l=DATA.levels[li]; return l.drills.every((d,di)=> state.answers[keyOf(li,di)]!=null);
 }
 
-function updateMeters(){
-  const k=computeKnowledge(), r=computeReadiness();
-  document.getElementById("kPct").textContent=k.pct+"%";
-  document.getElementById("rPct").textContent=r.pct+"%";
-  document.getElementById("kBar").style.width=k.pct+"%";
-  document.getElementById("rBar").style.width=r.pct+"%";
-}
+function setRing(id,pct){ const el=document.getElementById(id); if(!el) return; const C=119.38; el.style.strokeDashoffset=(C*(1-pct/100)).toFixed(2); }
+function countUp(id,target){ const el=document.getElementById(id); if(!el) return; const cur=parseInt(el.textContent)||0; if(cur===target){ el.textContent=target+"%"; return; } const start=performance.now(), dur=650; function step(t){ const p=Math.min(1,(t-start)/dur); const e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2; el.textContent=Math.round(cur+(target-cur)*e)+"%"; if(p<1) requestAnimationFrame(step);} requestAnimationFrame(step); }
+function updateMeters(){ const k=computeKnowledge(), r=computeReadiness(); setRing("kRing",k.pct); setRing("rRing",r.pct); countUp("kPct",k.pct); countUp("rPct",r.pct); }
 
 function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
@@ -3307,10 +3372,11 @@ function renderSide(){
   DATA.levels.forEach((l,i)=>{
     const active = state.view==="level-"+i;
     const done = levelDone(i);
+    const ansN = l.drills.filter((d,di)=>state.answers[keyOf(i,di)]!=null).length;
     h+=`<button class="navbtn ${active?'active':''}" data-view="level-${i}">
         <span class="num">${i+1}</span>
         <span style="flex:1">${esc(l.title.split(":")[0])}</span>
-        ${done?'<span class="dot">&#10003;</span>':''}
+        ${done?'<span class="dot">&#10003;</span>':(ansN>0?`<span class="navmini">${ansN}/${l.drills.length}</span>`:'')}
       </button>`;
   });
   h+='<div class="navhdr" style="margin-top:6px">Reference</div>';
@@ -3328,12 +3394,13 @@ function navBtn(view,label,icon,active){
 function render(){
   renderSide(); updateMeters();
   const m=document.getElementById("main");
-  if(state.view==="home") m.innerHTML=renderHome();
+  if(state.view==="home"){ m.innerHTML=renderHome(); wireHome(); }
   else if(state.view==="case"){ m.innerHTML=renderCaseLab(); wireCaseLab(); }
   else if(state.view==="roleplay"){ m.innerHTML=renderRoleplay(); wireRoleplay(); }
   else if(state.view==="glossary"){ m.innerHTML=renderGlossaryShell(); wireGlossary(); }
   else if(state.view.startsWith("level-")){ const i=+state.view.split("-")[1]; m.innerHTML=renderLevel(i); wireLevel(i); }
   renderFoot();
+  afterRender();
 }
 
 function renderFoot(){
@@ -3359,6 +3426,8 @@ function renderHome(){
       <div class="mini"><h4>Interview Readiness ${r.pct}%</h4><p>${r.earned} of ${r.max} scenario points earned. These reward the answer a real interviewer would score highest.</p></div>
     </div>
   </div>
+
+  ${courseMapCard()}
 
   <div class="card">
     <div class="eyebrow">Interview track</div>
@@ -3395,10 +3464,17 @@ function renderHome(){
 /* ---------- Level ---------- */
 function renderLevel(i){
   const l=DATA.levels[i];
+  const lvA=l.drills.filter((d,di)=>state.answers[keyOf(i,di)]!=null).length;
+  const lvP=l.drills.length?Math.round(lvA/l.drills.length*100):0;
   let h=`<div class="card">
-    <div class="eyebrow">Level ${i+1} of ${DATA.levels.length}</div>
-    <h2>${esc(l.title)}</h2>
-    <p class="sub">${esc(l.subtitle)}</p>
+    <div class="lvl-head">
+      <div class="lvl-head-main"><div class="eyebrow">Level ${i+1} of ${DATA.levels.length}</div>
+      <h2>${esc(l.title)}</h2>
+      <p class="sub">${esc(l.subtitle)}</p></div>
+      <div class="lvl-badge ${(lvA===l.drills.length&&l.drills.length>0)?'done':''}"><b>${lvA}/${l.drills.length}</b><small>drills</small></div>
+    </div>
+    <div class="lvl-progress"><i style="width:${lvP}%"></i></div>
+    <div class="kbd-hint">Tip: press <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> to answer, <kbd>&larr;</kbd><kbd>&rarr;</kbd> to move between levels. Tap a concept chip below for its definition.</div>
     <div class="brief">
       <div class="btag">Teaching brief</div>
       ${l.brief.map(p=>`<p>${esc(p)}</p>`).join("")}
@@ -3449,6 +3525,7 @@ function renderDrill(li,di,d){
     opts+=`<button class="${cls}" data-li="${li}" data-di="${di}" data-oi="${oi}" ${answered?'disabled':''}>
         <span class="mk ${answered?mk:''}">${mkContent}</span>
         <span>${esc(o.text)}${tag}</span>
+        ${answered?'':`<kbd class="opt-key">${oi+1}</kbd>`}
         ${fbShown}
       </button>`;
   });
@@ -3491,7 +3568,7 @@ function wireLevel(i){
   });
   m.querySelectorAll("[data-retry]").forEach(b=>{ b.onclick=()=>{ delete state.answers[b.getAttribute("data-retry")]; save(); render(); }; });
   m.querySelectorAll("[data-goto]").forEach(b=>{ b.onclick=()=>{ state.view=b.getAttribute("data-goto"); render(); window.scrollTo({top:0,behavior:"smooth"}); }; });
-  m.querySelectorAll(".chip[data-term]").forEach(c=>{ c.onclick=()=>{ state.view="glossary"; state.glossaryQuery=c.getAttribute("data-term"); render(); window.scrollTo({top:0,behavior:"smooth"}); }; });
+  m.querySelectorAll(".chip[data-term]").forEach(c=>{ c.onclick=(e)=>{ e.stopPropagation(); showTermPop(c, c.getAttribute("data-term")); }; });
   const sb=document.getElementById("startBtn"); if(sb) sb.onclick=()=>{ state.view="level-0"; render(); window.scrollTo({top:0}); };
 }
 
@@ -3652,9 +3729,97 @@ function wireGlossary(){
   document.querySelectorAll("#gfilters .fbtn").forEach(b=>{ b.onclick=()=>{ state.glossaryCat=b.getAttribute("data-cat"); render(); }; });
 }
 
+/* ---------- v6 interactive helpers ---------- */
+function courseMapCard(){
+  const items=DATA.levels.map((l,i)=>{
+    const done=levelDone(i);
+    const ans=l.drills.filter((d,di)=>state.answers[keyOf(i,di)]!=null).length;
+    return `<button class="cmap-item ${done?'done':''}" data-view="level-${i}">
+      <span class="cmap-num">${done?'&#10003;':(i+1)}</span>
+      <span class="cmap-t">${esc(l.title.split(":")[0])}</span>
+      <span class="cmap-prog">${ans}/${l.drills.length}</span>
+    </button>`;
+  }).join("");
+  return `<div class="card">
+    <div class="eyebrow">Course map</div>
+    <h2 style="font-size:20px;margin-bottom:3px">Your progress across ${DATA.levels.length} levels</h2>
+    <p class="sub" style="margin-bottom:14px">Jump straight to any level. Completed levels are checked, and each tile shows how many drills you have answered.</p>
+    <div class="cmap-grid">${items}</div>
+  </div>`;
+}
+function wireHome(){
+  const m=document.getElementById("main");
+  m.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>{ state.view=b.getAttribute("data-view"); render(); window.scrollTo({top:0,behavior:"smooth"}); });
+  const sb=document.getElementById("startBtn"); if(sb) sb.onclick=()=>{ state.view="level-0"; render(); window.scrollTo({top:0}); };
+}
+let __lastView=null;
+function afterRender(){
+  const m=document.getElementById("main"); if(!m) return;
+  const changed = state.view!==__lastView; __lastView=state.view;
+  const cards=[...m.querySelectorAll(":scope > .card")];
+  if(changed){
+    m.classList.remove("view-enter"); void m.offsetWidth; m.classList.add("view-enter");
+    cards.forEach((c,idx)=>{ c.classList.add("reveal"); c.style.setProperty("--d",(Math.min(idx,7)*55)+"ms"); });
+    if("IntersectionObserver" in window){
+      const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:0.05,rootMargin:"0px 0px -40px 0px"});
+      cards.forEach(c=>io.observe(c));
+    } else cards.forEach(c=>c.classList.add("in"));
+  }
+  wireConceptPops();
+}
+function glossaryLookup(term){
+  const t=(term||"").toLowerCase();
+  return DATA.glossary.find(g=>g.term.toLowerCase()===t)
+      || DATA.glossary.find(g=>g.term.toLowerCase().replace(/[^a-z0-9 ]/g,"").startsWith(t.replace(/[^a-z0-9 ]/g,"").split(" ")[0]))
+      || null;
+}
+function closeTermPop(){ const ex=document.getElementById("termPop"); if(ex) ex.remove(); document.querySelectorAll(".chip.hot").forEach(c=>c.classList.remove("hot")); }
+function showTermPop(chip, term){
+  const open=document.getElementById("termPop");
+  if(open && open.dataset.term===term){ closeTermPop(); return; }
+  closeTermPop();
+  const g=glossaryLookup(term);
+  const pop=document.createElement("div");
+  pop.className="term-pop"; pop.id="termPop"; pop.dataset.term=term;
+  if(g){
+    pop.innerHTML=`<h5>${esc(g.term)}<span class="tp-cat">${esc(g.cat)}</span></h5><div>${esc(g.def)}</div><div class="tp-ex"><b>Example.</b> ${esc(g.ex)}</div><a class="tp-link" href="#" data-open-gloss="${esc(g.term)}">Open in glossary &rarr;</a>`;
+  } else {
+    pop.innerHTML=`<h5>${esc(term)}</h5><div>Concept taught in this level. Open the glossary for related terms.</div><a class="tp-link" href="#" data-open-gloss="${esc(term)}">Open glossary &rarr;</a>`;
+  }
+  document.body.appendChild(pop);
+  chip.classList.add("hot");
+  const r=chip.getBoundingClientRect();
+  const pw=Math.min(320, window.innerWidth-24);
+  pop.style.width=pw+"px";
+  let left=r.left+window.scrollX; if(left+pw>window.scrollX+window.innerWidth-12) left=window.scrollX+window.innerWidth-pw-12;
+  pop.style.left=Math.max(window.scrollX+12,left)+"px";
+  pop.style.top=(r.bottom+window.scrollY+8)+"px";
+  pop.querySelector("[data-open-gloss]").onclick=(e)=>{ e.preventDefault(); const term2=e.currentTarget.getAttribute("data-open-gloss"); closeTermPop(); state.view="glossary"; state.glossaryQuery=term2; render(); window.scrollTo({top:0,behavior:"smooth"}); };
+}
+function wireConceptPops(){
+  document.querySelectorAll(".chip[data-term]").forEach(c=>{ if(c.dataset.wired) return; c.dataset.wired="1"; c.onclick=(e)=>{ e.stopPropagation(); showTermPop(c, c.getAttribute("data-term")); }; });
+}
+if(!window.__vkbd){
+  window.__vkbd=1;
+  document.addEventListener("click",(e)=>{ const pop=document.getElementById("termPop"); if(pop && !pop.contains(e.target) && !e.target.classList.contains("chip")) closeTermPop(); });
+  document.addEventListener("keydown",(e)=>{
+    const tag=e.target && e.target.tagName; if(tag==="INPUT"||tag==="TEXTAREA") return;
+    if(e.key==="Escape"){ closeTermPop(); return; }
+    if(!state.view.startsWith("level-")) return;
+    const i=+state.view.split("-")[1];
+    if(e.key==="ArrowRight" && i<DATA.levels.length-1){ state.view="level-"+(i+1); render(); window.scrollTo({top:0,behavior:"smooth"}); return; }
+    if(e.key==="ArrowLeft" && i>0){ state.view="level-"+(i-1); render(); window.scrollTo({top:0,behavior:"smooth"}); return; }
+    if(["1","2","3","4"].includes(e.key)){
+      const m=document.getElementById("main");
+      const drills=[...m.querySelectorAll(".drill")].filter(dr=>dr.querySelector(".opt:not([disabled])"));
+      if(drills.length){ const opt=drills[0].querySelector(`.opt[data-oi="${(+e.key)-1}"]:not([disabled])`); if(opt){ opt.classList.add("just"); opt.click(); } }
+    }
+  });
+}
+
 render();
 </script>
 </body>
 </html>
 
-<!-- deploy-version: veeva-v5-comprehensive -->
+<!-- deploy-version: veeva-v6-interactive -->
