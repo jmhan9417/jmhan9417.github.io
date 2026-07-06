@@ -144,6 +144,9 @@
 
 
   .casegrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+  .case-switch{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px}
+  .casebtn{border:1px solid var(--line);background:#fff;color:#334155;border-radius:999px;padding:8px 12px;font-size:12.5px;font-weight:700;cursor:pointer}
+  .casebtn.active{background:var(--navy-deep);color:#fff;border-color:var(--navy-deep)}
   .casebox{border:1px solid var(--line);border-radius:11px;background:#fbfcfe;padding:14px 16px}
   .casebox h4{font-size:14.5px;margin-bottom:8px;color:var(--navy-deep)}
   .casebox ul{margin:0;padding-left:18px;color:#3a4657;font-size:13.6px}
@@ -505,55 +508,649 @@ const DATA = {
           ]}
       ]
     }
+,
+{
+      "title": "Finance for Veeva Cases: Value, Cost, and ROI",
+      "subtitle": "Use finance terms only when they clarify the recommendation",
+      "concepts": [
+            "Profitability framework",
+            "ROI",
+            "Payback period",
+            "NPV",
+            "WACC",
+            "TCO",
+            "Run-rate savings",
+            "One-time cost",
+            "Sensitivity analysis",
+            "Hard savings vs strategic value"
+      ],
+      "brief": [
+            "Consulting finance is not about sounding like an investment banker. It is about explaining whether a recommendation creates enough value to justify its cost and risk. The most useful starting equation is profit equals revenue minus costs. In an R&D transformation case, revenue may be indirect, so you often model value through cost avoidance, productivity, fewer delays, fewer compliance failures, or faster cycle time. You should separate hard savings from strategic value. Hard savings are budget-visible, such as fewer contractor cases, avoided FTE hires, or reduced software maintenance. Strategic value is real but needs assumptions, such as avoiding a launch delay or improving inspection readiness.",
+            "The basic finance toolkit is small. ROI equals net benefit divided by investment. Payback period is how long it takes cumulative benefit to recover the upfront cost. NPV discounts future cash flows back to today using a discount rate, often WACC, the weighted average cost of capital. TCO means total cost of ownership, including implementation, licenses, maintenance, validation, training, and change management. Sensitivity analysis tests what happens when assumptions move. A strong Veeva case answer uses finance terms carefully, labels assumptions, and does not force a positive ROI if the numbers do not support it."
+      ],
+      "worked": "A safety workflow pilot costs 650,000 dollars once and 100,000 dollars per year to run. It avoids hiring 2 FTEs at 140,000 dollars each and reduces outsourced case work by 120,000 dollars per year. Annual gross benefit is 400,000 dollars, annual net benefit after recurring cost is 300,000 dollars, and simple payback is about 2.2 years. That is a reasonable but not automatic business case. You would run sensitivity on FTE avoidance, outsourcing reduction, and implementation cost before recommending full rollout.",
+      "drills": [
+            {
+                  "type": "knowledge",
+                  "q": "A project costs 650,000 dollars upfront, has 100,000 dollars recurring annual cost, and creates 400,000 dollars annual gross benefit. What is the simple payback period using net annual benefit?",
+                  "options": [
+                        {
+                              "text": "About 2.2 years, because net annual benefit is 300,000 dollars.",
+                              "correct": true,
+                              "fb": "Correct. 650,000 divided by 300,000 is about 2.17 years. Use net annual benefit after recurring cost, not gross benefit."
+                        },
+                        {
+                              "text": "About 1.6 years, because 650,000 divided by 400,000 is 1.625.",
+                              "correct": false,
+                              "fb": "That ignores the 100,000 recurring annual cost. Gross benefit is not the same as net benefit."
+                        },
+                        {
+                              "text": "It cannot be calculated without WACC.",
+                              "correct": false,
+                              "fb": "You need WACC for NPV, not for simple payback. Payback is a rough, undiscounted measure."
+                        }
+                  ]
+            },
+            {
+                  "type": "knowledge",
+                  "q": "When should you use the profitability framework in a case?",
+                  "options": [
+                        {
+                              "text": "When the prompt is about profits, margins, earnings, or financial underperformance.",
+                              "correct": true,
+                              "fb": "Correct. Profitability is diagnostic. Use it when the numbers are down and you need to find the driver."
+                        },
+                        {
+                              "text": "In every case, because profit equals revenue minus costs is always useful.",
+                              "correct": false,
+                              "fb": "It can be a supporting calculation, but forcing every case into a profit tree is a framework-fit mistake."
+                        },
+                        {
+                              "text": "Only in consumer-products cases, not life sciences.",
+                              "correct": false,
+                              "fb": "Profitability logic applies in life sciences too, but you must adapt the drivers, such as FTE capacity, delay cost, validation burden, and compliance risk."
+                        }
+                  ]
+            },
+            {
+                  "type": "scenario",
+                  "speaker": "Practice Leader",
+                  "q": "Your model shows hard savings alone do not justify a full RIM transformation, but one avoided launch-delay scenario makes the NPV strongly positive. What do you say?",
+                  "options": [
+                        {
+                              "tier": "strong",
+                              "fb": "This is the honest finance answer. It separates what is certain from what depends on a strategic assumption, and it gives the client a decision point.",
+                              "text": "I would separate the case into two views. On hard savings alone, the project is weak. If the client believes the system avoids even one meaningful launch delay, the strategic value changes the answer. I would not bury that assumption. I would show both cases and ask leadership which risk-adjusted value view they are willing to underwrite."
+                        },
+                        {
+                              "tier": "weak",
+                              "fb": "This is safe but too thin. A consultant should explain why the two views differ and what assumption drives the decision.",
+                              "text": "It depends on whether they value the launch-delay avoidance. I would discuss it with the client."
+                        },
+                        {
+                              "tier": "trap",
+                              "fb": "This hides the core assumption. Calling the project positive without separating hard savings from strategic value makes the model look cleaner than it is, but less trustworthy.",
+                              "text": "I would present the positive NPV case because that is the one that supports the recommendation."
+                        }
+                  ]
+            },
+            {
+                  "type": "scenario",
+                  "speaker": "Practice Leader",
+                  "q": "In a Veeva Safety case, the client asks for a 40 percent productivity improvement estimate. You do not have enough data. How do you handle it?",
+                  "options": [
+                        {
+                              "tier": "strong",
+                              "fb": "This is exactly the right balance: helpful, quantitative, and honest. You do not refuse to estimate, but you label it as a scenario and define the data needed to validate it.",
+                              "text": "I would frame it as a scenario, not a forecast. For example, if duplicate entry is 20 percent of time and we remove half of it, the first-order capacity lift is about 10 percent, before adoption effects. To claim 40 percent, I would need process-time data, rework rates, and case-mix complexity."
+                        },
+                        {
+                              "tier": "weak",
+                              "fb": "This protects you from overclaiming, but it does not help the client reason through the number.",
+                              "text": "I cannot estimate that until I have more data."
+                        },
+                        {
+                              "tier": "trap",
+                              "fb": "A confident number with no basis is dangerous. Veeva case interviewers will challenge the assumption, and the answer will collapse.",
+                              "text": "I would say 40 percent is achievable because automation usually creates big gains."
+                        }
+                  ]
+            },
+            {
+                  "type": "scenario",
+                  "speaker": "Practice Leader",
+                  "q": "Build a quick value model for reducing a safety backlog. What line items matter?",
+                  "options": [
+                        {
+                              "tier": "strong",
+                              "fb": "This is a useful consulting value model: investment, recurring cost, operational savings, risk-adjusted strategic value, and sensitivity.",
+                              "text": "I would include one-time implementation and validation cost, recurring license and support cost, avoided FTE or outsourcing, reduction in rework, avoided late-reporting remediation, and a risk-adjusted value for fewer launch or inspection delays. Then I would sensitivity-test adoption, productivity lift, and implementation cost."
+                        },
+                        {
+                              "tier": "weak",
+                              "fb": "This catches some costs but misses benefits and risk value, so it cannot support a recommendation.",
+                              "text": "I would include software cost, implementation cost, and maybe training."
+                        },
+                        {
+                              "tier": "trap",
+                              "fb": "Savings are not the only dimension, and ignoring costs makes the model useless. A recommendation without investment and risk is not a business case.",
+                              "text": "I would only focus on the savings, because that is what ROI means."
+                        }
+                  ]
+            }
+      ]
+},
+{
+      "title": "Veeva Solutions and Implementation Thinking",
+      "subtitle": "Map the business problem to the right solution without becoming product-first",
+      "concepts": [
+            "Business Consulting",
+            "Development Cloud",
+            "Veeva Safety",
+            "Vault Regulatory",
+            "Vault Clinical",
+            "Vault Quality",
+            "Operating model",
+            "Data governance",
+            "Change management",
+            "Adoption"
+      ],
+      "brief": [
+            "Veeva Business Consulting is not generic slide-making. It sits at the intersection of life sciences operations, data, software, AI, and organizational change. The R&D practice helps clients improve clinical, regulatory, and safety work by reshaping operating models, improving process handoffs, clarifying metrics, and aligning ways of working to enabling technology. That means a Veeva consultant must be able to speak product language without becoming product-first. The product is a lever, not the starting answer.",
+            "A good implementation answer usually has five pieces. First, diagnose the business problem and the metric that proves it matters. Second, map the process and data flow, including handoffs between clinical, regulatory, safety, quality, and IT validation. Third, define the future operating model: roles, governance, SOPs, data ownership, and escalation rules. Fourth, choose the technology path, such as Safety, RIM, CTMS, eTMF, or Quality, and identify integration and validation requirements. Fifth, plan adoption through pilots, training, super-users, and metrics. Veeva screens for this because its consulting promise is measurable business value, not software features in isolation."
+      ],
+      "worked": "A client says adverse-event cases require duplicate entry across safety and clinical systems. The product map points toward Veeva Safety and Development Cloud connections, but the consulting answer starts earlier: quantify duplicate-entry time, identify which fields duplicate, define ownership of source data, redesign intake and triage, validate the future workflow, then use the platform to sustain the process. Product knowledge helps, but process judgment leads.",
+      "drills": [
+            {
+                  "type": "knowledge",
+                  "q": "What is the biggest mistake in a Veeva solution-mapping answer?",
+                  "options": [
+                        {
+                              "text": "Naming a product before diagnosing the business problem and metric.",
+                              "correct": true,
+                              "fb": "Correct. Veeva consultants know the product suite, but they still lead with business diagnosis and measurable value."
+                        },
+                        {
+                              "text": "Mentioning change management in an implementation plan.",
+                              "correct": false,
+                              "fb": "Change management is necessary. Adoption is often the difference between a good design and a realized benefit."
+                        },
+                        {
+                              "text": "Using the word operating model.",
+                              "correct": false,
+                              "fb": "Operating model is appropriate when you define roles, process, governance, metrics, and tools."
+                        }
+                  ]
+            },
+            {
+                  "type": "knowledge",
+                  "q": "Which workstream belongs in almost every regulated software implementation?",
+                  "options": [
+                        {
+                              "text": "Process design, data migration or governance, validation, training, change management, and cutover planning.",
+                              "correct": true,
+                              "fb": "Correct. Regulated life sciences systems need process, data, validation, training, adoption, and controlled rollout."
+                        },
+                        {
+                              "text": "Only UI configuration and user access.",
+                              "correct": false,
+                              "fb": "Those matter, but they are only a small part of the implementation. The business process and validation work are critical."
+                        },
+                        {
+                              "text": "Only executive communications and steering meetings.",
+                              "correct": false,
+                              "fb": "Governance matters, but it does not replace process design, data, validation, and adoption."
+                        }
+                  ]
+            },
+            {
+                  "type": "scenario",
+                  "speaker": "Client, VP Regulatory Affairs",
+                  "q": "We have inconsistent product data across markets, and submissions teams keep reworking documents. What should we do?",
+                  "options": [
+                        {
+                              "tier": "strong",
+                              "fb": "This maps the business problem to RIM and data governance without jumping straight to a tool. It shows operating-model thinking.",
+                              "text": "This sounds like a RIM and data-governance issue. I would first map where product and registration data are created, who owns each field, and where teams re-enter it. The solution likely needs standardized data ownership, controlled templates, and a RIM workflow that supports eCTD publishing, but I would diagnose the data lineage before defining the technology path."
+                        },
+                        {
+                              "tier": "weak",
+                              "fb": "Generic and product-lite. It does not show you understand submissions, data ownership, or RIM.",
+                              "text": "I would standardize the process and improve communication across countries."
+                        },
+                        {
+                              "tier": "trap",
+                              "fb": "Product-first and overconfident. Software cannot fix unclear data ownership by itself.",
+                              "text": "They should implement Vault Regulatory and the issue should go away."
+                        }
+                  ]
+            },
+            {
+                  "type": "scenario",
+                  "speaker": "Client, Head of Clinical Operations",
+                  "q": "Study startup is slow because sites wait too long for activation documents and training. Where do you focus?",
+                  "options": [
+                        {
+                              "tier": "strong",
+                              "fb": "This is the right Veeva-style mapping: workflow, bottleneck metric, eTMF or CTMS relevance, and adoption.",
+                              "text": "I would measure the startup funnel: site selected, contract executed, regulatory packet complete, training complete, site activated. Then I would identify the longest wait state and whether it is document collection, training, or approval. Depending on the bottleneck, the solution may involve CTMS milestones, eTMF completeness, training workflow, and clearer site-owner accountability."
+                        },
+                        {
+                              "tier": "weak",
+                              "fb": "It points in the right direction but does not structure the funnel or isolate the bottleneck.",
+                              "text": "I would help them speed up site activation and improve document tracking."
+                        },
+                        {
+                              "tier": "trap",
+                              "fb": "More sites can make operations worse if activation is the bottleneck. Scale a broken process and the delay scales too.",
+                              "text": "They should add more sites, because more sites means faster enrollment."
+                        }
+                  ]
+            },
+            {
+                  "type": "scenario",
+                  "speaker": "Practice Leader",
+                  "q": "How would you show adoption risk in a Veeva transformation roadmap?",
+                  "options": [
+                        {
+                              "tier": "strong",
+                              "fb": "This is real implementation thinking. Adoption is not a vibe; it has owners, milestones, metrics, and mitigation.",
+                              "text": "I would give adoption its own workstream: stakeholder map, change champions, role-based training, SOP updates, pilot feedback, and weekly adoption metrics. I would also name the risk: if users keep shadow spreadsheets, the value case fails even if the system launches."
+                        },
+                        {
+                              "tier": "weak",
+                              "fb": "Training is part of adoption, but by itself it is not enough. You need governance and behavior metrics.",
+                              "text": "I would schedule training sessions for all users before go-live."
+                        },
+                        {
+                              "tier": "trap",
+                              "fb": "Go-live is not adoption. A system can launch and still fail if the operating model does not change.",
+                              "text": "Adoption risk is solved once the system goes live."
+                        }
+                  ]
+            }
+      ]
+}
 
   ],
 
-  caseStudy: {
-    title: "Case Study Lab: Pharmacovigilance Backlog Transformation",
-    subtitle: "A complete Veeva-style practice case, from ambiguous prompt to answer-first deck",
-    prompt: "A mid-size biotech has 4 marketed products and 12 active clinical trials. Its safety team receives about 1,200 adverse-event cases per month. Eight safety associates process about 120 cases each per month. Backlog is growing, late follow-ups are increasing, and leadership asks whether to implement a new safety system, hire more people, or outsource case processing.",
-    facts: [
-      "Client objective: reduce backlog growth, protect regulatory timelines, and improve audit readiness within 6 months.",
-      "Known data: 1,200 incoming cases per month, 8 associates, 120 cases processed per associate per month.",
-      "Initial capacity: 8 associates times 120 cases equals 960 cases processed per month.",
-      "Backlog growth: 1,200 cases in minus 960 cases out equals 240 cases added per month.",
-      "Hypothesis: the bottleneck is not only headcount. Manual intake, duplicate data entry, and weak triage reduce effective processing capacity."
+  caseStudies: [
+  {
+    "title": "Case 1: Pharmacovigilance Safety Backlog Transformation",
+    "subtitle": "Capacity math, workflow diagnosis, and ROI for a Veeva Safety style operating-model case",
+    "prompt": "A mid-size biotech has 4 marketed products and 12 active clinical trials. Its safety team receives about 1,200 adverse-event cases per month. Eight safety associates process about 120 cases each per month. Backlog is growing, late follow-ups are increasing, and leadership asks whether to implement a new safety system, hire more people, or outsource case processing.",
+    "facts": [
+      "Objective: stop backlog growth within 6 months while protecting regulatory reporting timelines and audit readiness.",
+      "Incoming demand: 1,200 cases per month.",
+      "Current capacity: 8 associates times 120 cases each equals 960 cases per month.",
+      "Current gap: 240 cases per month added to backlog.",
+      "Fully loaded safety associate cost assumption: 140,000 dollars per FTE per year.",
+      "Outsourcing assumption: 55 dollars per incremental case processed.",
+      "Transformation assumption: 650,000 dollars one-time implementation and validation cost, plus 100,000 dollars annual recurring support.",
+      "Pilot assumption: duplicate entry and rework consume 20 percent of productive time. The pilot can remove about half of that waste and reduce non-case intake by 6 percent through better triage."
     ],
-    issueTree: [
-      {branch:"Demand", tests:"How many cases arrive by product, source, seriousness, geography, and clinical-trial versus post-market origin?"},
-      {branch:"Capacity", tests:"How many cases can each associate process by case type, and where do handoffs slow work down?"},
-      {branch:"Quality and rework", tests:"How often are cases reopened because of missing fields, coding errors, or follow-up gaps?"},
-      {branch:"Workflow and systems", tests:"Where does manual entry, duplicate entry, or lack of integration create avoidable cycle time?"},
-      {branch:"Governance and triage", tests:"Are serious and time-sensitive cases prioritized correctly, with clear owners and escalation paths?"}
+    "issueTree": [
+      {
+        "branch": "Demand",
+        "tests": "Case volume by source, product, seriousness, country, partner versus direct intake, clinical versus post-market."
+      },
+      {
+        "branch": "Capacity",
+        "tests": "Cases processed per FTE by complexity, available hours, overtime, queue aging, medical-review constraints."
+      },
+      {
+        "branch": "Quality and rework",
+        "tests": "Reopen rate, missing fields, coding corrections, duplicate cases, follow-up defects."
+      },
+      {
+        "branch": "Workflow and systems",
+        "tests": "Manual entry points, duplicate data entry, system handoffs, reporting-rule automation, partner gateways."
+      },
+      {
+        "branch": "Governance and triage",
+        "tests": "Prioritization of serious cases, ownership, escalation rules, daily huddles, SLA monitoring."
+      }
     ],
-    mathRows: [
-      {item:"Incoming cases", math:"1,200 per month", implication:"This is the demand side of the queue."},
-      {item:"Current capacity", math:"8 associates times 120 cases = 960 per month", implication:"The team is under capacity by 240 cases per month."},
-      {item:"Backlog growth", math:"1,200 minus 960 = 240 cases per month", implication:"Without intervention, the problem worsens every month."},
-      {item:"Waste hypothesis", math:"20 percent productive time lost to duplicate entry and rework", implication:"Workflow redesign could recover meaningful capacity without immediately hiring."},
-      {item:"Pilot target", math:"Reduce rework plus duplicate entry by about half", implication:"A focused pilot can test whether system and process changes close most of the gap before full rollout."}
+    "mathRows": [
+      {
+        "item": "Current capacity",
+        "math": "8 FTE times 120 cases per month = 960 cases per month",
+        "implication": "Demand exceeds capacity by 240 cases per month."
+      },
+      {
+        "item": "FTE-only fix",
+        "math": "240 gap divided by 120 cases per FTE = 2 additional FTE",
+        "implication": "Hiring alone costs about 280,000 dollars per year before training and ramp."
+      },
+      {
+        "item": "Outsourcing-only fix",
+        "math": "240 cases times 55 dollars times 12 months = 158,400 dollars per year",
+        "implication": "Cheaper on paper, but creates oversight, quality, and vendor-control risk."
+      },
+      {
+        "item": "Workflow lift",
+        "math": "Half of 20 percent waste recovered = roughly 10 percent capacity lift, 960 to about 1,056 cases per month",
+        "implication": "Workflow alone helps but does not fully close the gap."
+      },
+      {
+        "item": "Triage lift",
+        "math": "6 percent intake reduction = 72 fewer cases per month, adjusted demand = 1,128",
+        "implication": "Workflow plus triage nearly closes the gap and may begin reducing backlog with small targeted support."
+      }
     ],
-    recommendation: [
-      "Do not start with a big-bang software rollout or a pure hiring plan. Diagnose and pilot first.",
-      "Run a 4-week discovery and workflow pilot focused on intake standardization, triage rules, duplicate-entry removal, and ownership clarity.",
-      "If the pilot proves manual workflow is the bottleneck, pursue safety-system standardization and integration as the scale path.",
-      "Use weekly metrics: incoming cases, processed cases, backlog size, cycle time by seriousness, rework rate, and overdue regulatory follow-ups."
+    "financeRows": [
+      {
+        "item": "Investment",
+        "math": "650,000 dollars one-time plus 100,000 dollars annual recurring",
+        "soWhat": "Do not recommend full rollout unless savings and compliance value are credible."
+      },
+      {
+        "item": "Hard savings scenario",
+        "math": "Avoid 2 FTE at 280,000 plus reduce outsourcing by 120,000 = 400,000 gross benefit",
+        "soWhat": "Net annual benefit after recurring cost is about 300,000 dollars."
+      },
+      {
+        "item": "Simple payback",
+        "math": "650,000 divided by 300,000 = 2.2 years",
+        "soWhat": "Reasonable, but sensitive to productivity lift and adoption."
+      },
+      {
+        "item": "Sensitivity",
+        "math": "If productivity lift is only 5 percent, FTE avoidance may fall from 2 to 1",
+        "soWhat": "The business case weakens fast. Pilot data matters."
+      },
+      {
+        "item": "Risk value",
+        "math": "Late serious-case reporting and inspection remediation not quantified in hard savings",
+        "soWhat": "Show separately as risk reduction, not fake precision."
+      }
     ],
-    deck: [
-      {slide:"1. Recommendation", content:"Pilot workflow redesign and safety-system standardization before a full rollout. Expected benefit: stop backlog growth and reduce audit-risk exposure."},
-      {slide:"2. Problem framing", content:"Backlog is a queueing problem: cases in exceed cases out. The issue tree separates demand, capacity, quality, workflow, and governance."},
-      {slide:"3. Key analysis", content:"Current capacity is 960 cases per month versus 1,200 incoming. The 240-case monthly gap may be partly recoverable through rework and duplicate-entry reduction."},
-      {slide:"4. Future-state model", content:"Standardized intake, triage rules, clear ownership, fewer manual handoffs, and system-backed audit trails."},
-      {slide:"5. Roadmap and risks", content:"4-week diagnostic pilot, 8-week workflow rollout, system-standardization decision gate, then phased implementation. Risks: adoption, data quality, validation burden, and regulatory-timeline continuity."}
+    "recommendation": [
+      "Do not start with a big-bang system rollout. Start with a 4-week diagnostic and pilot.",
+      "Target triage, duplicate-entry removal, rework reduction, and daily backlog governance first.",
+      "Use pilot data to decide whether Veeva Safety standardization and integrations are justified at scale.",
+      "Track intake, processed cases, backlog aging, serious-case SLA, rework rate, duplicate rate, and user adoption."
     ],
-    traps: [
-      "Trap 1: recommending software before diagnosing the bottleneck.",
-      "Trap 2: promising a specific percentage improvement without evidence.",
-      "Trap 3: treating pharmacovigilance as generic operations and ignoring regulatory timelines.",
-      "Trap 4: building a deck full of product features instead of a decision-ready recommendation.",
-      "Trap 5: hiding assumptions instead of labeling them clearly."
+    "deck": [
+      {
+        "slide": "1. Recommendation",
+        "content": "Pilot safety workflow redesign and prepare a scaled Veeva Safety path only if pilot metrics prove the value case."
+      },
+      {
+        "slide": "2. Problem framing",
+        "content": "Backlog is a flow problem: 1,200 cases in, 960 cases out, 240 monthly gap."
+      },
+      {
+        "slide": "3. Driver analysis",
+        "content": "The gap comes from capacity, duplicate entry, rework, and weak triage, not only headcount."
+      },
+      {
+        "slide": "4. Financial case",
+        "content": "2.2-year simple payback in base case, with sensitivity to adoption and productivity lift."
+      },
+      {
+        "slide": "5. Roadmap and risk",
+        "content": "4-week pilot, decision gate, phased rollout, validation plan, training, adoption metrics, and compliance-risk controls."
+      }
+    ],
+    "traps": [
+      "Trap 1: saying buy Veeva Safety immediately before diagnosing workflow waste.",
+      "Trap 2: presenting compliance-risk reduction as a precise dollar amount without client data.",
+      "Trap 3: ignoring validation, data migration, and adoption costs in TCO.",
+      "Trap 4: treating outsourcing as cheaper without oversight and quality risk.",
+      "Trap 5: making the model look positive by hiding recurring support cost."
     ]
   },
+  {
+    "title": "Case 2: Regulatory RIM and eCTD Submission Acceleration",
+    "subtitle": "When hard savings are weak but strategic value may be large",
+    "prompt": "A global specialty pharma submits 18 major regulatory packages per year across the US, EU, and Japan. Submission assembly takes 12 weeks on average, with frequent rework because product, registration, and labeling data are inconsistent across markets. Leadership asks whether a RIM and submission-publishing transformation is worth funding.",
+    "facts": [
+      "Objective: reduce submission assembly cycle time from 12 weeks to 8 weeks within 12 months.",
+      "Submission operations team: 12 FTE, fully loaded cost 140,000 dollars per year each.",
+      "Current time allocation: 25 percent of team time is spent reconciling data, re-keying fields, or fixing document defects.",
+      "Investment assumption: 1,200,000 dollars one-time implementation, migration, templates, validation, and training cost.",
+      "Recurring assumption: 250,000 dollars per year in incremental run cost and support.",
+      "Launch-delay assumption: one priority submission delay can cost 100,000 dollars per day in internal opportunity cost, but the client has not validated this value yet."
+    ],
+    "issueTree": [
+      {
+        "branch": "Submission demand",
+        "tests": "Number of submissions by region, product, variation type, priority, and deadline."
+      },
+      {
+        "branch": "Cycle time",
+        "tests": "Time spent in planning, authoring, QC, publishing, approval, and dispatch."
+      },
+      {
+        "branch": "Rework drivers",
+        "tests": "Document defects, inconsistent product data, labeling divergence, missing metadata, health-authority feedback."
+      },
+      {
+        "branch": "Data governance",
+        "tests": "Field ownership, source of truth, registration data quality, market-level accountability."
+      },
+      {
+        "branch": "Technology and operating model",
+        "tests": "RIM coverage, eCTD publishing, templates, workflow, validation, and global-local handoffs."
+      }
+    ],
+    "mathRows": [
+      {
+        "item": "Annual labor base",
+        "math": "12 FTE times 140,000 dollars = 1,680,000 dollars per year",
+        "implication": "This is the cost pool where efficiency savings could show up."
+      },
+      {
+        "item": "Reconciliation effort",
+        "math": "25 percent of 1,680,000 = 420,000 dollars equivalent annual effort",
+        "implication": "This is the maximum theoretical hard-savings pool before adoption and redeployment."
+      },
+      {
+        "item": "Realistic capture",
+        "math": "50 percent capture of 420,000 = 210,000 dollars annual hard benefit",
+        "implication": "Hard savings alone do not cover a 1.2 million dollar implementation quickly."
+      },
+      {
+        "item": "Cycle-time target",
+        "math": "12 weeks to 8 weeks = 33 percent reduction",
+        "implication": "The operating metric is meaningful, but financial value depends on what faster submissions enable."
+      },
+      {
+        "item": "Strategic value scenario",
+        "math": "Avoiding one 10-day priority delay at 100,000 dollars per day = 1,000,000 dollars",
+        "implication": "One avoided delay can dominate the hard-savings case, but only if leadership accepts the assumption."
+      }
+    ],
+    "financeRows": [
+      {
+        "item": "Hard-savings NPV logic",
+        "math": "210,000 hard benefit minus 250,000 recurring cost = negative annual net benefit",
+        "soWhat": "Do not sell this as a pure cost-reduction project."
+      },
+      {
+        "item": "Strategic-value case",
+        "math": "Add one avoided 10-day delay worth 1,000,000 dollars in year 2",
+        "soWhat": "The case may clear if delay risk is real and risk-adjusted."
+      },
+      {
+        "item": "TCO",
+        "math": "Implementation, migration, templates, validation, training, run support, change management",
+        "soWhat": "A RIM transformation is not just software license cost."
+      },
+      {
+        "item": "Decision gate",
+        "math": "Fund discovery first, then approve implementation if data-defect and delay-risk evidence is strong",
+        "soWhat": "A phased investment protects the client from overfunding an unproven value case."
+      },
+      {
+        "item": "Sensitivity",
+        "math": "Vary rework capture, recurring cost, and delay value",
+        "soWhat": "The recommendation depends mainly on delay-value credibility, not labor savings."
+      }
+    ],
+    "recommendation": [
+      "Position the project as cycle-time and risk-value transformation, not as a pure labor-savings project.",
+      "Run an 8-week diagnostic on submission defects, data lineage, and cycle-time by step.",
+      "Build a decision gate: proceed to RIM/eCTD implementation only if delay-risk and data-rework evidence is strong.",
+      "Focus future state on data ownership, global-local governance, controlled templates, and eCTD publishing workflow."
+    ],
+    "deck": [
+      {
+        "slide": "1. Recommendation",
+        "content": "Fund diagnostic now; approve RIM transformation only if delay-risk and data-defect evidence support strategic value."
+      },
+      {
+        "slide": "2. Current pain",
+        "content": "12-week submission assembly, 25 percent effort in reconciliation, inconsistent product and registration data."
+      },
+      {
+        "slide": "3. Value model",
+        "content": "Hard savings are weak alone. Strategic value from avoided delay can justify the project if validated."
+      },
+      {
+        "slide": "4. Future state",
+        "content": "Single data ownership model, RIM workflow, controlled templates, eCTD publishing, validation, and market accountability."
+      },
+      {
+        "slide": "5. Roadmap",
+        "content": "8-week diagnostic, data-governance design, pilot on one region, validation, phased global rollout."
+      }
+    ],
+    "traps": [
+      "Trap 1: claiming labor savings alone justify the project when the math says they do not.",
+      "Trap 2: inventing launch revenue instead of asking for a validated delay-value assumption.",
+      "Trap 3: treating data governance as an IT issue instead of a business operating-model issue.",
+      "Trap 4: ignoring validation and controlled-template work.",
+      "Trap 5: saying RIM fixes everything without changing global-local ownership."
+    ]
+  },
+  {
+    "title": "Case 3: Clinical Enrollment and Site Activation Improvement",
+    "subtitle": "Funnel math, site prioritization, and trial-delay economics",
+    "prompt": "A sponsor must enroll 240 additional patients in 8 months for a Phase 3 study. Thirty sites are selected, but only 20 are active. Current enrollment is 1.1 patients per active site per month. Screen-to-enroll conversion is 20 percent. The team is considering activating more sites, improving pre-screening, or increasing recruitment spend.",
+    "facts": [
+      "Objective: enroll 240 remaining patients in 8 months, or 30 patients per month.",
+      "Current enrollment: 20 active sites times 1.1 patients per site per month = 22 patients per month.",
+      "Current monthly gap: 8 patients per month.",
+      "Trial delay cost assumption: 400,000 dollars per month in extended study operations, excluding launch opportunity cost.",
+      "New site activation cost assumption: 50,000 dollars per site, with 3-month activation lag.",
+      "Pre-screening improvement assumption: raise conversion from 20 percent to 27 percent within 6 weeks at 300,000 dollars program cost.",
+      "Recruitment spend assumption: 500,000 dollars media spend could add 200 screens per month but may worsen screen-fail burden if eligibility criteria are not targeted."
+    ],
+    "issueTree": [
+      {
+        "branch": "Site activation",
+        "tests": "Selected versus active sites, activation cycle time, document readiness, training status, contract bottlenecks."
+      },
+      {
+        "branch": "Patient funnel",
+        "tests": "Awareness, referral, screening, eligibility, consent, enrollment conversion."
+      },
+      {
+        "branch": "Site productivity",
+        "tests": "Patients per active site per month, site capacity, coordinator bandwidth, investigator engagement."
+      },
+      {
+        "branch": "Protocol and eligibility",
+        "tests": "Inclusion and exclusion criteria, screen-fail reasons, burden of visits, competing trials."
+      },
+      {
+        "branch": "Economics and timing",
+        "tests": "Cost per patient, delay cost, activation lag, near-term versus long-term enrollment lift."
+      }
+    ],
+    "mathRows": [
+      {
+        "item": "Required pace",
+        "math": "240 patients divided by 8 months = 30 patients per month",
+        "implication": "This is the target throughput."
+      },
+      {
+        "item": "Current pace",
+        "math": "20 active sites times 1.1 = 22 patients per month",
+        "implication": "The study is short by 8 patients per month."
+      },
+      {
+        "item": "Site-only option",
+        "math": "10 more sites times 1.1 = 11 more patients per month after 3-month lag",
+        "implication": "Eventually enough, but late impact and high activation cost."
+      },
+      {
+        "item": "Conversion option",
+        "math": "Conversion 20 percent to 27 percent = 35 percent relative lift; 22 times 1.35 = about 30 patients per month",
+        "implication": "Pre-screening could close the gap faster if the assumption holds."
+      },
+      {
+        "item": "Delay economics",
+        "math": "One-month delay costs 400,000 dollars in study operations",
+        "implication": "A 300,000 dollar pre-screening pilot pays off if it avoids even one month of delay."
+      }
+    ],
+    "financeRows": [
+      {
+        "item": "Pre-screening ROI",
+        "math": "Avoid 1 month delay at 400,000 cost for 300,000 investment = 100,000 net value",
+        "soWhat": "Positive if it truly avoids at least one month delay."
+      },
+      {
+        "item": "Site activation cost",
+        "math": "10 sites times 50,000 = 500,000 dollars",
+        "soWhat": "Useful for long-term coverage, but delayed impact reduces near-term value."
+      },
+      {
+        "item": "Recruitment media risk",
+        "math": "500,000 spend adds screens, but not necessarily enrolled patients",
+        "soWhat": "If screen-fail reasons are protocol-related, media spend is wasteful."
+      },
+      {
+        "item": "Sensitivity",
+        "math": "If conversion improves only to 24 percent, enrollment rises to about 26 patients per month",
+        "soWhat": "Need parallel site activation for downside protection."
+      },
+      {
+        "item": "Value metric",
+        "math": "Cost per incremental enrolled patient plus months of delay avoided",
+        "soWhat": "Use both unit economics and timeline value, not only raw enrollment count."
+      }
+    ],
+    "recommendation": [
+      "Prioritize conversion improvement through targeted pre-screening because it can close the gap fastest.",
+      "Activate only the highest-probability inactive sites in parallel, not all sites blindly.",
+      "Avoid broad media spend until screen-fail reasons prove it will convert, not just generate screens.",
+      "Track active sites, screens, screen-fail reasons, conversion rate, enrolled patients per site, and delay-risk forecast weekly."
+    ],
+    "deck": [
+      {
+        "slide": "1. Recommendation",
+        "content": "Launch targeted pre-screening now and activate selected high-probability sites in parallel."
+      },
+      {
+        "slide": "2. Funnel math",
+        "content": "Current pace is 22 patients per month versus 30 needed. The 8-patient gap is the core metric."
+      },
+      {
+        "slide": "3. Option economics",
+        "content": "Pre-screening can close the gap faster and pays off if it avoids one month of delay. Site activation is useful but slower."
+      },
+      {
+        "slide": "4. Implementation plan",
+        "content": "Analyze screen-fail reasons, build site-specific pre-screening scripts, activate priority sites, monitor weekly funnel metrics."
+      },
+      {
+        "slide": "5. Risks and next steps",
+        "content": "Main risks: weak conversion lift, site staff burden, protocol constraints, and poor media targeting. Use a 6-week decision gate."
+      }
+    ],
+    "traps": [
+      "Trap 1: assuming more sites always means faster enrollment.",
+      "Trap 2: optimizing screens when the actual KPI is enrolled patients.",
+      "Trap 3: ignoring activation lag in site-expansion economics.",
+      "Trap 4: spending on media before diagnosing screen-fail reasons.",
+      "Trap 5: missing the value of avoiding one month of trial delay."
+    ]
+  }
+],
 
   glossary: [
     {term:"MECE", cat:"Consulting Method", def:"Mutually Exclusive, Collectively Exhaustive. Buckets that do not overlap and together leave no gaps. The test of a trustworthy breakdown.", ex:"Splitting prescriptions into new and refills is MECE. Splitting into brand, generic, and specialty is not, because specialty overlaps brand and generic."},
@@ -630,7 +1227,58 @@ const DATA = {
     {term:"Audit trail", cat:"Regulatory", def:"A secure record of who did what, when, and why in a regulated system.", ex:"Part 11 compliance depends on complete audit trails and controlled e-signatures."},
     {term:"Role-based access", cat:"Regulatory", def:"System permissions assigned by job role so users can only perform appropriate actions.", ex:"A case processor can code events, while a safety lead can medically review and approve."},
     {term:"SOP", cat:"Regulatory", def:"Standard Operating Procedure, the controlled document that defines how regulated work must be performed.", ex:"The safety-case intake SOP defines required fields, triage rules, and escalation timing."}
-
+,
+{"term": "Profitability framework", "cat": "Finance", "def": "A diagnostic framework built on profit equals revenue minus costs. Use it when profits, margins, or earnings are down.", "ex": "A RIM project is not purely a profitability case, but its labor savings still come from cost reduction."},
+{"term": "Revenue", "cat": "Finance", "def": "Money earned from selling products or services before subtracting costs.", "ex": "For a pharma product, launch-delay value may relate to delayed revenue, but you need client-provided assumptions."},
+{"term": "Cost", "cat": "Finance", "def": "Money spent to operate, build, deliver, or support something.", "ex": "Implementation cost, validation cost, software support, and training are all costs in a Veeva case."},
+{"term": "Fixed cost", "cat": "Finance", "def": "A cost that does not change much with volume in the short term.", "ex": "A base safety-team salary pool is mostly fixed over the next few months."},
+{"term": "Variable cost", "cat": "Finance", "def": "A cost that moves with volume.", "ex": "Outsourced case-processing fees rise with the number of cases sent to the vendor."},
+{"term": "Contribution margin", "cat": "Finance", "def": "Revenue minus variable cost, often used to see how much each unit contributes toward fixed cost and profit.", "ex": "In a trial case, cost per incremental enrolled patient is a similar unit-economics idea."},
+{"term": "Gross margin", "cat": "Finance", "def": "Revenue minus direct cost of goods or services, divided by revenue.", "ex": "Less central in R&D operations cases, but useful in broader consulting interviews."},
+{"term": "Operating margin", "cat": "Finance", "def": "Operating profit divided by revenue after operating expenses.", "ex": "A transformation may improve operating margin by reducing manual operations cost."},
+{"term": "EBITDA", "cat": "Finance", "def": "Earnings before interest, taxes, depreciation, and amortization. Often used as a proxy for operating profitability.", "ex": "If an interviewer mentions EBITDA miss, use profit-tree thinking."},
+{"term": "ROI", "cat": "Finance", "def": "Return on investment. A simple version is net benefit divided by investment.", "ex": "300,000 annual net benefit on 650,000 investment is about 46 percent annual simple ROI."},
+{"term": "Payback period", "cat": "Finance", "def": "The time required for cumulative benefits to recover the upfront investment.", "ex": "650,000 divided by 300,000 annual net benefit gives about 2.2 years."},
+{"term": "NPV", "cat": "Finance", "def": "Net present value. Future cash flows discounted back to today minus the upfront investment.", "ex": "A RIM case may have negative NPV on hard savings but positive NPV if risk-adjusted launch-delay value is included."},
+{"term": "Discount rate", "cat": "Finance", "def": "The rate used to convert future cash flows into present value.", "ex": "A 10 percent discount rate values next year's 1 million dollars at about 909,000 dollars today."},
+{"term": "WACC", "cat": "Finance", "def": "Weighted average cost of capital, often used as the discount rate in corporate valuation.", "ex": "If no WACC is provided, state the assumption rather than inventing certainty."},
+{"term": "CAPEX", "cat": "Finance", "def": "Capital expenditure, money spent on long-term assets or capitalized implementation work.", "ex": "Some enterprise implementation costs may be treated as CAPEX depending on accounting policy."},
+{"term": "OPEX", "cat": "Finance", "def": "Operating expense, recurring cost to run the business.", "ex": "Annual software support and business-admin headcount are OPEX."},
+{"term": "TCO", "cat": "Finance", "def": "Total cost of ownership across the full lifecycle, not just purchase price.", "ex": "TCO includes implementation, validation, migration, training, licenses, support, and change management."},
+{"term": "Run-rate savings", "cat": "Finance", "def": "Annualized savings expected once the change is fully implemented.", "ex": "Avoiding 2 FTE at 140,000 each creates 280,000 dollars of run-rate savings."},
+{"term": "One-time cost", "cat": "Finance", "def": "A non-recurring cost required to implement or transition to the new state.", "ex": "Data migration and validation during a Veeva rollout are one-time costs."},
+{"term": "Recurring cost", "cat": "Finance", "def": "A cost that continues every year or period after implementation.", "ex": "Support, maintenance, and admin ownership are recurring costs."},
+{"term": "Hard savings", "cat": "Finance", "def": "Budget-visible savings, such as avoided hires, vendor spend reduction, or retiring a system.", "ex": "Avoided outsourcing fees are hard savings."},
+{"term": "Strategic value", "cat": "Finance", "def": "Business value that is real but assumption-dependent, such as avoided launch delay or improved inspection readiness.", "ex": "Avoiding a 10-day launch delay may be worth more than labor savings, but the client must validate the value."},
+{"term": "Sensitivity analysis", "cat": "Finance", "def": "Testing how the recommendation changes when key assumptions move.", "ex": "Vary productivity lift from 5 percent to 15 percent and see if payback still works."},
+{"term": "Breakeven", "cat": "Finance", "def": "The point where benefits equal costs.", "ex": "If the pilot costs 300,000 dollars, one avoided 400,000 dollar delay month clears breakeven."},
+{"term": "Opportunity cost", "cat": "Finance", "def": "The value of the best alternative use of time, capital, or resources.", "ex": "A delayed submission may tie up regulatory and clinical teams that could support another program."},
+{"term": "FTE", "cat": "Operations", "def": "Full-time equivalent. A way to express labor capacity independent of individual headcount details.", "ex": "A 240-case monthly gap at 120 cases per FTE implies 2 FTE of capacity."},
+{"term": "Fully loaded cost", "cat": "Operations", "def": "Employee cost including salary, benefits, payroll tax, overhead, and sometimes management burden.", "ex": "A safety associate may have a fully loaded cost of 140,000 dollars per year in a case assumption."},
+{"term": "Throughput", "cat": "Operations", "def": "The amount of work completed per unit of time.", "ex": "960 safety cases processed per month is current throughput."},
+{"term": "Capacity", "cat": "Operations", "def": "The maximum sustainable amount of work a team or system can process in a period.", "ex": "8 associates times 120 cases each gives 960 monthly case capacity."},
+{"term": "Bottleneck", "cat": "Operations", "def": "The slowest or most constrained step that limits the whole process.", "ex": "If medical review queues are longest, adding intake staff may not reduce backlog."},
+{"term": "Utilization", "cat": "Operations", "def": "The percentage of available capacity being used.", "ex": "A team at 100 percent utilization has no buffer for spikes or rework."},
+{"term": "Cycle time", "cat": "Operations", "def": "The elapsed time from start to finish of a process.", "ex": "Submission assembly cycle time falls from 12 weeks to 8 weeks."},
+{"term": "SLA", "cat": "Operations", "def": "Service-level agreement, a target for response or completion time.", "ex": "Serious safety cases may need strict SLA tracking."},
+{"term": "Queue", "cat": "Operations", "def": "Work waiting to be processed.", "ex": "A growing safety backlog is a queue where intake exceeds completion."},
+{"term": "Go-live", "cat": "Implementation", "def": "The point when a new process or system becomes active for users.", "ex": "Go-live is not the same as adoption or value realization."},
+{"term": "Cutover", "cat": "Implementation", "def": "The controlled transition from old process or system to the new one.", "ex": "A safety-system cutover may include open-case migration and user-access validation."},
+{"term": "Data migration", "cat": "Implementation", "def": "Moving data from old systems into a new system while preserving quality and traceability.", "ex": "Migrating product registration data into RIM requires ownership and validation."},
+{"term": "User acceptance testing", "cat": "Implementation", "def": "Testing by business users to confirm the system supports real workflows.", "ex": "Safety associates test case intake, coding, review, and submission before go-live."},
+{"term": "Super-user", "cat": "Implementation", "def": "A trained business user who supports peers and helps drive adoption.", "ex": "A country regulatory super-user helps local teams adopt the new RIM workflow."},
+{"term": "Hypercare", "cat": "Implementation", "def": "The intensified support period right after go-live.", "ex": "For the first four weeks after launch, track defects, user questions, and adoption daily."},
+{"term": "Source of truth", "cat": "Implementation", "def": "The authoritative system or owner for a data field or record.", "ex": "RIM should define the source of truth for product registration fields."},
+{"term": "Data lineage", "cat": "Implementation", "def": "The path data takes from origin to use, including transformations and owners.", "ex": "Submission defects often come from unclear product-data lineage across markets."},
+{"term": "Veeva Business Consulting", "cat": "Veeva Domain", "def": "Veeva's consulting group focused on improving life sciences operations through software, AI, data, and consulting working together.", "ex": "A consultant may redesign a safety operating model and align it to Veeva Safety."},
+{"term": "Veeva Connections", "cat": "Veeva Domain", "def": "Veeva's approach to connecting processes and data across applications.", "ex": "Connecting clinical data to safety can reduce multiple data entry."},
+{"term": "Case Intake Agent", "cat": "Veeva Domain", "def": "Veeva AI for Safety capability described by Veeva as automating case intake and identifying potential data anomalies.", "ex": "Use it as a possible future-state lever, not as a magic answer before diagnosis."},
+{"term": "Case Narrative Agent", "cat": "Veeva Domain", "def": "Veeva AI for Safety capability described by Veeva as improving case narratives by correcting grammar, consolidating information, and improving readability.", "ex": "A narrative agent may reduce drafting friction, but the case still needs workflow and quality controls."},
+{"term": "Vault Submissions", "cat": "Veeva Domain", "def": "Veeva application area supporting regulatory submission planning, assembly, and publishing.", "ex": "Relevant when the client struggles with eCTD submission cycle time."},
+{"term": "Vault Registrations", "cat": "Veeva Domain", "def": "Veeva application area for tracking product registrations and market authorization data.", "ex": "Useful when global registration data are inconsistent across countries."},
+{"term": "Study startup", "cat": "Veeva Domain", "def": "The work needed to get a clinical trial site ready to enroll patients.", "ex": "Contracts, regulatory documents, training, and system access can all delay activation."},
+{"term": "Screen fail", "cat": "Veeva Domain", "def": "A patient who is screened for a trial but does not meet eligibility or cannot proceed.", "ex": "High screen-fail rate means media spend may create more work without enrollment."},
+{"term": "Cost per enrolled patient", "cat": "Finance", "def": "Total recruitment or activation spend divided by incremental patients enrolled.", "ex": "A 300,000 dollar pre-screening program that adds 48 patients costs 6,250 dollars per incremental enrollee."}
   ]
 };
 
@@ -723,7 +1371,7 @@ function renderHome(){
   <div class="card hero">
     <div class="eyebrow">Learn, then drill</div>
     <h2>Veeva Business Consultant, R&amp;D Practice</h2>
-    <p class="lede">This simulator teaches the real fundamentals a life sciences consultant needs, then drills you on Veeva-specific interview scenarios with scored feedback. You leave knowing the material, not just having seen the right answers. Two meters track your progress: <b>Knowledge</b> measures whether you understand the concepts, and <b>Interview Readiness</b> measures whether you can perform them under pressure.</p>
+    <p class="lede">This simulator teaches the real fundamentals a life sciences consultant needs, then drills you on Veeva-specific interview scenarios, full case studies, finance/value models, and solution-mapping exercises with scored feedback. You leave knowing the material, not just having seen the right answers. Two meters track your progress: <b>Knowledge</b> measures whether you understand the concepts, and <b>Interview Readiness</b> measures whether you can perform them under pressure.</p>
     <div class="grid2" style="margin-top:16px">
       <div class="mini"><h4>Knowledge ${k.pct}%</h4><p>${k.correct} of ${k.total} knowledge checks answered correctly. These verify you understand each concept the moment after it is taught.</p></div>
       <div class="mini"><h4>Interview Readiness ${r.pct}%</h4><p>${r.earned} of ${r.max} scenario points earned. These reward the answer a real interviewer would score highest.</p></div>
@@ -868,17 +1516,20 @@ function wireLevel(i){
 
 /* ---------- Case Study Lab ---------- */
 function renderCaseLab(){
-  const c=DATA.caseStudy;
+  const idx = Math.max(0, Math.min(DATA.caseStudies.length-1, state.caseIndex || 0));
+  const c=DATA.caseStudies[idx];
+  const nav = `<div class="case-switch">${DATA.caseStudies.map((x,i)=>`<button class="casebtn ${i===idx?'active':''}" data-case-index="${i}">Case ${i+1}: ${esc(x.title.replace(/^Case \d+:\s*/, '').split(':')[0])}</button>`).join("")}</div>`;
   return `<div class="card hero">
     <div class="eyebrow">Take-home case practice</div>
     <h2>${esc(c.title)}</h2>
     <p class="lede">${esc(c.subtitle)}</p>
+    ${nav}
     <div class="brief" style="margin-top:18px">
       <div class="btag">Case prompt</div>
       <p>${esc(c.prompt)}</p>
     </div>
-    <div class="callout"><b>How to use this lab:</b> Read the prompt, then practice saying the issue tree and recommendation out loud. Then complete Level 8 to drill the same case under interview pressure.</div>
-    <div style="margin-top:16px"><button class="ghost" id="caseStart" style="background:var(--accent);color:#fff;border-color:var(--accent);padding:10px 18px;font-size:14px">Practice Level 8</button></div>
+    <div class="callout"><b>How to use this lab:</b> Read the prompt, say the issue tree out loud, run the math by hand, then practice the recommendation deck. This is meant to feel like a real Veeva take-home case: structured, quantitative, Veeva-aware, and honest about assumptions.</div>
+    <div style="margin-top:16px"><button class="ghost" id="caseStart" style="background:var(--accent);color:#fff;border-color:var(--accent);padding:10px 18px;font-size:14px">Practice related drills</button></div>
   </div>
 
   <div class="card">
@@ -887,9 +1538,10 @@ function renderCaseLab(){
     <div class="casegrid">
       <div class="casebox"><h4>Known facts</h4><ul>${c.facts.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
       <div class="casebox"><h4>Answer-first hypothesis</h4><ul>
-        <li>The backlog is a queueing problem: monthly case intake exceeds monthly processing capacity.</li>
-        <li>The best first answer is not pure hiring or pure software. Diagnose capacity loss, rework, and triage first.</li>
-        <li>If manual workflow is the bottleneck, a standardized safety workflow and system path becomes the scale solution.</li>
+        <li>Clarify the client objective and the metric that proves success.</li>
+        <li>Separate the core operational driver from solution options.</li>
+        <li>Use numbers to rank options, then show risks and decision gates.</li>
+        <li>Name assumptions clearly. Do not hide weak assumptions inside confident language.</li>
       </ul></div>
     </div>
   </div>
@@ -903,11 +1555,20 @@ function renderCaseLab(){
   </div>
 
   <div class="card">
-    <div class="eyebrow">Capacity math</div>
+    <div class="eyebrow">Core math</div>
     <h2 style="font-size:20px">Minimum quantification needed for the case</h2>
     <table class="case-table"><thead><tr><th>Item</th><th>Math</th><th>Implication</th></tr></thead><tbody>
       ${c.mathRows.map(r=>`<tr><td><b>${esc(r.item)}</b></td><td>${esc(r.math)}</td><td>${esc(r.implication)}</td></tr>`).join("")}
     </tbody></table>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Finance and value model</div>
+    <h2 style="font-size:20px">Business case logic</h2>
+    <table class="case-table"><thead><tr><th>Value item</th><th>Calculation</th><th>So-what</th></tr></thead><tbody>
+      ${c.financeRows.map(r=>`<tr><td><b>${esc(r.item)}</b></td><td>${esc(r.math)}</td><td>${esc(r.soWhat)}</td></tr>`).join("")}
+    </tbody></table>
+    <div class="callout"><b>Finance discipline:</b> Keep hard savings separate from strategic value. If launch-delay, inspection-readiness, or compliance-risk value is not provided, model it as a scenario and ask the client to validate the assumption.</div>
   </div>
 
   <div class="card">
@@ -925,16 +1586,17 @@ function renderCaseLab(){
     <table class="case-table"><thead><tr><th>Slide</th><th>Content</th></tr></thead><tbody>
       ${c.deck.map(r=>`<tr><td><b>${esc(r.slide)}</b></td><td>${esc(r.content)}</td></tr>`).join("")}
     </tbody></table>
-    <div class="callout"><b>Practice prompt:</b> In 60 seconds, say the Slide 1 recommendation, the backlog math, and the phased roadmap. If you can do that clearly, you are interview-ready for this case pattern.</div>
+    <div class="callout"><b>Practice prompt:</b> In 90 seconds, say the recommendation, the one key equation, the financial so-what, and the main risk. If you can do that clearly, you are much closer to case-readiness.</div>
   </div>`;
 }
 function wireCaseLab(){
+  document.querySelectorAll('[data-case-index]').forEach(b=>{ b.onclick=()=>{ state.caseIndex=+b.getAttribute('data-case-index'); render(); window.scrollTo({top:0,behavior:'smooth'}); }; });
   const b=document.getElementById("caseStart");
-  if(b) b.onclick=()=>{ state.view="level-"+(DATA.levels.length-1); render(); window.scrollTo({top:0,behavior:"smooth"}); };
+  if(b) b.onclick=()=>{ state.view="level-"+(DATA.levels.length-3); render(); window.scrollTo({top:0,behavior:"smooth"}); };
 }
 
 /* ---------- Glossary ---------- */
-const CATS = ["All","Consulting Method","Communication","Veeva Domain","Regulatory","Fit and Behavioral"];
+const CATS = ["All","Consulting Method","Communication","Finance","Operations","Implementation","Veeva Domain","Regulatory","Fit and Behavioral"];
 function renderGlossaryShell(){
   const q = state.glossaryQuery || "";
   return `<div class="card">
