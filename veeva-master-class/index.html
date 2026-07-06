@@ -247,6 +247,22 @@
     .reveal{opacity:1!important;transform:none!important}
   }
 
+  /* ===== v7 visual aids ===== */
+  .diagram{background:linear-gradient(180deg,#fff,#f8f5ee);border:1px solid var(--line);border-radius:16px;padding:16px;overflow:auto}
+  .diagram svg{display:block;width:100%;height:auto;max-width:720px;margin:0 auto}
+  .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:14px}
+  .vfacade{position:relative;border-radius:14px;overflow:hidden;cursor:pointer;border:1px solid var(--line);background:#0a1120;box-shadow:var(--shadow)}
+  .vfacade .vthumb{width:100%;aspect-ratio:16/9;object-fit:cover;opacity:.82;transition:.22s;display:block}
+  .vfacade:hover .vthumb{opacity:1;transform:scale(1.03)}
+  .vplay{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:rgba(17,35,63,.85);border:2px solid rgba(255,255,255,.9);pointer-events:none}
+  .vplay:after{content:"";position:absolute;left:54%;top:50%;transform:translate(-50%,-50%);border-style:solid;border-width:9px 0 9px 16px;border-color:transparent transparent transparent #fff}
+  .vmeta{position:absolute;left:0;right:0;bottom:0;padding:24px 12px 10px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.85));color:#fff;display:flex;flex-direction:column;gap:2px;pointer-events:none}
+  .vmeta b{font-size:12.8px;line-height:1.25}
+  .vmeta small{font-size:10px;color:#cdd8e6;text-transform:uppercase;letter-spacing:.4px;font-weight:800}
+  .vframe{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/9;box-shadow:var(--shadow)}
+  .vframe iframe{width:100%;height:100%;display:block;border:0}
+  @media (max-width:560px){ .vgrid{grid-template-columns:1fr} }
+
 </style>
 </head>
 <body>
@@ -3429,6 +3445,8 @@ function renderHome(){
 
   ${courseMapCard()}
 
+  ${orientationCard()}
+
   <div class="card">
     <div class="eyebrow">Interview track</div>
     <h2 style="font-size:20px;margin-bottom:2px">How the Veeva Master Class process is structured</h2>
@@ -3484,6 +3502,8 @@ function renderLevel(i){
       ${l.concepts.map(c=>`<span class="chip" data-term="${esc(c)}">${esc(c)}</span>`).join("")}
     </div>
   </div>`;
+
+  h+=mediaCard(i);
 
   l.drills.forEach((d,di)=>{ h+=renderDrill(i,di,d); });
 
@@ -3766,6 +3786,7 @@ function afterRender(){
     } else cards.forEach(c=>c.classList.add("in"));
   }
   wireConceptPops();
+  wireVideos();
 }
 function glossaryLookup(term){
   const t=(term||"").toLowerCase();
@@ -3816,10 +3837,48 @@ if(!window.__vkbd){
     }
   });
 }
+const DIAGRAMS={"issueTree": "<svg viewBox=\"0 0 720 232\" role=\"img\" aria-label=\"MECE issue tree for enrollment\"><rect x=\"270\" y=\"14\" width=\"180\" height=\"46\" rx=\"10\" fill=\"#10233f\"/><text x=\"360\" y=\"42\" text-anchor=\"middle\" fill=\"#fff\" font-size=\"15\" font-weight=\"700\">Total enrollment</text><path d=\"M360 60 V88 M130 88 H590 M130 88 V116 M360 88 V116 M590 88 V116\" stroke=\"#9fb0c6\" stroke-width=\"2\" fill=\"none\"/><rect x=\"40\" y=\"116\" width=\"180\" height=\"66\" rx=\"10\" fill=\"#eef4fb\" stroke=\"#c6d8ef\"/><text x=\"130\" y=\"144\" text-anchor=\"middle\" fill=\"#10233f\" font-size=\"13\" font-weight=\"700\">Active sites</text><text x=\"130\" y=\"164\" text-anchor=\"middle\" fill=\"#5a6675\" font-size=\"11\">how many enroll</text><rect x=\"270\" y=\"116\" width=\"180\" height=\"66\" rx=\"10\" fill=\"#eef4fb\" stroke=\"#c6d8ef\"/><text x=\"360\" y=\"144\" text-anchor=\"middle\" fill=\"#10233f\" font-size=\"13\" font-weight=\"700\">Screened per site</text><text x=\"360\" y=\"164\" text-anchor=\"middle\" fill=\"#5a6675\" font-size=\"11\">patient flow</text><rect x=\"500\" y=\"116\" width=\"180\" height=\"66\" rx=\"10\" fill=\"#eef4fb\" stroke=\"#c6d8ef\"/><text x=\"590\" y=\"144\" text-anchor=\"middle\" fill=\"#10233f\" font-size=\"13\" font-weight=\"700\">Conversion rate</text><text x=\"590\" y=\"164\" text-anchor=\"middle\" fill=\"#5a6675\" font-size=\"11\">screen to enroll</text><text x=\"360\" y=\"214\" text-anchor=\"middle\" fill=\"#2a9d8f\" font-size=\"12\" font-weight=\"700\">Enrollment = sites x screened per site x conversion rate, a MECE split</text></svg>", "pyramid": "<svg viewBox=\"0 0 720 250\" role=\"img\" aria-label=\"Pyramid principle\"><polygon points=\"360,18 296,82 424,82\" fill=\"#10233f\"/><text x=\"360\" y=\"62\" text-anchor=\"middle\" fill=\"#fff\" font-size=\"12\" font-weight=\"700\">Answer</text><polygon points=\"296,88 424,88 476,152 244,152\" fill=\"#265d9f\"/><text x=\"360\" y=\"126\" text-anchor=\"middle\" fill=\"#fff\" font-size=\"12\" font-weight=\"700\">Reason 1   Reason 2   Reason 3</text><polygon points=\"244,158 476,158 548,226 172,226\" fill=\"#eef4fb\" stroke=\"#c6d8ef\"/><text x=\"360\" y=\"198\" text-anchor=\"middle\" fill=\"#10233f\" font-size=\"12\" font-weight=\"700\">Supporting detail and data, only if asked</text><text x=\"360\" y=\"244\" text-anchor=\"middle\" fill=\"#2a9d8f\" font-size=\"11.5\" font-weight=\"700\">Lead with the conclusion, then support it</text></svg>", "devcloud": "<svg viewBox=\"0 0 720 210\" role=\"img\" aria-label=\"Veeva Development Cloud pillars\"><g text-anchor=\"middle\"><rect x=\"30\" y=\"22\" width=\"152\" height=\"96\" rx=\"12\" fill=\"#eef4fb\" stroke=\"#c6d8ef\"/><text x=\"106\" y=\"58\" fill=\"#10233f\" font-size=\"13\" font-weight=\"700\">Clinical</text><text x=\"106\" y=\"80\" fill=\"#5a6675\" font-size=\"10.5\">CTMS, eTMF</text><rect x=\"196\" y=\"22\" width=\"152\" height=\"96\" rx=\"12\" fill=\"#eef4fb\" stroke=\"#c6d8ef\"/><text x=\"272\" y=\"58\" fill=\"#10233f\" font-size=\"13\" font-weight=\"700\">Regulatory</text><text x=\"272\" y=\"80\" fill=\"#5a6675\" font-size=\"10.5\">RIM, eCTD</text><rect x=\"362\" y=\"22\" width=\"152\" height=\"96\" rx=\"12\" fill=\"#eef4fb\" stroke=\"#c6d8ef\"/><text x=\"438\" y=\"58\" fill=\"#10233f\" font-size=\"13\" font-weight=\"700\">Quality</text><text x=\"438\" y=\"80\" fill=\"#5a6675\" font-size=\"10.5\">QMS, CAPA</text><rect x=\"528\" y=\"22\" width=\"162\" height=\"96\" rx=\"12\" fill=\"#eef4fb\" stroke=\"#c6d8ef\"/><text x=\"609\" y=\"58\" fill=\"#10233f\" font-size=\"13\" font-weight=\"700\">Safety</text><text x=\"609\" y=\"80\" fill=\"#5a6675\" font-size=\"10.5\">PV, ICSR</text><rect x=\"30\" y=\"132\" width=\"660\" height=\"54\" rx=\"12\" fill=\"#10233f\"/><text x=\"360\" y=\"165\" fill=\"#fff\" font-size=\"13\" font-weight=\"700\">Vault Platform, built on GxP, 21 CFR Part 11, and audit trails</text></g></svg>", "lifecycle": "<svg viewBox=\"0 0 720 150\" role=\"img\" aria-label=\"Drug lifecycle timeline\"><line x1=\"58\" y1=\"58\" x2=\"662\" y2=\"58\" stroke=\"#c9d4e2\" stroke-width=\"3\"/><circle cx=\"58\" cy=\"58\" r=\"8\" fill=\"#265d9f\"/><text x=\"58\" y=\"90\" text-anchor=\"middle\" fill=\"#2b3648\" font-size=\"10.5\" font-weight=\"700\">Discovery</text><circle cx=\"144\" cy=\"58\" r=\"8\" fill=\"#265d9f\"/><text x=\"144\" y=\"90\" text-anchor=\"middle\" fill=\"#2b3648\" font-size=\"10.5\" font-weight=\"700\">Preclinical</text><circle cx=\"231\" cy=\"58\" r=\"8\" fill=\"#265d9f\"/><text x=\"231\" y=\"90\" text-anchor=\"middle\" fill=\"#2b3648\" font-size=\"10.5\" font-weight=\"700\">Phase 1</text><circle cx=\"317\" cy=\"58\" r=\"8\" fill=\"#265d9f\"/><text x=\"317\" y=\"90\" text-anchor=\"middle\" fill=\"#2b3648\" font-size=\"10.5\" font-weight=\"700\">Phase 2</text><circle cx=\"403\" cy=\"58\" r=\"8\" fill=\"#265d9f\"/><text x=\"403\" y=\"90\" text-anchor=\"middle\" fill=\"#2b3648\" font-size=\"10.5\" font-weight=\"700\">Phase 3</text><circle cx=\"489\" cy=\"58\" r=\"8\" fill=\"#b9852f\"/><text x=\"489\" y=\"90\" text-anchor=\"middle\" fill=\"#2b3648\" font-size=\"10.5\" font-weight=\"700\">Approval</text><circle cx=\"576\" cy=\"58\" r=\"8\" fill=\"#2a9d8f\"/><text x=\"576\" y=\"90\" text-anchor=\"middle\" fill=\"#2b3648\" font-size=\"10.5\" font-weight=\"700\">Launch</text><circle cx=\"662\" cy=\"58\" r=\"8\" fill=\"#10233f\"/><text x=\"662\" y=\"90\" text-anchor=\"middle\" fill=\"#2b3648\" font-size=\"10.5\" font-weight=\"700\">Post-market</text><text x=\"360\" y=\"126\" text-anchor=\"middle\" fill=\"#2a9d8f\" font-size=\"11.5\" font-weight=\"700\">Different business problems live in different parts of this chain</text></svg>", "ectd": "<svg viewBox=\"0 0 720 230\" role=\"img\" aria-label=\"eCTD submission modules\"><rect x=\"60\" y=\"14\" width=\"600\" height=\"38\" rx=\"9\" fill=\"#10233f\" stroke=\"#c6d8ef\"/><text x=\"80\" y=\"38\" fill=\"#ffffff\" font-size=\"13\" font-weight=\"700\">Module 1</text><text x=\"640\" y=\"38\" text-anchor=\"end\" fill=\"#c6dcff\" font-size=\"11.5\">Administrative, region specific</text><rect x=\"60\" y=\"58\" width=\"600\" height=\"38\" rx=\"9\" fill=\"#eef4fb\" stroke=\"#c6d8ef\"/><text x=\"80\" y=\"82\" fill=\"#10233f\" font-size=\"13\" font-weight=\"700\">Module 2</text><text x=\"640\" y=\"82\" text-anchor=\"end\" fill=\"#5a6675\" font-size=\"11.5\">Summaries</text><rect x=\"60\" y=\"102\" width=\"600\" height=\"38\" rx=\"9\" fill=\"#eef4fb\" stroke=\"#c6d8ef\"/><text x=\"80\" y=\"126\" fill=\"#10233f\" font-size=\"13\" font-weight=\"700\">Module 3</text><text x=\"640\" y=\"126\" text-anchor=\"end\" fill=\"#5a6675\" font-size=\"11.5\">Quality and CMC</text><rect x=\"60\" y=\"146\" width=\"600\" height=\"38\" rx=\"9\" fill=\"#eef4fb\" stroke=\"#c6d8ef\"/><text x=\"80\" y=\"170\" fill=\"#10233f\" font-size=\"13\" font-weight=\"700\">Module 4</text><text x=\"640\" y=\"170\" text-anchor=\"end\" fill=\"#5a6675\" font-size=\"11.5\">Nonclinical study reports</text><rect x=\"60\" y=\"190\" width=\"600\" height=\"38\" rx=\"9\" fill=\"#eef4fb\" stroke=\"#c6d8ef\"/><text x=\"80\" y=\"214\" fill=\"#10233f\" font-size=\"13\" font-weight=\"700\">Module 5</text><text x=\"640\" y=\"214\" text-anchor=\"end\" fill=\"#5a6675\" font-size=\"11.5\">Clinical study reports</text><text x=\"360\" y=\"222\" text-anchor=\"middle\" fill=\"#2a9d8f\" font-size=\"11.5\" font-weight=\"700\">One standard structure that health authorities expect</text></svg>", "capacity": "<svg viewBox=\"0 0 720 170\" role=\"img\" aria-label=\"Safety case capacity flow\"><rect x=\"30\" y=\"52\" width=\"180\" height=\"66\" rx=\"12\" fill=\"#265d9f\"/><text x=\"120\" y=\"82\" text-anchor=\"middle\" fill=\"#fff\" font-size=\"13\" font-weight=\"700\">Intake</text><text x=\"120\" y=\"102\" text-anchor=\"middle\" fill=\"#cfe0f5\" font-size=\"12\">1,200 / month</text><rect x=\"270\" y=\"52\" width=\"180\" height=\"66\" rx=\"12\" fill=\"#fbf1dc\" stroke=\"#e1c078\"/><text x=\"360\" y=\"82\" text-anchor=\"middle\" fill=\"#7a510f\" font-size=\"13\" font-weight=\"700\">Backlog grows</text><text x=\"360\" y=\"102\" text-anchor=\"middle\" fill=\"#9a6a12\" font-size=\"12\">+240 / month</text><rect x=\"510\" y=\"52\" width=\"180\" height=\"66\" rx=\"12\" fill=\"#10233f\"/><text x=\"600\" y=\"82\" text-anchor=\"middle\" fill=\"#fff\" font-size=\"13\" font-weight=\"700\">Capacity</text><text x=\"600\" y=\"102\" text-anchor=\"middle\" fill=\"#c6dcff\" font-size=\"12\">960 / month</text><path d=\"M210 85 H268\" stroke=\"#9fb0c6\" stroke-width=\"2.5\" marker-end=\"url(#ar)\"/><path d=\"M450 85 H508\" stroke=\"#9fb0c6\" stroke-width=\"2.5\" marker-end=\"url(#ar)\"/><defs><marker id=\"ar\" markerWidth=\"9\" markerHeight=\"9\" refX=\"6\" refY=\"4.5\" orient=\"auto\"><path d=\"M0 0 L9 4.5 L0 9 z\" fill=\"#9fb0c6\"/></marker></defs><text x=\"360\" y=\"150\" text-anchor=\"middle\" fill=\"#2a9d8f\" font-size=\"11.5\" font-weight=\"700\">Backlog change = cases in minus cases out</text></svg>", "payergap": "<svg viewBox=\"0 0 720 170\" role=\"img\" aria-label=\"Approval is not access\"><text x=\"40\" y=\"46\" fill=\"#2b3648\" font-size=\"12.5\" font-weight=\"700\">FDA approval</text><rect x=\"180\" y=\"30\" width=\"500\" height=\"26\" rx=\"7\" fill=\"#2a9d8f\"/><text x=\"430\" y=\"48\" text-anchor=\"middle\" fill=\"#fff\" font-size=\"11.5\" font-weight=\"700\">granted</text><text x=\"40\" y=\"104\" fill=\"#2b3648\" font-size=\"12.5\" font-weight=\"700\">Payer access</text><rect x=\"180\" y=\"88\" width=\"500\" height=\"26\" rx=\"7\" fill=\"#ece7dc\"/><rect x=\"180\" y=\"88\" width=\"275\" height=\"26\" rx=\"7\" fill=\"#b0404a\"/><text x=\"317\" y=\"106\" text-anchor=\"middle\" fill=\"#fff\" font-size=\"11.5\" font-weight=\"700\">restricted</text><text x=\"360\" y=\"150\" text-anchor=\"middle\" fill=\"#2a9d8f\" font-size=\"11.5\" font-weight=\"700\">Approval does not guarantee coverage, so access is its own problem</text></svg>", "funnel": "<svg viewBox=\"0 0 720 220\" role=\"img\" aria-label=\"Patient funnel\"><rect x=\"60\" y=\"16\" width=\"600\" height=\"40\" rx=\"8\" fill=\"#10233f\"/><text x=\"360\" y=\"42\" text-anchor=\"middle\" fill=\"#fff\" font-size=\"12.5\" font-weight=\"700\">Diagnosed</text><rect x=\"150\" y=\"64\" width=\"420\" height=\"40\" rx=\"8\" fill=\"#265d9f\"/><text x=\"360\" y=\"90\" text-anchor=\"middle\" fill=\"#fff\" font-size=\"12.5\" font-weight=\"700\">Eligible</text><rect x=\"210\" y=\"112\" width=\"300\" height=\"40\" rx=\"8\" fill=\"#2a9d8f\"/><text x=\"360\" y=\"138\" text-anchor=\"middle\" fill=\"#fff\" font-size=\"12.5\" font-weight=\"700\">Accessible</text><rect x=\"285\" y=\"160\" width=\"150\" height=\"40\" rx=\"8\" fill=\"#b9852f\"/><text x=\"360\" y=\"186\" text-anchor=\"middle\" fill=\"#fff\" font-size=\"12.5\" font-weight=\"700\">Captured year 1</text><text x=\"360\" y=\"212\" text-anchor=\"middle\" fill=\"#2a9d8f\" font-size=\"11.5\" font-weight=\"700\">Forecast off the accessible funnel, not the full diagnosed pool</text></svg>"};
+const MEDIA={"0": {"diagram": "issueTree", "videos": [{"id": "bhOhCpBYpDk", "title": "What is the MECE framework?", "by": "My Consulting Offer"}]}, "3": {"diagram": "pyramid", "videos": [{"id": "elMPIxLYtoc", "title": "The Pyramid Principle, explained", "by": "Analyst Academy"}]}, "4": {"diagram": "devcloud", "videos": [{"id": "CI275dcUOLQ", "title": "What is Veeva Vault? A beginner intro", "by": "The Vault Explorer"}]}, "10": {"diagram": "lifecycle", "videos": [{"id": "3Gl0gAcW8rw", "title": "Drug discovery and development process", "by": "Novartis"}]}, "13": {"diagram": "ectd", "videos": []}, "14": {"diagram": "lifecycle", "videos": [{"id": "dsfPOpE-GEs", "title": "What are clinical trial phases?", "by": "National Cancer Institute"}]}, "15": {"diagram": "capacity", "videos": [{"id": "JEx5Y6psH2s", "title": "What is pharmacovigilance?", "by": "Bayer Global"}]}, "17": {"diagram": "funnel", "videos": []}, "18": {"diagram": "payergap", "videos": [{"id": "DIc81aXaDQM", "title": "What are the different types of payers?", "by": "CELforPharma"}]}, "19": {"diagram": null, "videos": [{"id": "VYGPeF9I_ug", "title": "HEOR explained", "by": "ISPOR"}]}};
+const HOME_VIDEOS=[{"id": "CI275dcUOLQ", "title": "What is Veeva Vault? A beginner intro", "by": "The Vault Explorer"}, {"id": "bhOhCpBYpDk", "title": "The MECE framework for case interviews", "by": "My Consulting Offer"}, {"id": "3Gl0gAcW8rw", "title": "Drug discovery and development process", "by": "Novartis"}];
+
+function videoFacade(v){
+  return `<div class="vfacade" data-vid="${v.id}" role="button" tabindex="0" aria-label="Play video: ${esc(v.title)}">
+    <img class="vthumb" loading="lazy" src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="${esc(v.title)}"/>
+    <span class="vplay"></span>
+    <span class="vmeta"><b>${esc(v.title)}</b><small>${esc(v.by)} &middot; YouTube</small></span>
+  </div>`;
+}
+function mediaCard(i){
+  const m=MEDIA[String(i)]; if(!m) return "";
+  let inner="";
+  if(m.diagram && DIAGRAMS[m.diagram]) inner+=`<div class="diagram">${DIAGRAMS[m.diagram]}</div>`;
+  if(m.videos && m.videos.length) inner+=`<div class="vgrid">${m.videos.map(videoFacade).join("")}</div>`;
+  if(!inner) return "";
+  return `<div class="card">
+    <div class="eyebrow">Visual aid</div>
+    <h2 style="font-size:19px;margin-bottom:4px">See it, then drill it</h2>
+    <p class="sub" style="margin-bottom:12px">A quick diagram to anchor the concept, plus a short explainer from a reputable source. Videos load on click and open the external YouTube player.</p>
+    ${inner}
+  </div>`;
+}
+function orientationCard(){
+  return `<div class="card">
+    <div class="eyebrow">Orientation videos</div>
+    <h2 style="font-size:20px;margin-bottom:4px">Three short explainers to warm up</h2>
+    <p class="sub" style="margin-bottom:12px">Optional background from reputable sources: what Veeva Vault is, how consultants structure problems, and how a drug is developed. They load on click.</p>
+    <div class="vgrid">${HOME_VIDEOS.map(videoFacade).join("")}</div>
+  </div>`;
+}
+function wireVideos(){
+  document.querySelectorAll(".vfacade").forEach(f=>{ if(f.dataset.wired) return; f.dataset.wired="1";
+    const go=()=>{ const id=f.getAttribute("data-vid"); const w=document.createElement("div"); w.className="vframe"; w.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`; f.replaceWith(w); };
+    f.onclick=go; f.onkeydown=(e)=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); go(); } };
+  });
+}
 
 render();
 </script>
 </body>
 </html>
 
-<!-- deploy-version: veeva-v6-interactive retry -->
+<!-- deploy-version: veeva-v7-visual-aids -->
