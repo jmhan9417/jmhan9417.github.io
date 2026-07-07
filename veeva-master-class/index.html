@@ -263,6 +263,21 @@
   .vframe iframe{width:100%;height:100%;display:block;border:0}
   @media (max-width:560px){ .vgrid{grid-template-columns:1fr} }
 
+  /* ===== v9 case challenge, review, a11y ===== */
+  .rv-your{font-size:13.6px;color:#7a510f;background:var(--soft-gold);border:1px solid #ecd7a6;border-radius:10px;padding:9px 12px;margin-top:8px}
+  .rv-best{font-size:13.6px;color:#0d5c39;background:var(--soft-green);border:1px solid #b7e2ca;border-radius:10px;padding:9px 12px;margin-top:8px}
+  .rv-fb{font-size:13px;color:#37424f;margin-top:8px}
+  .vhold{display:flex;flex-direction:column;gap:6px}
+  .vfallback{font-size:11.5px;color:var(--muted);font-weight:800;text-align:right}
+  .vfacade.noimg,.vfacade img.vthumb:not([src]){background:linear-gradient(135deg,#10233f,#265d9f)}
+  a:focus-visible,button:focus-visible,.opt:focus-visible,.vfacade:focus-visible,.chip:focus-visible,.navbtn:focus-visible,.cmap-item:focus-visible,.casebtn:focus-visible{outline:3px solid #7db0f0;outline-offset:2px;border-radius:10px}
+  h2:focus{outline:none}
+  @media (max-width:560px){
+    .case-table{font-size:12px}
+    .case-table th,.case-table td{padding:8px 9px}
+    .cmap-grid{grid-template-columns:1fr 1fr}
+  }
+
 </style>
 </head>
 <body>
@@ -3821,18 +3836,24 @@ const PTS = { strong:10, weak:5, trap:0 };
 
 function save(){ localStorage.setItem(STORE_KEY, JSON.stringify({answers:state.answers})); }
 
-function allKnowledge(){ let a=[]; DATA.levels.forEach((l,li)=>l.drills.forEach((d,di)=>{ if(d.type==="knowledge") a.push({li,di,d}); })); return a; }
-function allScenario(){ let a=[]; DATA.levels.forEach((l,li)=>l.drills.forEach((d,di)=>{ if(d.type==="scenario") a.push({li,di,d}); })); return a; }
 function keyOf(li,di){ return "l"+li+"-"+di; }
-
+function caseChallengesFor(ci){ return (typeof CASE_CHALLENGES!=="undefined" && CASE_CHALLENGES[String(ci)]) || []; }
+function allKnowledge(){ let a=[];
+  DATA.levels.forEach((l,li)=>l.drills.forEach((d,di)=>{ if(d.type==="knowledge") a.push({key:keyOf(li,di), d, where:"level-"+li, title:"Level "+(li+1)+": "+l.title}); }));
+  DATA.caseStudies.forEach((c,ci)=>caseChallengesFor(ci).forEach((d,si)=>{ if(d.type==="knowledge") a.push({key:"cc"+ci+"-"+si, d, where:"case:"+ci, title:c.title}); }));
+  return a; }
+function allScenario(){ let a=[];
+  DATA.levels.forEach((l,li)=>l.drills.forEach((d,di)=>{ if(d.type==="scenario") a.push({key:keyOf(li,di), d, where:"level-"+li, title:"Level "+(li+1)+": "+l.title}); }));
+  DATA.caseStudies.forEach((c,ci)=>caseChallengesFor(ci).forEach((d,si)=>{ if(d.type==="scenario") a.push({key:"cc"+ci+"-"+si, d, where:"case:"+ci, title:c.title}); }));
+  return a; }
 function computeKnowledge(){
   const ks = allKnowledge(); let correct=0;
-  ks.forEach(({li,di,d})=>{ const idx=state.answers[keyOf(li,di)]; if(idx!=null && d.options[idx] && d.options[idx].correct) correct++; });
+  ks.forEach(({key,d})=>{ const idx=state.answers[key]; if(idx!=null && d.options[idx] && d.options[idx].correct) correct++; });
   return { correct, total:ks.length, pct: ks.length? Math.round(correct/ks.length*100):0 };
 }
 function computeReadiness(){
   const ss = allScenario(); let earned=0, max=0;
-  ss.forEach(({li,di,d})=>{ max+=PTS.strong; const idx=state.answers[keyOf(li,di)]; if(idx!=null && d.options[idx]) earned += PTS[d.options[idx].tier]; });
+  ss.forEach(({key,d})=>{ max+=PTS.strong; const idx=state.answers[key]; if(idx!=null && d.options[idx]) earned += PTS[d.options[idx].tier]; });
   return { earned, max, pct: max? Math.round(earned/max*100):0 };
 }
 function levelDone(li){
@@ -3865,6 +3886,8 @@ function renderSide(){
   });
   h+='<div class="navhdr" style="margin-top:6px">Reference</div>';
   h+=navBtn("glossary","Glossary and Knowledge Base","&#9776;",state.view==="glossary");
+  const _miss=missedCount();
+  h+=navBtn("review","Review missed"+(_miss?" ("+_miss+")":""),"&#9873;",state.view==="review");
   h+='<div style="padding:10px 6px 4px"><button class="ghost" id="resetBtn" style="width:100%">Reset progress</button></div>';
   side.innerHTML=h;
   side.querySelectorAll("[data-view]").forEach(b=> b.onclick=()=>{ state.view=b.getAttribute("data-view"); render(); window.scrollTo({top:0,behavior:"smooth"}); });
@@ -3882,6 +3905,7 @@ function render(){
   else if(state.view==="case"){ m.innerHTML=renderCaseLab(); wireCaseLab(); }
   else if(state.view==="roleplay"){ m.innerHTML=renderRoleplay(); wireRoleplay(); }
   else if(state.view==="glossary"){ m.innerHTML=renderGlossaryShell(); wireGlossary(); }
+  else if(state.view==="review"){ m.innerHTML=renderReview(); wireReview(); }
   else if(state.view.startsWith("level-")){ const i=+state.view.split("-")[1]; m.innerHTML=renderLevel(i); wireLevel(i); }
   renderFoot();
   afterRender();
@@ -3889,7 +3913,7 @@ function render(){
 
 function renderFoot(){
   document.getElementById("foot").innerHTML =
-    "Built for Minseok \"Joey\" Han, PharmD, MS Regulatory Science &nbsp;&middot;&nbsp; Practice tool only. Every model answer is grounded in your real, verifiable resume. Nothing here should be memorized as a script; internalize the reasoning and answer in your own words.";
+    "Built for Minseok \"Joey\" Han, PharmD, MS Regulatory Science &nbsp;&middot;&nbsp; Practice tool. The Your Story Bank level is grounded in your real, verifiable resume; the other levels teach general life science and consulting knowledge from public, reputable sources. Model answers show the reasoning to internalize, not scripts to memorize. Embedded videos are third-party content on YouTube.";
 }
 
 /* ---------- Home ---------- */
@@ -4134,12 +4158,16 @@ function renderCaseLab(){
       ${c.deck.map(r=>`<tr><td><b>${esc(r.slide)}</b></td><td>${esc(r.content)}</td></tr>`).join("")}
     </tbody></table>
     <div class="callout"><b>Practice prompt:</b> In 90 seconds, say the recommendation, the one key equation, the financial so-what, and the main risk. If you can do that clearly, you are much closer to case-readiness.</div>
-  </div>`;
+  </div>
+  ${caseChallengeSection(idx)}`;
 }
 function wireCaseLab(){
   document.querySelectorAll('[data-case-index]').forEach(b=>{ b.onclick=()=>{ state.caseIndex=+b.getAttribute('data-case-index'); render(); window.scrollTo({top:0,behavior:'smooth'}); }; });
   const b=document.getElementById("caseStart");
   if(b) b.onclick=()=>{ const idx=DATA.levels.findIndex(l=>l.title.startsWith("Full Case Study")); state.view="level-"+(idx>=0?idx:0); render(); window.scrollTo({top:0,behavior:"smooth"}); };
+  const m=document.getElementById("main");
+  m.querySelectorAll('.opt[data-key]:not([disabled])').forEach(o=>{ o.onclick=()=>{ state.answers[o.getAttribute('data-key')]=+o.getAttribute('data-oi'); save(); render(); }; });
+  m.querySelectorAll('[data-retry]').forEach(r=>{ r.onclick=()=>{ delete state.answers[r.getAttribute('data-retry')]; save(); render(); }; });
 }
 
 
@@ -4253,6 +4281,7 @@ function afterRender(){
       cards.forEach(c=>io.observe(c));
     } else cards.forEach(c=>c.classList.add("in"));
   }
+  if(changed){ const h2=m.querySelector("h2"); if(h2){ h2.setAttribute("tabindex","-1"); try{ h2.focus({preventScroll:true}); }catch(e){} } }
   wireConceptPops();
   wireVideos();
 }
@@ -4312,8 +4341,8 @@ const HOME_VIDEOS=[{"id": "CI275dcUOLQ", "title": "What is Veeva Vault? A beginn
 Object.assign(DIAGRAMS,{"fdahier": "<svg viewBox=\"0 0 720 210\" role=\"img\" aria-label=\"FDA authority hierarchy\"><rect x=\"60\" y=\"14\" width=\"600\" height=\"50\" rx=\"10\" fill=\"#10233f\"/><text x=\"80\" y=\"38\" fill=\"#fff\" font-size=\"13\" font-weight=\"700\">Law</text><text x=\"80\" y=\"55\" fill=\"#c6dcff\" font-size=\"11\">Federal Food, Drug, and Cosmetic Act</text><text x=\"640\" y=\"44\" text-anchor=\"end\" fill=\"#8fb0d8\" font-size=\"10.5\" font-weight=\"700\">from Congress, binding</text><rect x=\"60\" y=\"76\" width=\"600\" height=\"50\" rx=\"10\" fill=\"#265d9f\"/><text x=\"80\" y=\"100\" fill=\"#fff\" font-size=\"13\" font-weight=\"700\">Regulations</text><text x=\"80\" y=\"117\" fill=\"#d7e6f7\" font-size=\"11\">Code of Federal Regulations, e.g. 21 CFR Part 11</text><text x=\"640\" y=\"106\" text-anchor=\"end\" fill=\"#d7e6f7\" font-size=\"10.5\" font-weight=\"700\">binding rules</text><rect x=\"60\" y=\"138\" width=\"600\" height=\"50\" rx=\"10\" fill=\"#eef4fb\" stroke=\"#c6d8ef\"/><text x=\"80\" y=\"162\" fill=\"#10233f\" font-size=\"13\" font-weight=\"700\">Guidance</text><text x=\"80\" y=\"179\" fill=\"#5a6675\" font-size=\"11\">FDA current thinking and recommendations</text><text x=\"640\" y=\"168\" text-anchor=\"end\" fill=\"#b0404a\" font-size=\"10.5\" font-weight=\"700\">not legally binding</text></svg>", "modalities": "<svg viewBox=\"0 0 720 210\" role=\"img\" aria-label=\"Drug modalities comparison\"><rect x=\"20\" y=\"20\" width=\"200\" height=\"168\" rx=\"12\" fill=\"#eef4fb\" stroke=\"#c6d8ef\"/><text x=\"120\" y=\"48\" text-anchor=\"middle\" fill=\"#10233f\" font-size=\"13.5\" font-weight=\"700\">Small molecule</text><text x=\"120\" y=\"74\" text-anchor=\"middle\" fill=\"#5a6675\" font-size=\"11\">Chemically made</text><text x=\"120\" y=\"96\" text-anchor=\"middle\" fill=\"#5a6675\" font-size=\"11\">Small, simple</text><text x=\"120\" y=\"118\" text-anchor=\"middle\" fill=\"#5a6675\" font-size=\"11\">Often oral</text><text x=\"120\" y=\"140\" text-anchor=\"middle\" fill=\"#5a6675\" font-size=\"11\">Generic via ANDA</text><rect x=\"260\" y=\"20\" width=\"200\" height=\"168\" rx=\"12\" fill=\"#e9f4ef\" stroke=\"#c6d8ef\"/><text x=\"360\" y=\"48\" text-anchor=\"middle\" fill=\"#10233f\" font-size=\"13.5\" font-weight=\"700\">Biologic</text><text x=\"360\" y=\"74\" text-anchor=\"middle\" fill=\"#5a6675\" font-size=\"11\">Made in living cells</text><text x=\"360\" y=\"96\" text-anchor=\"middle\" fill=\"#5a6675\" font-size=\"11\">Large, complex</text><text x=\"360\" y=\"118\" text-anchor=\"middle\" fill=\"#5a6675\" font-size=\"11\">Usually injected</text><text x=\"360\" y=\"140\" text-anchor=\"middle\" fill=\"#5a6675\" font-size=\"11\">Approved via BLA</text><rect x=\"500\" y=\"20\" width=\"200\" height=\"168\" rx=\"12\" fill=\"#fbf3e3\" stroke=\"#c6d8ef\"/><text x=\"600\" y=\"48\" text-anchor=\"middle\" fill=\"#10233f\" font-size=\"13.5\" font-weight=\"700\">Biosimilar</text><text x=\"600\" y=\"74\" text-anchor=\"middle\" fill=\"#7a510f\" font-size=\"11\">Highly similar copy</text><text x=\"600\" y=\"96\" text-anchor=\"middle\" fill=\"#7a510f\" font-size=\"11\">Not identical</text><text x=\"600\" y=\"118\" text-anchor=\"middle\" fill=\"#7a510f\" font-size=\"11\">Totality of evidence</text><text x=\"600\" y=\"140\" text-anchor=\"middle\" fill=\"#7a510f\" font-size=\"11\">Not a generic</text></svg>", "ichmap": "<svg viewBox=\"0 0 720 170\" role=\"img\" aria-label=\"ICH guideline categories\"><g text-anchor=\"middle\"><rect x=\"24\" y=\"24\" width=\"156\" height=\"92\" rx=\"12\" fill=\"#eef4fb\" stroke=\"#c6d8ef\"/><text x=\"102\" y=\"58\" fill=\"#10233f\" font-size=\"15\" font-weight=\"700\">E</text><text x=\"102\" y=\"80\" fill=\"#5a6675\" font-size=\"11\">Efficacy</text><text x=\"102\" y=\"98\" fill=\"#5a6675\" font-size=\"10\">E6 = GCP</text><rect x=\"196\" y=\"24\" width=\"156\" height=\"92\" rx=\"12\" fill=\"#eef4fb\" stroke=\"#c6d8ef\"/><text x=\"274\" y=\"58\" fill=\"#10233f\" font-size=\"15\" font-weight=\"700\">Q</text><text x=\"274\" y=\"80\" fill=\"#5a6675\" font-size=\"11\">Quality</text><text x=\"274\" y=\"98\" fill=\"#5a6675\" font-size=\"10\">Q9, Q10</text><rect x=\"368\" y=\"24\" width=\"156\" height=\"92\" rx=\"12\" fill=\"#eef4fb\" stroke=\"#c6d8ef\"/><text x=\"446\" y=\"58\" fill=\"#10233f\" font-size=\"15\" font-weight=\"700\">S</text><text x=\"446\" y=\"80\" fill=\"#5a6675\" font-size=\"11\">Safety</text><text x=\"446\" y=\"98\" fill=\"#5a6675\" font-size=\"10\">nonclinical</text><rect x=\"540\" y=\"24\" width=\"156\" height=\"92\" rx=\"12\" fill=\"#eef4fb\" stroke=\"#c6d8ef\"/><text x=\"618\" y=\"58\" fill=\"#10233f\" font-size=\"15\" font-weight=\"700\">M</text><text x=\"618\" y=\"80\" fill=\"#5a6675\" font-size=\"11\">Multidisciplinary</text><text x=\"618\" y=\"98\" fill=\"#5a6675\" font-size=\"10\">M4 = CTD</text><text x=\"360\" y=\"150\" text-anchor=\"middle\" fill=\"#2a9d8f\" font-size=\"11.5\" font-weight=\"700\">Identify which ICH category governs the question</text></g></svg>"});
 Object.assign(MEDIA,{"23": {"diagram": "fdahier", "videos": [{"id": "fZ-Msidi7EE", "title": "How does the FDA approve new drugs?", "by": "U.S. FDA"}]}, "24": {"diagram": "modalities", "videos": [{"id": "GEYhlLbHNEw", "title": "Biologic drugs and biosimilars", "by": "Healthcare Triage"}, {"id": "1s7W1EKUekk", "title": "The basics of biosimilars", "by": "U.S. FDA"}]}, "25": {"diagram": null, "videos": [{"id": "GbJasFgJkLg", "title": "Gene therapy, inside out", "by": "U.S. FDA"}, {"id": "F1TbvdjmXJ8", "title": "Orphan drugs: an introduction", "by": "Healthcare Triage"}]}, "26": {"diagram": "ichmap", "videos": [{"id": "Ri1wgXqb-sk", "title": "ICH guidelines explained", "by": "Pharmaguideline"}]}});
 function videoFacade(v){
-  return `<div class="vfacade" data-vid="${v.id}" role="button" tabindex="0" aria-label="Play video: ${esc(v.title)}">
-    <img class="vthumb" loading="lazy" src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="${esc(v.title)}"/>
+  return `<div class="vfacade" data-vid="${v.id}" data-vtitle="${esc(v.title)}" role="button" tabindex="0" aria-label="Play video: ${esc(v.title)}">
+    <img class="vthumb" loading="lazy" src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="${esc(v.title)}" onerror="this.remove();"/>
     <span class="vplay"></span>
     <span class="vmeta"><b>${esc(v.title)}</b><small>${esc(v.by)} &middot; YouTube</small></span>
   </div>`;
@@ -4341,9 +4370,78 @@ function orientationCard(){
 }
 function wireVideos(){
   document.querySelectorAll(".vfacade").forEach(f=>{ if(f.dataset.wired) return; f.dataset.wired="1";
-    const go=()=>{ const id=f.getAttribute("data-vid"); const w=document.createElement("div"); w.className="vframe"; w.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`; f.replaceWith(w); };
+    const go=()=>{ const id=f.getAttribute("data-vid"); const w=document.createElement("div"); w.className="vhold";
+      w.innerHTML=`<div class="vframe"><iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><a class="vfallback" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener">Trouble playing? Open on YouTube &rarr;</a>`;
+      f.replaceWith(w); };
     f.onclick=go; f.onkeydown=(e)=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); go(); } };
   });
+}
+const CASE_CHALLENGES={"0": [{"type": "knowledge", "q": "Case 1: which equation frames the backlog most cleanly?", "options": [{"text": "Backlog change = cases in minus cases out.", "correct": true, "fb": "Correct. Demand minus capacity is the governing flow."}, {"text": "Backlog = number of software tools times users.", "correct": false, "fb": "Tools add friction but do not define the backlog. Start from flow."}, {"text": "Backlog = staff morale plus complexity.", "correct": false, "fb": "Not the governing equation. It is cases in versus cases out."}]}, {"type": "knowledge", "q": "Case 1: the 240-case monthly gap, at 120 cases per FTE, implies how many added FTE if you hire only?", "options": [{"text": "About 2 FTE.", "correct": true, "fb": "Correct. 240 divided by 120 is 2 FTE, roughly 280,000 dollars per year."}, {"text": "About 5 FTE.", "correct": false, "fb": "That overshoots. 240 over 120 is 2, not 5."}, {"text": "None, hiring cannot help.", "correct": false, "fb": "Hiring can help; it is just not the only or best lever."}]}, {"type": "scenario", "speaker": "Client, VP Safety", "q": "Case 1: should we buy a new safety system right now?", "options": [{"tier": "strong", "fb": "Diagnose before prescribing. This is the consulting answer.", "text": "Not as the first move. I would quantify whether the bottleneck is demand, capacity, rework, or triage, then pilot workflow fixes. If duplicate entry and manual routing dominate, a system standardization path is likely right, but after a pilot, not before."}, {"tier": "weak", "fb": "Too vague to guide a decision.", "text": "It depends. I would look into it and then decide."}, {"tier": "trap", "fb": "Vendor-first. Prescribing software before diagnosis is the classic trap.", "text": "Yes, move to a new system immediately since it should solve the problem."}]}, {"type": "scenario", "speaker": "Practice Leader", "q": "Case 1: how do you present the recommendation?", "options": [{"tier": "strong", "fb": "Answer-first, phased, metric-driven.", "text": "Recommendation first: pilot workflow redesign, then scale a system path only if pilot metrics prove the value. Then the flow math, the driver analysis, the payback with sensitivity, and a roadmap with risks and metrics."}, {"tier": "weak", "fb": "A background-first data dump buries the recommendation.", "text": "I would start with all the background and data I gathered, then get to a conclusion."}, {"tier": "trap", "fb": "A feature tour is not a recommendation.", "text": "I would mostly show the safety system's features and screenshots."}]}], "1": [{"type": "knowledge", "q": "Case 2: do hard labor savings alone justify the RIM transformation here?", "options": [{"text": "No. Realistic hard savings are below the recurring cost, so net is negative.", "correct": true, "fb": "Correct. About 210,000 captured versus 250,000 recurring is negative on hard savings alone."}, {"text": "Yes. The labor savings clearly cover it.", "correct": false, "fb": "The math shows hard savings do not cover recurring cost."}, {"text": "There is no way to tell.", "correct": false, "fb": "The case gives enough to see hard savings are weak; strategic value is the swing factor."}]}, {"type": "scenario", "speaker": "Client, VP Regulatory", "q": "Case 2: how do you position the project to leadership?", "options": [{"tier": "strong", "fb": "Positions on cycle-time and risk value, honestly separating from weak labor savings.", "text": "As a cycle-time and risk-value transformation, not a pure labor-savings play. On hard savings it is weak, but avoiding even one priority launch delay can dominate the case, so I would present both views and let leadership underwrite the delay-risk assumption."}, {"tier": "weak", "fb": "Selling it as cost savings misrepresents the math.", "text": "As a cost-savings project that pays for itself through headcount reduction."}, {"tier": "trap", "fb": "Inventing revenue the client has not validated is dishonest.", "text": "I would just assume large new revenue to make the numbers look positive."}]}, {"type": "scenario", "speaker": "Practice Leader", "q": "Case 2: your model is positive only under one avoided-delay scenario. What do you say?", "options": [{"tier": "strong", "fb": "Separates certain hard savings from assumption-driven strategic value.", "text": "I would show both views clearly: weak on hard savings alone, strongly positive if the client believes the delay-avoidance value. I would name that assumption openly and ask leadership which risk-adjusted view they will underwrite."}, {"tier": "weak", "fb": "Too thin. Explain what drives the difference.", "text": "It depends on the launch value. I would discuss it with them."}, {"tier": "trap", "fb": "Hiding the swing assumption makes the model look cleaner but less trustworthy.", "text": "I would just present the positive case since it supports the recommendation."}]}, {"type": "knowledge", "q": "Case 2: what protects the client from overfunding an unproven value case?", "options": [{"text": "A decision gate: fund discovery first, approve full build only if delay-risk and data-defect evidence is strong.", "correct": true, "fb": "Correct. Phased investment with a decision gate manages the uncertainty."}, {"text": "Committing to the full rollout immediately.", "correct": false, "fb": "That is exactly the overfunding risk a gate avoids."}, {"text": "Skipping diagnosis to save time.", "correct": false, "fb": "Skipping diagnosis increases the risk of funding the wrong thing."}]}], "2": [{"type": "knowledge", "q": "Case 3: 240 patients in 8 months means what monthly pace?", "options": [{"text": "About 30 patients per month.", "correct": true, "fb": "Correct. 240 divided by 8 is 30 per month."}, {"text": "About 12 patients per month.", "correct": false, "fb": "That is too low. 240 over 8 is 30."}, {"text": "About 60 patients per month.", "correct": false, "fb": "That doubles the target. 240 over 8 is 30."}]}, {"type": "knowledge", "q": "Case 3: 20 active sites at 1.1 patients each per month gives what, and what is the gap?", "options": [{"text": "About 22 per month, an 8-patient monthly gap.", "correct": true, "fb": "Correct. 20 times 1.1 is 22; 30 minus 22 is 8."}, {"text": "About 30 per month, no gap.", "correct": false, "fb": "That would already hit target; the math gives 22."}, {"text": "About 44 per month, a surplus.", "correct": false, "fb": "That doubles the rate. It is 22 per month."}]}, {"type": "scenario", "speaker": "Client, Clinical Ops Lead", "q": "Case 3: more sites, more ads, or better screening?", "options": [{"tier": "strong", "fb": "Prioritizes the fastest gap-closer and protects the downside.", "text": "Lead with targeted pre-screening to lift conversion, since it can close the gap fastest, and activate only the highest-probability sites in parallel for downside protection. Hold broad media until screen-fail reasons show it would convert."}, {"tier": "weak", "fb": "Adding sites alone is slow due to activation lag.", "text": "Just activate more sites to add capacity."}, {"tier": "trap", "fb": "More sites do not help fast if activation lag and conversion are the constraints.", "text": "More sites always means faster enrollment, so add as many as possible."}]}, {"type": "scenario", "speaker": "Practice Leader", "q": "Case 3: leadership wants a big media spend now. Your take?", "options": [{"tier": "strong", "fb": "Diagnose screen-fail before spending on screens.", "text": "I would hold broad media until we know the screen-fail reasons. If failures are protocol or eligibility driven, more screens will not convert, so spend should follow a diagnosis, not precede it."}, {"tier": "weak", "fb": "Optimizing screens is not the KPI; enrolled patients are.", "text": "Media is good because it will generate more screens."}, {"tier": "trap", "fb": "Spending before diagnosing screen-fail can waste the budget entirely.", "text": "Yes, spend the full media budget now to maximize awareness."}]}], "3": [{"type": "knowledge", "q": "Case 4: what should the year-1 forecast be built from?", "options": [{"text": "The accessible funnel, not the full diagnosed population.", "correct": true, "fb": "Correct. Eligibility and access shrink the realistic pool sharply."}, {"text": "The full diagnosed population at full uptake.", "correct": false, "fb": "That ignores eligibility, access, and competitive share."}, {"text": "A single round number that sounds right.", "correct": false, "fb": "An unbuilt number cannot be defended under questioning."}]}, {"type": "knowledge", "q": "Case 4: 120,000 diagnosed, 60 percent eligible, 55 percent accessible gives roughly what accessible pool?", "options": [{"text": "About 39,600.", "correct": true, "fb": "Correct. 120,000 times 0.6 times 0.55 is about 39,600."}, {"text": "About 72,000.", "correct": false, "fb": "That is the eligible pool before access. Access cuts it further."}, {"text": "About 120,000.", "correct": false, "fb": "That is the full diagnosed pool, not the accessible one."}]}, {"type": "scenario", "speaker": "Client, Commercial Lead", "q": "Case 4: sales are behind. Increase promotion?", "options": [{"tier": "strong", "fb": "Diagnose the funnel barrier before spending.", "text": "Not before diagnosing the drop. I would map the funnel for where patients are lost, awareness, diagnosis, referral, access, affordability, or adherence, and target the real barrier. If access or referral is the block, more promotion will not fix it."}, {"tier": "weak", "fb": "Generic. Spending without diagnosis often wastes budget.", "text": "Yes, more promotion usually lifts sales."}, {"tier": "trap", "fb": "Blaming the field before diagnosis is premature.", "text": "The sales team is not working hard enough; push them harder."}]}, {"type": "scenario", "speaker": "Practice Leader", "q": "Case 4: what should the launch plan lead with?", "options": [{"tier": "strong", "fb": "Leads with the highest-leverage lever, access.", "text": "Access strategy: payer value story, prior-authorization support, and affordability, since access is the highest-leverage variable. Then fix referral pathways with targeted specialist engagement, and track leading metrics weekly."}, {"tier": "weak", "fb": "Broad awareness is rarely the binding constraint here.", "text": "Lead with broad awareness advertising to everyone."}, {"tier": "trap", "fb": "An oversized field cannot fix an access barrier.", "text": "Lead by hiring the largest possible sales force."}]}], "4": [{"type": "knowledge", "q": "Case 5: what is the payer's core objection?", "options": [{"text": "Unclear incremental value versus standard of care, plus budget impact.", "correct": true, "fb": "Correct. Value clarity and budget impact drive the restriction, not price alone."}, {"text": "That the drug is not FDA approved.", "correct": false, "fb": "It is approved; approval and coverage are different."}, {"text": "That the trial had no placebo arm.", "correct": false, "fb": "The issue is comparative value and budget, not the placebo design."}]}, {"type": "scenario", "speaker": "Client, Market Access Director", "q": "Case 5: should we just cut the price?", "options": [{"tier": "strong", "fb": "Targets the value-clarity objection, not just price.", "text": "Price is one lever, but the objection is value clarity and budget impact. I would invest in comparative and real-world evidence aimed at that objection, model budget impact honestly with any offsets, and consider an outcomes-based contract, while reducing prior-authorization burden."}, {"tier": "weak", "fb": "Price cuts alone may not move a value-clarity objection.", "text": "Yes, lower the price until they cover it."}, {"tier": "trap", "fb": "Approval does not force coverage; payers can restrict.", "text": "The FDA approved it, so payers must cover it fully."}]}, {"type": "scenario", "speaker": "Practice Leader", "q": "Case 5: when is an outcomes-based contract useful here?", "options": [{"tier": "strong", "fb": "Uses risk-sharing when value is uncertain and measurable.", "text": "When there is genuine uncertainty about real-world value and both sides can measure a credible outcome, it can share risk and unlock access that a fixed price could not, while evidence matures."}, {"tier": "weak", "fb": "Novelty is not the reason; measurable risk-sharing is.", "text": "It is useful mainly because it sounds innovative."}, {"tier": "trap", "fb": "These contracts require measurement, not the absence of evidence.", "text": "It lets us avoid showing any evidence and still get paid."}]}, {"type": "knowledge", "q": "Case 5: which statement is true?", "options": [{"text": "FDA approval does not guarantee payer coverage.", "correct": true, "fb": "Correct. Approval and access are separate decisions."}, {"text": "Approval automatically forces favorable formulary placement.", "correct": false, "fb": "Payers set coverage independently of FDA approval."}, {"text": "Payers must cover any approved drug at list price.", "correct": false, "fb": "Payers can restrict, tier, or negotiate."}]}], "5": [{"type": "knowledge", "q": "Case 6: what is the right scope of remediation?", "options": [{"text": "Fix the operating model across all sites, not just the flagged records.", "correct": true, "fb": "Correct. Systemic root-cause remediation prevents recurrence."}, {"text": "Correct only the specific records that triggered the finding.", "correct": false, "fb": "That leaves the systemic cause and can raise integrity concerns."}, {"text": "Document it as a one-time issue and move on.", "correct": false, "fb": "Minimizing a finding is an integrity violation and inspection risk."}]}, {"type": "scenario", "speaker": "Client, Head of Quality", "q": "Case 6: we fixed one site. Enough?", "options": [{"tier": "strong", "fb": "Consistency across sites is required; a local fix leaves exposure.", "text": "No. The same access, audit-trail, and review gaps likely exist at the other sites, so I would remediate consistently across all three, with a systemic CAPA and governance, not a local fix."}, {"tier": "weak", "fb": "A single-site fix is a partial answer that leaves risk elsewhere.", "text": "Probably, if that site was the worst one."}, {"tier": "trap", "fb": "Leaving other sites exposed invites an expanded finding.", "text": "Yes, one site is enough since that is where the finding happened."}]}, {"type": "scenario", "speaker": "Practice Leader", "q": "Case 6: leadership wants the finding closed fast and quietly. Your stance?", "options": [{"tier": "strong", "fb": "Holds the integrity line while being genuinely faster in the long run.", "text": "I would close it credibly, not quietly: root cause, role-based access, validated audit trails, standardized review, a systemic CAPA, and governance. A weak or hidden remediation is the slow and risky path because it invites an expanded finding."}, {"tier": "weak", "fb": "Speed without systemic fix tends to produce repeat findings.", "text": "I would do the minimum needed to close the specific finding quickly."}, {"tier": "trap", "fb": "Hiding or downplaying a finding is a data-integrity violation.", "text": "I would frame it as a one-off so the inspector moves on."}]}, {"type": "knowledge", "q": "Case 6: which fix addresses the first ALCOA principle, attributable?", "options": [{"text": "Replace shared logins with individual role-based accounts.", "correct": true, "fb": "Correct. Attributable means knowing who did what, which needs individual accounts and audit trails."}, {"text": "Print records to paper for storage.", "correct": false, "fb": "Paper storage does not make electronic actions attributable."}, {"text": "Delete the audit trail to reduce clutter.", "correct": false, "fb": "That destroys attributability and is an integrity violation."}]}]};
+
+function renderStep(d, key){
+  const chosen=state.answers[key]; const answered=chosen!=null; const isK=d.type==="knowledge";
+  let opts="";
+  d.options.forEach((o,oi)=>{
+    let cls="opt", mk="", tag="", fbShown=""; const letter=String.fromCharCode(65+oi);
+    if(answered){
+      cls+=" disabled show-fb";
+      if(isK){ if(o.correct){ cls+=" reveal-correct"; mk="correct"; tag=`<span class="tier-tag correct">Correct</span>`; } else if(oi===chosen){ cls+=" reveal-wrong"; mk="wrong"; tag=`<span class="tier-tag wrong">Your pick</span>`; } }
+      else { cls+=" reveal-"+o.tier; mk=o.tier; const label=o.tier==="strong"?"Strong":o.tier==="weak"?"Weak":"Trap"; tag=`<span class="tier-tag ${o.tier}">${label}</span>`; if(oi===chosen) tag+=`<span class="pts">your pick, ${PTS[o.tier]} pts</span>`; }
+      if(oi===chosen) cls+=" chosen"; fbShown=`<div class="fb">${esc(o.fb)}</div>`;
+    }
+    const mkContent=answered ? (isK ? (o.correct?"&#10003;":(oi===chosen?"&#10007;":letter)) : (o.tier==="strong"?"&#10003;":o.tier==="trap"?"&#10007;":"~")) : letter;
+    opts+=`<button class="${cls}" data-key="${key}" data-oi="${oi}" ${answered?'disabled':''}><span class="mk ${answered?mk:''}">${mkContent}</span><span>${esc(o.text)}${tag}</span>${answered?'':`<kbd class="opt-key">${oi+1}</kbd>`}${fbShown}</button>`;
+  });
+  let banner="";
+  if(answered){
+    if(isK){ const ok=d.options[chosen].correct; banner=`<div class="banner ${ok?'correct':'wrong'} show">${ok?'&#10003; Correct.':'&#10007; Not quite.'} See the highlighted answer.</div>`; }
+    else { const t=d.options[chosen].tier; const msg=t==="strong"?"Strong answer. Full 10 points.":t==="weak"?"Weak answer. 5 points. See the strong option.":"Trap answer. 0 points. See why the strong option wins."; banner=`<div class="banner ${t} show">${msg}</div>`; }
+    banner+=`<div style="margin-top:10px"><button class="ghost" data-retry="${key}">Try this again</button></div>`;
+  }
+  return `<div class="card" style="padding:0"><div class="drill" style="margin:0;border:none">
+    <div class="dhead"><span class="kind ${isK?'know':'scen'}">${isK?'Knowledge check':'Application scenario'}</span><span class="qmeta">Case challenge</span></div>
+    ${!isK && d.speaker?`<div class="speaker">${esc(d.speaker)} asks:</div>`:''}
+    <div class="qtext ${isK?'':'scenq'}">${esc(d.q)}</div>
+    <div class="opts">${opts}</div>${banner}
+  </div></div>`;
+}
+function caseChallengeSection(ci){
+  const ch=(CASE_CHALLENGES[String(ci)])||[]; if(!ch.length) return "";
+  const ans=ch.filter((d,si)=>state.answers["cc"+ci+"-"+si]!=null).length;
+  let h=`<div class="card"><div class="eyebrow">Attempt this case</div><h2 style="font-size:20px;margin-bottom:3px">Now you try, scored (${ans}/${ch.length})</h2><p class="sub" style="margin-bottom:2px">Answer these to practice the case under pressure. Points feed your Knowledge and Interview Readiness meters, and any misses collect in Review.</p></div>`;
+  ch.forEach((d,si)=>{ h+=renderStep(d,"cc"+ci+"-"+si); });
+  return h;
+}
+function missedItems(){
+  const out=[];
+  allKnowledge().forEach(({key,d,where,title})=>{ const idx=state.answers[key]; if(idx!=null && !(d.options[idx]&&d.options[idx].correct)) out.push({kind:"knowledge",key,d,idx,where,title}); });
+  allScenario().forEach(({key,d,where,title})=>{ const idx=state.answers[key]; if(idx!=null && d.options[idx] && d.options[idx].tier!=="strong") out.push({kind:"scenario",key,d,idx,where,title}); });
+  return out;
+}
+function missedCount(){ return missedItems().length; }
+function bestOption(d){ if(d.type==="knowledge"){ const i=d.options.findIndex(o=>o.correct); return d.options[i]; } const i=d.options.findIndex(o=>o.tier==="strong"); return d.options[i]; }
+function reviewTarget(where){ if(where.indexOf("case:")===0) return {view:"case", ci:+where.split(":")[1]}; return {view:where}; }
+function renderReview(){
+  const items=missedItems();
+  let h=`<div class="card hero"><div class="eyebrow">Review</div><h2>Fix your missed answers</h2><p class="lede">Every question where you picked a wrong knowledge answer or a weak or trap scenario collects here with the strongest answer and why it wins. Reviewing misses is the fastest way to raise both meters.</p></div>`;
+  if(!items.length){ h+=`<div class="card"><h2 style="font-size:18px;margin-bottom:6px">Nothing to review yet</h2><p style="font-size:14.5px;color:var(--muted)">Answer some drills and case challenges. Any knowledge answer you get wrong, or any weak or trap scenario pick, will show up here so you can study just your gaps.</p></div>`; return h; }
+  items.forEach(it=>{
+    const best=bestOption(it.d); const yours=it.d.options[it.idx];
+    h+=`<div class="card">
+      <div class="dhead"><span class="kind ${it.kind==='knowledge'?'know':'scen'}">${it.kind==='knowledge'?'Knowledge check':'Application scenario'}</span><span class="qmeta">${esc(it.title)}</span></div>
+      <div class="qtext">${esc(it.d.q)}</div>
+      <div class="rv-your"><b>Your answer:</b> ${esc(yours.text)}</div>
+      <div class="rv-best"><b>Strongest answer:</b> ${esc(best.text)}</div>
+      <div class="rv-fb">${esc(best.fb)}</div>
+      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap"><button class="ghost" data-review-go="${esc(it.where)}" style="background:var(--accent);color:#fff;border-color:var(--accent)">Go there</button><button class="ghost" data-retry="${esc(it.key)}">Clear this answer</button></div>
+    </div>`;
+  });
+  return h;
+}
+function wireReview(){
+  const m=document.getElementById("main");
+  m.querySelectorAll("[data-review-go]").forEach(b=>{ b.onclick=()=>{ const t=reviewTarget(b.getAttribute("data-review-go")); if(t.ci!=null) state.caseIndex=t.ci; state.view=t.view; render(); window.scrollTo({top:0,behavior:"smooth"}); }; });
+  m.querySelectorAll("[data-retry]").forEach(b=>{ b.onclick=()=>{ delete state.answers[b.getAttribute("data-retry")]; save(); render(); }; });
 }
 
 render();
@@ -4351,4 +4449,4 @@ render();
 </body>
 </html>
 
-<!-- deploy-version: veeva-v8-fda-modalities -->
+<!-- deploy-version: veeva-v9-interactive-cases-review -->
