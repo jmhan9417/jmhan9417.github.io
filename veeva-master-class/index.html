@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="theme-color" content="#0b1220" />
-<title>Veeva Master Class Interview Simulator | R&D Business Consultant</title>
+<title>Life Sciences Consulting Interview Course | R&D Business Consultant</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -278,14 +278,53 @@
     .cmap-grid{grid-template-columns:1fr 1fr}
   }
 
+  /* ===== v10 course edition ===== */
+  .objectives{background:#f4f8fd;border:1px solid #cfe0f5;border-radius:14px;padding:13px 16px;margin:8px 0 2px}
+  .objectives .obj-h{font-size:10.5px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;color:var(--blue)}
+  .objectives p{margin:5px 0 0;font-size:14.3px;color:#25405f;font-weight:650}
+  .takeaway-card{background:linear-gradient(135deg,#eef7f1,#f6fbf8);border:1px solid #b7e2ca}
+  .tk-badge{font-size:10.5px;font-weight:900;letter-spacing:.6px;text-transform:uppercase;color:var(--green)}
+  .takeaway-card p{margin:6px 0 0;font-size:15px;color:#14603f;font-weight:650}
+  .syl-list{display:flex;flex-direction:column;gap:8px}
+  .syl-item{display:flex;gap:12px;align-items:flex-start;text-align:left;border:1px solid var(--line);background:#fff;border-radius:12px;padding:11px 13px;cursor:pointer;transition:.15s;width:100%}
+  .syl-item:hover{transform:translateX(2px);border-color:#c6d8ef;box-shadow:0 8px 18px rgba(27,39,67,.06)}
+  .syl-item.done{background:#f4fbf7;border-color:#b7e2ca}
+  .syl-num{flex:0 0 26px;height:26px;border-radius:8px;background:#ece7dc;color:#5d6675;font-weight:900;font-size:12px;display:grid;place-items:center;font-family:"IBM Plex Serif",serif}
+  .syl-item.done .syl-num{background:linear-gradient(135deg,var(--green),#2aa06f);color:#fff}
+  .syl-main{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .syl-main b{font-size:14px;color:var(--navy)}
+  .syl-main small{font-size:12.5px;color:var(--muted)}
+  .cert-req{display:flex;align-items:center;gap:10px;font-size:14.3px;color:#39434f;padding:10px 0;border-bottom:1px solid var(--line)}
+  .cert-req:last-of-type{border-bottom:none}
+  .cert-req.ok{color:#14603f}
+  .cert-req span{font-size:16px}
+  .certificate{background:linear-gradient(135deg,#fffdf6,#f6f1e6);border:1px solid #d8cba0;padding:8px}
+  .cert-inner{border:2px solid #c9b787;border-radius:12px;padding:36px 28px;text-align:center}
+  .cert-kicker{font-size:12px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#9a7b2e}
+  .cert-course{font-family:"IBM Plex Serif",serif;font-size:26px;color:var(--navy);margin-top:10px}
+  .cert-sub{font-size:13px;color:var(--muted);margin-top:2px}
+  .cert-awarded{margin-top:22px;font-size:11.5px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:800}
+  .cert-name{font-family:"IBM Plex Serif",serif;font-size:22px;color:#1a2a44;margin-top:6px}
+  .cert-line{max-width:520px;margin:16px auto 0;font-size:13.5px;color:#3a4657}
+  .cert-foot{display:flex;justify-content:space-between;gap:12px;margin-top:26px;font-size:11px;color:var(--muted);flex-wrap:wrap}
+  @media print{
+    header.top,nav.side,.foot,.kbd-hint,.vfacade,.vhold,.vframe,.case-switch,.term-pop{display:none!important}
+    .ghost{display:none!important}
+    .wrap{display:block;padding:0;max-width:none}
+    main{width:100%}
+    body{background:#fff}
+    .card{box-shadow:none;border:1px solid #ccc;break-inside:avoid;page-break-inside:avoid}
+    .hero:after{display:none}
+  }
+
 </style>
 </head>
 <body>
 <header class="top">
   <div class="top-inner">
     <div class="brand">
-      <h1>Veeva Master Class Simulator</h1>
-      <span>R&amp;D Business Consultant &nbsp;&middot;&nbsp; Learn the fundamentals, then drill under pressure</span>
+      <h1>Life Sciences Consulting Interview Course</h1>
+      <span>Independent life sciences consulting interview course &nbsp;&middot;&nbsp; not affiliated with or endorsed by Veeva Systems</span>
     </div>
     <div class="meters">
       <div class="meter ringm" title="Knowledge: concepts mastered through knowledge checks">
@@ -3869,25 +3908,26 @@ function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").rep
 /* ---------- Sidebar ---------- */
 function renderSide(){
   const side=document.getElementById("side");
-  let h='<div class="navhdr">Simulator</div>';
+  let h='<div class="navhdr">Course</div>';
   h+=navBtn("home","Overview","",state.view==="home");
+  h+=navBtn("syllabus","Syllabus","&#9783;",state.view==="syllabus");
   h+=navBtn("case","Case Study Lab","C",state.view==="case");
   h+=navBtn("roleplay","Stakeholder Roleplay","R",state.view==="roleplay");
-  h+='<div class="navhdr" style="margin-top:6px">Levels</div>';
-  DATA.levels.forEach((l,i)=>{
-    const active = state.view==="level-"+i;
-    const done = levelDone(i);
-    const ansN = l.drills.filter((d,di)=>state.answers[keyOf(i,di)]!=null).length;
-    h+=`<button class="navbtn ${active?'active':''}" data-view="level-${i}">
-        <span class="num">${i+1}</span>
-        <span style="flex:1">${esc(l.title.split(":")[0])}</span>
-        ${done?'<span class="dot">&#10003;</span>':(ansN>0?`<span class="navmini">${ansN}/${l.drills.length}</span>`:'')}
-      </button>`;
+  COURSE.units.forEach((u)=>{
+    h+=`<div class="navhdr" style="margin-top:6px">${esc(u.title)}</div>`;
+    for(let i=u.start;i<u.start+u.count;i++){
+      const l=DATA.levels[i]; if(!l) continue;
+      const active=state.view==="level-"+i; const done=levelDone(i);
+      const ansN=l.drills.filter((d,di)=>state.answers[keyOf(i,di)]!=null).length;
+      h+=`<button class="navbtn ${active?'active':''}" data-view="level-${i}"><span class="num">${i+1}</span><span style="flex:1">${esc(l.title.split(":")[0])}</span>${done?'<span class="dot">&#10003;</span>':(ansN>0?`<span class="navmini">${ansN}/${l.drills.length}</span>`:'')}</button>`;
+    }
   });
   h+='<div class="navhdr" style="margin-top:6px">Reference</div>';
   h+=navBtn("glossary","Glossary and Knowledge Base","&#9776;",state.view==="glossary");
   const _miss=missedCount();
   h+=navBtn("review","Review missed"+(_miss?" ("+_miss+")":""),"&#9873;",state.view==="review");
+  h+=navBtn("certificate","Certificate","&#9733;",state.view==="certificate");
+  h+=navBtn("about","About this course","&#9432;",state.view==="about");
   h+='<div style="padding:10px 6px 4px"><button class="ghost" id="resetBtn" style="width:100%">Reset progress</button></div>';
   side.innerHTML=h;
   side.querySelectorAll("[data-view]").forEach(b=> b.onclick=()=>{ state.view=b.getAttribute("data-view"); render(); window.scrollTo({top:0,behavior:"smooth"}); });
@@ -3906,6 +3946,9 @@ function render(){
   else if(state.view==="roleplay"){ m.innerHTML=renderRoleplay(); wireRoleplay(); }
   else if(state.view==="glossary"){ m.innerHTML=renderGlossaryShell(); wireGlossary(); }
   else if(state.view==="review"){ m.innerHTML=renderReview(); wireReview(); }
+  else if(state.view==="syllabus"){ m.innerHTML=renderSyllabus(); wireSyllabus(); }
+  else if(state.view==="certificate"){ m.innerHTML=renderCertificate(); wireCertificate(); }
+  else if(state.view==="about"){ m.innerHTML=renderAbout(); wireAbout(); }
   else if(state.view.startsWith("level-")){ const i=+state.view.split("-")[1]; m.innerHTML=renderLevel(i); wireLevel(i); }
   renderFoot();
   afterRender();
@@ -3925,7 +3968,7 @@ function renderHome(){
     <h2>Veeva Business Consultant, R&amp;D Practice</h2>
     <p class="lede">A compact consulting bootcamp for Veeva R&amp;D Business Consultant prep. Learn the life sciences background, build case math, practice stakeholder conversations, and rehearse honest story answers with scored feedback. Two meters keep the work honest: <b>Knowledge</b> tracks concept mastery, and <b>Interview Readiness</b> tracks performance under pressure.</p>
     <div class="legend" style="margin-top:18px">
-      <div class="lg"><span class="sw" style="background:var(--blue)"></span><b>27 levels</b> full curriculum</div>
+      <div class="lg"><span class="sw" style="background:var(--blue)"></span><b>7 units, 27 lessons</b> full curriculum</div>
       <div class="lg"><span class="sw" style="background:var(--aqua)"></span><b>6 cases</b> with math and value models</div>
       <div class="lg"><span class="sw" style="background:var(--gold)"></span><b>285 terms</b> searchable knowledge base</div>
     </div>
@@ -3985,6 +4028,7 @@ function renderLevel(i){
     </div>
     <div class="lvl-progress"><i style="width:${lvP}%"></i></div>
     <div class="kbd-hint">Tip: press <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> to answer, <kbd>&larr;</kbd><kbd>&rarr;</kbd> to move between levels. Tap a concept chip below for its definition.</div>
+    ${objectivesBox(i)}
     <div class="brief">
       <div class="btag">Teaching brief</div>
       ${l.brief.map(p=>`<p>${esc(p)}</p>`).join("")}
@@ -3999,12 +4043,14 @@ function renderLevel(i){
 
   l.drills.forEach((d,di)=>{ h+=renderDrill(i,di,d); });
 
+  h+=takeawayBox(i);
   const done=levelDone(i);
   h+=`<div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
-      <div style="font-size:14px;color:${done?'var(--green)':'var(--slate)'}">${done?'&#10003; Level complete. Your answers are saved.':'Answer every drill to complete this level. Progress saves automatically.'}</div>
-      <div style="display:flex;gap:10px">
+      <div style="font-size:14px;color:${done?'var(--green)':'var(--slate)'}">${done?'&#10003; Lesson complete. Your answers are saved.':'Answer every drill to complete this lesson. Progress saves automatically.'}</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="ghost" onclick="window.print()">Print</button>
         ${i>0?`<button class="ghost" data-goto="level-${i-1}">Previous</button>`:''}
-        ${i<DATA.levels.length-1?`<button class="ghost" data-goto="level-${i+1}" style="background:var(--accent);color:#fff;border-color:var(--accent)">Next level</button>`:`<button class="ghost" data-goto="glossary" style="background:var(--accent);color:#fff;border-color:var(--accent)">Open Glossary</button>`}
+        ${i<DATA.levels.length-1?`<button class="ghost" data-goto="level-${i+1}" style="background:var(--accent);color:#fff;border-color:var(--accent)">Next lesson</button>`:`<button class="ghost" data-goto="certificate" style="background:var(--accent);color:#fff;border-color:var(--accent)">Get certificate</button>`}
       </div>
     </div>`;
   return h;
@@ -4443,10 +4489,74 @@ function wireReview(){
   m.querySelectorAll("[data-review-go]").forEach(b=>{ b.onclick=()=>{ const t=reviewTarget(b.getAttribute("data-review-go")); if(t.ci!=null) state.caseIndex=t.ci; state.view=t.view; render(); window.scrollTo({top:0,behavior:"smooth"}); }; });
   m.querySelectorAll("[data-retry]").forEach(b=>{ b.onclick=()=>{ delete state.answers[b.getAttribute("data-retry")]; save(); render(); }; });
 }
+const COURSE={"units": [{"title": "Unit 1: Consulting Method and Communication", "sub": "The core problem-solving and communication skills every consultant needs.", "start": 0, "count": 4}, {"title": "Unit 2: Veeva Domain, Fit, and Your Story", "sub": "Speak Veeva's R&D language and turn your real background into honest interview evidence.", "start": 4, "count": 3}, {"title": "Unit 3: Case Craft and Consulting Economics", "sub": "Run a full case, and use finance and solution design to support a recommendation.", "start": 7, "count": 3}, {"title": "Unit 4: Life Sciences Industry and Stakeholders", "sub": "How the industry creates value, which function owns which problem, and who the players are.", "start": 10, "count": 3}, {"title": "Unit 5: R&D Operations", "sub": "Regulatory, clinical, safety, and quality operations in depth.", "start": 13, "count": 4}, {"title": "Unit 6: Commercial, Access, Evidence, and Technology", "sub": "Launch, market access, HEOR, digital and AI, business development, and manufacturing.", "start": 17, "count": 6}, {"title": "Unit 7: FDA, Modalities, and Guidelines", "sub": "How products are regulated, plus the modalities and guidelines a consultant should know.", "start": 23, "count": 4}], "meta": [{"obj": "Structure an ambiguous problem into a MECE issue tree instead of forcing a stock framework.", "take": "A clean split has no overlap and no gaps, and it points directly to what to test next."}, {"obj": "Lead with a testable hypothesis and turn every fact into a decision-relevant so-what.", "take": "Synthesis names the driver, ranks the action, and points to the next step."}, {"obj": "Reach a defensible estimate from explicit assumptions and sanity-check the result.", "take": "A structured estimate with honest assumptions beats false precision every time."}, {"obj": "Communicate answer-first using the pyramid principle and clear signposting.", "take": "State the conclusion, then two or three reasons, then detail only if asked."}, {"obj": "Map an R&D client problem to the right Vault pillar and the relevant regulation.", "take": "Name the pillar (Clinical, Regulatory, Quality, Safety) and the rule (GxP, Part 11)."}, {"obj": "Tell STAR stories and let the precise, honest answer outscore the confident, inflated one.", "take": "At a Public Benefit Corporation, accurately scoping what you did is itself the skill."}, {"obj": "Convert your real experience into verifiable, honest interview evidence.", "take": "Lead with the answer, quantify honestly, and name your own contribution precisely."}, {"obj": "Run a full case from an ambiguous prompt to a five-slide, answer-first deck.", "take": "Diagnose demand versus capacity before prescribing any tool."}, {"obj": "Use ROI, payback, NPV, and TCO only when they clarify the recommendation.", "take": "Separate hard savings from strategic value, and label every assumption."}, {"obj": "Map a business problem to a solution and operating model without going product-first.", "take": "Diagnose process, data, and adoption before naming a tool."}, {"obj": "Locate where value is created and lost across the drug lifecycle.", "take": "Different business problems live in different parts of the value chain."}, {"obj": "Recognize which pharma function owns which problem.", "take": "Strong data can still fail on access, medical, or supply, not only on the clinical side."}, {"obj": "Read each stakeholder's metric, incentive, and decision risk before answering.", "take": "Ask who decides, who feels the pain, and who can block adoption."}, {"obj": "Sequence submissions, pathways, and health-authority meetings to reach patients faster.", "take": "Speed comes from evidence readiness and pathway choice, not from cutting corners."}, {"obj": "Connect endpoints, design, and statistical power to operational feasibility.", "take": "A protocol no site can enroll still fails, however elegant the science."}, {"obj": "Balance safety-case throughput with benefit-risk and signal-detection quality.", "take": "Faster processing has no value if detection quality and governance are weak."}, {"obj": "Treat audit readiness as an everyday operating-model outcome, not a scramble.", "take": "Fix the system and the root cause, not just the single flagged record."}, {"obj": "Forecast the patient funnel and diagnose the real launch barrier.", "take": "Access or referral gaps are not solved by more promotion."}, {"obj": "Answer the payer's value and budget question, not just the price.", "take": "Approval is not access; a payer can restrict a covered drug."}, {"obj": "Design fit-for-purpose real-world evidence and control for bias.", "take": "Match the data source and design to the decision it must support."}, {"obj": "Match a real problem to a technology capability with governance and human oversight.", "take": "AI is one governed lever, not a standalone cure or a precise unproven promise."}, {"obj": "Prioritize pipeline assets by risk-adjusted value with explicit assumptions.", "take": "Weight value by probability of success, and name the decisive driver and biggest risk."}, {"obj": "Connect supply reliability and CMC to business strategy.", "take": "A supply interruption can stop a launch, so resilience is strategic, not overhead."}, {"obj": "Distinguish a law, a binding regulation, and a non-binding guidance.", "take": "The phrase the FDA requires it can mean very different levels of legal force."}, {"obj": "Tell small molecules, biologics, and biosimilars apart and explain why it matters.", "take": "A biosimilar is not a generic, and modality reshapes cost, access, and strategy."}, {"obj": "Handle cell, gene, and vaccine strategy, manufacturing, and access differently.", "take": "Manufacturing and durable one-time value are central strategy questions, not footnotes."}, {"obj": "Recognize which FDA or ICH guideline governs a given question.", "take": "ICH is organized into E, Q, S, and M categories; identify the specific guideline."}]};
+
+function objectivesBox(i){ const m=COURSE.meta[i]; if(!m) return ""; return `<div class="objectives"><div class="obj-h">Learning objective</div><p>${esc(m.obj)}</p></div>`; }
+function takeawayBox(i){ const m=COURSE.meta[i]; if(!m) return ""; return `<div class="card takeaway-card"><div class="tk-badge">Key takeaway</div><p>${esc(m.take)}</p></div>`; }
+function courseProgress(){
+  const total=DATA.levels.length; let done=0; for(let i=0;i<total;i++) if(levelDone(i)) done++;
+  const k=computeKnowledge(), r=computeReadiness();
+  return {total, done, pct: total?Math.round(done/total*100):0, k:k.pct, r:r.pct, eligible: done===total && k.pct>=80 && r.pct>=70};
+}
+function renderSyllabus(){
+  const cp=courseProgress();
+  let h=`<div class="card hero"><div class="eyebrow">Syllabus</div><h2>Course syllabus and progress</h2><p class="lede">Seven units and ${DATA.levels.length} lessons, plus ${DATA.caseStudies.length} full case studies, a stakeholder roleplay, and a searchable knowledge base. Work top to bottom or jump anywhere. Progress saves in your browser.</p>
+    <div class="legend" style="margin-top:16px"><div class="lg"><b>${cp.done}/${cp.total}</b> lessons complete</div><div class="lg"><b>${cp.k}%</b> knowledge</div><div class="lg"><b>${cp.r}%</b> interview readiness</div></div>
+    <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap"><button class="ghost" data-view="level-0" style="background:var(--accent);color:#fff;border-color:var(--accent)">Start Unit 1</button><button class="ghost" onclick="window.print()">Print syllabus</button></div>
+  </div>`;
+  COURSE.units.forEach((u)=>{
+    const parts=u.title.split(": ");
+    h+=`<div class="card"><div class="eyebrow">${esc(parts[0])}</div><h2 style="font-size:19px;margin-bottom:3px">${esc(parts[1]||u.title)}</h2><p class="sub" style="margin-bottom:12px">${esc(u.sub)}</p><div class="syl-list">`;
+    for(let i=u.start;i<u.start+u.count;i++){ const l=DATA.levels[i]; if(!l) continue; const done=levelDone(i); const m=COURSE.meta[i];
+      h+=`<button class="syl-item ${done?'done':''}" data-view="level-${i}"><span class="syl-num">${done?'&#10003;':(i+1)}</span><span class="syl-main"><b>${esc(l.title)}</b><small>${esc(m?m.obj:l.subtitle)}</small></span></button>`;
+    }
+    h+=`</div></div>`;
+  });
+  return h;
+}
+function wireSyllabus(){ const m=document.getElementById("main"); m.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>{ state.view=b.getAttribute("data-view"); render(); window.scrollTo({top:0,behavior:"smooth"}); }); }
+function renderCertificate(){
+  const cp=courseProgress();
+  if(!cp.eligible){
+    return `<div class="card hero"><div class="eyebrow">Certificate</div><h2>Certificate of completion</h2><p class="lede">Finish the course to unlock a printable certificate. Completing every lesson and reaching strong scores keeps the certificate meaningful.</p></div>
+    <div class="card"><h2 style="font-size:19px;margin-bottom:8px">Requirements</h2>
+      <div class="cert-req ${cp.done===cp.total?'ok':''}"><span>${cp.done===cp.total?'&#10003;':'&#9675;'}</span> Complete all ${cp.total} lessons &nbsp;<b>(${cp.done}/${cp.total})</b></div>
+      <div class="cert-req ${cp.k>=80?'ok':''}"><span>${cp.k>=80?'&#10003;':'&#9675;'}</span> Reach 80% Knowledge &nbsp;<b>(${cp.k}%)</b></div>
+      <div class="cert-req ${cp.r>=70?'ok':''}"><span>${cp.r>=70?'&#10003;':'&#9675;'}</span> Reach 70% Interview Readiness &nbsp;<b>(${cp.r}%)</b></div>
+      <div style="margin-top:14px"><button class="ghost" data-view="syllabus" style="background:var(--accent);color:#fff;border-color:var(--accent)">Go to syllabus</button></div>
+    </div>`;
+  }
+  const d=new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
+  return `<div class="card"><div class="eyebrow">Certificate</div><h2 style="font-size:19px">You earned it. Print or save your certificate.</h2><p class="sub" style="margin:4px 0 12px">Knowledge ${cp.k}% and Interview Readiness ${cp.r}%, all ${cp.total} lessons complete.</p><button class="ghost" onclick="window.print()" style="background:var(--accent);color:#fff;border-color:var(--accent)">Print / Save as PDF</button></div>
+  <div class="card certificate">
+    <div class="cert-inner">
+      <div class="cert-kicker">Certificate of Completion</div>
+      <div class="cert-course">Life Sciences Consulting Interview Course</div>
+      <div class="cert-sub">R&amp;D Business Consultant preparation</div>
+      <div class="cert-awarded">Awarded to</div>
+      <div class="cert-name">Minseok "Joey" Han, PharmD, MS Regulatory Science</div>
+      <div class="cert-line">For completing all ${cp.total} lessons across 7 units and ${DATA.caseStudies.length} case studies, reaching ${cp.k}% knowledge and ${cp.r}% interview readiness.</div>
+      <div class="cert-foot"><span>${esc(d)}</span><span>Independent educational course, not affiliated with Veeva Systems</span></div>
+    </div>
+  </div>`;
+}
+function wireCertificate(){ const m=document.getElementById("main"); m.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>{ state.view=b.getAttribute("data-view"); render(); window.scrollTo({top:0,behavior:"smooth"}); }); }
+function renderAbout(){
+  return `<div class="card hero"><div class="eyebrow">About this course</div><h2>An independent life sciences consulting interview course</h2><p class="lede">A self-paced, learn-then-drill course that teaches the background knowledge and interview skills for a life sciences and R&D business consulting role, then drills them with scored feedback.</p></div>
+  <div class="card"><h2 style="font-size:19px;margin-bottom:8px">Important disclaimer</h2><p style="font-size:14.5px;color:#39434f">This course is an independent educational resource. It is <b>not affiliated with, authorized by, or endorsed by Veeva Systems Inc.</b> or any other company named for teaching context. Company, product, and program names are used only to describe a realistic interview and industry setting. Embedded videos are third-party content hosted on YouTube by their respective owners.</p></div>
+  <div class="card"><h2 style="font-size:19px;margin-bottom:8px">What is inside</h2><ul style="font-size:14.3px;color:#39434f;padding-left:18px;line-height:1.7">
+    <li>27 lessons across 7 units, ${DATA.caseStudies.length} full case studies, a stakeholder roleplay, and a searchable knowledge base.</li>
+    <li>Each lesson teaches a concept, then scores you on a knowledge check and an application scenario.</li>
+    <li>Intellectual honesty is scored: in several drills the precise honest answer beats the confident inflated one.</li>
+    <li>Domain content is drawn from public, reputable sources; the Your Story Bank lesson is grounded in the learner's real resume.</li>
+  </ul></div>
+  <div class="card"><h2 style="font-size:19px;margin-bottom:8px">How to use it</h2><p style="font-size:14.5px;color:#39434f">Work through the syllabus top to bottom or jump to any unit. Use Review to study only your missed answers, and print any lesson or your certificate with Save as PDF. Progress is saved locally in your browser.</p></div>`;
+}
+function wireAbout(){}
 
 render();
 </script>
 </body>
 </html>
 
-<!-- deploy-version: veeva-v9-interactive-cases-review -->
+<!-- deploy-version: veeva-v10-course-edition -->
