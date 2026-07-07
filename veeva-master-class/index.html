@@ -345,6 +345,20 @@
   @media(max-width:820px){.unit-map,.ach-grid,.coach-grid{grid-template-columns:1fr}.top-actions{width:100%;order:3}.topbtn{flex:1;justify-content:center}.pal-item{grid-template-columns:62px 1fr}.pal-key{display:none}}
   @media print{.top-actions,.palette-backdrop,.coach-actions{display:none!important}}
 
+  /* ===== v12 real consulting work simulator ===== */
+  .cap-hero{background:linear-gradient(135deg,#10233f,#265d9f);color:#eef6ff;position:relative;overflow:hidden}
+  .cap-hero h2,.cap-hero .eyebrow{color:#fff}.cap-hero .lede{color:#d9e8ff}.cap-hero:after{content:"";position:absolute;right:-70px;top:-80px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.08)}
+  .cap-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.cap-tab{border:1px solid rgba(255,255,255,.26);background:rgba(255,255,255,.09);color:#fff;border-radius:999px;padding:8px 11px;font-weight:850;font-size:12px;cursor:pointer}.cap-tab.active{background:#fff;color:#10233f}
+  .data-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.data-card{border:1px solid var(--line);background:#fff;border-radius:14px;padding:13px}.data-card h4{font-size:14px;color:var(--navy);margin-bottom:8px}.data-card table{width:100%;border-collapse:collapse;font-size:12px}.data-card td,.data-card th{border-bottom:1px solid #edf0f4;padding:6px 4px;text-align:left}.data-card th{color:var(--blue);font-size:10px;text-transform:uppercase;letter-spacing:.5px}.data-note{font-size:12px;color:var(--muted);line-height:1.45;margin-top:8px}
+  .quote-stack{display:grid;gap:9px}.quote{border-left:4px solid var(--blue);background:#f5f8fd;border-radius:12px;padding:10px 12px;font-size:13.2px;color:#334052}.quote b{color:var(--navy)}.quote.warn{border-left-color:var(--amber);background:#fff8e8}.quote.risk{border-left-color:var(--red);background:#fff2f3}
+  .work-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.model-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.model-field label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.55px;color:var(--muted);font-weight:900;margin-bottom:4px}.model-field input{width:100%;border:1px solid var(--line);border-radius:11px;background:#fffdf8;padding:9px 10px;font-weight:800;color:var(--navy)}
+  .model-output{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}.metric{border:1px solid var(--line);background:#fff;border-radius:14px;padding:12px}.metric small{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:900}.metric b{display:block;font-family:"IBM Plex Serif",serif;color:var(--navy);font-size:24px;margin-top:4px}.metric.good b{color:var(--green)}.metric.bad b{color:var(--red)}
+  .slide-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.slide-input textarea{width:100%;min-height:94px;border:1px solid var(--line);border-radius:13px;padding:10px;background:#fffdf8;color:var(--navy);font:500 13.5px/1.45 Inter,sans-serif}.deck{display:grid;gap:10px}.slide-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;min-height:94px;box-shadow:0 8px 18px rgba(27,39,67,.05)}.slide-card h4{font-family:"IBM Plex Serif",serif;color:var(--navy);font-size:17px;margin-bottom:6px}.slide-card p{font-size:13.2px;color:#39434f;line-height:1.5;white-space:pre-wrap}
+  .rubric-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.rub-card{border:1px solid var(--line);border-radius:13px;background:#fff;padding:11px;display:flex;gap:9px;align-items:flex-start}.rub-card input{margin-top:3px}.rub-card b{display:block;font-size:13.5px;color:var(--navy)}.rub-card small{display:block;color:var(--muted);font-size:12px;line-height:1.4;margin-top:2px}.score-ring{width:112px;height:112px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--green) var(--p),#e8edf5 0);margin:auto}.score-ring span{width:82px;height:82px;border-radius:50%;background:#fff;display:grid;place-items:center;font-family:"IBM Plex Serif",serif;font-size:25px;font-weight:800;color:var(--navy)}
+  .cap-timer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.08);border-radius:16px;padding:12px;margin-top:14px}.cap-clock{font-family:"IBM Plex Serif",serif;font-size:32px;color:#fff}.cap-timer .ghost{border-color:rgba(255,255,255,.35);color:#fff;background:rgba(255,255,255,.08)}
+  @media(max-width:900px){.data-grid,.work-grid,.slide-grid,.rubric-grid{grid-template-columns:1fr}.model-output,.model-grid{grid-template-columns:1fr}}
+  @media print{.cap-tabs,.cap-timer{display:none!important}}
+
 </style>
 </head>
 <body>
@@ -3949,6 +3963,7 @@ function renderSide(){
   h+=navBtn("home","Overview","",state.view==="home");
   h+=navBtn("syllabus","Syllabus","&#9783;",state.view==="syllabus");
   h+=navBtn("case","Case Study Lab","C",state.view==="case");
+  h+=navBtn("capstone","Capstone Simulator","M",state.view==="capstone");
   h+=navBtn("roleplay","Stakeholder Roleplay","R",state.view==="roleplay");
   COURSE.units.forEach((u)=>{
     h+=`<div class="navhdr" style="margin-top:6px">${esc(u.title)}</div>`;
@@ -3980,6 +3995,7 @@ function render(){
   const m=document.getElementById("main");
   if(state.view==="home"){ m.innerHTML=renderHome(); wireHome(); }
   else if(state.view==="case"){ m.innerHTML=renderCaseLab(); wireCaseLab(); }
+  else if(state.view==="capstone"){ m.innerHTML=renderCapstone(); wireCapstone(); }
   else if(state.view==="roleplay"){ m.innerHTML=renderRoleplay(); wireRoleplay(); }
   else if(state.view==="glossary"){ m.innerHTML=renderGlossaryShell(); wireGlossary(); }
   else if(state.view==="review"){ m.innerHTML=renderReview(); wireReview(); }
@@ -4016,6 +4032,8 @@ function renderHome(){
   </div>
 
   ${courseMapCard()}
+
+  ${capstoneLaunchCard()}
 
   ${achievementsCard()}
 
@@ -4363,6 +4381,7 @@ function achievementsCard(){
     {on:k.pct>=80, ico:'K', name:'Knowledge ready', sub:'80% or higher'},
     {on:r.pct>=70, ico:'R', name:'Interview ready', sub:'70% or higher'},
     {on:cp.eligible, ico:'★', name:'Certificate ready', sub:'All requirements met'},
+    {on:(capState.slides.summary||capState.started), ico:'M', name:'Capstone mode', sub:'Real work simulator'},
     {on:uiState.focus, ico:'F', name:'Focus mode', sub:'Deep work enabled'}
   ];
   return `<div class="card"><div class="eyebrow">Momentum</div><h2 style="font-size:20px;margin-bottom:10px">Achievements</h2><div class="ach-grid">${list.map(a=>`<div class="ach ${a.on?'on':''}"><div class="ach-ico">${a.ico}</div><b>${esc(a.name)}</b><small>${esc(a.sub)}</small></div>`).join('')}</div></div>`;
@@ -4625,6 +4644,65 @@ function renderAbout(){
 function wireAbout(){}
 
 
+
+/* ---------- v12 real work simulator ---------- */
+const CAPSTONE_KEY="veeva-capstone-v12";
+const CAPSTONE={
+  title:"R&D Safety Operations Transformation",
+  client:"A mid-size biopharma preparing for two global Phase 3 readouts and one US launch",
+  prompt:"The COO says safety case backlog is rising, clinical operations is under pressure, and leadership wants to know whether a 12-month operating-model and technology program is worth funding. Build an executive recommendation using the data room. You have 75 minutes.",
+  safety:[
+    ["Month","Intake","Processed","Backlog end","Late cases"],["Jan",1100,920,2810,184],["Feb",1180,940,3050,212],["Mar",1210,955,3305,244],["Apr",1240,965,3580,271],["May",1190,960,3810,289],["Jun",1220,960,4070,306]
+  ],
+  clinical:[
+    ["Region","Active sites","Screened / site / mo","Screen fail","Enrollment gap"],["US",42,3.1,"38%","-18%"],["EU",36,2.4,"42%","-24%"],["APAC",22,1.8,"35%","-31%"]
+  ],
+  access:[
+    ["Segment","Diagnosed","Eligible","Accessible","Capture yr1"],["Commercial",48000,14200,8100,1450],["Medicare",39000,10900,5200,780],["Medicaid",21000,5100,1700,210]
+  ],
+  quotes:[
+    {type:"risk", who:"Head of Safety", text:"We call it a technology issue, but intake coding and triage rules are inconsistent by region."},
+    {type:"warn", who:"Clinical Ops Lead", text:"Sites are asking for more coordinators. I am not convinced another dashboard fixes enrollment."},
+    {type:"", who:"Regulatory Affairs", text:"Late safety cases will become visible in inspection readiness. We need evidence of control, not just a prettier workflow."},
+    {type:"warn", who:"Finance", text:"I can support investment, but not a vague transformation. Show me capacity, payback, and the main assumption."}
+  ]
+};
+function defaultCapstoneState(){ return {tab:'brief', started:false, secondsLeft:4500, model:{intake:1220,capacity:960,backlog:4070,automation:18,fte:4,fteOutput:55,lateCost:950,implementation:650000,contractorCost:26000}, slides:{summary:'',analysis:'',recommendation:'',risks:''}, rubric:{structure:false,quant:false,synthesis:false,client:false,honesty:false,action:false}}; }
+let capState=defaultCapstoneState();
+try{ const c=JSON.parse(localStorage.getItem(CAPSTONE_KEY)); if(c) capState=Object.assign(defaultCapstoneState(),c,{model:Object.assign(defaultCapstoneState().model,c.model||{}),slides:Object.assign(defaultCapstoneState().slides,c.slides||{}),rubric:Object.assign(defaultCapstoneState().rubric,c.rubric||{})}); }catch(e){}
+function saveCapstone(){ localStorage.setItem(CAPSTONE_KEY, JSON.stringify(capState)); }
+function capstoneLaunchCard(){ return `<div class="card cap-hero"><div class="eyebrow">Advanced work simulator</div><h2>Capstone: solve a messy client case like a junior consultant</h2><p class="lede">Move beyond quizzes. Open a client data room, test capacity assumptions, build an executive recommendation deck, and score yourself with a partner-style rubric.</p><div style="margin-top:16px"><button class="ghost" data-view="capstone" style="background:#fff;color:#10233f;border-color:#fff">Open capstone simulator</button></div></div>`; }
+function renderCapstone(){
+  const tabs=[['brief','Brief'],['data','Data room'],['model','Model'],['slides','Slide builder'],['rubric','Partner review']];
+  let h=`<div class="card cap-hero"><div class="eyebrow">75-minute capstone</div><h2>${esc(CAPSTONE.title)}</h2><p class="lede">${esc(CAPSTONE.prompt)}</p><div class="cap-timer"><div><div style="font-size:12px;color:#cfe0f5;font-weight:850;text-transform:uppercase;letter-spacing:.6px">Capstone clock</div><div class="cap-clock" id="capClock">${capTime()}</div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="ghost" id="capStart">${capState.started?'Pause':'Start 75 min'}</button><button class="ghost" id="capReset">Reset timer</button></div></div><div class="cap-tabs">${tabs.map(t=>`<button class="cap-tab ${capState.tab===t[0]?'active':''}" data-cap-tab="${t[0]}">${t[1]}</button>`).join('')}</div></div>`;
+  if(capState.tab==='brief') h+=capBrief();
+  if(capState.tab==='data') h+=capDataRoom();
+  if(capState.tab==='model') h+=capModel();
+  if(capState.tab==='slides') h+=capSlides();
+  if(capState.tab==='rubric') h+=capRubric();
+  return h;
+}
+function capTime(){ const s=Math.max(0,capState.secondsLeft|0); const m=Math.floor(s/60), r=s%60; return String(m).padStart(2,'0')+':'+String(r).padStart(2,'0'); }
+function capBrief(){ return `<div class="card"><div class="eyebrow">Client context</div><h2 style="font-size:20px">${esc(CAPSTONE.client)}</h2><p class="sub">Your task is not to guess a product. Your task is to turn messy operations data into a fundable recommendation.</p><ol class="steps"><li><b>Clarify the problem.</b> Is this demand, capacity, quality, governance, or adoption?</li><li><b>Use the data room.</b> Do not trust any single stakeholder quote without checking the numbers.</li><li><b>Build a model.</b> Test how automation, temporary capacity, and implementation cost change the answer.</li><li><b>Write the deck.</b> Synthesize the answer first, then show the evidence and risk.</li><li><b>Score yourself.</b> Use the partner rubric before calling the answer done.</li></ol><div class="callout"><b>Real-work standard:</b> the strongest answer separates the operating diagnosis from the technology recommendation. It names the bottleneck, quantifies the impact, and explains what must be governed so the solution sticks.</div></div>`; }
+function capTable(rows){ return `<table><thead><tr>${rows[0].map(x=>`<th>${esc(x)}</th>`).join('')}</tr></thead><tbody>${rows.slice(1).map(r=>`<tr>${r.map(x=>`<td>${esc(x)}</td>`).join('')}</tr>`).join('')}</tbody></table>`; }
+function capDataRoom(){ return `<div class="card"><div class="eyebrow">Client data room</div><h2 style="font-size:20px">Messy but decision-relevant inputs</h2><p class="sub">The data is intentionally incomplete. A consultant should state assumptions, triangulate, and avoid pretending precision that is not supported.</p><div class="data-grid"><div class="data-card"><h4>Safety operations</h4>${capTable(CAPSTONE.safety)}<div class="data-note">Backlog keeps rising even though processed volume is stable.</div></div><div class="data-card"><h4>Clinical operations</h4>${capTable(CAPSTONE.clinical)}<div class="data-note">Enrollment issue may compete for the same leadership budget.</div></div><div class="data-card"><h4>Launch access funnel</h4>${capTable(CAPSTONE.access)}<div class="data-note">Access constraints mean launch value is not equal to diagnosed population.</div></div></div></div><div class="card"><div class="eyebrow">Stakeholder notes</div><h2 style="font-size:20px">Conflicting quotes to reconcile</h2><div class="quote-stack">${CAPSTONE.quotes.map(q=>`<div class="quote ${q.type}"><b>${esc(q.who)}:</b> ${esc(q.text)}</div>`).join('')}</div></div>`; }
+function capCalc(){ const m=capState.model; const proposed=m.capacity*(1+m.automation/100)+m.fte*m.fteOutput; const status=m.intake-m.capacity; const burn=proposed-m.intake; const months=burn>0?m.backlog/burn:999; const backlogReduced=Math.min(m.backlog,Math.max(0,burn)*12); const gross=backlogReduced*m.lateCost; const cost=m.implementation+(m.fte*m.contractorCost*12); const net=gross-cost; const payback=net>0?cost/(Math.max(1,gross/12)):999; return {proposed,status,burn,months,backlogReduced,gross,cost,net,payback}; }
+function money(n){ return '$'+Math.round(n).toLocaleString(); }
+function capModel(){ const m=capState.model, c=capCalc(); const field=(k,label)=>`<div class="model-field"><label>${label}</label><input type="number" data-cap-model="${k}" value="${esc(m[k])}"></div>`; return `<div class="card"><div class="eyebrow">Interactive model</div><h2 style="font-size:20px">Capacity and business case builder</h2><p class="sub">Change assumptions and watch the recommendation economics move. This is the closest part to real work.</p><div class="work-grid"><div><div class="model-grid">${field('intake','Monthly intake')}${field('capacity','Current processed')}${field('backlog','Current backlog')}${field('automation','Automation uplift %')}${field('fte','Temporary FTE')}${field('fteOutput','Cases per FTE')}${field('lateCost','Value per late case avoided')}${field('implementation','Implementation cost')}${field('contractorCost','Monthly cost per FTE')}</div></div><div><div class="model-output"><div class="metric ${c.status>0?'bad':'good'}"><small>Status quo monthly gap</small><b>${Math.round(c.status)}</b></div><div class="metric ${c.burn>0?'good':'bad'}"><small>Proposed net burn</small><b>${Math.round(c.burn)}</b></div><div class="metric"><small>Months to clear backlog</small><b>${c.months>60?'Never':c.months.toFixed(1)}</b></div><div class="metric ${c.net>0?'good':'bad'}"><small>12-month net value</small><b>${money(c.net)}</b></div><div class="metric"><small>Backlog reduced in 12 mo</small><b>${Math.round(c.backlogReduced)}</b></div><div class="metric"><small>Payback months</small><b>${c.payback>60?'N/A':c.payback.toFixed(1)}</b></div></div></div></div><div class="callout" style="margin-top:14px"><b>Consultant synthesis prompt:</b> Does the model support funding the program? If yes, what governance condition must be true for the recommendation to hold?</div></div>`; }
+function capSlides(){ const s=capState.slides; const input=(k,title,ph)=>`<div class="slide-input"><label style="font-size:11px;text-transform:uppercase;letter-spacing:.55px;color:var(--muted);font-weight:900">${title}</label><textarea data-cap-slide="${k}" placeholder="${ph}">${esc(s[k])}</textarea></div>`; const fallback={summary:'Recommendation in one sentence. Include funding decision and expected impact.',analysis:'Key math and facts from the model or data room.',recommendation:'Operating model, technology, governance, and sequencing.',risks:'Main assumption, risk, and next step to de-risk.'}; return `<div class="card"><div class="eyebrow">Slide builder</div><h2 style="font-size:20px">Build a mini executive deck</h2><p class="sub">Write concise slide content. The preview forces answer-first consulting communication.</p><div class="slide-grid"><div>${input('summary','Slide 1: Executive summary','Fund the 12-month program because...')}${input('analysis','Slide 2: Evidence and math','The backlog is growing by...')}${input('recommendation','Slide 3: Recommendation','Prioritize triage standardization, workflow automation, and temporary capacity...')}${input('risks','Slide 4: Risks and next steps','The recommendation depends on...')}</div><div class="deck" id="deckPreview">${['summary','analysis','recommendation','risks'].map((k,i)=>`<div class="slide-card"><h4>Slide ${i+1}: ${['Executive Summary','Evidence and Math','Recommendation','Risks and Next Steps'][i]}</h4><p>${esc(s[k]||fallback[k])}</p></div>`).join('')}</div></div><div style="margin-top:12px"><button class="ghost" onclick="window.print()">Print deck</button></div></div>`; }
+function capRubric(){ const r=capState.rubric; const items=[['structure','Problem structure','Separates demand, capacity, process, governance, and adoption.'],['quant','Quantitative rigor','Uses model outputs and labels assumptions instead of handwaving.'],['synthesis','Synthesis','Answer-first, with a clear fund or no-fund recommendation.'],['client','Client readiness','Names owner, sequencing, adoption, and decision risk.'],['honesty','Honesty','Does not overstate precision or claim the data proves more than it does.'],['action','Next step','Defines what to test next in the first 30 days.']]; const score=items.filter(x=>r[x[0]]).length*100/items.length; return `<div class="card"><div class="eyebrow">Partner review rubric</div><h2 style="font-size:20px">Score your work like a manager would</h2><div class="work-grid"><div class="rubric-grid">${items.map(x=>`<label class="rub-card"><input type="checkbox" data-cap-rubric="${x[0]}" ${r[x[0]]?'checked':''}><span><b>${x[1]}</b><small>${x[2]}</small></span></label>`).join('')}</div><div style="display:grid;place-items:center;gap:12px"><div class="score-ring" style="--p:${score}%"><span>${Math.round(score)}</span></div><p class="sub" style="text-align:center">80+ means the answer is client-ready. Below 60 means revise before presenting.</p><button class="ghost" data-cap-tab="slides" style="background:var(--accent);color:#fff;border-color:var(--accent)">Return to deck</button></div></div></div>`; }
+let __capTimer=null;
+function wireCapstone(){
+  document.querySelectorAll('[data-cap-tab]').forEach(b=>{ b.onclick=()=>{ capState.tab=b.getAttribute('data-cap-tab'); saveCapstone(); render(); window.scrollTo({top:0,behavior:'smooth'}); }; });
+  const st=document.getElementById('capStart'); if(st) st.onclick=()=>{ capState.started=!capState.started; saveCapstone(); capTimerTick(); render(); };
+  const rs=document.getElementById('capReset'); if(rs) rs.onclick=()=>{ capState.secondsLeft=4500; capState.started=false; saveCapstone(); render(); };
+  document.querySelectorAll('[data-cap-model]').forEach(inp=>{ inp.oninput=()=>{ capState.model[inp.getAttribute('data-cap-model')]=+inp.value||0; saveCapstone(); render(); }; });
+  document.querySelectorAll('[data-cap-slide]').forEach(t=>{ t.oninput=()=>{ capState.slides[t.getAttribute('data-cap-slide')]=t.value; saveCapstone(); refreshDeckPreview(); }; });
+  document.querySelectorAll('[data-cap-rubric]').forEach(c=>{ c.onchange=()=>{ capState.rubric[c.getAttribute('data-cap-rubric')]=c.checked; saveCapstone(); render(); }; });
+}
+function refreshDeckPreview(){ const prev=document.getElementById('deckPreview'); if(!prev) return; const names=['Executive Summary','Evidence and Math','Recommendation','Risks and Next Steps']; const keys=['summary','analysis','recommendation','risks']; const fallback=['Recommendation in one sentence. Include funding decision and expected impact.','Key math and facts from the model or data room.','Operating model, technology, governance, and sequencing.','Main assumption, risk, and next step to de-risk.']; prev.innerHTML=keys.map((k,i)=>`<div class="slide-card"><h4>Slide ${i+1}: ${names[i]}</h4><p>${esc(capState.slides[k]||fallback[i])}</p></div>`).join(''); }
+function capTimerTick(){ if(__capTimer) clearInterval(__capTimer); if(!capState.started) return; __capTimer=setInterval(()=>{ if(!capState.started) return; capState.secondsLeft=Math.max(0,capState.secondsLeft-1); if(capState.secondsLeft===0) capState.started=false; saveCapstone(); const c=document.getElementById('capClock'); if(c) c.textContent=capTime(); if(!capState.started) clearInterval(__capTimer); },1000); }
+
 /* ---------- v11 UX helpers ---------- */
 let __timerId=null, __timerEnd=0;
 function wireTopActions(){
@@ -4637,6 +4715,7 @@ function paletteItems(){
     {kind:'View', title:'Overview', sub:'Home dashboard', view:'home'},
     {kind:'View', title:'Syllabus', sub:'7 units and 27 lessons', view:'syllabus'},
     {kind:'View', title:'Case Study Lab', sub:'6 scored cases', view:'case'},
+    {kind:'View', title:'Capstone Simulator', sub:'Data room, live model, deck builder, and partner rubric', view:'capstone'},
     {kind:'View', title:'Stakeholder Roleplay', sub:'6 persona conversations', view:'roleplay'},
     {kind:'View', title:'Review missed', sub:missedCount()+' active review items', view:'review'},
     {kind:'View', title:'Certificate', sub:'Completion requirements and printable certificate', view:'certificate'},
@@ -4670,9 +4749,10 @@ function startCoachTimer(sec){ stopCoachTimer(); __timerEnd=Date.now()+sec*1000;
 function stopCoachTimer(){ if(__timerId){ clearInterval(__timerId); __timerId=null; } }
 
 applyFocusMode();
+capTimerTick();
 render();
 </script>
 </body>
 </html>
 
-<!-- deploy-version: veeva-v11-interactive-experience -->
+<!-- deploy-version: veeva-v12-real-work-simulator -->
