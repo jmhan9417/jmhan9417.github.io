@@ -192,8 +192,8 @@
 
   main.view-enter{animation:viewIn .42s cubic-bezier(.2,.7,.2,1)}
   @keyframes viewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-  .reveal{opacity:0;transform:translateY(16px)}
-  .reveal.in{opacity:1;transform:none;transition:opacity .55s ease var(--d,0ms),transform .6s cubic-bezier(.2,.7,.2,1) var(--d,0ms)}
+  .reveal{opacity:1;transform:none}
+  .reveal.in{opacity:1;transform:none;transition:opacity .35s ease var(--d,0ms),transform .35s cubic-bezier(.2,.7,.2,1) var(--d,0ms)}
 
   .hero{background:
     radial-gradient(circle at 88% -10%,rgba(47,114,200,.20),transparent 42%),
@@ -411,6 +411,10 @@
   .section-guide{background:#f6fbff;border:1px solid #d6e8f8;border-radius:14px;padding:12px 14px;margin:0 0 14px;color:#28445f;font-size:14px}.section-guide b{color:var(--navy)}.section-guide .guide-line{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.section-guide span{border:1px solid #cfe0f5;background:#fff;border-radius:999px;padding:5px 8px;font-size:12px;font-weight:800;color:#315a82}
   @media(max-width:1100px){.flow-steps,.practice-path{grid-template-columns:1fr 1fr}.flow-intro{grid-template-columns:1fr}}
   @media(max-width:680px){.flow-steps,.practice-path{grid-template-columns:1fr}}
+
+  /* ===== v20 simplified flow ===== */
+  .simple-home{display:grid;gap:14px}.simple-hero{padding:28px}.simple-hero h2{font-size:32px;max-width:760px}.simple-hero .lede{max-width:780px}.choice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.choice-card{border:1px solid var(--line);background:#fff;border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:10px;min-height:220px}.choice-card .choice-k{font-size:11px;text-transform:uppercase;letter-spacing:.65px;font-weight:900;color:var(--blue)}.choice-card h3{font-size:20px;margin:0;color:var(--navy)}.choice-card p{font-size:14px;color:#596679;margin:0;line-height:1.5}.choice-card ul{margin:2px 0 0 18px;padding:0;color:#596679;font-size:13.5px;line-height:1.5}.choice-card .ghost{margin-top:auto;align-self:flex-start}.next-strip{display:flex;gap:10px;flex-wrap:wrap;align-items:center;border:1px solid #d6e8f8;background:#f6fbff;border-radius:16px;padding:12px 14px;color:#28445f;font-size:14px}.next-strip b{color:var(--navy)}.simple-stats{display:flex;gap:8px;flex-wrap:wrap}.simple-stats span{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:850;color:#42566f}.side .nav-section-note{font-size:11.5px;color:#8a93a4;padding:2px 8px 8px;line-height:1.35}.qbank-grid.compact{grid-template-columns:1fr}.qbank-grid.compact .q-card:nth-child(n+6){display:none}.show-all-note{border:1px dashed #c7d8eb;border-radius:14px;background:#f8fbff;padding:13px;color:#35516c;font-size:14px;margin-top:12px}.view-all-btn{margin-top:8px}
+  @media(max-width:980px){.choice-grid{grid-template-columns:1fr}.simple-hero h2{font-size:26px}}
 </style>
 </head>
 <body>
@@ -4029,31 +4033,22 @@ function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").rep
 /* ---------- Sidebar ---------- */
 function renderSide(){
   const side=document.getElementById("side");
-  let h='<div class="navhdr">Course</div>';
-  h+=navBtn("home","Overview","",state.view==="home");
-  h+=navBtn("syllabus","Syllabus","&#9783;",state.view==="syllabus");
-  h+=navBtn("notebook","Analyst Notebook","N",state.view==="notebook");
+  let h='<div class="navhdr">Start</div>';
+  h+=navBtn("home","Home","",state.view==="home");
+  h+=navBtn("syllabus","Syllabus","☷",state.view==="syllabus");
+  h+='<div class="nav-section-note">Use Syllabus for the full 27-lesson list. The sidebar stays short on purpose.</div>';
+  h+='<div class="navhdr" style="margin-top:6px">Practice</div>';
   h+=navBtn("case","Case Study Lab","C",state.view==="case");
   h+=navBtn("capstone","Capstone Simulator","M",state.view==="capstone");
-  h+=navBtn("strategy","Commercial Strategy Lab","S",state.view==="strategy");
-  h+=navBtn("practical","Advanced Practical Studio","A",state.view==="practical");
-  h+=navBtn("qbank","Deep Question Bank","Q",state.view==="qbank");
-  h+=navBtn("roleplay","Stakeholder Roleplay","R",state.view==="roleplay");
-  COURSE.units.forEach((u)=>{
-    h+=`<div class="navhdr" style="margin-top:6px">${esc(u.title)}</div>`;
-    for(let i=u.start;i<u.start+u.count;i++){
-      const l=DATA.levels[i]; if(!l) continue;
-      const active=state.view==="level-"+i; const done=levelDone(i);
-      const ansN=l.drills.filter((d,di)=>state.answers[keyOf(i,di)]!=null).length;
-      h+=`<button class="navbtn ${active?'active':''}" data-view="level-${i}"><span class="num">${i+1}</span><span style="flex:1">${esc(l.title.split(":")[0])}</span>${done?'<span class="dot">&#10003;</span>':(ansN>0?`<span class="navmini">${ansN}/${l.drills.length}</span>`:'')}</button>`;
-    }
-  });
-  h+='<div class="navhdr" style="margin-top:6px">Reference</div>';
-  h+=navBtn("glossary","Glossary and Knowledge Base","&#9776;",state.view==="glossary");
-  const _miss=missedCount();
-  h+=navBtn("review","Review missed"+(_miss?" ("+_miss+")":""),"&#9873;",state.view==="review");
-  h+=navBtn("certificate","Certificate","&#9733;",state.view==="certificate");
-  h+=navBtn("about","About this course","&#9432;",state.view==="about");
+  h+=navBtn("strategy","Strategy Lab","S",state.view==="strategy");
+  h+=navBtn("practical","Practical Studio","A",state.view==="practical");
+  h+=navBtn("qbank","Deep QBank","Q",state.view==="qbank");
+  h+='<div class="navhdr" style="margin-top:6px">Support</div>';
+  h+=navBtn("notebook","Analyst Notebook","N",state.view==="notebook");
+  h+=navBtn("review","Review missed"+(missedCount()?" ("+missedCount()+")":""),"⚑",state.view==="review");
+  h+=navBtn("glossary","Glossary","☰",state.view==="glossary");
+  h+=navBtn("certificate","Certificate","★",state.view==="certificate");
+  h+=navBtn("about","About","ⓘ",state.view==="about");
   h+='<div style="padding:10px 6px 4px"><button class="ghost" id="resetBtn" style="width:100%">Reset progress</button></div>';
   side.innerHTML=h;
   side.querySelectorAll("[data-view]").forEach(b=> b.onclick=()=>{ state.view=b.getAttribute("data-view"); render(); window.scrollTo({top:0,behavior:"smooth"}); });
@@ -4092,66 +4087,21 @@ function renderFoot(){
 
 /* ---------- Home ---------- */
 function renderHome(){
-  const k=computeKnowledge(), r=computeReadiness();
-  return `
-  <div class="card hero">
-    <div class="eyebrow">Start here</div>
-    <h2>Life Sciences Consulting Interview Course</h2>
-    <p class="lede">Use this like a guided training path, not a reference dump. Start with the core lessons, then move into cases, then do analyst-style work, then review weak spots. The left navigation is there when you want to jump around, but the recommended flow below is the easiest path to follow.</p>
-    <div class="legend" style="margin-top:18px">
-      <div class="lg"><span class="sw" style="background:var(--blue)"></span><b>7 units, 27 lessons</b> full curriculum</div>
-      <div class="lg"><span class="sw" style="background:var(--aqua)"></span><b>6 cases</b> with math and value models</div>
-      <div class="lg"><span class="sw" style="background:var(--gold)"></span><b>300+ terms</b> searchable knowledge base</div>
+  const k=computeKnowledge(), r=computeReadiness(), cp=courseProgress(), sc=practicalScore();
+  return `<div class="simple-home">
+    <div class="card hero simple-hero">
+      <div class="eyebrow">Start here</div>
+      <h2>Choose one path. Do not try to use everything at once.</h2>
+      <p class="lede">This course has lessons, cases, notebook, capstone, strategy lab, practical studio, and QBank. The clean way to use it is simple: learn basics, practice a case, then do analyst work.</p>
+      <div class="simple-stats"><span>${cp.done}/${cp.total} lessons done</span><span>Knowledge ${k.pct}%</span><span>Readiness ${r.pct}%</span><span>QBank ${sc.qAnswered}/${sc.qTotal}</span></div>
     </div>
-    <div class="grid2" style="margin-top:16px">
-      <div class="mini"><h4>Knowledge ${k.pct}%</h4><p>${k.correct} of ${k.total} knowledge checks answered correctly. These verify you understand each concept the moment after it is taught.</p></div>
-      <div class="mini"><h4>Interview Readiness ${r.pct}%</h4><p>${r.earned} of ${r.max} scenario points earned. These reward the answer a real interviewer would score highest.</p></div>
+    <div class="next-strip"><b>Recommended if starting fresh:</b> Syllabus → Case Study Lab → Capstone → Practical Studio → Deep QBank</div>
+    <div class="choice-grid">
+      <div class="choice-card"><div class="choice-k">Path 1</div><h3>Start learning</h3><p>Use this if you are new or feel lost. It shows the full lesson order without dumping everything on the home page.</p><ul><li>27 lessons</li><li>concept briefs</li><li>knowledge and scenario drills</li></ul><button class="ghost" data-view="syllabus" style="background:var(--accent);color:#fff;border-color:var(--accent)">Open syllabus</button></div>
+      <div class="choice-card"><div class="choice-k">Path 2</div><h3>Practice cases</h3><p>Use this when you understand the basics and want case reps. Start with the clean case lab before messy simulations.</p><ul><li>worked case lab</li><li>capstone data room</li><li>strategy simulator</li></ul><button class="ghost" data-view="case" style="background:var(--accent);color:#fff;border-color:var(--accent)">Open case lab</button></div>
+      <div class="choice-card"><div class="choice-k">Path 3</div><h3>Analyst mode</h3><p>Use this for harder practice: dirty data, manager prompts, answer builder, rubric, and focused judgment questions.</p><ul><li>3 practical cases</li><li>20 QBank prompts</li><li>notebook for hypotheses</li></ul><button class="ghost" data-view="practical" style="background:var(--accent);color:#fff;border-color:var(--accent)">Open practical studio</button></div>
     </div>
-  </div>
-
-  ${guidedFlowCard()}
-
-  ${continueLearningCard()}
-
-  ${courseMapCard()}
-
-  ${practicePathCard()}
-
-  ${achievementsCard()}
-
-  ${interviewCoachCard()}
-
-  ${orientationCard()}
-
-  <div class="card">
-    <div class="eyebrow">Interview track</div>
-    <h2 style="font-size:20px;margin-bottom:2px">How the Veeva Master Class process is structured</h2>
-    <p class="sub" style="margin-bottom:6px">Based on reviewed public Veeva Master Class and Business Consultant postings. Specific process timing, compensation, and steps can vary by posting and date.</p>
-    <ol class="steps">
-      <li><b>Application.</b> Submit your resume, a short cover letter of questions, and a third-party personality assessment.</li>
-      <li><b>Application decision timing.</b> Reviewed Master Class postings described a decision within about a week after the application package is reviewed.</li>
-      <li><b>45-minute interview with a practice leader.</b> Reviewed Master Class postings described a 45-minute interview with an executive or practice leader.</li>
-      <li><b>Job-history interview.</b> A structured walk through your real experience. This is where STAR and honesty matter most.</li>
-      <li><b>Take-home case exercise.</b> Reviewed Master Class postings described a case exercise with about one week to prepare.</li>
-      <li><b>Final decision and compensation.</b> Reviewed Master Class postings described an offer-or-decline decision within about one week after the case step, starting salary of 130,000 dollars, and potential salary increase and equity after a strong first year.</li>
-    </ol>
-    <div class="callout"><b>What public Veeva materials emphasize:</b> problem-solving, process-and-data orientation, high work ethic, and above all high integrity. Veeva is a Public Benefit Corporation and publicly emphasizes the value do the right thing. That is why honesty is a scored virtue throughout this tool.</div>
-  </div>
-
-  <div class="card">
-    <div class="eyebrow">Training system</div>
-    <h2 style="font-size:20px;margin-bottom:8px">Learn first, then prove it under pressure</h2>
-    <div class="grid2">
-      <div class="mini"><h4>Knowledge check</h4><p>A fast, unambiguous question that verifies you understood the brief. Right or wrong, with an explanation. Feeds the Knowledge meter.</p></div>
-      <div class="mini"><h4>Application scenario</h4><p>An interviewer asks a real Veeva question. Three answers: one strong, one weak, one trap. Feeds the Interview Readiness meter.</p></div>
-    </div>
-    <div class="legend">
-      <div class="lg"><span class="sw" style="background:var(--green)"></span><b>Strong</b> &nbsp;10 pts &middot; structured, precise, honest</div>
-      <div class="lg"><span class="sw" style="background:var(--amber)"></span><b>Weak</b> &nbsp;5 pts &middot; vague or unstructured</div>
-      <div class="lg"><span class="sw" style="background:var(--red)"></span><b>Trap</b> &nbsp;0 pts &middot; inflated or off-method</div>
-    </div>
-    <p style="font-size:13.5px;color:var(--slate);margin-top:14px">In several drills, the precise honest answer beats the confident inflated one on purpose. The feedback explains why honesty scores higher: at a Public Benefit Corporation, on client work, and under a case exercise and reference checks, an exaggeration you cannot back up is a liability, and accurate scoping is itself the skill.</p>
-    <div style="margin-top:16px"><button class="ghost" id="startBtn" style="background:var(--accent);color:#fff;border-color:var(--accent);padding:10px 18px;font-size:14px">Start Level 1</button></div>
+    ${continueLearningCard()}
   </div>`;
 }
 
@@ -4832,7 +4782,7 @@ function apPrompts(c){ return `<div class="card"><div class="eyebrow">Manager pr
 function apBuilder(c){ const key='case'+practicalState.caseIndex; const b=practicalState.builders[key]||{}; return `<div class="card"><div class="eyebrow">Answer builder</div><h2 style="font-size:20px">Write the recommendation like an analyst</h2><p class="sub">Save concise bullets. These sync with the rest of your progress when signed in.</p><div class="builder-grid">${c.builder.map((field,i)=>`<div class="builder-field"><label>${esc(field)}</label><textarea data-ap-build="${i}" placeholder="Write a client-ready bullet.">${esc(b[i]||'')}</textarea></div>`).join('')}</div></div>`; }
 function apRubric(c){ const key='case'+practicalState.caseIndex; const r=practicalState.rubrics[key]||{}; const score=c.rubric.filter((_,i)=>r[i]).length; return `<div class="card"><div class="eyebrow">Partner-style rubric</div><h2 style="font-size:20px">Would this survive review?</h2><p class="sub">${score}/${c.rubric.length} criteria checked. Do not mark a criterion unless your written answer proves it.</p><div class="rub-score">${c.rubric.map((x,i)=>`<label><input type="checkbox" data-ap-rubric="${i}" ${r[i]?'checked':''}><span>${termify(x)}<small>Evidence must appear in your answer builder.</small></span></label>`).join('')}</div></div>`; }
 function wirePracticalStudio(){ document.querySelectorAll('[data-ap-case]').forEach(b=>b.onclick=()=>{ practicalState.caseIndex=+b.getAttribute('data-ap-case'); practicalState.tab='brief'; savePractical(); render(); window.scrollTo({top:0,behavior:'smooth'}); }); document.querySelectorAll('[data-ap-tab]').forEach(b=>b.onclick=()=>{ practicalState.tab=b.getAttribute('data-ap-tab'); savePractical(); render(); window.scrollTo({top:0,behavior:'smooth'}); }); document.querySelectorAll('[data-ap-build]').forEach(t=>t.oninput=()=>{ const key='case'+practicalState.caseIndex; practicalState.builders[key]=practicalState.builders[key]||{}; practicalState.builders[key][t.getAttribute('data-ap-build')]=t.value; savePractical(); }); document.querySelectorAll('[data-ap-rubric]').forEach(c=>c.onchange=()=>{ const key='case'+practicalState.caseIndex; practicalState.rubrics[key]=practicalState.rubrics[key]||{}; practicalState.rubrics[key][c.getAttribute('data-ap-rubric')]=c.checked; savePractical(); render(); }); }
-function renderDeepQBank(){ const cats=['All',...Array.from(new Set(DEEP_QS.map(q=>q.cat)))]; const active=practicalState.activeQCat||'All'; const list=DEEP_QS.map((q,i)=>Object.assign({i},q)).filter(q=>active==='All'||q.cat===active); const sc=practicalScore(); return `<div class="card studio-hero"><div class="eyebrow">Deep Question Bank</div><h2>Hard practical prompts</h2><p class="lede">These are judgment questions, not trivia. Pick the answer you would defend in front of a manager. Use this after a case or whenever you want fast repetitions.</p><div class="section-guide" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.22);color:#eef7ff"><b style="color:#fff">Simple QBank flow:</b> pick one category, answer 3 to 5 prompts, then open Review missed or return to the matching simulator.</div><div class="studio-progress"><div class="mini"><h4>${sc.qAnswered}/${sc.qTotal}</h4><p>answered</p></div><div class="mini"><h4>${sc.qPts}/${sc.qMax}</h4><p>points</p></div><div class="mini"><h4>${sc.qMax?Math.round(sc.qPts/sc.qMax*100):0}%</h4><p>practical score</p></div></div><div class="q-tabs">${cats.map(c=>`<button class="q-tab ${active===c?'active':''}" data-q-cat="${esc(c)}">${esc(c)}</button>`).join('')}</div></div><div class="qbank-grid">${list.map(q=>renderDeepQ(q)).join('')}</div>`; }
+function renderDeepQBank(){ const cats=['All',...Array.from(new Set(DEEP_QS.map(q=>q.cat)))]; const active=practicalState.activeQCat||'All'; let list=DEEP_QS.map((q,i)=>Object.assign({i},q)).filter(q=>active==='All'||q.cat===active); const compactAll=active==='All'; const sc=practicalScore(); return `<div class="card studio-hero"><div class="eyebrow">Deep Question Bank</div><h2>Hard practical prompts</h2><p class="lede">These are judgment questions, not trivia. Pick the answer you would defend in front of a manager. Use this after a case or whenever you want fast repetitions.</p><div class="section-guide" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.22);color:#eef7ff"><b style="color:#fff">Simple QBank flow:</b> pick one category, answer 3 to 5 prompts, then open Review missed or return to the matching simulator.</div><div class="studio-progress"><div class="mini"><h4>${sc.qAnswered}/${sc.qTotal}</h4><p>answered</p></div><div class="mini"><h4>${sc.qPts}/${sc.qMax}</h4><p>points</p></div><div class="mini"><h4>${sc.qMax?Math.round(sc.qPts/sc.qMax*100):0}%</h4><p>practical score</p></div></div><div class="q-tabs">${cats.map(c=>`<button class="q-tab ${active===c?'active':''}" data-q-cat="${esc(c)}">${esc(c)}</button>`).join('')}</div></div><div class="qbank-grid ${compactAll?'compact':''}">${list.map(q=>renderDeepQ(q)).join('')}</div>${compactAll?`<div class="show-all-note"><b>Keep it focused:</b> only the first 5 prompts are shown on the default view. Pick a category above to drill a specific weakness, or use Search if you need a topic.</div>`:''}`; }
 function renderDeepQ(q){ const ans=practicalState.qbank[q.i]; const chosen=ans&&q.options[ans.oi]; return `<div class="q-card"><h3>${termify(q.q)}</h3><div class="q-meta"><span>${esc(q.cat)}</span><span>${esc(q.diff)}</span></div><div class="q-options">${q.options.map((o,oi)=>`<button class="${ans&&ans.oi===oi?'chosen '+o[0]:''}" data-q-pick="${q.i}:${oi}">${termify(o[1])}</button>`).join('')}</div>${chosen?`<div class="q-feedback ${chosen[0]}"><b>${chosen[0].toUpperCase()}.</b> ${qFeedback(chosen[0])}</div>`:''}</div>`; }
 function qFeedback(t){ return t==='strong'?'This is manager-ready because it states the decision logic, caveat, and next analytic step.':t==='weak'?'Partly right, but it is too generic or misses the decision-driving assumption.':'Trap answer. It overclaims, skips structure, or confuses a symptom for the underlying problem.'; }
 function wireDeepQBank(){ document.querySelectorAll('[data-q-cat]').forEach(b=>b.onclick=()=>{ practicalState.activeQCat=b.getAttribute('data-q-cat'); savePractical(); render(); window.scrollTo({top:0,behavior:'smooth'}); }); document.querySelectorAll('[data-q-pick]').forEach(b=>b.onclick=()=>{ const [i,oi]=b.getAttribute('data-q-pick').split(':').map(Number); practicalState.qbank[i]={i,oi}; savePractical(); render(); }); }
@@ -4850,31 +4800,13 @@ function updateAuthButton(){ const b=document.getElementById('authBtn'); if(!b) 
 function openAuthModal(){ closeAuthModal(); const signed=!!cloud.user; const configured=supabaseConfigured(); const div=document.createElement('div'); div.className='auth-backdrop'; div.id='authModal'; div.innerHTML=`<div class="auth-card"><h3>${signed?'Account and cloud sync':'Sign in to continue anywhere'}</h3><p>${configured?'Use email magic link. Your answers, case work, analyst notebook, capstone, and strategy lab progress will sync to your account.':'Cloud sync is not configured yet. The app is safe to use locally, and the Supabase setup panel/schema is ready.'}</p>${signed?`<div class="sync-pill on">Signed in as ${esc(cloud.user.email||'user')}</div><div class="auth-actions"><button class="ghost" id="syncNow">Sync now</button><button class="ghost" id="signOutBtn">Sign out</button><button class="ghost" id="closeAuth">Close</button></div>`: configured?`<input id="authEmail" type="email" placeholder="you@example.com"><div class="auth-actions"><button class="ghost" id="magicBtn" style="background:var(--accent);color:#fff;border-color:var(--accent)">Send magic link</button><button class="ghost" id="closeAuth">Close</button></div>`:`<div class="cloud-disabled"><b>Backend needed:</b> create a Supabase project, run the provided SQL schema, then add the project URL and anon key to the app constants. Until then, progress continues to save in this browser.</div><div class="auth-actions"><button class="ghost" id="closeAuth">Close</button></div>`}<div class="auth-msg" id="authMsg"></div></div>`; document.body.appendChild(div); div.onclick=e=>{ if(e.target===div) closeAuthModal(); }; const close=document.getElementById('closeAuth'); if(close) close.onclick=closeAuthModal; const sync=document.getElementById('syncNow'); if(sync) sync.onclick=async()=>{ await saveCloudProgress(); document.getElementById('authMsg').textContent='Synced'; }; const sign=document.getElementById('signOutBtn'); if(sign) sign.onclick=async()=>{ await cloud.client.auth.signOut(); cloud.user=null; cloud.status='local'; cloud.message='Local only'; closeAuthModal(); render(); }; const magic=document.getElementById('magicBtn'); if(magic) magic.onclick=sendMagicLink;  }
 function closeAuthModal(){ const m=document.getElementById('authModal'); if(m) m.remove(); }
 async function sendMagicLink(){ const el=document.getElementById('authEmail'); const msg=document.getElementById('authMsg'); const email=el&&el.value.trim(); if(!email){ msg.textContent='Enter an email first'; msg.className='auth-msg err'; return; } const {error}=await cloud.client.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin}}); if(error){ msg.textContent=error.message; msg.className='auth-msg err'; } else { msg.textContent='Magic link sent. Check your email.'; msg.className='auth-msg'; } }
-function continueLearningCard(){ const cp=courseProgress(); const label=state.view.startsWith('level-')?'Lesson '+((+state.view.split('-')[1])+1):state.view==='home'?'Overview':state.view.replace(/-/g,' '); const nbCount=Object.values(notebookState.entries||{}).reduce((a,e)=>a+Object.values(e||{}).filter(v=>String(v||'').trim()).length,0); const cloudLabel=cloud.user?'Cloud sync on':supabaseConfigured()?'Sign in available':'Local browser save'; const cls=cloud.user?'on':supabaseConfigured()?'warn':''; return `<div class="card"><div class="eyebrow">Continue learning</div><h2 style="font-size:20px;margin-bottom:4px">Pick up where you left off</h2><div class="continue-grid"><div class="continue-box"><span class="sync-pill ${cls}">${esc(cloudLabel)}</span><h4 style="margin-top:10px">Last workspace: ${esc(label)}</h4><p>${cp.done}/${cp.total} lessons complete. Notebook has ${nbCount} analyst notes. Knowledge ${computeKnowledge().pct}% and readiness ${computeReadiness().pct}%.</p><div class="continue-actions"><button class="ghost" data-view="${esc(state.view==='home'?'syllabus':state.view)}" style="background:var(--accent);color:#fff;border-color:var(--accent)">Continue</button><button class="ghost" data-view="notebook">Open notebook</button><button class="ghost" id="homeAuthBtn">${cloud.user?'Sync account':'Sign in'}</button></div></div><div class="continue-box"><h4>Analyst lens</h4><p>Use the notebook to track hypotheses, evidence, assumptions, risks, open questions, and next steps. The goal is not only finishing lessons, but thinking like an analyst.</p></div></div></div>`; }
-function renderNotebook(){ const tabs=[['general','General'],['capstone','R&D Capstone'],['strategy','Commercial Strategy']]; const active=notebookState.active||'capstone'; const e=notebookState.entries[active]||{}; const field=(k,l,ph)=>`<div class="nb-field"><label>${l}</label><textarea data-nb-field="${k}" placeholder="${ph}">${esc(e[k]||'')}</textarea></div>`; return `<div class="card hero"><div class="eyebrow">Analyst Notebook</div><h2>Think like an analyst, not a passive learner</h2><p class="lede">Track hypotheses, evidence, assumptions, risks, open questions, and next steps as you move through cases. Signed-in learners can sync this across devices once Supabase is configured.</p></div><div class="card"><div class="notebook-grid"><div class="nb-tabs">${tabs.map(t=>`<button class="nb-tab ${active===t[0]?'active':''}" data-nb-tab="${t[0]}">${t[1]}</button>`).join('')}<button class="ghost" id="addRevision">Add revision log</button></div><div><div class="nb-fields">${field('hypothesis','Hypothesis','What do you believe is true right now?')}${field('evidence','Evidence','What data or quote supports or weakens it?')}${field('assumptions','Assumptions','What assumption drives the answer?')}${field('risks','Risks','What could make the recommendation wrong?')}${field('questions','Open questions','What would you ask the client or manager?')}${field('next','Next steps','What should happen in the next 30 days?')}</div><div class="rev-log">${(notebookState.revisions||[]).slice(-5).reverse().map(r=>`<div class="rev-item"><b>${esc(r.when)}</b> ${esc(r.text)}</div>`).join('')}</div></div></div></div>`; }
-function wireNotebook(){ document.querySelectorAll('[data-nb-tab]').forEach(b=>{ b.onclick=()=>{ notebookState.active=b.getAttribute('data-nb-tab'); saveNotebook(); render(); }; }); document.querySelectorAll('[data-nb-field]').forEach(t=>{ t.oninput=()=>{ const a=notebookState.active||'capstone'; notebookState.entries[a]=notebookState.entries[a]||{}; notebookState.entries[a][t.getAttribute('data-nb-field')]=t.value; saveNotebook(); }; }); const ar=document.getElementById('addRevision'); if(ar) ar.onclick=()=>{ const a=notebookState.active||'capstone'; const txt=(notebookState.entries[a]&&notebookState.entries[a].next)||'Reviewed notebook'; notebookState.revisions=notebookState.revisions||[]; notebookState.revisions.push({when:new Date().toLocaleString(),text:a+': '+txt.slice(0,120)}); saveNotebook(); render(); }; }
-
-
-
-/* ---------- v14 boutique commercial strategy lab ---------- */
-const STRAT_KEY="veeva-strategy-v14";
-const STRAT={
-  assets:[
-    {id:'derm', name:'Asset A: oral immunology therapy', tag:'Dermatology', note:'Phase 2-ready oral therapy for moderate-to-severe inflammatory dermatosis.', bullets:['Large addressable population but crowded competitive landscape','Primary value driver is convenience versus injectables','Requires broad prescriber education and payer proof of durable response']},
-    {id:'oph', name:'Asset B: ophthalmology biosimilar', tag:'Ophthalmology', note:'Late-stage biosimilar for retinal disease with specialist-prescriber concentration.', bullets:['Smaller patient pool but high annual treatment cost','Commercial model can be focused around retina specialists','Pricing, contracting, and interchangeability perception drive uptake']}
-  ],
-  competitors:[['Area','Incumbent pressure','Differentiation lever','Commercial implication'],['Dermatology','Multiple biologics and oral options','Convenience, safety, speed of response','Broad salesforce and payer step-edits likely'],['Ophthalmology','Reference biologic and emerging biosimilars','Net price, supply reliability, retina KOL trust','Focused launch team, contracting, hub support']],
-  kols:[
-    {id:'kol1', who:'Retina KOL', quote:'I will use a biosimilar if supply is reliable, reimbursement is clean, and the retina community sees no signal of poorer durability.'},
-    {id:'kol2', who:'Dermatology KOL', quote:'Patients like oral options, but payers will ask whether the response is meaningfully better than cheaper step-through options.'},
-    {id:'payer', who:'National payer', quote:'We do not pay a premium for convenience alone. Show avoided administration burden, persistence, and budget impact.'},
-    {id:'commercial', who:'Commercial lead', quote:'A broad derm launch is attractive, but it needs a much larger field force than a retina-specialist launch.'}
-  ]
-};
-function defaultStrategyState(){ return {tab:'brief', asset:'oph', model:{dermPatients:650000,dermEligible:18,dermShare:3,dermPrice:42000,dermGTN:38,dermCOGS:12,dermLaunch:180000000,dermPoS:45,ophPatients:92000,ophEligible:42,ophShare:10,ophPrice:19000,ophGTN:28,ophCOGS:18,ophLaunch:65000000,ophPoS:70,discount:10}, access:{tpp:false,budget:false,rwe:false,coding:false,kol:false,contract:false}, kol:{}, score:{market:'Medium',access:'Medium',differentiation:'Medium',fit:'Medium',risk:'Medium'}, evaluator:{math:false,assumptions:false,think:false,creativity:false,recommendation:false,findings:false,next:false}, notes:{memo:''}}; }
-let stratState=defaultStrategyState();
-try{ const st=JSON.parse(localStorage.getItem(STRAT_KEY)); if(st) stratState=Object.assign(defaultStrategyState(),st,{model:Object.assign(defaultStrategyState().model,st.model||{}),access:Object.assign(defaultStrategyState().access,st.access||{}),kol:Object.assign({},st.kol||{}),score:Object.assign(defaultStrategyState().score,st.score||{}),evaluator:Object.assign(defaultStrategyState().evaluator,st.evaluator||{}),notes:Object.assign(defaultStrategyState().notes,st.notes||{})}); }catch(e){}
-function saveStrategy(){ localStorage.setItem(STRAT_KEY, JSON.stringify(stratState)); scheduleCloudSave(); }
+function continueLearningCard(){
+  const cp=courseProgress();
+  const label=state.view.startsWith('level-')?'Lesson '+((+state.view.split('-')[1])+1):state.view==='home'?'Overview':state.view.replace(/-/g,' ');
+  const cloudLabel=cloud.user?'Cloud sync on':supabaseConfigured()?'Sign in available':'Local browser save';
+  const cls=cloud.user?'on':supabaseConfigured()?'warn':'';
+  return `<div class="card"><div class="eyebrow">Continue</div><h2 style="font-size:20px;margin-bottom:4px">Pick up where you left off</h2><div class="continue-grid"><div class="continue-box"><span class="sync-pill ${cls}">${esc(cloudLabel)}</span><h4 style="margin-top:10px">Last workspace: ${esc(label)}</h4><p>${cp.done}/${cp.total} lessons complete. If you are unsure, go back to the syllabus instead of jumping randomly.</p><div class="continue-actions"><button class="ghost" data-view="${esc(state.view==='home'?'syllabus':state.view)}" style="background:var(--accent);color:#fff;border-color:var(--accent)">Continue</button><button class="ghost" data-view="syllabus">Syllabus</button><button class="ghost" data-view="notebook">Notebook</button></div></div><div class="continue-box"><h4>Rule of thumb</h4><p>One session should have one goal: one lesson block, one case, or five QBank questions. Do not try to finish the whole site at once.</p></div></div></div>`;
+}
 function strategyLaunchCard(){ return `<div class="card strat-hero"><div class="eyebrow">Boutique strategy simulator</div><h2>Commercial Strategy Lab: asset prioritization and market access</h2><p class="lede">Train the work boutique life science firms actually test: indication prioritization, dirty data review, transcript synthesis, sensitivity analysis, payer evidence, KOL synthesis, and diligence-style recommendation.</p><div style="margin-top:16px"><button class="ghost" data-view="strategy" style="background:#fff;color:#17334d;border-color:#fff">Open strategy lab</button></div></div>`; }
 function renderStrategyLab(){ const tabs=[['brief','Brief'],['datapack','Data pack'],['market','Market model'],['sensitivity','Sensitivity'],['competition','Competition'],['access','Access evidence'],['kol','KOL synthesis'],['transcripts','Transcripts'],['diligence','Diligence score'],['evaluator','WSO evaluator'],['memo','IC memo']]; let h=`<div class="card strat-hero"><div class="eyebrow">Boutique-ready lab</div><h2>Commercial Strategy and Market Access Case</h2><p class="lede">Recommend which asset the client should prioritize and what evidence, launch, and access plan must support it.</p><div class="strat-tabs">${tabs.map(t=>`<button class="strat-tab ${stratState.tab===t[0]?'active':''}" data-strat-tab="${t[0]}">${t[1]}</button>`).join('')}</div></div>`; if(stratState.tab==='brief') h+=strategyBrief(); if(stratState.tab==='datapack') h+=strategyDataPack(); if(stratState.tab==='market') h+=strategyMarket(); if(stratState.tab==='sensitivity') h+=strategySensitivity(); if(stratState.tab==='competition') h+=strategyCompetition(); if(stratState.tab==='access') h+=strategyAccess(); if(stratState.tab==='kol') h+=strategyKOL(); if(stratState.tab==='transcripts') h+=strategyTranscripts(); if(stratState.tab==='diligence') h+=strategyDiligence(); if(stratState.tab==='evaluator') h+=strategyEvaluator(); if(stratState.tab==='memo') h+=strategyMemo(); return h; }
 function strategyBrief(){ return `<div class="card"><div class="eyebrow">Client prompt</div><h2 style="font-size:20px">Which asset should we prioritize?</h2><p class="sub">A mid-size biopharma can fund only one near-term commercial strategy workstream. Choose the better asset and explain the commercial, access, evidence, and execution logic.</p><div class="asset-grid">${STRAT.assets.map(a=>`<div class="asset-card"><span class="asset-tag">${esc(a.tag)}</span><h4>${esc(a.name)}</h4><p class="sub">${esc(a.note)}</p><ul>${a.bullets.map(b=>`<li>${esc(b)}</li>`).join('')}</ul></div>`).join('')}</div><div class="callout" style="margin-top:14px"><b>Consulting standard:</b> do not pick the biggest market by default. Pick the asset with the better risk-adjusted opportunity, access path, evidence plan, and strategic fit.</div></div>`; }
