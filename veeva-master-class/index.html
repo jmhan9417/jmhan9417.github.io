@@ -475,6 +475,18 @@
   /* ===== v27 global nav and utility quieting ===== */
   .brand{display:flex!important;flex-direction:row!important;align-items:center!important;gap:0!important;padding-left:0!important}.brand:before{display:none!important;content:none!important}.brand span{display:none!important}.topbtn{background:transparent!important;border:0!important;color:#1d1d1f!important;border-radius:0!important;padding:6px 8px!important;font-size:12px!important;font-weight:500!important}.topbtn:hover{background:transparent!important;color:#0071e3!important}.topbtn kbd{display:none!important}#resetBtn{background:transparent!important;color:#86868b!important;border:0!important;border-radius:0!important;box-shadow:none!important;font-size:11.5px!important;font-weight:500!important;padding:7px 10px!important;text-align:left!important;width:auto!important}#resetBtn:hover{color:#1d1d1f!important;text-decoration:underline!important;text-underline-offset:3px!important;background:transparent!important}.side div:has(>#resetBtn){padding:4px 0 2px!important}.continue-actions .ghost:after{content:" ›"}.continue-actions .ghost:hover{text-decoration:underline!important;text-underline-offset:3px!important;background:transparent!important}
 
+
+  /* ===== v28 guided roadmap ===== */
+  .roadmap-card{background:#fff!important;border:0!important;border-radius:30px!important;box-shadow:none!important;padding:44px 46px!important}.roadmap-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;margin-bottom:28px}.roadmap-head .eyebrow{font-size:14px!important;font-weight:600!important;color:#86868b!important;text-transform:none!important;letter-spacing:-.01em!important}.roadmap-head h2{font-size:44px!important;line-height:1.03!important;letter-spacing:-.055em!important;margin:8px 0 0!important;color:#1d1d1f!important}.roadmap-head p{max-width:430px;margin:0!important;color:#6e6e73!important;font-size:17px!important;line-height:1.35!important;font-weight:500!important}.roadmap-steps{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:#e8e8ed;border-radius:24px;overflow:hidden}.roadstep{background:#fbfbfd;padding:24px 18px 22px;min-height:188px;display:flex;flex-direction:column;gap:10px}.roadstep .n{font-size:12px;font-weight:600;color:#86868b}.roadstep h3{font-size:21px!important;line-height:1.06!important;letter-spacing:-.035em!important;margin:0!important;color:#1d1d1f!important}.roadstep p{font-size:13.5px!important;line-height:1.38!important;color:#6e6e73!important;margin:0!important}.roadstep .done{margin-top:auto;font-size:12.5px;color:#86868b;line-height:1.35}.roadmap-bottom{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;margin-top:14px}.roadmap-note{background:#fbfbfd;border-radius:24px;padding:24px;color:#6e6e73;font-size:15px;line-height:1.45}.roadmap-note b{display:block;color:#1d1d1f;font-size:18px;letter-spacing:-.03em;margin-bottom:6px}.roadmap-actions{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px}.roadmap-actions button{background:transparent!important;color:#0071e3!important;border:0!important;border-radius:0!important;padding:0!important;font-size:15px!important;font-weight:500!important}.roadmap-actions button:after{content:" ›"}.roadmap-actions button:hover{text-decoration:underline!important;text-underline-offset:3px!important;background:transparent!important}@media(max-width:1180px){.roadmap-steps{grid-template-columns:repeat(3,1fr)}.roadmap-head{grid-template-columns:1fr}.roadmap-head p{max-width:720px}.roadmap-bottom{grid-template-columns:1fr}}@media(max-width:720px){.roadmap-card{padding:32px 22px!important}.roadmap-steps{grid-template-columns:1fr}.roadmap-head h2{font-size:34px!important}.roadstep{min-height:0}}
+
+
+  /* ===== v29 roadmap priority ===== */
+  .simple-hero{padding-top:96px!important;padding-bottom:86px!important}.roadmap-card{margin-top:0!important}.roadmap-head h2{max-width:720px}.path-line{flex-wrap:wrap}.path-line span+span:before{margin-left:2px}
+
+
+  /* ===== v30 roadmap readability ===== */
+  .roadmap-steps{grid-template-columns:repeat(3,1fr)!important;gap:1px!important}.roadstep{min-height:210px!important;padding:28px 28px 26px!important}.roadstep h3{font-size:26px!important}.roadstep p{font-size:15px!important;max-width:250px}.roadstep .done{font-size:13.5px!important;max-width:260px}.roadmap-head{grid-template-columns:1fr 1fr!important}.roadmap-bottom{grid-template-columns:1fr 1fr!important}@media(max-width:980px){.roadmap-head,.roadmap-bottom{grid-template-columns:1fr!important}.roadmap-steps{grid-template-columns:1fr!important}.roadstep{min-height:0!important}}
+
 </style>
 </head>
 <body>
@@ -515,6 +527,9 @@
 /* v25-alignment-cleanup */
 /* v26-apple-com-quiet-pass */
 /* v27-nav-quieting */
+/* v28-guided-roadmap */
+/* v29-roadmap-priority */
+/* v30-roadmap-readability */
 </script>
 <script>
 /* =====================================================================
@@ -4161,8 +4176,9 @@ function renderHome(){
       <h2>Think like the analyst in the room.</h2>
       <p class="lede tight">Build the language, cases, and judgment for life sciences consulting interviews. One clear path at a time.</p>
       <div class="hero-actions"><button class="ghost" data-view="syllabus">Start learning</button><button class="ghost secondary" data-view="practical">Explore studio</button></div>
-      <div class="path-line"><b>Best path</b><span>Learn</span><span>Practice</span><span>Perform</span></div>
+      <div class="path-line"><b>Best path</b><span>Curriculum</span><span>Case Lab</span><span>Capstone</span><span>Studio</span><span>Drills</span></div>
     </div>
+    ${guidedRoadmapCard()}
     <div class="choice-grid">
       <div class="choice-card"><div class="choice-k">Learn</div><h3>Build the base.</h3><p>Frameworks, domain language, and small drills in a clean curriculum.</p><ul><li>27 guided lessons</li><li>plain-English consulting logic</li><li>quick checks as you go</li></ul><button class="ghost" data-view="syllabus" style="background:var(--accent);color:#fff;border-color:var(--accent)">View curriculum</button></div>
       <div class="choice-card"><div class="choice-k">Practice</div><h3>Turn structure into answers.</h3><p>Work cases until the recommendation feels natural, not memorized.</p><ul><li>worked case lab</li><li>capstone data room</li><li>strategy simulation</li></ul><button class="ghost" data-view="case" style="background:var(--accent);color:#fff;border-color:var(--accent)">Start cases</button></div>
@@ -4867,6 +4883,24 @@ function updateAuthButton(){ const b=document.getElementById('authBtn'); if(!b) 
 function openAuthModal(){ closeAuthModal(); const signed=!!cloud.user; const configured=supabaseConfigured(); const div=document.createElement('div'); div.className='auth-backdrop'; div.id='authModal'; div.innerHTML=`<div class="auth-card"><h3>${signed?'Account and cloud sync':'Sign in to continue anywhere'}</h3><p>${configured?'Use email magic link. Your answers, case work, analyst notebook, capstone, and strategy lab progress will sync to your account.':'Cloud sync is not configured yet. The app is safe to use locally, and the Supabase setup panel/schema is ready.'}</p>${signed?`<div class="sync-pill on">Signed in as ${esc(cloud.user.email||'user')}</div><div class="auth-actions"><button class="ghost" id="syncNow">Sync now</button><button class="ghost" id="signOutBtn">Sign out</button><button class="ghost" id="closeAuth">Close</button></div>`: configured?`<input id="authEmail" type="email" placeholder="you@example.com"><div class="auth-actions"><button class="ghost" id="magicBtn" style="background:var(--accent);color:#fff;border-color:var(--accent)">Send magic link</button><button class="ghost" id="closeAuth">Close</button></div>`:`<div class="cloud-disabled"><b>Backend needed:</b> create a Supabase project, run the provided SQL schema, then add the project URL and anon key to the app constants. Until then, progress continues to save in this browser.</div><div class="auth-actions"><button class="ghost" id="closeAuth">Close</button></div>`}<div class="auth-msg" id="authMsg"></div></div>`; document.body.appendChild(div); div.onclick=e=>{ if(e.target===div) closeAuthModal(); }; const close=document.getElementById('closeAuth'); if(close) close.onclick=closeAuthModal; const sync=document.getElementById('syncNow'); if(sync) sync.onclick=async()=>{ await saveCloudProgress(); document.getElementById('authMsg').textContent='Synced'; }; const sign=document.getElementById('signOutBtn'); if(sign) sign.onclick=async()=>{ await cloud.client.auth.signOut(); cloud.user=null; cloud.status='local'; cloud.message='Local only'; closeAuthModal(); render(); }; const magic=document.getElementById('magicBtn'); if(magic) magic.onclick=sendMagicLink;  }
 function closeAuthModal(){ const m=document.getElementById('authModal'); if(m) m.remove(); }
 async function sendMagicLink(){ const el=document.getElementById('authEmail'); const msg=document.getElementById('authMsg'); const email=el&&el.value.trim(); if(!email){ msg.textContent='Enter an email first'; msg.className='auth-msg err'; return; } const {error}=await cloud.client.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin}}); if(error){ msg.textContent=error.message; msg.className='auth-msg err'; } else { msg.textContent='Magic link sent. Check your email.'; msg.className='auth-msg'; } }
+
+function guidedRoadmapCard(){
+  const steps=[
+    ['01','Curriculum','Learn the basic language first.','Core consulting, R&D, value chain, market access.'],
+    ['02','Case Lab','See what a clean answer looks like.','Finish two cases you can explain out loud.'],
+    ['03','Capstone','Turn data into a recommendation.','Build one clear, slide-ready answer.'],
+    ['04','Studio','Practice messy analyst work.','Run Case A, B, and C end to end.'],
+    ['05','Drills','Sharpen weak spots fast.','Do five at a time. Review the misses.'],
+    ['06','Notebook','Save your own answer patterns.','Keep reusable structures, phrases, and insights.']
+  ];
+  return `<div class="roadmap-card">
+    <div class="roadmap-head"><div><div class="eyebrow">Guided Roadmap</div><h2>Start here. Stop when you can explain it.</h2></div><p>You do not need to finish everything. The goal is to become interview-ready: learn the language, run the cases, then practice judgment under pressure.</p></div>
+    <div class="roadmap-steps">${steps.map(s=>`<div class="roadstep"><div class="n">${s[0]}</div><h3>${s[1]}</h3><p>${s[2]}</p><div class="done">Done when: ${s[3]}</div></div>`).join('')}</div>
+    <div class="roadmap-bottom"><div class="roadmap-note"><b>The best route</b>Curriculum → Case Lab → Capstone → Studio → Drills → Review missed. Do not start with drills unless you already know the basics.</div><div class="roadmap-note"><b>One session rule</b>One lesson set, one case, or five drills. Small reps compound faster than cramming.</div></div>
+    <div class="roadmap-actions"><button class="ghost" data-view="syllabus">Start with Curriculum</button><button class="ghost" data-view="case">Run your first case</button><button class="ghost" data-view="practical">Go to Studio</button></div>
+  </div>`;
+}
+
 function continueLearningCard(){
   const cp=courseProgress();
   const label=state.view.startsWith('level-')?'Lesson '+((+state.view.split('-')[1])+1):state.view==='home'?'Overview':state.view.replace(/-/g,' ');
