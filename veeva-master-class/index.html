@@ -535,6 +535,10 @@
   /* ===== v42 continue card alignment ===== */
   .continue-card{padding:42px 46px!important}.continue-head{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:24px!important;align-items:start!important;margin-bottom:30px!important}.continue-head h2{font-size:30px!important;line-height:1.08!important;letter-spacing:-.045em!important;margin:8px 0 0!important;color:#1d1d1f!important}.continue-head .sync-pill{justify-self:end!important;align-self:start!important;margin-top:2px!important}.continue-grid{display:grid!important;grid-template-columns:1.2fr .8fr!important;gap:56px!important;align-items:start!important}.continue-box{padding:0!important;border-radius:0!important;height:auto!important;background:transparent!important}.continue-box h4{font-size:22px!important;line-height:1.12!important;letter-spacing:-.035em!important;margin:0 0 12px!important;color:#1d1d1f!important}.continue-box p{max-width:500px!important;margin:0!important;font-size:16px!important;line-height:1.45!important;color:#6e6e73!important}.continue-actions{margin-top:22px!important;gap:22px!important}.continue-actions .ghost{font-size:15px!important;padding:0!important;background:transparent!important;color:#0071e3!important;border:0!important;border-radius:0!important}.continue-actions .ghost:after{content:" ›"}.continue-actions .ghost:hover{text-decoration:underline!important;text-underline-offset:3px!important;background:transparent!important}@media(max-width:820px){.continue-card{padding:34px 26px!important}.continue-head{grid-template-columns:1fr!important;margin-bottom:24px!important}.continue-head .sync-pill{justify-self:start!important}.continue-grid{grid-template-columns:1fr!important;gap:28px!important}}
 
+
+  /* ===== v43 drill alignment and visual path ===== */
+  .card:has(> .drill){padding:0!important;overflow:hidden!important}.drill{padding:42px 48px 38px!important}.drill .dhead{grid-template-columns:minmax(0,1fr) max-content!important;align-items:start!important;margin-bottom:22px!important}.kind,.qmeta{line-height:1.2!important}.qmeta{justify-self:end!important;max-width:240px!important}.qtext{max-width:920px!important;margin-bottom:22px!important}.drill-path{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;border-top:1px solid rgba(0,0,0,.12)!important;border-bottom:1px solid rgba(0,0,0,.12)!important;margin:0 0 24px!important}.path-step{padding:15px 18px 15px 0!important;border-right:1px solid rgba(0,0,0,.10)!important;display:grid!important;gap:5px!important}.path-step:last-child{border-right:0!important}.path-step span{font-size:12px!important;color:#86868b!important;font-weight:600!important}.path-step b{font-size:15px!important;line-height:1.25!important;color:#1d1d1f!important;font-weight:600!important;letter-spacing:-.02em!important}.opts{border-top:0!important}.opt{padding:18px 0!important;grid-template-columns:32px minmax(0,1fr)!important}.opt > .mk{margin-top:1px!important}.banner{max-width:920px!important}.banner + div{margin-top:18px!important}@media(max-width:760px){.drill{padding:32px 24px!important}.drill .dhead{grid-template-columns:1fr!important}.qmeta{justify-self:start!important;text-align:left!important}.drill-path{grid-template-columns:1fr!important}.path-step{border-right:0!important;border-bottom:1px solid rgba(0,0,0,.10)!important}.path-step:last-child{border-bottom:0!important}.qtext{font-size:21px!important}.opt{grid-template-columns:28px minmax(0,1fr)!important}}
+
 </style>
 </head>
 <body>
@@ -590,6 +594,7 @@
 /* v40-quiet-simulator-navigation */
 /* v41-quiet-lesson-header */
 /* v42-continue-card-alignment */
+/* v43-drill-alignment-visual-path */
 </script>
 <script>
 /* =====================================================================
@@ -4323,6 +4328,12 @@ function renderLevel(i){
   return h;
 }
 
+
+function drillPath(isK){
+  const steps = isK ? ['Read the split','Check overlap','Decide'] : ['Clarify the ask','Structure the drivers','Recommend'];
+  return `<div class="drill-path" aria-label="Answer path">${steps.map((x,i)=>`<div class="path-step"><span>${String(i+1).padStart(2,'0')}</span><b>${x}</b></div>`).join('')}</div>`;
+}
+
 function renderDrill(li,di,d){
   const key=keyOf(li,di);
   const chosen=state.answers[key];
@@ -4376,6 +4387,7 @@ function renderDrill(li,di,d){
       </div>
       ${!isK && d.speaker?`<div class="speaker">${esc(d.speaker)} asks:</div>`:''}
       <div class="qtext ${isK?'':'scenq'}">${esc(d.q)}</div>
+      ${drillPath(isK)}
       <div class="opts">${opts}</div>
       ${banner}
     </div>
