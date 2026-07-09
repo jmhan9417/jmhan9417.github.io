@@ -601,6 +601,21 @@
   .visual-card .visual-surface{margin-top:0!important;width:100%!important}
   @media(max-width:980px){.visual-card{padding:34px 24px 40px!important}.visual-card h2{font-size:29px!important}}
 
+
+  /* ===== v48 compact sidebar ===== */
+  .wrap{grid-template-columns:176px minmax(0,1fr)!important;gap:30px!important}
+  .side{border-radius:22px!important;padding:18px 18px 16px!important;background:rgba(251,251,253,.82)!important}
+  .navhdr{font-size:13px!important;line-height:1.2!important;font-weight:500!important;color:#86868b!important;margin:18px 8px 9px!important;padding:0!important;text-transform:none!important;letter-spacing:-.01em!important}
+  .navhdr:first-child{margin-top:6px!important}
+  .navbtn{padding:7px 10px!important;border-radius:10px!important;font-size:14.5px!important;line-height:1.25!important;font-weight:500!important;color:#3f3f46!important;min-height:34px!important}
+  .navbtn + .navbtn{margin-top:3px!important}
+  .navbtn.active{background:rgba(0,0,0,.06)!important;color:#1d1d1f!important;font-weight:600!important}
+  .navbtn:hover{background:rgba(0,0,0,.04)!important;color:#1d1d1f!important}
+  .side .nav-section-note{display:none!important}
+  .side-reset{border-top:1px solid rgba(0,0,0,.10)!important;margin:16px 8px 0!important;padding-top:12px!important}
+  #resetBtn{width:100%!important;text-align:left!important;padding:4px 0!important;font-size:13px!important;color:#86868b!important}
+  @media(max-width:980px){.wrap{grid-template-columns:1fr!important}.side{padding:14px!important}.navhdr{margin-top:12px!important}.navbtn{font-size:14px!important}}
+
 </style>
 </head>
 <body>
@@ -4275,23 +4290,22 @@ function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").rep
 /* ---------- Sidebar ---------- */
 function renderSide(){
   const side=document.getElementById("side");
-  let h='<div class="navhdr">Start</div>';
-  h+=navBtn("home","Start","",state.view==="home");
+  let h='<div class="navhdr">Learn</div>';
+  h+=navBtn("home","Overview","",state.view==="home");
   h+=navBtn("syllabus","Curriculum","☷",state.view==="syllabus");
-  h+='<div class="nav-section-note">Full lesson list lives in Curriculum. This sidebar stays calm.</div>';
-  h+='<div class="navhdr" style="margin-top:6px">Practice</div>';
+  h+='<div class="navhdr">Practice</div>';
   h+=navBtn("case","Case Lab","C",state.view==="case");
   h+=navBtn("capstone","Capstone","M",state.view==="capstone");
   h+=navBtn("strategy","Strategy","S",state.view==="strategy");
   h+=navBtn("practical","Studio","A",state.view==="practical");
   h+=navBtn("qbank","Drills","Q",state.view==="qbank");
-  h+='<div class="navhdr" style="margin-top:6px">Support</div>';
+  h+='<div class="navhdr">Support</div>';
   h+=navBtn("notebook","Notebook","N",state.view==="notebook");
   h+=navBtn("review","Review missed"+(missedCount()?" ("+missedCount()+")":""),"⚑",state.view==="review");
   h+=navBtn("glossary","Glossary","☰",state.view==="glossary");
   h+=navBtn("certificate","Certificate","★",state.view==="certificate");
   h+=navBtn("about","About","ⓘ",state.view==="about");
-  h+='<div style="padding:10px 6px 4px"><button class="ghost" id="resetBtn" style="width:100%">Reset progress</button></div>';
+  h+='<div class="side-reset"><button class="ghost" id="resetBtn">Reset progress</button></div>';
   side.innerHTML=h;
   side.querySelectorAll("[data-view]").forEach(b=> b.onclick=()=>{ state.view=b.getAttribute("data-view"); render(); window.scrollTo({top:0,behavior:"smooth"}); });
   const rb=document.getElementById("resetBtn"); if(rb) rb.onclick=()=>{ if(confirm("Clear all answers and reset both meters to 0 percent?")){ state.answers={}; save(); render(); } };
@@ -4324,7 +4338,7 @@ function render(){
 
 function renderFoot(){
   document.getElementById("foot").innerHTML =
-    "Built for Minseok \"Joey\" Han, PharmD, MS Regulatory Science &nbsp;&middot;&nbsp; Practice tool. The Your Story Bank level is grounded in your real, verifiable resume; the other levels teach general life science and consulting knowledge from public, reputable sources. Model answers show the reasoning to internalize, not scripts to memorize. Embedded videos are optional third-party YouTube explainers, now blended into the visual learning flow. v47 makes visual models large, readable, and print-free.";
+    "Built for Minseok \"Joey\" Han, PharmD, MS Regulatory Science &nbsp;&middot;&nbsp; Practice tool. The Your Story Bank level is grounded in your real, verifiable resume; the other levels teach general life science and consulting knowledge from public, reputable sources. Model answers show the reasoning to internalize, not scripts to memorize. Embedded videos are optional third-party YouTube explainers, now blended into the visual learning flow. v48 tightens sidebar navigation while keeping visual models large and print-free.";
 }
 
 /* ---------- Home ---------- */
