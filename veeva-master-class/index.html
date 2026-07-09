@@ -539,6 +539,28 @@
   /* ===== v43 drill alignment and visual path ===== */
   .card:has(> .drill){padding:0!important;overflow:hidden!important}.drill{padding:42px 48px 38px!important}.drill .dhead{grid-template-columns:minmax(0,1fr) max-content!important;align-items:start!important;margin-bottom:22px!important}.kind,.qmeta{line-height:1.2!important}.qmeta{justify-self:end!important;max-width:240px!important}.qtext{max-width:920px!important;margin-bottom:22px!important}.drill-path{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;border-top:1px solid rgba(0,0,0,.12)!important;border-bottom:1px solid rgba(0,0,0,.12)!important;margin:0 0 24px!important}.path-step{padding:15px 18px 15px 0!important;border-right:1px solid rgba(0,0,0,.10)!important;display:grid!important;gap:5px!important}.path-step:last-child{border-right:0!important}.path-step span{font-size:12px!important;color:#86868b!important;font-weight:600!important}.path-step b{font-size:15px!important;line-height:1.25!important;color:#1d1d1f!important;font-weight:600!important;letter-spacing:-.02em!important}.opts{border-top:0!important}.opt{padding:18px 0!important;grid-template-columns:32px minmax(0,1fr)!important}.opt > .mk{margin-top:1px!important}.banner{max-width:920px!important}.banner + div{margin-top:18px!important}@media(max-width:760px){.drill{padding:32px 24px!important}.drill .dhead{grid-template-columns:1fr!important}.qmeta{justify-self:start!important;text-align:left!important}.drill-path{grid-template-columns:1fr!important}.path-step{border-right:0!important;border-bottom:1px solid rgba(0,0,0,.10)!important}.path-step:last-child{border-bottom:0!important}.qtext{font-size:21px!important}.opt{grid-template-columns:28px minmax(0,1fr)!important}}
 
+
+  /* ===== v44 visual learner layer ===== */
+  .visual-home-card{display:grid!important;grid-template-columns:1.08fr .92fr!important;gap:34px!important;align-items:center!important;background:#fff!important;border:0!important;border-radius:30px!important;box-shadow:none!important;padding:44px 46px!important}
+  .visual-home-stage{background:#fbfbfd;border:1px solid rgba(0,0,0,.08);border-radius:28px;padding:22px;min-height:300px;display:grid;place-items:center}
+  .visual-map-svg{width:100%;max-width:560px;height:auto;display:block}
+  .visual-copy .eyebrow,.visual-card .eyebrow{color:#86868b!important;text-transform:none!important;letter-spacing:-.01em!important;font-size:14px!important;font-weight:600!important}
+  .visual-copy h2{font-size:40px!important;line-height:1.04!important;letter-spacing:-.055em!important;margin:8px 0 12px!important;color:#1d1d1f!important}
+  .visual-copy p{font-size:17px!important;line-height:1.42!important;color:#6e6e73!important;margin:0!important;max-width:520px}
+  .visual-rules{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#e8e8ed;border-radius:22px;overflow:hidden;margin:22px 0 24px}
+  .visual-rule{background:#fbfbfd;padding:18px 18px 17px}.visual-rule b{display:block;color:#1d1d1f;font-size:15px;font-weight:650;letter-spacing:-.02em;margin-bottom:5px}.visual-rule span{display:block;color:#6e6e73;font-size:13.5px;line-height:1.35}
+  .visual-watch{border-top:1px solid rgba(0,0,0,.12);padding-top:18px}.visual-watch-label{font-size:13px;color:#86868b;font-weight:600;margin-bottom:10px}.visual-watch .vgrid{display:grid!important;grid-template-columns:1fr!important;gap:10px!important;margin:0!important}
+  .visual-card{display:grid!important;grid-template-columns:minmax(0,1.1fr) minmax(260px,.9fr)!important;gap:28px!important;align-items:center!important;background:#fff!important;border:0!important;border-radius:30px!important;box-shadow:none!important;padding:36px 42px!important}
+  .visual-card.no-video{grid-template-columns:1fr!important}.visual-card .visual-surface{background:#fbfbfd;border:1px solid rgba(0,0,0,.08);border-radius:26px;padding:18px;overflow:hidden}.visual-card .diagram{background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;box-shadow:none!important}.visual-card .diagram svg{max-width:760px!important}
+  .visual-card h2{font-size:28px!important;line-height:1.1!important;letter-spacing:-.045em!important;margin:8px 0 8px!important;color:#1d1d1f!important}.visual-card p.sub{font-size:16px!important;line-height:1.42!important;color:#6e6e73!important;margin:0 0 18px!important;max-width:600px}
+  .visual-video-copy{align-self:stretch;display:flex;flex-direction:column;justify-content:center;border-top:1px solid rgba(0,0,0,.12);padding-top:18px}.visual-video-copy h3{margin:0 0 8px!important;font-size:20px!important;line-height:1.15!important;letter-spacing:-.035em!important;color:#1d1d1f!important}.visual-video-copy p{margin:0 0 16px!important;color:#6e6e73!important;font-size:14.5px!important;line-height:1.42!important}.visual-video-copy .vgrid{display:grid!important;grid-template-columns:1fr!important;gap:10px!important;margin:0!important}
+  .visual-card .vfacade,.visual-home-card .vfacade{display:grid!important;grid-template-columns:92px minmax(0,1fr)!important;align-items:center!important;min-height:72px!important;background:#fbfbfd!important;border:1px solid rgba(0,0,0,.10)!important;border-radius:18px!important;box-shadow:none!important;overflow:hidden!important;transition:background .16s ease,border-color .16s ease!important}.visual-card .vfacade:hover,.visual-home-card .vfacade:hover{background:#f5f5f7!important;border-color:rgba(0,0,0,.18)!important;transform:none!important}
+  .visual-card .vthumb,.visual-home-card .vthumb{width:92px!important;height:72px!important;aspect-ratio:auto!important;object-fit:cover!important;opacity:.86!important;filter:saturate(.82)!important;transform:none!important}.visual-card .vfacade:hover .vthumb,.visual-home-card .vfacade:hover .vthumb{opacity:.95!important;transform:none!important}
+  .visual-card .vplay,.visual-home-card .vplay{left:46px!important;top:50%!important;width:30px!important;height:30px!important;border-width:1px!important;background:rgba(29,29,31,.72)!important}.visual-card .vplay:after,.visual-home-card .vplay:after{border-width:6px 0 6px 10px!important}
+  .visual-card .vmeta,.visual-home-card .vmeta{position:static!important;background:transparent!important;color:#1d1d1f!important;padding:0 14px!important;display:block!important}.visual-card .vmeta b,.visual-home-card .vmeta b{display:block!important;color:#1d1d1f!important;font-size:14px!important;line-height:1.25!important;font-weight:600!important;letter-spacing:-.015em!important}.visual-card .vmeta small,.visual-home-card .vmeta small{display:block!important;color:#86868b!important;font-size:12px!important;font-weight:500!important;text-transform:none!important;letter-spacing:-.01em!important;margin-top:4px}
+  .visual-card .vhold,.visual-home-card .vhold{grid-column:1/-1}.visual-card .vframe,.visual-home-card .vframe{border:0!important;border-radius:22px!important;box-shadow:none!important;background:#000}.visual-card .vfallback,.visual-home-card .vfallback{text-align:left!important;color:#0071e3!important;font-size:13px!important;font-weight:500!important;margin-top:8px}
+  @media(max-width:980px){.visual-home-card,.visual-card{grid-template-columns:1fr!important;padding:34px 26px!important}.visual-copy h2{font-size:34px!important}.visual-rules{grid-template-columns:1fr}.visual-video-copy{border-top:1px solid rgba(0,0,0,.12);padding-top:18px}}
+
 </style>
 </head>
 <body>
@@ -4262,7 +4284,7 @@ function render(){
 
 function renderFoot(){
   document.getElementById("foot").innerHTML =
-    "Built for Minseok \"Joey\" Han, PharmD, MS Regulatory Science &nbsp;&middot;&nbsp; Practice tool. The Your Story Bank level is grounded in your real, verifiable resume; the other levels teach general life science and consulting knowledge from public, reputable sources. Model answers show the reasoning to internalize, not scripts to memorize. Embedded videos are third-party content on YouTube. v18 adds advanced practical cases and a deep question bank for analyst-style practice.";
+    "Built for Minseok \"Joey\" Han, PharmD, MS Regulatory Science &nbsp;&middot;&nbsp; Practice tool. The Your Story Bank level is grounded in your real, verifiable resume; the other levels teach general life science and consulting knowledge from public, reputable sources. Model answers show the reasoning to internalize, not scripts to memorize. Embedded videos are optional third-party YouTube explainers, now blended into the visual learning flow. v44 adds visual-learner maps across the course.";
 }
 
 /* ---------- Home ---------- */
@@ -4277,6 +4299,7 @@ function renderHome(){
       <div class="path-line"><b>Best path</b><span>Curriculum</span><span>Case Lab</span><span>Capstone</span><span>Studio</span><span>Drills</span></div>
     </div>
     ${guidedRoadmapCard()}
+    ${visualLearnerCard()}
     <div class="choice-grid">
       <div class="choice-card"><div class="choice-k">Learn</div><h3>Build the base.</h3><p>Frameworks, domain language, and small drills in a clean curriculum.</p><ul><li>27 guided lessons</li><li>plain-English consulting logic</li><li>quick checks as you go</li></ul><button class="ghost" data-view="syllabus" style="background:var(--accent);color:#fff;border-color:var(--accent)">View curriculum</button></div>
       <div class="choice-card"><div class="choice-k">Practice</div><h3>Turn structure into answers.</h3><p>Work cases until the recommendation feels natural, not memorized.</p><ul><li>worked case lab</li><li>capstone data room</li><li>strategy simulation</li></ul><button class="ghost" data-view="case" style="background:var(--accent);color:#fff;border-color:var(--accent)">Start cases</button></div>
@@ -4725,26 +4748,70 @@ function videoFacade(v){
     <span class="vmeta"><b>${esc(v.title)}</b><small>${esc(v.by)} &middot; YouTube</small></span>
   </div>`;
 }
+function visualMapSvg(){
+  return `<svg class="visual-map-svg" viewBox="0 0 620 360" role="img" aria-label="Visual learning loop from concept map to case answer">
+    <rect x="24" y="26" width="572" height="308" rx="34" fill="#fff" stroke="rgba(0,0,0,.10)"/>
+    <path d="M124 104 C188 44 310 38 394 90 C486 146 500 258 420 300 C350 338 232 314 178 238" fill="none" stroke="#d2d2d7" stroke-width="2.4" stroke-linecap="round"/>
+    <g font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif">
+      <circle cx="132" cy="104" r="48" fill="#f5f5f7" stroke="rgba(0,0,0,.10)"/><text x="132" y="99" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1d1f">Read</text><text x="132" y="119" text-anchor="middle" font-size="11" fill="#6e6e73">one concept</text>
+      <circle cx="302" cy="72" r="48" fill="#f5f5f7" stroke="rgba(0,0,0,.10)"/><text x="302" y="67" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1d1f">Map</text><text x="302" y="87" text-anchor="middle" font-size="11" fill="#6e6e73">the drivers</text>
+      <circle cx="468" cy="148" r="48" fill="#f5f5f7" stroke="rgba(0,0,0,.10)"/><text x="468" y="143" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1d1f">Watch</text><text x="468" y="163" text-anchor="middle" font-size="11" fill="#6e6e73">only if useful</text>
+      <circle cx="428" cy="278" r="48" fill="#f5f5f7" stroke="rgba(0,0,0,.10)"/><text x="428" y="273" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1d1f">Drill</text><text x="428" y="293" text-anchor="middle" font-size="11" fill="#6e6e73">choose answer</text>
+      <circle cx="218" cy="282" r="48" fill="#1d1d1f"/><text x="218" y="277" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Explain</text><text x="218" y="297" text-anchor="middle" font-size="11" fill="rgba(255,255,255,.68)">out loud</text>
+      <path d="M255 174 h110" stroke="#1d1d1f" stroke-width="2" stroke-linecap="round"/><path d="M358 166 l12 8 -12 8" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><text x="310" y="158" text-anchor="middle" font-size="12" fill="#6e6e73">mental model</text>
+    </g>
+  </svg>`;
+}
+function visualLearnerCard(){
+  return `<div class="card visual-home-card">
+    <div class="visual-home-stage">${visualMapSvg()}</div>
+    <div class="visual-copy">
+      <div class="eyebrow">For visual learners</div>
+      <h2>See the structure before the words.</h2>
+      <p>Each lesson now gives you a mental model first: a diagram, the key relationship, then the drill. Videos stay optional and quiet, so they support the page instead of taking it over.</p>
+      <div class="visual-rules">
+        <div class="visual-rule"><b>Map the problem</b><span>Use the diagram to see the buckets, flow, or funnel before memorizing terms.</span></div>
+        <div class="visual-rule"><b>Then answer</b><span>Move from visual structure to a spoken recommendation, the way an interview will feel.</span></div>
+      </div>
+      <div class="visual-watch">
+        <div class="visual-watch-label">Optional warm-up videos</div>
+        <div class="vgrid">${HOME_VIDEOS.slice(0,2).map(videoFacade).join("")}</div>
+      </div>
+    </div>
+  </div>`;
+}
+function conceptSketch(i){
+  const l=DATA.levels[i];
+  const labels=(l.concepts||[]).slice(0,4);
+  const title=esc((l.title||'Concept').split(':')[0]);
+  const nodes=[[116,88],[504,88],[116,250],[504,250]];
+  return `<svg viewBox="0 0 620 338" role="img" aria-label="Concept map for ${title}">
+    <rect x="24" y="24" width="572" height="290" rx="32" fill="#fff" stroke="rgba(0,0,0,.10)"/>
+    <g font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif">
+      <rect x="210" y="126" width="200" height="86" rx="24" fill="#1d1d1f"/>
+      <text x="310" y="158" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">${title.length>28?title.slice(0,28)+'…':title}</text>
+      <text x="310" y="182" text-anchor="middle" fill="rgba(255,255,255,.68)" font-size="12">answer structure</text>
+      ${labels.map((x,idx)=>{ const [cx,cy]=nodes[idx]; const anchor=cx<310?'start':'end'; const tx=cx<310?cx+54:cx-54; return `<path d="M${cx<310?cx+48:cx-48} ${cy} C ${cx<310?230:390} ${cy}, ${cx<310?230:390} 169, ${cx<310?210:410} 169" fill="none" stroke="#d2d2d7" stroke-width="2"/><circle cx="${cx}" cy="${cy}" r="44" fill="#f5f5f7" stroke="rgba(0,0,0,.10)"/><text x="${cx}" y="${cy+4}" text-anchor="middle" fill="#1d1d1f" font-size="12" font-weight="650">${esc(x).length>18?esc(x).slice(0,18)+'…':esc(x)}</text>`; }).join('')}
+      <text x="310" y="284" text-anchor="middle" fill="#6e6e73" font-size="12">Use the map to explain the answer in one clean sentence.</text>
+    </g>
+  </svg>`;
+}
 function mediaCard(i){
-  const m=MEDIA[String(i)]; if(!m) return "";
-  let inner="";
-  if(m.diagram && DIAGRAMS[m.diagram]) inner+=`<div class="diagram">${DIAGRAMS[m.diagram]}</div>`;
-  if(m.videos && m.videos.length) inner+=`<div class="vgrid">${m.videos.map(videoFacade).join("")}</div>`;
-  if(!inner) return "";
-  return `<div class="card">
-    <div class="eyebrow">Visual aid</div>
-    <h2 style="font-size:19px;margin-bottom:4px">See it, then drill it</h2>
-    <p class="sub" style="margin-bottom:12px">A quick diagram to anchor the concept, plus a short explainer from a reputable source. Videos load on click and open the external YouTube player.</p>
-    ${inner}
+  const m=MEDIA[String(i)] || {};
+  const diagram=(m.diagram && DIAGRAMS[m.diagram]) ? DIAGRAMS[m.diagram] : conceptSketch(i);
+  const videos=m.videos || [];
+  return `<div class="card visual-card ${videos.length?'':'no-video'}">
+    <div>
+      <div class="eyebrow">Visual model</div>
+      <h2>See it before you drill it.</h2>
+      <p class="sub">Use the picture as the mental anchor, then answer the scenario out loud. If a video appears, treat it as optional reinforcement, not another lesson to finish.</p>
+      <div class="visual-surface"><div class="diagram">${diagram}</div></div>
+    </div>
+    ${videos.length?`<div class="visual-video-copy"><h3>Motion version</h3><p>Short third-party explainer. It loads only after you click, so the lesson stays lightweight.</p><div class="vgrid">${videos.map(videoFacade).join("")}</div></div>`:''}
   </div>`;
 }
 function orientationCard(){
-  return `<div class="card">
-    <div class="eyebrow">Orientation videos</div>
-    <h2 style="font-size:20px;margin-bottom:4px">Three short explainers to warm up</h2>
-    <p class="sub" style="margin-bottom:12px">Optional background from reputable sources: what Veeva Vault is, how consultants structure problems, and how a drug is developed. They load on click.</p>
-    <div class="vgrid">${HOME_VIDEOS.map(videoFacade).join("")}</div>
-  </div>`;
+  return visualLearnerCard();
 }
 function wireVideos(){
   document.querySelectorAll(".vfacade").forEach(f=>{ if(f.dataset.wired) return; f.dataset.wired="1";
