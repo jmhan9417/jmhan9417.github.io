@@ -810,8 +810,8 @@
   /* ===== v58 session and report ===== */
   .session-start,.session-next{display:flex;gap:16px;align-items:center;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.16);padding-top:20px;margin-top:24px}
   .session-next{border-top-color:rgba(24,26,30,.10);padding:20px 30px}
-  .session-cta{background:#c8a668!important;color:#0f2A43!important;border:0!important;border-radius:999px!important;padding:11px 22px!important;font-weight:650!important;font-size:15px!important}
-  .session-cta:hover{background:#d4b47c!important}
+  button.ghost.session-cta,.session-cta{background:#c8a668!important;color:#0f2A43!important;border:0!important;border-radius:999px!important;padding:11px 22px!important;font-weight:650!important;font-size:15px!important}
+  button.ghost.session-cta:hover,.session-cta:hover{background:#d4b47c!important}
   .session-note{color:#b9c4cf;font-size:13.5px}
   .session-bar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center;padding:26px 34px!important}
   .sdots{display:flex;gap:8px}
@@ -825,8 +825,8 @@
   .report-row{display:grid;grid-template-columns:200px minmax(0,1fr) 52px auto;gap:14px;align-items:center}
   .report-cat{font-size:13.5px;color:#33353a;font-weight:600}
   .report-pct{font-size:13px;color:#6b6d72;text-align:right}
-  .report-go{background:transparent!important;color:#123c63!important;border:0!important;border-radius:0!important;padding:0!important;font-size:13.5px!important;font-weight:600!important}
-  .report-go:hover{text-decoration:underline!important;text-underline-offset:3px!important;background:transparent!important}
+  button.ghost.report-go,.report-go{background:transparent!important;color:#123c63!important;border:0!important;border-radius:0!important;padding:0!important;font-size:13.5px!important;font-weight:600!important}
+  button.ghost.report-go:hover,.report-go:hover{text-decoration:underline!important;text-underline-offset:3px!important;background:transparent!important}
   .focus-card{padding:34px 40px!important}
   .focus-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:center}
   .focus-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
@@ -4420,7 +4420,7 @@ try { const u = JSON.parse(localStorage.getItem(UI_KEY)); if(u) uiState = Object
 function saveUI(){ localStorage.setItem(UI_KEY, JSON.stringify(uiState)); scheduleCloudSave(); }
 function applyFocusMode(){ document.body.classList.toggle("focus-mode", !!uiState.focus); const b=document.getElementById("focusBtn"); if(b) b.textContent=uiState.focus?"Exit focus":"Focus"; }
 
-const READYTOCONSULT_VERSION = "2.2.0";
+const READYTOCONSULT_VERSION = "2.2.1";
 const SUPABASE_URL = "https://oergojtnxmjztjgadkkv.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_WdMMBeui--DSDVloYcTWeg_L9WAXcKA";
 const NOTEBOOK_KEY = "readytoconsult-notebook-v17";
@@ -4562,7 +4562,7 @@ function render(){
 
 function renderFoot(){
   document.getElementById("foot").innerHTML =
-    "ReadyToConsult v2.2 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
+    "ReadyToConsult v2.2.1 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
 }
 
 /* ---------- Home ---------- */
