@@ -662,6 +662,10 @@
   .gitem .ex b{color:#1d1d1f!important;font-weight:650!important}
   .gcat{background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;margin-left:10px!important;color:#86868b!important;font-size:12px!important;letter-spacing:.06em!important}
 
+
+  /* ===== v51 consulting problem-solving lab ===== */
+  .benchmark-card,.problem-preview-card{padding:34px!important}.benchmark-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:end;border-bottom:1px solid rgba(0,0,0,.10);padding-bottom:20px;margin-bottom:20px}.benchmark-head h2,.problem-preview-card h2{font-size:clamp(30px,4vw,50px)!important;letter-spacing:-.055em!important}.benchmark-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:rgba(0,0,0,.10);border:1px solid rgba(0,0,0,.10);border-radius:24px;overflow:hidden}.benchmark-cell{background:#fff;padding:22px}.benchmark-cell b{display:block;font-size:15px;color:#1d1d1f;margin-bottom:8px}.benchmark-cell p{font-size:13.5px;color:#6e6e73;line-height:1.45;margin:0}.problem-preview-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:start}.problem-principles{display:grid;gap:1px;background:rgba(0,0,0,.10);border:1px solid rgba(0,0,0,.10);border-radius:22px;overflow:hidden}.problem-principles div{background:#fff;padding:16px 18px;color:#424245;font-size:14px;line-height:1.4}.problem-principles b{color:#1d1d1f}.problem-hero{background:#1d1d1f!important;color:#f5f5f7!important;border:0!important;border-radius:34px!important}.problem-hero h2{color:#fff!important;font-size:clamp(36px,5vw,64px)!important;letter-spacing:-.06em!important;line-height:.98!important}.problem-hero .lede{color:#a1a1a6!important;font-size:20px!important;line-height:1.25!important}.problem-switch{display:flex;gap:18px;overflow:auto;border-top:1px solid rgba(255,255,255,.18);padding-top:18px;margin-top:26px}.problem-tab{background:transparent!important;border:0!important;color:rgba(255,255,255,.68)!important;padding:8px 18px 8px 0!important;white-space:nowrap;font-weight:600;cursor:pointer}.problem-tab.active{color:#fff!important;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:8px}.problem-board{display:grid;gap:18px}.problem-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}.problem-box{background:#fff;border:0;border-radius:28px;padding:28px}.problem-box h3{font-size:23px!important;letter-spacing:-.035em!important;margin-bottom:12px}.problem-box p,.problem-box li{color:#424245;font-size:14.5px;line-height:1.55}.problem-box ul{margin:0;padding-left:18px}.problem-table-wrap{overflow:auto;border:1px solid rgba(0,0,0,.10);border-radius:22px}.problem-table{width:100%;border-collapse:collapse;font-size:13.5px}.problem-table th{font-size:11px;text-transform:none;letter-spacing:0;color:#86868b;text-align:left;font-weight:650;border-bottom:1px solid rgba(0,0,0,.10);padding:12px}.problem-table td{padding:13px 12px;border-bottom:1px solid rgba(0,0,0,.07);vertical-align:top;color:#424245}.problem-table tr:last-child td{border-bottom:0}.decision-ladder{display:grid;gap:1px;background:rgba(0,0,0,.10);border:1px solid rgba(0,0,0,.10);border-radius:22px;overflow:hidden}.decision-ladder div{background:#fff;padding:16px 18px}.decision-ladder b{display:block;color:#1d1d1f;margin-bottom:4px}.decision-ladder span{display:block;color:#6e6e73;font-size:13.5px;line-height:1.45}.partner-note{border-top:1px solid rgba(0,0,0,.10);padding-top:16px;margin-top:16px;color:#6e6e73!important}.source-note{font-size:12.5px;color:#86868b;line-height:1.45;margin-top:14px}@media(max-width:980px){.benchmark-head,.problem-preview-grid,.problem-layout{grid-template-columns:1fr}.benchmark-grid{grid-template-columns:1fr}.problem-box{padding:22px}.problem-hero h2{font-size:42px!important}}
+
 </style>
 </head>
 <body>
@@ -4250,7 +4254,7 @@ try { const u = JSON.parse(localStorage.getItem(UI_KEY)); if(u) uiState = Object
 function saveUI(){ localStorage.setItem(UI_KEY, JSON.stringify(uiState)); scheduleCloudSave(); }
 function applyFocusMode(){ document.body.classList.toggle("focus-mode", !!uiState.focus); const b=document.getElementById("focusBtn"); if(b) b.textContent=uiState.focus?"Exit focus":"Focus"; }
 
-const READYTOCONSULT_VERSION = "1.9.5";
+const READYTOCONSULT_VERSION = "1.9.6";
 const SUPABASE_URL = "https://oergojtnxmjztjgadkkv.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_WdMMBeui--DSDVloYcTWeg_L9WAXcKA";
 const NOTEBOOK_KEY = "readytoconsult-notebook-v17";
@@ -4344,6 +4348,7 @@ function renderSide(){
   h+=navBtn("case","Case Lab","C",state.view==="case");
   h+=navBtn("capstone","Capstone","M",state.view==="capstone");
   h+=navBtn("strategy","Strategy","S",state.view==="strategy");
+  h+=navBtn("problem","Problem Lab","P",state.view==="problem");
   h+=navBtn("roleplay","Roleplay","R",state.view==="roleplay");
   h+=navBtn("practical","Studio","A",state.view==="practical");
   h+=navBtn("qbank","Drills","Q",state.view==="qbank");
@@ -4370,6 +4375,7 @@ function render(){
   else if(state.view==="case"){ m.innerHTML=renderCaseLab(); wireCaseLab(); }
   else if(state.view==="capstone"){ m.innerHTML=renderCapstone(); wireCapstone(); }
   else if(state.view==="strategy"){ m.innerHTML=renderStrategyLab(); wireStrategyLab(); }
+  else if(state.view==="problem"){ m.innerHTML=renderProblemLab(); wireProblemLab(); }
   else if(state.view==="practical"){ m.innerHTML=renderPracticalStudio(); wirePracticalStudio(); }
   else if(state.view==="qbank"){ m.innerHTML=renderDeepQBank(); wireDeepQBank(); }
   else if(state.view==="roleplay"){ m.innerHTML=renderRoleplay(); wireRoleplay(); }
@@ -4386,7 +4392,7 @@ function render(){
 
 function renderFoot(){
   document.getElementById("foot").innerHTML =
-    "ReadyToConsult v1.9.5 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
+    "ReadyToConsult v1.9.6 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
 }
 
 /* ---------- Home ---------- */
@@ -4400,8 +4406,30 @@ function renderHome(){
       <div class="hero-actions"><button class="ghost" data-view="syllabus">Start learning</button><button class="ghost secondary" data-view="practical">Explore studio</button></div>
     </div>
     ${guidedRoadmapCard()}
+    ${consultingBenchmarkCard()}
+    ${problemSolvingCard()}
     ${visualLearnerCard()}
     ${continueLearningCard()}
+  </div>`;
+}
+
+function consultingBenchmarkCard(){
+  const items=[
+    ["R&D productivity", "Trial design, site activation, regulatory risk, cycle time, and evidence generation are linked instead of treated as separate topics."],
+    ["Asset and portfolio", "Cases test risk-adjusted value, indication sequencing, probability of technical success, and capital allocation."],
+    ["Launch and access", "Approval is only one gate. Payer restrictions, evidence gaps, channel execution, and patient flow decide uptake."],
+    ["AI and operating model", "AI is not a magic lever. The hard questions are data quality, governance, workflow adoption, and measurable value."]
+  ];
+  return `<div class="card benchmark-card">
+    <div class="benchmark-head"><div><div class="eyebrow">Top-firm case themes</div><h2>What major life sciences consulting cases actually test.</h2></div><button class="ghost" data-view="problem">Open Problem Lab</button></div>
+    <div class="benchmark-grid">${items.map(x=>`<div class="benchmark-cell"><b>${esc(x[0])}</b><p>${esc(x[1])}</p></div>`).join('')}</div>
+    <div class="source-note">Benchmarked from public capability themes across major strategy and life sciences consulting firms. Cases below are original training cases, not copied client work.</div>
+  </div>`;
+}
+function problemSolvingCard(){
+  return `<div class="card problem-preview-card">
+    <div class="problem-preview-grid"><div><div class="eyebrow">Complex problem solving</div><h2>Move from answer choice to partner-ready recommendation.</h2><p class="sub">The new Problem Lab forces trade-offs: attractive markets with weak evidence, faster trials with representation risk, AI value with governance constraints, and launch upside blocked by access or supply.</p><button class="ghost" data-view="problem">Practice complex cases</button></div>
+    <div class="problem-principles"><div><b>1. Frame the decision.</b> What is the client choosing, by when, and under what constraint?</div><div><b>2. Build the driver tree.</b> Separate demand, evidence, economics, execution, and risk.</div><div><b>3. Stress-test the data.</b> Name what is missing before using the number.</div><div><b>4. Recommend a sequence.</b> A strong answer says what to do now, what to de-risk next, and what would change the answer.</div></div></div>
   </div>`;
 }
 
@@ -4613,6 +4641,71 @@ function wireCaseLab(){
   m.querySelectorAll('[data-retry]').forEach(r=>{ r.onclick=()=>{ delete state.answers[r.getAttribute('data-retry')]; save(); render(); }; });
 }
 
+
+
+/* ---------- Complex Problem Lab ---------- */
+const COMPLEX_CASES = [
+  {
+    title:"Portfolio triage after mixed Phase 2 readouts",
+    subtitle:"Choose the next funded asset when science, access, and runway conflict.",
+    decision:"The CEO can fund one 18-month program before the next financing. Pick the asset, name the de-risking plan, and explain what evidence would change your mind.",
+    situation:"A biotech has three mid-stage assets and 24 months of cash. Investors want a clear value-creation story. The largest market has weak payer evidence, the cleanest science is orphan-sized, and the fastest trial has a crowded competitive set.",
+    data:[["Asset","Headline data","Commercial upside","Caveat"],["A: oral immunology","Phase 2 response 58 percent vs 41 percent control","Large population, crowded class","Safety imbalance and likely step edits"],["B: rare disease enzyme therapy","Biomarker response strong in 28 patients","Orphan pricing and high unmet need","Small N, surrogate endpoint uncertainty"],["C: oncology combo","Early ORR signal in biomarker subgroup","High strategic interest if validated","Comparator changing, trial cost highest"]],
+    tensions:["Largest TAM is not the same as best risk-adjusted value.","A clean biomarker story still needs regulatory and access credibility.","A partner-ready answer separates financing narrative from clinical development plan."],
+    questions:["What decision criteria would you use before calculating rNPV?","Which asset would you fund now and what milestone would you commit to?","What data caveat would you say first in the partner meeting?"],
+    recommendation:[["Fund", "B as the base-case recommendation if the goal is credible value inflection before financing."],["De-risk", "Run regulator and payer evidence checks in parallel: endpoint acceptability, comparator expectations, registry/RWE plan, and manufacturing readiness."],["Hold option", "Keep C alive only if a partner can share trial cost or the biomarker subgroup becomes clearer."],["Kill or pause", "Do not lead with A unless safety and access evidence improve. Its market size is attractive but the first launch wedge is weak."]],
+    partner:"The senior answer is not 'pick the biggest market.' It is 'pick the asset with the best risk-adjusted path to the next financing event, while preserving options on the higher-upside asset.'"
+  },
+  {
+    title:"Rare disease trial rescue with country and site trade-offs",
+    subtitle:"Fix enrollment without breaking representativeness, data quality, or regulatory credibility.",
+    decision:"The CMO asks whether to add countries, add sites, loosen criteria, or extend the study. Recommend a rescue plan with a measurable 12-week gate.",
+    situation:"Enrollment is 40 percent behind plan. US academic sites are high quality but slow. Several ex-US markets have larger diagnosed pools but weaker site experience. Patient advocacy groups say travel burden is the hidden bottleneck.",
+    data:[["Lever","Incremental patients expected","Risk","Cost"],["Add 12 US sites","18 patients in 9 months","slow activation, same travel barrier","$2.4M"],["Add 5 EU centers","26 patients in 7 months","country startup and data harmonization","$2.1M"],["Home nursing plus travel support","22 retained or recovered patients","operational complexity","$900K"],["Broaden inclusion criteria","35 potential patients","endpoint noise and regulator concern","low direct cost"]],
+    tensions:["Speed, representativeness, and endpoint cleanliness pull in different directions.","A site-count answer ignores the patient journey.","The cheapest lever can be the most damaging if it weakens evidence quality."],
+    questions:["Which lever should be first and why?","What metric proves the rescue is working before full rollout?","What would you refuse to recommend without regulator input?"],
+    recommendation:[["First move", "Combine patient-support operations with selected EU centers. This attacks both access friction and diagnosed-pool scarcity."],["Do not lead with", "Broad inclusion criteria. It creates endpoint and regulatory risk unless the agency agrees."],["12-week gate", "Track consent rate, screen failure, activation cycle time, retention, protocol deviations, and subgroup balance."],["Executive message", "This is not an enrollment problem only. It is a patient-access, site-readiness, and evidence-integrity problem."]],
+    partner:"A strong consultant does not just add sites. They identify the bottleneck in the enrollment funnel and protect the credibility of the future label and access story."
+  },
+  {
+    title:"GLP-1 metabolic launch under supply and access constraints",
+    subtitle:"Prioritize segments when demand is huge but capacity, adherence, and payer rules bind uptake.",
+    decision:"The commercial lead wants a year-1 launch plan. Decide which patient segment to prioritize, what access evidence to generate, and how to avoid over-promising demand.",
+    situation:"Demand is enormous after approval, but fill capacity is capped, payers are signaling prior authorization, discontinuation is high, and HCP education needs differ by patient segment.",
+    data:[["Segment","Eligible patients","Access friction","Execution note"],["Obesity without diabetes","9.5M","very high","largest pool, weakest near-term coverage"],["T2D plus obesity","2.2M","moderate","stronger clinical rationale and HCP familiarity"],["High CV risk subgroup","820K","moderate to high","needs outcomes and budget-impact evidence"],["Self-pay affluent segment","450K","low payer friction","reputation and equity risk"]],
+    tensions:["Huge demand can destroy trust if supply and coverage cannot support it.","The best launch wedge may be the segment with the clearest evidence, not the largest pool.","Medical, commercial, supply, and payer strategy must be sequenced together."],
+    questions:["Where would you focus year-1 field effort?","What would you put in the payer evidence plan?","What metric would make you slow down promotion?"],
+    recommendation:[["Launch wedge", "Prioritize T2D plus obesity and selected high-CV-risk subgroups, not the broadest obesity population first."],["Evidence plan", "Budget impact, discontinuation/adherence, cardiometabolic outcomes, and real-world persistence."],["Operating guardrail", "Tie demand generation to fill capacity, abandonment rate, PA approval rate, and persistence."],["Risk statement", "Self-pay can create revenue but may damage trust if it appears to bypass medical value and access fairness."]],
+    partner:"The complex answer balances demand creation with access, supply, adherence, and reputation. A simple TAM answer is junior."
+  },
+  {
+    title:"AI evidence engine for Medical Affairs and RWE",
+    subtitle:"Separate real AI value from demo value in a regulated evidence workflow.",
+    decision:"The Chief Medical Officer asks whether to fund an AI evidence engine. Recommend where to start, what governance is required, and how to measure value in 90 days.",
+    situation:"Medical Affairs wants faster insight generation from publications, congress abstracts, CRM notes, and RWE studies. Legal and Compliance worry about hallucination, off-label leakage, and unapproved scientific claims.",
+    data:[["Use case","Potential value","Main risk","Readiness"],["KOL insight synthesis","faster thematic readout","source traceability and bias","medium"],["Evidence gap mapping","better study planning","incomplete data ontology","high"],["MSL next-best scientific action","field efficiency","promotional boundary risk","low"],["Automated literature surveillance","cycle-time reduction","false positives and missed signals","medium"]],
+    tensions:["The most exciting use case may be the least compliant first use case.","AI value depends on source traceability, ontology, review workflow, and adoption.","A pilot should prove decision quality, not just time saved."],
+    questions:["Which use case should be the first 90-day pilot?","What governance must exist before field-facing use?","How would you measure success without fake precision?"],
+    recommendation:[["Start", "Evidence gap mapping plus literature surveillance, because the outputs are reviewable and close to existing medical workflows."],["Avoid first", "Field-facing next-best action until claim boundaries, approvals, and audit trails are strong."],["Governance", "Human review, source citations, approved-use boundaries, model monitoring, escalation rules, and audit logs."],["Metrics", "Cycle time, reviewer agreement, traceable-source rate, decision adoption, and number of evidence decisions improved."]],
+    partner:"The senior answer does not sell AI. It designs the minimum safe operating model that can create measurable evidence value."
+  }
+];
+function renderProblemLab(){
+  const idx=Math.max(0,Math.min(COMPLEX_CASES.length-1,state.problemIndex||0));
+  const c=COMPLEX_CASES[idx];
+  const tabs=COMPLEX_CASES.map((x,i)=>`<button class="problem-tab ${i===idx?'active':''}" data-problem-index="${i}">${esc(x.title.split(' with ')[0].split(' under ')[0])}</button>`).join('');
+  return `<div class="problem-board">
+    <div class="card problem-hero"><div class="eyebrow">Problem Lab</div><h2>${esc(c.title)}</h2><p class="lede">${esc(c.subtitle)}</p><div class="problem-switch">${tabs}</div></div>
+    <div class="problem-layout"><div class="problem-box"><div class="eyebrow">Client decision</div><h3>${esc(c.decision)}</h3><p>${esc(c.situation)}</p><p class="partner-note"><b>Why this is hard:</b> ${esc(c.tensions.join(' '))}</p></div>
+    <div class="problem-box"><div class="eyebrow">What to solve out loud</div><h3>Three prompts</h3><ul>${c.questions.map(q=>`<li>${esc(q)}</li>`).join('')}</ul></div></div>
+    <div class="problem-box"><div class="eyebrow">Data pack</div><h3>Use the data, but challenge it first.</h3><div class="problem-table-wrap"><table class="problem-table"><thead><tr>${c.data[0].map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${c.data.slice(1).map(r=>`<tr>${r.map(v=>`<td>${esc(v)}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>
+    <div class="problem-layout"><div class="problem-box"><div class="eyebrow">Recommendation spine</div><h3>Partner-ready answer structure</h3><div class="decision-ladder">${c.recommendation.map(r=>`<div><b>${esc(r[0])}</b><span>${esc(r[1])}</span></div>`).join('')}</div></div>
+    <div class="problem-box"><div class="eyebrow">Partner readout</div><h3>What separates a senior answer</h3><p>${esc(c.partner)}</p><p class="partner-note">Say the recommendation first, then the two facts that made it hard, then the condition that would change your answer.</p></div></div>
+  </div>`;
+}
+function wireProblemLab(){
+  document.querySelectorAll('[data-problem-index]').forEach(b=>b.onclick=()=>{ state.problemIndex=+b.getAttribute('data-problem-index'); render(); window.scrollTo({top:0,behavior:'smooth'}); });
+}
 
 /* ---------- Stakeholder Roleplay ---------- */
 function renderRoleplay(){
@@ -5150,6 +5243,16 @@ function apPrompts(c){ return `<div class="card"><div class="eyebrow">Manager pr
 function apBuilder(c){ const key='case'+practicalState.caseIndex; const b=practicalState.builders[key]||{}; return `<div class="card"><div class="eyebrow">Answer builder</div><h2 style="font-size:20px">Write the recommendation like an analyst</h2><p class="sub">Save concise bullets. These sync with the rest of your progress when signed in.</p><div class="builder-grid">${c.builder.map((field,i)=>`<div class="builder-field"><label>${esc(field)}</label><textarea data-ap-build="${i}" placeholder="Write a client-ready bullet.">${esc(b[i]||'')}</textarea></div>`).join('')}</div></div>`; }
 function apRubric(c){ const key='case'+practicalState.caseIndex; const r=practicalState.rubrics[key]||{}; const score=c.rubric.filter((_,i)=>r[i]).length; return `<div class="card"><div class="eyebrow">Partner-style rubric</div><h2 style="font-size:20px">Would this survive review?</h2><p class="sub">${score}/${c.rubric.length} criteria checked. Do not mark a criterion unless your written answer proves it.</p><div class="rub-score">${c.rubric.map((x,i)=>`<label><input type="checkbox" data-ap-rubric="${i}" ${r[i]?'checked':''}><span>${termify(x)}<small>Evidence must appear in your answer builder.</small></span></label>`).join('')}</div></div>`; }
 function wirePracticalStudio(){ document.querySelectorAll('[data-ap-case]').forEach(b=>b.onclick=()=>{ practicalState.caseIndex=+b.getAttribute('data-ap-case'); practicalState.tab='brief'; savePractical(); render(); window.scrollTo({top:0,behavior:'smooth'}); }); document.querySelectorAll('[data-ap-tab]').forEach(b=>b.onclick=()=>{ practicalState.tab=b.getAttribute('data-ap-tab'); savePractical(); render(); window.scrollTo({top:0,behavior:'smooth'}); }); document.querySelectorAll('[data-ap-build]').forEach(t=>t.oninput=()=>{ const key='case'+practicalState.caseIndex; practicalState.builders[key]=practicalState.builders[key]||{}; practicalState.builders[key][t.getAttribute('data-ap-build')]=t.value; savePractical(); }); document.querySelectorAll('[data-ap-rubric]').forEach(c=>c.onchange=()=>{ const key='case'+practicalState.caseIndex; practicalState.rubrics[key]=practicalState.rubrics[key]||{}; practicalState.rubrics[key][c.getAttribute('data-ap-rubric')]=c.checked; savePractical(); render(); }); }
+
+DEEP_QS.push(
+  {cat:"Portfolio", diff:"Partner", q:"A biotech has one large-market asset with payer evidence gaps and one orphan asset with cleaner biomarker data. The CEO asks which one to fund before a financing. What is the best framing?", options:[["strong","Frame the decision around risk-adjusted value to the next financing milestone, not raw market size. Compare endpoint credibility, access path, cost, time to inflection, and option value."],["weak","Pick the large-market asset because investors prefer big TAM stories."],["trap","Pick the orphan asset only because orphan pricing is high."]]},
+  {cat:"Clinical strategy", diff:"Partner", q:"A rare-disease trial is behind enrollment. Adding countries is faster on paper, but patient groups say travel burden is the bottleneck. What should you do first?", options:[["strong","Diagnose the enrollment funnel before adding sites: activation time, screen failure, travel burden, retention, protocol deviations, and country data quality. Then combine patient-support levers with selective site expansion."],["weak","Add the countries with the largest diagnosed pools immediately."],["trap","Loosen inclusion criteria because it is the cheapest way to increase eligible patients."]]},
+  {cat:"Market access", diff:"Partner", q:"A launch team wants to promote the broadest GLP-1 population first, but payer restrictions and supply caps are severe. What is the senior answer?", options:[["strong","Prioritize a defensible launch wedge where evidence, access, HCP readiness, and supply can support uptake. Track PA approval, fill capacity, abandonment, and persistence before widening promotion."],["weak","Launch broadly because demand is already very high."],["trap","Focus on self-pay only because payer friction is lower."]]},
+  {cat:"AI and evidence", diff:"Partner", q:"Medical Affairs wants an AI engine for KOL insights, evidence gaps, and field next-best actions. Compliance is worried. Which pilot is most defensible?", options:[["strong","Start with reviewable evidence gap mapping or literature surveillance, with source traceability, human review, approved-use boundaries, monitoring, and audit logs before any field-facing recommendation."],["weak","Start with all use cases so the organization can learn faster."],["trap","Start with field next-best action because it is the most visible demo."]]},
+  {cat:"RWE", diff:"Hard", q:"A payer rejects a value story because the RWE comparator cohort is sicker than the treated cohort. What should the consultant say?", options:[["strong","Do not oversell the result. Diagnose confounding, define a better comparator strategy, run sensitivity analyses, and state what claim the evidence can and cannot support."],["weak","Explain that RWE is always accepted because it is real-world."],["trap","Remove the comparator slide and keep the positive result only."]]},
+  {cat:"Operations", diff:"Partner", q:"A sponsor wants to cut clinical operations cost by centralizing monitoring, but site burden and data-query cycle time are worsening. What is the right problem statement?", options:[["strong","This is a throughput and quality trade-off, not just a cost case. Analyze monitoring productivity, query cycle time, protocol complexity, site burden, risk-based monitoring thresholds, and patient-impact metrics."],["weak","Centralization is always better because it reduces fixed cost."],["trap","Push more queries to sites because that improves data quality."]]}
+);
+
 function renderDeepQBank(){ const cats=['All',...Array.from(new Set(DEEP_QS.map(q=>q.cat)))]; const active=practicalState.activeQCat||'All'; let list=DEEP_QS.map((q,i)=>Object.assign({i},q)).filter(q=>active==='All'||q.cat===active); const compactAll=active==='All'; const sc=practicalScore(); return `<div class="card studio-hero"><div class="eyebrow">Drills</div><h2>Sharp reps for messy judgment.</h2><p class="lede">Not trivia. These prompts train the kind of answer you can defend when a manager pushes back.</p><div class="section-guide" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.22);color:#eef7ff"><b style="color:#fff">Drill flow:</b> choose one category, answer a few prompts, then review the misses while the logic is fresh.</div><div class="studio-progress"><div class="mini"><h4>${sc.qAnswered}/${sc.qTotal}</h4><p>answered</p></div><div class="mini"><h4>${sc.qPts}/${sc.qMax}</h4><p>points</p></div><div class="mini"><h4>${sc.qMax?Math.round(sc.qPts/sc.qMax*100):0}%</h4><p>practical score</p></div></div><div class="q-tabs">${cats.map(c=>`<button class="q-tab ${active===c?'active':''}" data-q-cat="${esc(c)}">${esc(c)}</button>`).join('')}</div></div><div class="qbank-grid ${compactAll?'compact':''}">${list.map(q=>renderDeepQ(q)).join('')}</div>${compactAll?`<div class="show-all-note"><b>Keep it focused:</b> the default view shows five prompts. Pick a category when you want a targeted rep.</div>`:''}`; }
 function renderDeepQ(q){ const ans=practicalState.qbank[q.i]; const chosen=ans&&q.options[ans.oi]; return `<div class="q-card"><h3>${esc(q.q)}</h3><div class="q-meta"><span>${esc(q.cat)}</span><span>${esc(q.diff)}</span></div><div class="q-options">${q.options.map((o,oi)=>`<button class="${ans&&ans.oi===oi?'chosen '+o[0]:''}" data-q-pick="${q.i}:${oi}">${esc(o[1])}</button>`).join('')}</div>${chosen?`<div class="q-feedback ${chosen[0]}"><b>${chosen[0].toUpperCase()}.</b> ${qFeedback(chosen[0])}</div>`:''}</div>`; }
 function qFeedback(t){ return t==='strong'?'This is manager-ready because it states the decision logic, caveat, and next analytic step.':t==='weak'?'Partly right, but it is too generic or misses the decision-driving assumption.':'Trap answer. It overclaims, skips structure, or confuses a symptom for the underlying problem.'; }
