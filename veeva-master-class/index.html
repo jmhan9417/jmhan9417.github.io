@@ -806,6 +806,32 @@
   .coach-empty{margin-top:12px;font-size:13px;color:#8a8577}
   @media(max-width:720px){#coachBtn{right:16px;bottom:16px}#coachPanel{right:12px;bottom:72px}.q-solve{grid-template-columns:1fr}.q-solve-col+.q-solve-col{border-left:0;border-top:1px solid rgba(24,26,30,.10)}}
 
+
+  /* ===== v58 session and report ===== */
+  .session-start,.session-next{display:flex;gap:16px;align-items:center;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.16);padding-top:20px;margin-top:24px}
+  .session-next{border-top-color:rgba(24,26,30,.10);padding:20px 30px}
+  .session-cta{background:#c8a668!important;color:#0f2A43!important;border:0!important;border-radius:999px!important;padding:11px 22px!important;font-weight:650!important;font-size:15px!important}
+  .session-cta:hover{background:#d4b47c!important}
+  .session-note{color:#b9c4cf;font-size:13.5px}
+  .session-bar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center;padding:26px 34px!important}
+  .sdots{display:flex;gap:8px}
+  .sdot{width:10px;height:10px;border-radius:50%;background:#e3dfd6;display:inline-block}
+  .sdot.done{background:#123c63}
+  .sdot.now{background:#c8a668}
+  .q-options button.reveal-strong{outline:2px solid #2f8f5b;outline-offset:-2px}
+  .q-options button[disabled]{cursor:default}
+  .t-strong{color:#2f8f5b;font-weight:650}.t-weak{color:#a86d00;font-weight:650}.t-trap{color:#b4232f;font-weight:650}
+  .report-rows{display:grid;gap:12px;margin-top:16px}
+  .report-row{display:grid;grid-template-columns:200px minmax(0,1fr) 52px auto;gap:14px;align-items:center}
+  .report-cat{font-size:13.5px;color:#33353a;font-weight:600}
+  .report-pct{font-size:13px;color:#6b6d72;text-align:right}
+  .report-go{background:transparent!important;color:#123c63!important;border:0!important;border-radius:0!important;padding:0!important;font-size:13.5px!important;font-weight:600!important}
+  .report-go:hover{text-decoration:underline!important;text-underline-offset:3px!important;background:transparent!important}
+  .focus-card{padding:34px 40px!important}
+  .focus-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:center}
+  .focus-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  @media(max-width:980px){.report-row{grid-template-columns:1fr;gap:6px}.report-pct{text-align:left}.focus-grid{grid-template-columns:1fr}.session-bar{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -4394,7 +4420,7 @@ try { const u = JSON.parse(localStorage.getItem(UI_KEY)); if(u) uiState = Object
 function saveUI(){ localStorage.setItem(UI_KEY, JSON.stringify(uiState)); scheduleCloudSave(); }
 function applyFocusMode(){ document.body.classList.toggle("focus-mode", !!uiState.focus); const b=document.getElementById("focusBtn"); if(b) b.textContent=uiState.focus?"Exit focus":"Focus"; }
 
-const READYTOCONSULT_VERSION = "2.1.0";
+const READYTOCONSULT_VERSION = "2.2.0";
 const SUPABASE_URL = "https://oergojtnxmjztjgadkkv.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_WdMMBeui--DSDVloYcTWeg_L9WAXcKA";
 const NOTEBOOK_KEY = "readytoconsult-notebook-v17";
@@ -4492,6 +4518,7 @@ function renderSide(){
   h+=navBtn("roleplay","Roleplay","R",state.view==="roleplay");
   h+=navBtn("practical","Studio","A",state.view==="practical");
   h+=navBtn("qbank","Drills","Q",state.view==="qbank");
+  h+=navBtn("session","Daily Rep","5",state.view==="session");
   h+='<div class="navhdr">Support</div>';
   h+=navBtn("notebook","Notebook","N",state.view==="notebook");
   h+=navBtn("review","Review missed"+(missedCount()?" ("+missedCount()+")":""),"⚑",state.view==="review");
@@ -4518,6 +4545,7 @@ function render(){
   else if(state.view==="problem"){ m.innerHTML=renderProblemLab(); wireProblemLab(); }
   else if(state.view==="practical"){ m.innerHTML=renderPracticalStudio(); wirePracticalStudio(); }
   else if(state.view==="qbank"){ m.innerHTML=renderDeepQBank(); wireDeepQBank(); }
+  else if(state.view==="session"){ m.innerHTML=renderSession(); wireSession(); }
   else if(state.view==="roleplay"){ m.innerHTML=renderRoleplay(); wireRoleplay(); }
   else if(state.view==="glossary"){ m.innerHTML=renderGlossaryShell(); wireGlossary(); }
   else if(state.view==="review"){ m.innerHTML=renderReview(); wireReview(); }
@@ -4534,7 +4562,7 @@ function render(){
 
 function renderFoot(){
   document.getElementById("foot").innerHTML =
-    "ReadyToConsult v2.1 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
+    "ReadyToConsult v2.2 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
 }
 
 /* ---------- Home ---------- */
@@ -4551,6 +4579,7 @@ function renderHome(){
     ${consultingBenchmarkCard()}
     ${problemSolvingCard()}
     ${visualLearnerCard()}
+    ${focusNextCard()}
     ${continueLearningCard()}
   </div>`;
 }
@@ -4788,6 +4817,39 @@ function wireCaseLab(){
 
 
 
+
+/* ---------- v58 daily rep session and readiness report ---------- */
+let sessionState={phase:'intro',qs:[],idx:0,picks:{}};
+function qTier(q,oi){ return (q.options[oi]&&q.options[oi][0])||'trap'; }
+function categoryStats(){ const m={}; DEEP_QS.forEach((q,i)=>{ m[q.cat]=m[q.cat]||{cat:q.cat,total:0,answered:0,pts:0}; m[q.cat].total++; const a=practicalState.qbank[i]; if(a){ m[q.cat].answered++; const t=qTier(q,a.oi); m[q.cat].pts+=t==='strong'?10:t==='weak'?5:0; } }); return Object.values(m); }
+function weakestCats(n){ const st=categoryStats().filter(c=>c.answered>0).map(c=>Object.assign({pct:Math.round(c.pts/(c.answered*10)*100)},c)).sort((a,b)=>a.pct-b.pct); return st.slice(0,n||3); }
+function pickSessionQs(){ const missed=[],fresh=[],rest=[]; DEEP_QS.forEach((q,i)=>{ const a=practicalState.qbank[i]; if(!a) fresh.push(i); else if(qTier(q,a.oi)!=='strong') missed.push(i); else rest.push(i); }); const shuffle=a=>a.sort(()=>Math.random()-.5); const pool=shuffle(missed).concat(shuffle(fresh)).concat(shuffle(rest)); const out=[]; const cats=new Set(); pool.forEach(i=>{ if(out.length>=5) return; if(cats.has(DEEP_QS[i].cat) && pool.length-out.length>5) return; out.push(i); cats.add(DEEP_QS[i].cat); }); let k=0; while(out.length<5 && k<pool.length){ if(!out.includes(pool[k])) out.push(pool[k]); k++; } return out.slice(0,5); }
+function renderSession(){
+  if(sessionState.phase==='intro'){ const w=weakestCats(1)[0]; return `<div class="card problem-hero"><div class="eyebrow">Daily Rep</div><h2>Five questions. One honest sitting.</h2><p class="lede">A short mixed set that prioritizes what you missed and what you have not seen. Answer like a manager is across the table, then read every model answer.</p><div class="session-start"><button class="ghost session-cta" data-session-start>Start today&rsquo;s rep</button>${w&&w.pct<100?`<span class="session-note">Current weakest category: ${esc(w.cat)} at ${w.pct} percent.</span>`:w?`<span class="session-note">All drilled categories are clean so far. This rep mixes in unseen prompts.</span>`:'<span class="session-note">First rep: we will mix fundamentals and judgment.</span>'}</div></div>${sessionReportCard()}`; }
+  const qi=sessionState.qs[sessionState.idx]; const q=DEEP_QS[qi]; const pick=sessionState.picks[qi]; const letters=['A','B','C','D']; const strongIdx=q.options.findIndex(o=>o[0]==='strong'); const parts=qVisualParts(q);
+  if(sessionState.phase==='run'){
+    const dots=sessionState.qs.map((x,i)=>`<span class="sdot ${i<sessionState.idx?'done':''} ${i===sessionState.idx?'now':''}"></span>`).join('');
+    const solved=pick!=null;
+    return `<div class="card session-bar"><div><div class="eyebrow">Daily Rep</div><h2 style="font-size:24px;margin:6px 0 0">Question ${sessionState.idx+1} of ${sessionState.qs.length}</h2></div><div class="sdots">${dots}</div></div>
+    <div class="q-card q-card-visual"><div class="q-prompt-grid"><div class="q-prompt-main"><div class="q-kicker">${esc(q.cat)} &middot; ${esc(q.diff)}</div><h3>${esc(q.q)}</h3></div>${renderQVisual(q)}</div><div class="q-options">${q.options.map((o,oi)=>`<button class="${solved&&pick===oi?'chosen '+o[0]:''} ${solved&&oi===strongIdx&&pick!==oi?'reveal-strong':''}" data-session-pick="${qi}:${oi}" ${solved?'disabled':''}><span class="opt-letter">${letters[oi]}</span><span>${esc(o[1])}</span></button>`).join('')}</div>
+    ${solved?`<div class="q-feedback ${qTier(q,pick)}"><b>${qTier(q,pick).toUpperCase()}.</b> ${qFeedback(qTier(q,pick))}</div><div class="q-solve"><div class="q-solve-col"><b>Model answer &middot; ${letters[strongIdx]}</b><p>${esc(q.options[strongIdx][1])}</p></div><div class="q-solve-col"><b>How to get there</b><ol><li>Start from the facts: ${esc(parts[0].toLowerCase())}.</li><li>Name the tension: ${esc(parts[1].toLowerCase())}.</li><li>Commit at the decision point (${esc(parts[2].toLowerCase())}) and say what would change your mind.</li></ol></div></div><div class="session-next"><button class="ghost session-cta" data-session-next>${sessionState.idx+1<sessionState.qs.length?'Next question':'See session report'}</button></div>`:''}</div>`;
+  }
+  // summary
+  let pts=0, tiers={strong:0,weak:0,trap:0}; const rows=sessionState.qs.map(i2=>{ const qq=DEEP_QS[i2]; const pk=sessionState.picks[i2]; const t=pk!=null?qTier(qq,pk):'trap'; tiers[t]++; pts+=t==='strong'?10:t==='weak'?5:0; return `<tr><td>${esc(qq.cat)}</td><td>${esc(qq.q.slice(0,86))}${qq.q.length>86?'&hellip;':''}</td><td class="t-${t}">${t}</td></tr>`; }).join('');
+  const w2=weakestCats(1)[0];
+  return `<div class="card problem-hero"><div class="eyebrow">Session report</div><h2>${pts}/${sessionState.qs.length*10} points this rep.</h2><p class="lede">${tiers.strong} strong &middot; ${tiers.weak} partial &middot; ${tiers.trap} trap. Strong answers state the logic, the caveat, and the next step.</p></div>
+  <div class="card"><div class="eyebrow">This session</div><h2 style="font-size:22px">Question by question</h2><div class="problem-table-wrap" style="margin-top:14px"><table class="problem-table"><thead><tr><th>Category</th><th>Prompt</th><th>Result</th></tr></thead><tbody>${rows}</tbody></table></div><div class="session-next"><button class="ghost session-cta" data-session-start>Run another rep</button>${w2&&w2.pct<100?`<button class="ghost" data-session-drill="${esc(w2.cat)}">Drill weakest: ${esc(w2.cat)}</button>`:''}<button class="ghost" data-view="review">Open review</button></div></div>${sessionReportCard()}`;
+}
+function sessionReportCard(){ const st=categoryStats().filter(c=>c.answered>0); if(!st.length) return ''; const rows=st.map(c=>Object.assign({pct:Math.round(c.pts/(c.answered*10)*100)},c)).sort((a,b)=>a.pct-b.pct).slice(0,6); return `<div class="card"><div class="eyebrow">Readiness report</div><h2 style="font-size:22px">Category scorecard</h2><div class="report-rows">${rows.map(r=>`<div class="report-row"><span class="report-cat">${esc(r.cat)}</span><div class="score-track"><i style="width:${r.pct}%"></i></div><span class="report-pct">${r.pct}%</span><button class="ghost report-go" data-session-drill="${esc(r.cat)}">Drill</button></div>`).join('')}</div><p class="fig-note" style="margin-top:14px">Percent of available points in answered questions per category. Drill the lowest rows first.</p></div>`; }
+function wireSession(){
+  document.querySelectorAll('[data-session-start]').forEach(b=>b.onclick=()=>{ sessionState={phase:'run',qs:pickSessionQs(),idx:0,picks:{}}; render(); window.scrollTo({top:0,behavior:'smooth'}); });
+  document.querySelectorAll('[data-session-pick]').forEach(b=>b.onclick=()=>{ const [i,oi]=b.getAttribute('data-session-pick').split(':').map(Number); if(sessionState.picks[i]!=null) return; sessionState.picks[i]=oi; practicalState.qbank[i]={i,oi}; savePractical(); render(); });
+  document.querySelectorAll('[data-session-next]').forEach(b=>b.onclick=()=>{ if(sessionState.idx+1<sessionState.qs.length){ sessionState.idx++; } else { sessionState.phase='done'; } render(); window.scrollTo({top:0,behavior:'smooth'}); });
+  document.querySelectorAll('[data-session-drill]').forEach(b=>b.onclick=()=>{ practicalState.activeQCat=b.getAttribute('data-session-drill'); savePractical(); state.view='qbank'; render(); window.scrollTo({top:0,behavior:'smooth'}); });
+  document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{ state.view=b.getAttribute('data-view'); render(); window.scrollTo({top:0,behavior:'smooth'}); });
+}
+function focusNextCard(){ const st=categoryStats().filter(c=>c.answered>0); const w=weakestCats(1)[0]; const body=st.length?(w.pct<100?`Your weakest drilled category is <b>${esc(w.cat)}</b> at ${w.pct} percent. Run a five-question rep or drill it directly.`:`Every drilled category is clean so far. Keep the streak with a mixed rep on unseen prompts.`):`No drills answered yet. A five-question Daily Rep is the fastest way to find your baseline.`; return `<div class="card focus-card"><div class="focus-grid"><div><div class="eyebrow">Focus next</div><h2 style="font-size:26px;margin:8px 0 10px">One rep a day moves the needle.</h2><p class="sub" style="margin:0">${body}</p></div><div class="focus-actions"><button class="ghost session-cta" data-view="session">Start Daily Rep</button>${st.length?`<button class="ghost" data-session-drill="${esc(w.cat)}">Drill ${esc(w.cat)}</button>`:''}</div></div></div>`; }
+
 /* ---------- v57 coach helper ---------- */
 const COACH_TIPS={
  home:["Pick one lane per session: one lesson set, one case, or five drills.","If you are new, start with Curriculum unit 1, then run Case 1 out loud."],
@@ -4798,6 +4860,7 @@ const COACH_TIPS={
  problem:["Say the decision in one sentence before reading the data pack.","Challenge each data row: what is missing, biased, or unverified?","End with: recommendation, the condition it depends on, and what would change your mind."],
  roleplay:["Answer the same case twice for two personas. The structure stays, the emphasis moves.","Name the stakeholder metric first. It earns you the right to disagree."],
  practical:["Flag every dirty-data caveat before using a number.","Write the one-sentence recommendation in the builder before polishing anything."],
+ session:["Five questions, one sitting. Treat it like a live manager check-in.","Read the model answer even when you are right. The phrasing is the product.","Finish by drilling your weakest category while the misses are fresh."],
  qbank:["Answer, then read the model answer and the three-step path.","The strong option always states logic, caveat, and next step. Copy that pattern.","Wrong picks collect in Review missed. Clear them the same day."],
  glossary:["Search beats scrolling. Look up terms the moment they block you.","Read the example sentence out loud. That is interview phrasing practice."],
  review:["Redo misses without looking at the old answer first.","If the same category keeps missing, reopen its lesson before drilling more."],
@@ -5110,6 +5173,7 @@ function wireHome(){
   const sb=document.getElementById("startBtn"); if(sb) sb.onclick=()=>{ state.view="level-0"; render(); window.scrollTo({top:0}); };
   wireCoachTimer();
   const hb=document.getElementById("homeAuthBtn"); if(hb) hb.onclick=openAuthModal;
+  document.querySelectorAll('[data-session-drill]').forEach(b=>b.onclick=()=>{ practicalState.activeQCat=b.getAttribute('data-session-drill'); savePractical(); state.view='qbank'; render(); window.scrollTo({top:0,behavior:'smooth'}); });
 }
 let __lastView=null;
 function afterRender(){
@@ -5316,6 +5380,7 @@ function reviewTarget(where){ if(where.indexOf("case:")===0) return {view:"case"
 function renderReview(){
   const items=missedItems();
   let h=`<div class="card hero"><div class="eyebrow">Review</div><h2>Fix your missed answers</h2><p class="lede">Every question where you picked a wrong knowledge answer or a weak or trap scenario collects here with the strongest answer and why it wins. Reviewing misses is the fastest way to raise both meters.</p></div>`;
+  h+=sessionReportCard();
   if(!items.length){ h+=`<div class="card"><h2 style="font-size:18px;margin-bottom:6px">Nothing to review yet</h2><p style="font-size:14.5px;color:var(--muted)">Answer some drills and case challenges. Any knowledge answer you get wrong, or any weak or trap scenario pick, will show up here so you can study just your gaps.</p></div>`; return h; }
   items.forEach(it=>{
     const best=bestOption(it.d); const yours=it.d.options[it.idx];
@@ -5332,6 +5397,7 @@ function renderReview(){
 }
 function wireReview(){
   const m=document.getElementById("main");
+  m.querySelectorAll("[data-session-drill]").forEach(b=>{ b.onclick=()=>{ practicalState.activeQCat=b.getAttribute("data-session-drill"); savePractical(); state.view="qbank"; render(); window.scrollTo({top:0,behavior:"smooth"}); }; });
   m.querySelectorAll("[data-review-go]").forEach(b=>{ b.onclick=()=>{ const t=reviewTarget(b.getAttribute("data-review-go")); if(t.ci!=null) state.caseIndex=t.ci; state.view=t.view; render(); window.scrollTo({top:0,behavior:"smooth"}); }; });
   m.querySelectorAll("[data-retry]").forEach(b=>{ b.onclick=()=>{ delete state.answers[b.getAttribute("data-retry")]; save(); render(); }; });
 }
