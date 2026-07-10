@@ -727,7 +727,7 @@
   .studio-hero .lede,.cap-hero .lede,.strat-hero .lede,.problem-hero .lede{color:#b9c4cf!important}
   .drill-hero .mini{background:rgba(255,255,255,.07)!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:18px!important;color:#f3f1ec!important}
   .drill-hero .mini h4{color:#fff!important}.drill-hero .mini p{color:#b9c4cf!important}
-  .ghost{color:#123c63!important}
+  button.ghost[style*="var(--accent)"]{color:#fffefb!important}
   .ghost[style*="background:var(--accent)"],button.ghost[style*="background: var(--accent)"]{background:#123c63!important;border-color:#123c63!important;color:#fffefb!important}
   .navbtn:hover{color:#123c63!important}
   .navbtn.active span:not(.num):not(.dot):not(.navmini){text-decoration-color:#8a6d3f!important}
@@ -766,7 +766,7 @@
   .problem-tab.active{text-decoration-color:#c8a668!important}
 
   .simple-hero .ghost,.hero .ghost,.hero-actions .ghost,.roadmap-actions .ghost,.continue-actions .ghost{color:#123c63!important}
-  .benchmark-head .ghost,.problem-preview-grid .ghost{color:#123c63!important}
+  .benchmark-head .ghost,.problem-preview-grid .ghost{color:#fffefb!important}
 
 
   /* ===== v56 refined logo ===== */
@@ -774,6 +774,37 @@
   .brand h1{font-size:19px!important;font-weight:600!important;letter-spacing:-.025em!important;color:#16181d!important;font-family:"IBM Plex Serif",Georgia,serif!important}
   .brand h1 .wm-dot,.brand h1 b{font-weight:600!important;color:#c8a668!important;font-family:inherit!important;font-style:normal!important}
   @media(max-width:720px){.brand h1{font-size:16px!important}}
+
+
+  /* ===== v57 solutions and coach ===== */
+  .q-solve{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid rgba(24,26,30,.10);background:#f7f5f1}
+  .q-solve-col{padding:22px 30px}
+  .q-solve-col+.q-solve-col{border-left:1px solid rgba(24,26,30,.10)}
+  .q-solve b{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.12em;color:#8a6d3f;font-weight:650;margin-bottom:10px}
+  .q-solve p{margin:0;font-size:14.5px;line-height:1.5;color:#33353a}
+  .q-solve ol{margin:0;padding-left:18px;font-size:14px;line-height:1.55;color:#4b4d52}
+  .q-solve ol li{margin-bottom:6px}
+  #coachBtn{position:fixed;right:26px;bottom:26px;z-index:80;background:#0f2A43;color:#f7f5f1;border:0;border-radius:999px;padding:13px 22px;font-family:"IBM Plex Serif",Georgia,serif;font-size:15px;font-weight:600;letter-spacing:-.01em;cursor:pointer;box-shadow:0 10px 30px rgba(15,42,67,.35)}
+  #coachBtn:hover{background:#16334e}
+  #coachPanel{position:fixed;right:26px;bottom:84px;z-index:81;width:min(400px,calc(100vw - 40px));max-height:min(560px,70vh);overflow:auto;background:#fffefb;border:1px solid rgba(24,26,30,.12);border-radius:22px;box-shadow:0 30px 80px rgba(15,42,67,.28)}
+  #coachPanel.hidden{display:none}
+  .coach-head{position:sticky;top:0;display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;background:#0f2A43;color:#f7f5f1;padding:16px 20px}
+  .coach-head b{font-family:"IBM Plex Serif",Georgia,serif;font-size:17px;font-weight:600}
+  .coach-head span{font-size:11.5px;color:#b9c4cf}
+  .coach-head button{background:transparent;border:0;color:#b9c4cf;font-size:20px;cursor:pointer;line-height:1}
+  .coach-head button:hover{color:#fff}
+  .coach-sec{padding:18px 20px;border-bottom:1px solid rgba(24,26,30,.08)}
+  .coach-sec:last-child{border-bottom:0}
+  .coach-sec>b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#8a6d3f;font-weight:650;margin-bottom:10px}
+  .coach-sec ul{margin:0;padding-left:17px;font-size:13.8px;line-height:1.5;color:#3d3f44}
+  .coach-sec li{margin-bottom:7px}
+  .coach-sec input{width:100%;box-sizing:border-box;border:1px solid rgba(24,26,30,.16);border-radius:12px;background:#fff;padding:10px 12px;font:500 13.5px/1.4 Inter,sans-serif;color:#16181d}
+  .coach-hit{border-top:1px solid rgba(24,26,30,.08);padding:12px 2px 4px;margin-top:12px}
+  .coach-hit b{font-family:"IBM Plex Serif",Georgia,serif;font-size:15px;color:#16181d}
+  .coach-hit p{margin:5px 0 0;font-size:13px;line-height:1.45;color:#4b4d52}
+  .coach-hit .coach-ex{color:#8a8577;font-style:italic}
+  .coach-empty{margin-top:12px;font-size:13px;color:#8a8577}
+  @media(max-width:720px){#coachBtn{right:16px;bottom:16px}#coachPanel{right:12px;bottom:72px}.q-solve{grid-template-columns:1fr}.q-solve-col+.q-solve-col{border-left:0;border-top:1px solid rgba(24,26,30,.10)}}
 
 </style>
 </head>
@@ -4363,7 +4394,7 @@ try { const u = JSON.parse(localStorage.getItem(UI_KEY)); if(u) uiState = Object
 function saveUI(){ localStorage.setItem(UI_KEY, JSON.stringify(uiState)); scheduleCloudSave(); }
 function applyFocusMode(){ document.body.classList.toggle("focus-mode", !!uiState.focus); const b=document.getElementById("focusBtn"); if(b) b.textContent=uiState.focus?"Exit focus":"Focus"; }
 
-const READYTOCONSULT_VERSION = "2.0.1";
+const READYTOCONSULT_VERSION = "2.1.0";
 const SUPABASE_URL = "https://oergojtnxmjztjgadkkv.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_WdMMBeui--DSDVloYcTWeg_L9WAXcKA";
 const NOTEBOOK_KEY = "readytoconsult-notebook-v17";
@@ -4497,11 +4528,13 @@ function render(){
   else if(state.view.startsWith("level-")){ const i=+state.view.split("-")[1]; m.innerHTML=renderLevel(i); wireLevel(i); }
   renderFoot();
   afterRender();
+  mountCoach();
+  if(document.getElementById('coachPanel') && !document.getElementById('coachPanel').classList.contains('hidden')) renderCoachBody();
 }
 
 function renderFoot(){
   document.getElementById("foot").innerHTML =
-    "ReadyToConsult v2.0.1 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
+    "ReadyToConsult v2.1 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
 }
 
 /* ---------- Home ---------- */
@@ -4753,6 +4786,35 @@ function wireCaseLab(){
 
 
 
+
+
+/* ---------- v57 coach helper ---------- */
+const COACH_TIPS={
+ home:["Pick one lane per session: one lesson set, one case, or five drills.","If you are new, start with Curriculum unit 1, then run Case 1 out loud."],
+ syllabus:["Do lessons in order inside a unit. The drills assume the earlier language.","Done means you can explain the takeaway out loud without the page."],
+ case:["Read the prompt, then say the issue tree before scrolling.","Run the math by hand once. The case teaches through the arithmetic.","Close by saying the recommendation first, then two reasons, then the risk."],
+ capstone:["Work tabs left to right: brief, data room, model, then memo.","Do not trust a single stakeholder quote. Check it against the data room."],
+ strategy:["No asset wins every row. Choose, then defend the trade-off.","Use the sensitivity tab to find which assumption flips the answer."],
+ problem:["Say the decision in one sentence before reading the data pack.","Challenge each data row: what is missing, biased, or unverified?","End with: recommendation, the condition it depends on, and what would change your mind."],
+ roleplay:["Answer the same case twice for two personas. The structure stays, the emphasis moves.","Name the stakeholder metric first. It earns you the right to disagree."],
+ practical:["Flag every dirty-data caveat before using a number.","Write the one-sentence recommendation in the builder before polishing anything."],
+ qbank:["Answer, then read the model answer and the three-step path.","The strong option always states logic, caveat, and next step. Copy that pattern.","Wrong picks collect in Review missed. Clear them the same day."],
+ glossary:["Search beats scrolling. Look up terms the moment they block you.","Read the example sentence out loud. That is interview phrasing practice."],
+ review:["Redo misses without looking at the old answer first.","If the same category keeps missing, reopen its lesson before drilling more."],
+ notebook:["Save answer patterns, not transcripts: hypothesis, evidence, risk, next step."],
+ certificate:["The certificate unlocks at 27 lessons, 80 percent knowledge, 70 percent readiness."],
+ about:["Everything here is original training content. Company names only set the scene."]
+};
+function coachContext(){ const v=state.view.startsWith('level-')?'syllabus':state.view; return COACH_TIPS[v]||COACH_TIPS.home; }
+function coachSearch(qs){
+ const q=qs.trim().toLowerCase(); if(!q) return '';
+ const hits=DATA.glossary.filter(g=>g.term.toLowerCase().includes(q)||g.def.toLowerCase().includes(q)).slice(0,3);
+ if(!hits.length) return '<div class="coach-empty">No match in the knowledge base. Try a shorter keyword, like "payer" or "NPV".</div>';
+ return hits.map(g=>`<div class="coach-hit"><b>${esc(g.term)}</b><p>${esc(g.def)}</p><p class="coach-ex">${esc(g.ex)}</p></div>`).join('');
+}
+function toggleCoach(open){ const el=document.getElementById('coachPanel'); if(!el) return; const willOpen=open!==undefined?open:el.classList.contains('hidden'); el.classList.toggle('hidden',!willOpen); if(willOpen){ renderCoachBody(); const inp=document.getElementById('coachInput'); if(inp) inp.focus(); } }
+function renderCoachBody(){ const tips=coachContext(); const body=document.getElementById('coachBody'); if(!body) return; body.innerHTML=`<div class="coach-sec"><b>How to work this screen</b><ul>${tips.map(t=>`<li>${esc(t)}</li>`).join('')}</ul></div><div class="coach-sec"><b>Ask the knowledge base</b><input id="coachInput" type="text" placeholder="Try: NPV, payer mix, MECE, gross-to-net" autocomplete="off"><div id="coachResults"></div></div>`; const inp=document.getElementById('coachInput'); if(inp){ inp.oninput=()=>{ const r=document.getElementById('coachResults'); if(r) r.innerHTML=coachSearch(inp.value); }; } }
+function mountCoach(){ if(document.getElementById('coachBtn')) return; const btn=document.createElement('button'); btn.id='coachBtn'; btn.type='button'; btn.innerHTML='Coach'; btn.onclick=()=>toggleCoach(); document.body.appendChild(btn); const panel=document.createElement('div'); panel.id='coachPanel'; panel.className='hidden'; panel.innerHTML=`<div class="coach-head"><b>Coach</b><span>Context help, not a scored answer</span><button type="button" id="coachClose" aria-label="Close coach">&times;</button></div><div id="coachBody"></div>`; document.body.appendChild(panel); panel.querySelector('#coachClose').onclick=()=>toggleCoach(false); }
 
 /* ---------- v54 study-material figure library ---------- */
 const FIG={ink:"#1d1d1f",mut:"#86868b",line:"rgba(0,0,0,.14)",blue:"#123c63",soft:"#f5f5f7"};
@@ -5128,7 +5190,7 @@ Object.assign(DIAGRAMS,{"fdahier": "<svg viewBox=\"0 0 720 210\" role=\"img\" ar
 Object.assign(MEDIA,{"23": {"diagram": "fdahier", "videos": [{"id": "fZ-Msidi7EE", "title": "How does the FDA approve new drugs?", "by": "U.S. FDA"}]}, "24": {"diagram": "modalities", "videos": [{"id": "GEYhlLbHNEw", "title": "Biologic drugs and biosimilars", "by": "Healthcare Triage"}, {"id": "1s7W1EKUekk", "title": "The basics of biosimilars", "by": "U.S. FDA"}]}, "25": {"diagram": null, "videos": [{"id": "GbJasFgJkLg", "title": "Gene therapy, inside out", "by": "U.S. FDA"}, {"id": "F1TbvdjmXJ8", "title": "Orphan drugs: an introduction", "by": "Healthcare Triage"}]}, "26": {"diagram": "ichmap", "videos": [{"id": "Ri1wgXqb-sk", "title": "ICH guidelines explained", "by": "Pharmaguideline"}]}});
 function videoFacade(v){
   return `<div class="vfacade" data-vid="${v.id}" data-vtitle="${esc(v.title)}" role="button" tabindex="0" aria-label="Play video: ${esc(v.title)}">
-    <img class="vthumb" loading="lazy" src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="${esc(v.title)}" onerror="this.remove();"/>
+    <img class="vthumb" loading="lazy" src="https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg" alt="${esc(v.title)}" onerror="if(!this.dataset.f){this.dataset.f=1;this.src='https://i.ytimg.com/vi/${v.id}/hqdefault.jpg'}else{this.remove()}"/>
     <span class="vplay"></span>
     <span class="vmeta"><b>${esc(v.title)}</b><small>${esc(v.by)} &middot; YouTube</small></span>
   </div>`;
@@ -5453,7 +5515,10 @@ function renderDeepQ(q){
   const ans=practicalState.qbank[q.i];
   const chosen=ans&&q.options[ans.oi];
   const letters=['A','B','C','D'];
-  return `<div class="q-card q-card-visual"><div class="q-prompt-grid"><div class="q-prompt-main"><div class="q-kicker">Prompt</div><h3>${esc(q.q)}</h3><div class="q-meta"><span>${esc(q.cat)}</span><span>${esc(q.diff)}</span></div></div>${renderQVisual(q)}</div><div class="q-options">${q.options.map((o,oi)=>`<button class="${ans&&ans.oi===oi?'chosen '+o[0]:''}" data-q-pick="${q.i}:${oi}"><span class="opt-letter">${letters[oi]||String(oi+1)}</span><span>${esc(o[1])}</span></button>`).join('')}</div>${chosen?`<div class="q-feedback ${chosen[0]}"><b>${chosen[0].toUpperCase()}.</b> ${qFeedback(chosen[0])}</div>`:''}</div>`;
+  const strongIdx=q.options.findIndex(o=>o[0]==='strong');
+  const parts=qVisualParts(q);
+  const solve=chosen?`<div class="q-solve"><div class="q-solve-col"><b>Model answer &middot; ${letters[strongIdx]||''}</b><p>${esc(q.options[strongIdx][1])}</p></div><div class="q-solve-col"><b>How to get there</b><ol><li>Start from the facts: ${esc(parts[0].toLowerCase())}.</li><li>Name the tension that makes it hard: ${esc(parts[1].toLowerCase())}.</li><li>Commit at the decision point (${esc(parts[2].toLowerCase())}) and say what evidence would change your answer.</li></ol></div></div>`:'';
+  return `<div class="q-card q-card-visual"><div class="q-prompt-grid"><div class="q-prompt-main"><div class="q-kicker">Prompt</div><h3>${esc(q.q)}</h3><div class="q-meta"><span>${esc(q.cat)}</span><span>${esc(q.diff)}</span></div></div>${renderQVisual(q)}</div><div class="q-options">${q.options.map((o,oi)=>`<button class="${ans&&ans.oi===oi?'chosen '+o[0]:''}" data-q-pick="${q.i}:${oi}"><span class="opt-letter">${letters[oi]||String(oi+1)}</span><span>${esc(o[1])}</span></button>`).join('')}</div>${chosen?`<div class="q-feedback ${chosen[0]}"><b>${chosen[0].toUpperCase()}.</b> ${qFeedback(chosen[0])}</div>`:''}${solve}</div>`;
 }
 function qFeedback(t){ return t==='strong'?'This is manager-ready because it states the decision logic, caveat, and next analytic step.':t==='weak'?'Partly right, but it is too generic or misses the decision-driving assumption.':'Trap answer. It overclaims, skips structure, or confuses a symptom for the underlying problem.'; }
 function wireDeepQBank(){ document.querySelectorAll('[data-q-cat]').forEach(b=>b.onclick=()=>{ practicalState.activeQCat=b.getAttribute('data-q-cat'); savePractical(); render(); window.scrollTo({top:0,behavior:'smooth'}); }); document.querySelectorAll('[data-q-pick]').forEach(b=>b.onclick=()=>{ const [i,oi]=b.getAttribute('data-q-pick').split(':').map(Number); practicalState.qbank[i]={i,oi}; savePractical(); render(); }); }
