@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="theme-color" content="#0b1220" />
 <title>Life Sciences Consulting Interview Course | R&D Business Consultant</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='11' fill='%230f2A43'/%3E%3Ctext x='21' y='33' text-anchor='middle' font-family='Georgia, serif' font-weight='600' font-size='26' fill='%23f7f5f1'%3ER%3C/text%3E%3Ccircle cx='33' cy='31' r='2.6' fill='%23c8a668'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -767,13 +768,20 @@
   .simple-hero .ghost,.hero .ghost,.hero-actions .ghost,.roadmap-actions .ghost,.continue-actions .ghost{color:#123c63!important}
   .benchmark-head .ghost,.problem-preview-grid .ghost{color:#123c63!important}
 
+
+  /* ===== v56 refined logo ===== */
+  .brand{align-items:center!important}
+  .brand h1{font-size:19px!important;font-weight:600!important;letter-spacing:-.025em!important;color:#16181d!important;font-family:"IBM Plex Serif",Georgia,serif!important}
+  .brand h1 .wm-dot,.brand h1 b{font-weight:600!important;color:#c8a668!important;font-family:inherit!important;font-style:normal!important}
+  @media(max-width:720px){.brand h1{font-size:16px!important}}
+
 </style>
 </head>
 <body>
 <header class="top">
   <div class="top-inner">
     <div class="brand">
-      <h1>Life Sciences Consulting Interview Course</h1>
+      <h1>ReadyToConsult<b class="wm-dot">.</b></h1>
       <span>Independent life sciences consulting interview course &nbsp;&middot;&nbsp; not affiliated with or endorsed by Veeva Systems</span>
     </div>
     <div class="top-actions">
@@ -4355,7 +4363,7 @@ try { const u = JSON.parse(localStorage.getItem(UI_KEY)); if(u) uiState = Object
 function saveUI(){ localStorage.setItem(UI_KEY, JSON.stringify(uiState)); scheduleCloudSave(); }
 function applyFocusMode(){ document.body.classList.toggle("focus-mode", !!uiState.focus); const b=document.getElementById("focusBtn"); if(b) b.textContent=uiState.focus?"Exit focus":"Focus"; }
 
-const READYTOCONSULT_VERSION = "2.0.0";
+const READYTOCONSULT_VERSION = "2.0.1";
 const SUPABASE_URL = "https://oergojtnxmjztjgadkkv.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_WdMMBeui--DSDVloYcTWeg_L9WAXcKA";
 const NOTEBOOK_KEY = "readytoconsult-notebook-v17";
@@ -4493,7 +4501,7 @@ function render(){
 
 function renderFoot(){
   document.getElementById("foot").innerHTML =
-    "ReadyToConsult v2.0 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
+    "ReadyToConsult v2.0.1 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
 }
 
 /* ---------- Home ---------- */
