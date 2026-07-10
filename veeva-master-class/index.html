@@ -4250,7 +4250,7 @@ try { const u = JSON.parse(localStorage.getItem(UI_KEY)); if(u) uiState = Object
 function saveUI(){ localStorage.setItem(UI_KEY, JSON.stringify(uiState)); scheduleCloudSave(); }
 function applyFocusMode(){ document.body.classList.toggle("focus-mode", !!uiState.focus); const b=document.getElementById("focusBtn"); if(b) b.textContent=uiState.focus?"Exit focus":"Focus"; }
 
-const READYTOCONSULT_VERSION = "1.9.4";
+const READYTOCONSULT_VERSION = "1.9.5";
 const SUPABASE_URL = "https://oergojtnxmjztjgadkkv.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_WdMMBeui--DSDVloYcTWeg_L9WAXcKA";
 const NOTEBOOK_KEY = "readytoconsult-notebook-v17";
@@ -4344,6 +4344,7 @@ function renderSide(){
   h+=navBtn("case","Case Lab","C",state.view==="case");
   h+=navBtn("capstone","Capstone","M",state.view==="capstone");
   h+=navBtn("strategy","Strategy","S",state.view==="strategy");
+  h+=navBtn("roleplay","Roleplay","R",state.view==="roleplay");
   h+=navBtn("practical","Studio","A",state.view==="practical");
   h+=navBtn("qbank","Drills","Q",state.view==="qbank");
   h+='<div class="navhdr">Support</div>';
@@ -4385,7 +4386,7 @@ function render(){
 
 function renderFoot(){
   document.getElementById("foot").innerHTML =
-    "ReadyToConsult v1.9.4 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
+    "ReadyToConsult v1.9.5 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
 }
 
 /* ---------- Home ---------- */
@@ -4617,9 +4618,9 @@ function wireCaseLab(){
 function renderRoleplay(){
   return `<div class="card hero">
     <div class="eyebrow">Stakeholder roleplay</div>
-    <h2>Practice with fictional life science consulting personas</h2>
-    <p class="lede">These are fictional training personas, not real Veeva employees. Use them to rehearse how different stakeholders ask the same problem differently. The goal is to adjust your structure, language, and level of detail to the person in front of you.</p>
-    <div class="callout"><b>How to practice:</b> Pick one persona, answer the prompt in 90 seconds, then check whether your answer names the stakeholder's metric, incentive, decision risk, and next step. If a future visual roleplay mode needs human character art, this is where Higgsfield-generated fictional characters would fit.</div>
+    <h2>Practice with fictional life sciences consulting personas</h2>
+    <p class="lede">These are fictional training personas, not real employees of any company named in this course. Use them to rehearse how different stakeholders ask the same problem differently. The goal is to adjust your structure, language, and level of detail to the person in front of you.</p>
+    <div class="callout"><b>How to practice:</b> Pick one persona, answer the prompt in 90 seconds, then check whether your answer names the stakeholder's metric, incentive, decision risk, and next step.</div>
   </div>
   <div class="card">
     <div class="eyebrow">Personas</div>
