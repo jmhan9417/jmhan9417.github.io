@@ -889,6 +889,21 @@
     .side .side-reset{flex:0 0 auto!important}
   }
 
+
+/* ===== v2.5 audit fixes and interactive study visuals ===== */
+body.focus-mode .wrap{grid-template-columns:minmax(0,1fr)!important;max-width:1040px!important;gap:0!important}
+body.focus-mode main{width:100%!important;min-width:0!important}
+.pal-search input{display:block!important;min-width:0!important;opacity:1!important;color:var(--navy)!important;-webkit-text-fill-color:var(--navy)!important}
+.pal-search input::placeholder{color:#697586!important;opacity:1!important}
+.pal-title,.pal-sub{display:block!important}.pal-title{line-height:1.25!important}.pal-sub{line-height:1.35!important;margin-top:4px!important}
+.lesson-workbench{padding:0!important;overflow:hidden!important}
+.workbench-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.44fr);border-bottom:1px solid rgba(0,0,0,.10)}
+.workbench-copy{padding:30px 32px}.workbench-copy h2{font-size:clamp(26px,3vw,38px)!important;line-height:1.04!important;letter-spacing:-.045em!important;margin:8px 0 10px!important}.workbench-copy p{margin:0;color:#6e6e73;line-height:1.5}
+.workbench-decision{background:#f2eee5;padding:26px 28px;display:grid;align-content:center;gap:7px}.workbench-decision small{font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.08em;color:#86724f}.workbench-decision b{font-family:var(--serif);font-size:20px;line-height:1.2;color:var(--navy)}
+.workbench-map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));position:relative}.workbench-node{appearance:none;border:0;border-right:1px solid rgba(0,0,0,.10);background:#fff;padding:25px 26px 23px;text-align:left;cursor:pointer;min-height:186px;transition:background .18s,box-shadow .18s}.workbench-node:last-child{border-right:0}.workbench-node:hover,.workbench-node.active{background:#f7f8fa}.workbench-node.active{box-shadow:inset 0 4px 0 var(--bronze)}.workbench-node small{display:block;color:#86868b;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}.workbench-node b{display:block;font-size:18px;line-height:1.18;letter-spacing:-.025em;color:#1d1d1f;margin-bottom:12px}.workbench-node p{font-size:13.5px;line-height:1.42;color:#6e6e73;margin:0}.workbench-meter{height:6px;background:#e7e7e9;border-radius:99px;overflow:hidden;margin-top:18px}.workbench-meter i{display:block;height:100%;background:linear-gradient(90deg,var(--navy),var(--bronze));border-radius:99px}.workbench-insight{display:grid;grid-template-columns:140px minmax(0,1fr);gap:18px;align-items:start;padding:20px 28px;border-top:1px solid rgba(0,0,0,.10);background:#fbfbfc}.workbench-insight b{font-size:12px;color:#86724f;text-transform:uppercase;letter-spacing:.07em}.workbench-insight span{font-size:14.5px;line-height:1.48;color:#424245}
+.answer-order-note{font-size:12.5px;color:#86868b;margin-top:12px}
+@media(max-width:820px){.workbench-head,.workbench-map,.workbench-insight{grid-template-columns:1fr}.workbench-node{border-right:0;border-bottom:1px solid rgba(0,0,0,.10);min-height:0}.workbench-node:last-child{border-bottom:0}.workbench-insight{gap:6px}.pal-search{align-items:flex-start!important;flex-direction:column!important}.pal-search input{width:100%!important}}
+
 </style>
 </head>
 <body>
@@ -4468,6 +4483,9 @@ const DATA = {
 /* =====================================================================
    APP LOGIC
    ===================================================================== */
+// v2.5: keep one canonical entry per glossary term.
+DATA.glossary = DATA.glossary.filter((g,i,a)=>a.findIndex(x=>x.term.toLowerCase()===g.term.toLowerCase())===i);
+
 const STORE_KEY = "veeva-master-class-sim-v1";
 let state = { view:"home", answers:{} };
 try { const s = JSON.parse(localStorage.getItem(STORE_KEY)); if (s && s.answers) state.answers = s.answers; } catch(e){}
@@ -4477,7 +4495,7 @@ try { const u = JSON.parse(localStorage.getItem(UI_KEY)); if(u) uiState = Object
 function saveUI(){ localStorage.setItem(UI_KEY, JSON.stringify(uiState)); scheduleCloudSave(); }
 function applyFocusMode(){ document.body.classList.toggle("focus-mode", !!uiState.focus); const b=document.getElementById("focusBtn"); if(b) b.textContent=uiState.focus?"Exit focus":"Focus"; }
 
-const READYTOCONSULT_VERSION = "2.4.0";
+const READYTOCONSULT_VERSION = "2.5.0";
 const SUPABASE_URL = "https://oergojtnxmjztjgadkkv.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_WdMMBeui--DSDVloYcTWeg_L9WAXcKA";
 const NOTEBOOK_KEY = "readytoconsult-notebook-v17";
@@ -4619,7 +4637,7 @@ function render(){
 
 function renderFoot(){
   document.getElementById("foot").innerHTML =
-    "ReadyToConsult v2.4 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
+    "ReadyToConsult v2.5 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
 }
 
 /* ---------- Home ---------- */
@@ -4661,6 +4679,42 @@ function problemSolvingCard(){
   </div>`;
 }
 
+/* ---------- v2.5 deterministic option order + interactive lesson maps ---------- */
+function stableHash(str){ let h=2166136261>>>0; for(let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; }
+function stableOptionOrder(n,key){ const a=Array.from({length:n},(_,i)=>i); if(n<2) return a; const h=stableHash(key); const off=h%n; const r=a.slice(off).concat(a.slice(0,off)); if(((h>>>5)&1) && n>2){ const first=r.shift(); r.reverse(); r.unshift(first); } return r; }
+function optionLetter(order,original){ const rank=order.indexOf(original); return String.fromCharCode(65+(rank<0?0:rank)); }
+
+const LESSON_VISUALS = [
+  ["MECE issue tree","Client question","What exactly must be decided?",72,"Driver branches","Separate volume, conversion, capacity, and risk.",88,"Testable leaves","Turn every branch into a measurable check.",94,"A clean structure prevents double counting before the math starts."],
+  ["Hypothesis loop","Initial hypothesis","State the likely answer and why.",68,"Disconfirming evidence","Look first for data that could prove you wrong.",92,"Updated synthesis","Keep, revise, or reject the hypothesis.",86,"A hypothesis is a starting point, not a conclusion to defend."],
+  ["Case math chain","Known inputs","Write units beside every number.",82,"Core equation","Make demand, capacity, price, or probability explicit.",94,"Sanity check","Compare the result with a plausible benchmark.",88,"Good math is transparent enough for an interviewer to challenge."],
+  ["Pyramid message","Recommendation","Lead with the answer and condition.",96,"Supporting reasons","Use two or three mutually exclusive reasons.",85,"Evidence","Place the strongest fact under each reason.",78,"The slide title should communicate the conclusion even when read alone."],
+  ["R&D cloud map","Business problem","Start with the workflow, not the product.",90,"Process owner","Name who owns the regulated decision.",78,"System capability","Map Vault capability only after diagnosis.",72,"Technology is credible when it solves a named operating problem."],
+  ["Integrity check","Real evidence","Use only claims supported by your experience.",95,"Role clarity","Separate your work from the team outcome.",86,"Interview claim","Make the strongest precise statement you can defend.",92,"Specific, bounded evidence is more persuasive than inflated scope."],
+  ["Story architecture","Situation and task","Set context in two sentences.",72,"Action","Show your judgment and direct contribution.",94,"Result and reflection","Quantify honestly and name what you learned.",85,"A story becomes reusable when its decision and lesson are explicit."],
+  ["Safety backlog flow","Monthly intake","Measure cases entering the system.",90,"Net capacity","Subtract rework and quality leakage from output.",94,"Backlog trajectory","Model burn rate, time, cost, and risk.",97,"Backlog change equals intake minus sustainable quality-adjusted output."],
+  ["Investment logic","Cash outflow","Include implementation and recurring cost.",88,"Value drivers","Separate hard savings from risk-adjusted value.",92,"Decision metric","Use NPV, payback, and sensitivity together.",96,"A positive base case is weak if one small assumption reverses it."],
+  ["Implementation sequence","Discover","Map workflow, data, owners, and controls.",92,"Pilot","Test adoption, quality, and measurable value.",88,"Scale","Expand only after defined gates are met.",82,"A phased roadmap protects the client from overfunding an unproven solution."],
+  ["Life sciences value chain","Discover and develop","Generate evidence and reduce technical risk.",86,"Approve and launch","Translate evidence into regulatory and access decisions.",90,"Maintain and optimize","Manage safety, quality, supply, and lifecycle value.",82,"Value leaks can appear at any handoff, not only at approval."],
+  ["Functional handoffs","R&D functions","Clinical, regulatory, safety, and quality generate evidence.",92,"Commercial functions","Medical, access, and commercial translate evidence into use.",84,"Shared decisions","Data governance and operating cadence connect both sides.",78,"Many consulting cases are really broken handoffs between functions."],
+  ["Stakeholder lens","Metric","What outcome is this stakeholder measured on?",88,"Incentive","What behavior does that metric create?",90,"Decision risk","What could make them reject your recommendation?",94,"Change the language and detail level without changing the underlying facts."],
+  ["Submission critical path","Evidence readiness","Are pivotal analyses and narratives complete?",90,"CMC readiness","Are process, control, and stability packages ready?",95,"Regional sequence","Which filing order maximizes value without creating rework?",82,"The filing date is credible only when the slowest dependency is credible."],
+  ["Trial performance funnel","Activated sites","How many sites can actually enroll?",72,"Screen to randomize","Where and why do eligible patients drop?",95,"Retention and data quality","Will enrolled patients produce usable endpoints?",88,"More sites do not solve a conversion or patient-burden bottleneck."],
+  ["Benefit-risk system","Case intake","Capture complete, timely, coded safety data.",86,"Signal detection","Aggregate patterns and test whether they are meaningful.",94,"Risk action","Update labeling, monitoring, or risk minimization.",90,"Fast case processing is necessary but not sufficient for signal quality."],
+  ["Quality system loop","Deviation","Describe what happened and contain risk.",78,"Root cause and CAPA","Correct the system, not only the record.",95,"Effectiveness check","Prove recurrence risk actually declined.",92,"On-time closure is not evidence that a CAPA worked."],
+  ["Launch funnel","Eligible patients","Define the clinically appropriate pool.",88,"Access and referral","Measure coverage, PA, referral, and abandonment.",96,"Treated and persistent","Track starts, adherence, and outcomes.",84,"Promotion cannot fix a patient flow blocked by coverage or referral."],
+  ["Payer value bridge","Clinical benefit","Compare outcomes with relevant alternatives.",92,"Economic impact","Model budget, utilization, and offsets honestly.",90,"Access design","Match evidence and contracting to the objection.",86,"Approval answers safety and efficacy; coverage asks value and affordability."],
+  ["RWE credibility chain","Question","Define the decision and estimand first.",94,"Data and design","Choose fit-for-purpose sources and comparator methods.",92,"Inference boundary","State what the evidence can and cannot support.",96,"A larger dataset does not repair confounding or a weak comparator."],
+  ["AI governance stack","Use case","Start with a bounded workflow and value metric.",90,"Control layer","Require source traceability, validation, and human review.",97,"Monitoring","Track error, drift, override, and audit evidence.",92,"A regulated AI pilot needs a control system, not just a model demo."],
+  ["Portfolio decision","Unadjusted upside","Estimate market and strategic value.",78,"Probability and timing","Risk-adjust technical, regulatory, and access success.",94,"Option value","Preserve future choices around milestones and capital.",88,"The best asset is the one that creates risk-adjusted value at the required milestone."],
+  ["Supply reliability","Process capability","Can the process repeatedly meet specifications?",92,"Release and network","Can QA, sites, and suppliers deliver on time?",94,"Launch resilience","Quantify shortage, revenue, and patient impact.",90,"Commercial demand is irrelevant when quality release is the binding constraint."],
+  ["FDA authority map","Statute","Congress creates legal authority.",96,"Regulation","Binding requirements are codified in the CFR.",94,"Guidance","FDA explains current thinking and acceptable approaches.",82,"Always distinguish law, regulation, and generally nonbinding guidance."],
+  ["Modality comparison","Small molecule","Chemically synthesized and usually well characterized.",90,"Biologic","Complex, variable, and manufactured in living systems.",94,"Biosimilar path","Requires high similarity and no clinically meaningful differences.",92,"A biologic competitor follows a biosimilar pathway, not a generic pathway."],
+  ["Advanced therapy chain","Patient and product","Autologous products link identity, logistics, and manufacturing.",95,"Treatment site","Readiness can constrain throughput and safety.",90,"Durability and payment","Long-term value meets large near-term budget impact.",86,"For cell and gene therapy, operations and access are part of the clinical promise."],
+  ["Guideline locator","Efficacy series","Clinical safety, efficacy, and trial conduct.",88,"Quality series","Development, manufacturing, and product control.",90,"Safety and multidisciplinary","Nonclinical safety plus cross-cutting technical standards.",86,"Name the exact guideline and revision instead of citing ICH as one rule."]
+];
+function lessonWorkbench(i){ const v=LESSON_VISUALS[i]; if(!v) return ''; const nodes=[[v[1],v[2],v[3]],[v[4],v[5],v[6]],[v[7],v[8],v[9]]]; return `<div class="card lesson-workbench"><div class="workbench-head"><div class="workbench-copy"><div class="eyebrow">Interactive study map</div><h2>${esc(v[0])}</h2><p>Click each node to see what the interviewer expects you to test.</p></div><div class="workbench-decision"><small>Decision rule</small><b>${esc(v[10])}</b></div></div><div class="workbench-map">${nodes.map((n,k)=>`<button class="workbench-node ${k===0?'active':''}" data-visual-node data-note="${esc(n[1])}" aria-pressed="${k===0?'true':'false'}"><small>0${k+1}</small><b>${esc(n[0])}</b><p>${esc(n[1])}</p><div class="workbench-meter" aria-label="Relative decision importance ${n[2]} percent"><i style="width:${n[2]}%"></i></div></button>`).join('')}</div><div class="workbench-insight"><b>Why it matters</b><span data-visual-insight>${esc(nodes[0][1])}</span></div></div>`; }
+
 /* ---------- Level ---------- */
 function renderLevel(i){
   const l=DATA.levels[i];
@@ -4686,6 +4740,7 @@ function renderLevel(i){
     </div>
   </div>`;
 
+  h+=lessonWorkbench(i);
   h+=mediaCard(i);
 
   l.drills.forEach((d,di)=>{ h+=renderDrill(i,di,d); });
@@ -4714,9 +4769,11 @@ function renderDrill(li,di,d){
   const answered = chosen!=null;
   const isK = d.type==="knowledge";
   let opts="";
-  d.options.forEach((o,oi)=>{
+  const order=stableOptionOrder(d.options.length,"lesson-"+li+"-"+di);
+  order.forEach((oi,rank)=>{
+    const o=d.options[oi];
     let cls="opt", mk="", tag="", fbShown="";
-    const letter=String.fromCharCode(65+oi);
+    const letter=String.fromCharCode(65+rank);
     if(answered){
       cls+=" disabled show-fb";
       if(isK){
@@ -4732,10 +4789,10 @@ function renderDrill(li,di,d){
       fbShown=`<div class="fb">${esc(o.fb)}</div>`;
     }
     const mkContent = answered ? (isK ? (o.correct?"&#10003;":(oi===chosen?"&#10007;":letter)) : (o.tier==="strong"?"&#10003;":o.tier==="trap"?"&#10007;":"~")) : letter;
-    opts+=`<button class="${cls}" data-li="${li}" data-di="${di}" data-oi="${oi}" ${answered?'disabled':''}>
+    opts+=`<button class="${cls}" data-li="${li}" data-di="${di}" data-oi="${oi}" data-pos="${rank}" ${answered?'disabled':''}>
         <span class="mk ${answered?mk:''}">${mkContent}</span>
         <span>${esc(o.text)}${tag}</span>
-        ${answered?'':`<kbd class="opt-key">${oi+1}</kbd>`}
+        ${answered?'':`<kbd class="opt-key">${rank+1}</kbd>`}
         ${fbShown}
       </button>`;
   });
@@ -4905,13 +4962,13 @@ function weakestCats(n){ const st=categoryStats().filter(c=>c.answered>0).map(c=
 function pickSessionQs(){ const missed=[],fresh=[],rest=[]; DEEP_QS.forEach((q,i)=>{ const a=practicalState.qbank[i]; if(!a) fresh.push(i); else if(qTier(q,a.oi)!=='strong') missed.push(i); else rest.push(i); }); const shuffle=a=>a.sort(()=>Math.random()-.5); const pool=shuffle(missed).concat(shuffle(fresh)).concat(shuffle(rest)); const out=[]; const cats=new Set(); pool.forEach(i=>{ if(out.length>=5) return; if(cats.has(DEEP_QS[i].cat) && pool.length-out.length>5) return; out.push(i); cats.add(DEEP_QS[i].cat); }); let k=0; while(out.length<5 && k<pool.length){ if(!out.includes(pool[k])) out.push(pool[k]); k++; } return out.slice(0,5); }
 function renderSession(){
   if(sessionState.phase==='intro'){ const w=weakestCats(1)[0]; return `<div class="card problem-hero"><div class="eyebrow">Daily Rep</div><h2>Five questions. One honest sitting.</h2><p class="lede">A short mixed set that prioritizes what you missed and what you have not seen. Answer like a manager is across the table, then read every model answer.</p><div class="session-start"><button class="ghost session-cta" data-session-start>Start today&rsquo;s rep</button>${w&&w.pct<100?`<span class="session-note">Current weakest category: ${esc(w.cat)} at ${w.pct} percent.</span>`:w?`<span class="session-note">All drilled categories are clean so far. This rep mixes in unseen prompts.</span>`:'<span class="session-note">First rep: we will mix fundamentals and judgment.</span>'}</div></div>${repHistoryCard()}${sessionReportCard()}`; }
-  const qi=sessionState.qs[sessionState.idx]; const q=DEEP_QS[qi]; const pick=sessionState.picks[qi]; const letters=['A','B','C','D']; const strongIdx=q.options.findIndex(o=>o[0]==='strong'); const parts=qVisualParts(q);
+  const qi=sessionState.qs[sessionState.idx]; const q=DEEP_QS[qi]; const pick=sessionState.picks[qi]; const letters=['A','B','C','D']; const strongIdx=q.options.findIndex(o=>o[0]==='strong'); const order=stableOptionOrder(q.options.length,'dq-'+qi); const strongLetter=letters[order.indexOf(strongIdx)]||''; const parts=qVisualParts(q);
   if(sessionState.phase==='run'){
     const dots=sessionState.qs.map((x,i)=>`<span class="sdot ${i<sessionState.idx?'done':''} ${i===sessionState.idx?'now':''}"></span>`).join('');
     const solved=pick!=null;
     return `<div class="card session-bar"><div><div class="eyebrow">Daily Rep</div><h2 style="font-size:24px;margin:6px 0 0">Question ${sessionState.idx+1} of ${sessionState.qs.length}</h2></div><div class="sdots">${dots}</div></div>
-    <div class="q-card q-card-visual"><div class="q-prompt-grid"><div class="q-prompt-main"><div class="q-kicker">${esc(q.cat)} &middot; ${esc(q.diff)}</div><h3>${esc(q.q)}</h3></div>${renderQVisual(q)}</div><div class="q-options">${q.options.map((o,oi)=>`<button class="${solved&&pick===oi?'chosen '+o[0]:''} ${solved&&oi===strongIdx&&pick!==oi?'reveal-strong':''}" data-session-pick="${qi}:${oi}" ${solved?'disabled':''}><span class="opt-letter">${letters[oi]}</span><span>${esc(o[1])}</span></button>`).join('')}</div>
-    ${solved?`<div class="q-feedback ${qTier(q,pick)}"><b>${qTier(q,pick).toUpperCase()}.</b> ${qFeedback(qTier(q,pick))}</div><div class="q-solve"><div class="q-solve-col"><b>Model answer &middot; ${letters[strongIdx]}</b><p>${esc(q.options[strongIdx][1])}</p></div><div class="q-solve-col"><b>How to get there</b><ol><li>Start from the facts: ${esc(parts[0].toLowerCase())}.</li><li>Name the tension: ${esc(parts[1].toLowerCase())}.</li><li>Commit at the decision point (${esc(parts[2].toLowerCase())}) and say what would change your mind.</li></ol></div></div><div class="session-next"><button class="ghost session-cta" data-session-next>${sessionState.idx+1<sessionState.qs.length?'Next question':'See session report'}</button></div>`:''}</div>`;
+    <div class="q-card q-card-visual"><div class="q-prompt-grid"><div class="q-prompt-main"><div class="q-kicker">${esc(q.cat)} &middot; ${esc(q.diff)}</div><h3>${esc(q.q)}</h3></div>${renderQVisual(q)}</div><div class="q-options">${order.map((oi,rank)=>{ const o=q.options[oi]; return `<button class="${solved&&pick===oi?'chosen '+o[0]:''} ${solved&&oi===strongIdx&&pick!==oi?'reveal-strong':''}" data-session-pick="${qi}:${oi}" ${solved?'disabled':''}><span class="opt-letter">${letters[rank]}</span><span>${esc(o[1])}</span></button>`; }).join('')}</div>
+    ${solved?`<div class="q-feedback ${qTier(q,pick)}"><b>${qTier(q,pick).toUpperCase()}.</b> ${qFeedback(qTier(q,pick))}</div><div class="q-solve"><div class="q-solve-col"><b>Model answer &middot; ${strongLetter}</b><p>${esc(q.options[strongIdx][1])}</p></div><div class="q-solve-col"><b>How to get there</b><ol><li>Start from the facts: ${esc(parts[0].toLowerCase())}.</li><li>Name the tension: ${esc(parts[1].toLowerCase())}.</li><li>Commit at the decision point (${esc(parts[2].toLowerCase())}) and say what would change your mind.</li></ol></div></div><div class="session-next"><button class="ghost session-cta" data-session-next>${sessionState.idx+1<sessionState.qs.length?'Next question':'See session report'}</button></div>`:''}</div>`;
   }
   // summary
   let pts=0, tiers={strong:0,weak:0,trap:0}; const rows=sessionState.qs.map(i2=>{ const qq=DEEP_QS[i2]; const pk=sessionState.picks[i2]; const t=pk!=null?qTier(qq,pk):'trap'; tiers[t]++; pts+=t==='strong'?10:t==='weak'?5:0; return `<tr><td>${esc(qq.cat)}</td><td>${esc(qq.q.slice(0,86))}${qq.q.length>86?'&hellip;':''}</td><td class="t-${t}">${t}</td></tr>`; }).join('');
@@ -5330,7 +5387,7 @@ if(!window.__vkbd){
     if(["1","2","3","4"].includes(e.key)){
       const m=document.getElementById("main");
       const drills=[...m.querySelectorAll(".drill")].filter(dr=>dr.querySelector(".opt:not([disabled])"));
-      if(drills.length){ const opt=drills[0].querySelector(`.opt[data-oi="${(+e.key)-1}"]:not([disabled])`); if(opt){ opt.classList.add("just"); opt.click(); } }
+      if(drills.length){ const opt=drills[0].querySelector(`.opt[data-pos="${(+e.key)-1}"]:not([disabled])`); if(opt){ opt.classList.add("just"); opt.click(); } }
     }
   });
 }
@@ -5425,8 +5482,10 @@ const CASE_CHALLENGES={"0": [{"type": "knowledge", "q": "Case 1: which equation 
 function renderStep(d, key){
   const chosen=state.answers[key]; const answered=chosen!=null; const isK=d.type==="knowledge";
   let opts="";
-  d.options.forEach((o,oi)=>{
-    let cls="opt", mk="", tag="", fbShown=""; const letter=String.fromCharCode(65+oi);
+  const order=stableOptionOrder(d.options.length,"case-"+key);
+  order.forEach((oi,rank)=>{
+    const o=d.options[oi];
+    let cls="opt", mk="", tag="", fbShown=""; const letter=String.fromCharCode(65+rank);
     if(answered){
       cls+=" disabled show-fb";
       if(isK){ if(o.correct){ cls+=" reveal-correct"; mk="correct"; tag=`<span class="tier-tag correct">Correct</span>`; } else if(oi===chosen){ cls+=" reveal-wrong"; mk="wrong"; tag=`<span class="tier-tag wrong">Your pick</span>`; } }
@@ -5434,7 +5493,7 @@ function renderStep(d, key){
       if(oi===chosen) cls+=" chosen"; fbShown=`<div class="fb">${esc(o.fb)}</div>`;
     }
     const mkContent=answered ? (isK ? (o.correct?"&#10003;":(oi===chosen?"&#10007;":letter)) : (o.tier==="strong"?"&#10003;":o.tier==="trap"?"&#10007;":"~")) : letter;
-    opts+=`<button class="${cls}" data-key="${key}" data-oi="${oi}" ${answered?'disabled':''}><span class="mk ${answered?mk:''}">${mkContent}</span><span>${esc(o.text)}${tag}</span>${answered?'':`<kbd class="opt-key">${oi+1}</kbd>`}${fbShown}</button>`;
+    opts+=`<button class="${cls}" data-key="${key}" data-oi="${oi}" data-pos="${rank}" ${answered?'disabled':''}><span class="mk ${answered?mk:''}">${mkContent}</span><span>${esc(o.text)}${tag}</span>${answered?'':`<kbd class="opt-key">${rank+1}</kbd>`}${fbShown}</button>`;
   });
   let banner="";
   if(answered){
@@ -5619,7 +5678,7 @@ const ADV_CASES = [
 ];
 
 const DEEP_QS = [
-  {cat:"Case math", diff:"Hard", q:"A safety team receives 1,250 cases per month and closes 980. Backlog is 3,600. A vendor can add 180 closures per month and automation may improve baseline capacity by 16 percent. What is the best first statement?", options:[["strong","Backlog still grows slightly: 1,250 minus roughly 1,317 capacity after vendor plus automation, so the case only works if quality and adoption hold. I would sensitivity-test automation uplift."],["weak","The backlog will be solved because capacity is now higher than before."],["trap","Automation has a 16 percent uplift, so the backlog disappears in a few months."]]},
+  {cat:"Case math", diff:"Hard", q:"A safety team receives 1,250 cases per month and closes 980. Backlog is 3,600. A vendor can add 180 closures per month and automation may improve baseline capacity by 16 percent. What is the best first statement?", options:[["strong","Backlog begins shrinking by roughly 67 cases per month: about 1,317 capacity after vendor plus automation versus 1,250 intake. That is directionally positive but would take about 54 months to clear a 3,600-case backlog, so I would sensitivity-test automation uplift, quality, and adoption."],["weak","The backlog will be solved because capacity is now higher than before."],["trap","Automation has a 16 percent uplift, so the backlog disappears in a few months."]]},
   {cat:"Strategy", diff:"Hard", q:"A client wants to prioritize the largest market indication, but access evidence is weakest there. What should you say?", options:[["strong","I would compare market size against access feasibility, evidence gap, and probability of success. The largest market is not automatically the best launch wedge."],["weak","I would still prioritize the biggest market because the upside is highest."],["trap","I would ignore access until after approval because FDA approval is the main barrier."]]},
   {cat:"Regulatory", diff:"Hard", q:"The team says FDA guidance requires a specific approach. What is the best consultant response?", options:[["strong","Clarify whether this is statute, binding regulation, or non-binding guidance. The business risk differs by source of authority."],["weak","Follow it because guidance is usually what FDA expects."],["trap","Ignore guidance because it is not legally binding."]]},
   {cat:"Data quality", diff:"Very hard", q:"Your model depends on a field that has three source systems with conflicting definitions. What should happen before the recommendation?", options:[["strong","Name a source of truth, quantify the effect of each definition, and present the recommendation as conditional until governance is resolved."],["weak","Average the three sources and disclose the uncertainty."],["trap","Use the source with the most favorable result because the client wants a recommendation."]]},
@@ -5670,9 +5729,11 @@ function renderDeepQ(q){
   const chosen=ans&&q.options[ans.oi];
   const letters=['A','B','C','D'];
   const strongIdx=q.options.findIndex(o=>o[0]==='strong');
+  const order=stableOptionOrder(q.options.length,'dq-'+q.i);
+  const strongLetter=letters[order.indexOf(strongIdx)]||'';
   const parts=qVisualParts(q);
-  const solve=chosen?`<div class="q-solve"><div class="q-solve-col"><b>Model answer &middot; ${letters[strongIdx]||''}</b><p>${esc(q.options[strongIdx][1])}</p></div><div class="q-solve-col"><b>How to get there</b><ol><li>Start from the facts: ${esc(parts[0].toLowerCase())}.</li><li>Name the tension that makes it hard: ${esc(parts[1].toLowerCase())}.</li><li>Commit at the decision point (${esc(parts[2].toLowerCase())}) and say what evidence would change your answer.</li></ol></div></div>`:'';
-  return `<div class="q-card q-card-visual"><div class="q-prompt-grid"><div class="q-prompt-main"><div class="q-kicker">Prompt</div><h3>${esc(q.q)}</h3><div class="q-meta"><span>${esc(q.cat)}</span><span>${esc(q.diff)}</span></div></div>${renderQVisual(q)}</div><div class="q-options">${q.options.map((o,oi)=>`<button class="${ans&&ans.oi===oi?'chosen '+o[0]:''}" data-q-pick="${q.i}:${oi}"><span class="opt-letter">${letters[oi]||String(oi+1)}</span><span>${esc(o[1])}</span></button>`).join('')}</div>${chosen?`<div class="q-feedback ${chosen[0]}"><b>${chosen[0].toUpperCase()}.</b> ${qFeedback(chosen[0])}</div>`:''}${solve}</div>`;
+  const solve=chosen?`<div class="q-solve"><div class="q-solve-col"><b>Model answer &middot; ${strongLetter}</b><p>${esc(q.options[strongIdx][1])}</p></div><div class="q-solve-col"><b>How to get there</b><ol><li>Start from the facts: ${esc(parts[0].toLowerCase())}.</li><li>Name the tension that makes it hard: ${esc(parts[1].toLowerCase())}.</li><li>Commit at the decision point (${esc(parts[2].toLowerCase())}) and say what evidence would change your answer.</li></ol></div></div>`:'';
+  return `<div class="q-card q-card-visual"><div class="q-prompt-grid"><div class="q-prompt-main"><div class="q-kicker">Prompt</div><h3>${esc(q.q)}</h3><div class="q-meta"><span>${esc(q.cat)}</span><span>${esc(q.diff)}</span></div></div>${renderQVisual(q)}</div><div class="q-options">${order.map((oi,rank)=>{ const o=q.options[oi]; return `<button class="${ans&&ans.oi===oi?'chosen '+o[0]:''}" data-q-pick="${q.i}:${oi}"><span class="opt-letter">${letters[rank]||String(rank+1)}</span><span>${esc(o[1])}</span></button>`; }).join('')}</div>${chosen?`<div class="q-feedback ${chosen[0]}"><b>${chosen[0].toUpperCase()}.</b> ${qFeedback(chosen[0])}</div>`:''}${solve}</div>`;
 }
 function qFeedback(t){ return t==='strong'?'This is manager-ready because it states the decision logic, caveat, and next analytic step.':t==='weak'?'Partly right, but it is too generic or misses the decision-driving assumption.':'Trap answer. It overclaims, skips structure, or confuses a symptom for the underlying problem.'; }
 function wireDeepQBank(){ document.querySelectorAll('[data-q-cat]').forEach(b=>b.onclick=()=>{ practicalState.activeQCat=b.getAttribute('data-q-cat'); savePractical(); render(); window.scrollTo({top:0,behavior:'smooth'}); }); document.querySelectorAll('[data-q-pick]').forEach(b=>b.onclick=()=>{ const [i,oi]=b.getAttribute('data-q-pick').split(':').map(Number); practicalState.qbank[i]={i,oi}; savePractical(); render(); }); }
@@ -5892,6 +5953,16 @@ function wireCoachTimer(){
 function setTimerFace(sec){ const f=document.getElementById('timerFace'); if(!f) return; const m=Math.floor(sec/60), s=sec%60; f.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0'); }
 function startCoachTimer(sec){ stopCoachTimer(); __timerEnd=Date.now()+sec*1000; setTimerFace(sec); __timerId=setInterval(()=>{ const left=Math.max(0,Math.ceil((__timerEnd-Date.now())/1000)); setTimerFace(left); if(left<=0){ stopCoachTimer(); try{ navigator.vibrate&&navigator.vibrate(120); }catch(e){} } },250); }
 function stopCoachTimer(){ if(__timerId){ clearInterval(__timerId); __timerId=null; } }
+
+document.addEventListener('click',e=>{
+  const b=e.target.closest&&e.target.closest('[data-visual-node]');
+  if(!b) return;
+  const card=b.closest('.lesson-workbench');
+  if(!card) return;
+  card.querySelectorAll('[data-visual-node]').forEach(x=>{ x.classList.toggle('active',x===b); x.setAttribute('aria-pressed',x===b?'true':'false'); });
+  const insight=card.querySelector('[data-visual-insight]');
+  if(insight) insight.textContent=b.getAttribute('data-note')||'';
+});
 
 applyFocusMode();
 capTimerTick();
