@@ -832,6 +832,23 @@
   .focus-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
   @media(max-width:980px){.report-row{grid-template-columns:1fr;gap:6px}.report-pct{text-align:left}.focus-grid{grid-template-columns:1fr}.session-bar{grid-template-columns:1fr}}
 
+
+  /* ===== v59 rep history and hints ===== */
+  .rep-trend{display:flex;gap:12px;align-items:flex-end;height:120px;margin-top:18px;border-bottom:1px solid rgba(24,26,30,.10);padding-bottom:2px}
+  .rep-bar{display:grid;grid-template-rows:1fr auto;justify-items:center;height:100%;width:44px}
+  .rep-bar i{align-self:end;display:block;width:26px;border-radius:6px 6px 0 0;background:#123c63}
+  .rep-bar:last-child i{background:#c8a668}
+  .rep-bar span{font-size:11.5px;color:#6b6d72;margin-top:6px}
+  .rep-meta{display:flex;gap:26px;margin-top:14px;color:#6b6d72;font-size:13.5px}
+  .rep-meta b{color:#16181d;font-size:16px;font-family:"IBM Plex Serif",Georgia,serif;margin-right:4px}
+  .hint-box{margin-top:18px;padding:0!important;border:0!important;border-top:1px solid rgba(24,26,30,.10)!important;border-radius:0!important;padding-top:18px!important;background:transparent!important}
+  .hint-box h3{font-size:18px!important}
+  .hint-item{border-left:2px solid #c8a668;padding:2px 0 2px 14px;margin:12px 0}
+  .hint-item small{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#8a6d3f;font-weight:650;margin-bottom:4px}
+  .hint-item p{margin:0;font-size:14px;line-height:1.5;color:#3d3f44}
+  button.ghost.hint-btn,.hint-btn{background:transparent!important;color:#123c63!important;border:1px solid rgba(18,60,99,.35)!important;border-radius:999px!important;padding:8px 16px!important;font-size:13.5px!important;font-weight:600!important;margin-top:10px}
+  button.ghost.hint-btn:hover{background:rgba(18,60,99,.06)!important}
+
 </style>
 </head>
 <body>
@@ -4420,7 +4437,7 @@ try { const u = JSON.parse(localStorage.getItem(UI_KEY)); if(u) uiState = Object
 function saveUI(){ localStorage.setItem(UI_KEY, JSON.stringify(uiState)); scheduleCloudSave(); }
 function applyFocusMode(){ document.body.classList.toggle("focus-mode", !!uiState.focus); const b=document.getElementById("focusBtn"); if(b) b.textContent=uiState.focus?"Exit focus":"Focus"; }
 
-const READYTOCONSULT_VERSION = "2.2.1";
+const READYTOCONSULT_VERSION = "2.3.0";
 const SUPABASE_URL = "https://oergojtnxmjztjgadkkv.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_WdMMBeui--DSDVloYcTWeg_L9WAXcKA";
 const NOTEBOOK_KEY = "readytoconsult-notebook-v17";
@@ -4562,7 +4579,7 @@ function render(){
 
 function renderFoot(){
   document.getElementById("foot").innerHTML =
-    "ReadyToConsult v2.2.1 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
+    "ReadyToConsult v2.3 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
 }
 
 /* ---------- Home ---------- */
@@ -4820,12 +4837,15 @@ function wireCaseLab(){
 
 /* ---------- v58 daily rep session and readiness report ---------- */
 let sessionState={phase:'intro',qs:[],idx:0,picks:{}};
+function logRep(){ let pts=0; const tiers={strong:0,weak:0,trap:0}; sessionState.qs.forEach(i=>{ const q=DEEP_QS[i]; const pk=sessionState.picks[i]; const t=pk!=null?qTier(q,pk):'trap'; tiers[t]++; pts+=t==='strong'?10:t==='weak'?5:0; }); practicalState.repLog=practicalState.repLog||[]; practicalState.repLog.push({at:new Date().toISOString(), day:new Date().toISOString().slice(0,10), pts, max:sessionState.qs.length*10, strong:tiers.strong, weak:tiers.weak, trap:tiers.trap}); if(practicalState.repLog.length>60) practicalState.repLog=practicalState.repLog.slice(-60); savePractical(); }
+function repStreak(){ const log=practicalState.repLog||[]; if(!log.length) return 0; const days=[...new Set(log.map(r=>r.day))].sort().reverse(); const one=86400000; let streak=0; let cursor=new Date(new Date().toISOString().slice(0,10)); if(days[0]!==cursor.toISOString().slice(0,10)){ cursor=new Date(cursor.getTime()-one); if(days[0]!==cursor.toISOString().slice(0,10)) return 0; } for(const d of days){ if(d===cursor.toISOString().slice(0,10)){ streak++; cursor=new Date(cursor.getTime()-one); } else break; } return streak; }
+function repHistoryCard(){ const log=(practicalState.repLog||[]).slice(-8); if(!log.length) return ''; const streak=repStreak(); const best=Math.max(...(practicalState.repLog||[]).map(r=>r.pts)); return `<div class="card"><div class="eyebrow">Your reps</div><h2 style="font-size:22px">Recent sessions</h2><div class="rep-trend">${log.map(r=>{ const pct=Math.round(r.pts/r.max*100); return `<div class="rep-bar" title="${esc(r.day)}: ${r.pts}/${r.max}"><i style="height:${Math.max(8,pct)}%"></i><span>${r.pts}</span></div>`; }).join('')}</div><div class="rep-meta"><span><b>${streak}</b> day streak</span><span><b>${best}</b> best score</span><span><b>${(practicalState.repLog||[]).length}</b> total reps</span></div></div>`; }
 function qTier(q,oi){ return (q.options[oi]&&q.options[oi][0])||'trap'; }
 function categoryStats(){ const m={}; DEEP_QS.forEach((q,i)=>{ m[q.cat]=m[q.cat]||{cat:q.cat,total:0,answered:0,pts:0}; m[q.cat].total++; const a=practicalState.qbank[i]; if(a){ m[q.cat].answered++; const t=qTier(q,a.oi); m[q.cat].pts+=t==='strong'?10:t==='weak'?5:0; } }); return Object.values(m); }
 function weakestCats(n){ const st=categoryStats().filter(c=>c.answered>0).map(c=>Object.assign({pct:Math.round(c.pts/(c.answered*10)*100)},c)).sort((a,b)=>a.pct-b.pct); return st.slice(0,n||3); }
 function pickSessionQs(){ const missed=[],fresh=[],rest=[]; DEEP_QS.forEach((q,i)=>{ const a=practicalState.qbank[i]; if(!a) fresh.push(i); else if(qTier(q,a.oi)!=='strong') missed.push(i); else rest.push(i); }); const shuffle=a=>a.sort(()=>Math.random()-.5); const pool=shuffle(missed).concat(shuffle(fresh)).concat(shuffle(rest)); const out=[]; const cats=new Set(); pool.forEach(i=>{ if(out.length>=5) return; if(cats.has(DEEP_QS[i].cat) && pool.length-out.length>5) return; out.push(i); cats.add(DEEP_QS[i].cat); }); let k=0; while(out.length<5 && k<pool.length){ if(!out.includes(pool[k])) out.push(pool[k]); k++; } return out.slice(0,5); }
 function renderSession(){
-  if(sessionState.phase==='intro'){ const w=weakestCats(1)[0]; return `<div class="card problem-hero"><div class="eyebrow">Daily Rep</div><h2>Five questions. One honest sitting.</h2><p class="lede">A short mixed set that prioritizes what you missed and what you have not seen. Answer like a manager is across the table, then read every model answer.</p><div class="session-start"><button class="ghost session-cta" data-session-start>Start today&rsquo;s rep</button>${w&&w.pct<100?`<span class="session-note">Current weakest category: ${esc(w.cat)} at ${w.pct} percent.</span>`:w?`<span class="session-note">All drilled categories are clean so far. This rep mixes in unseen prompts.</span>`:'<span class="session-note">First rep: we will mix fundamentals and judgment.</span>'}</div></div>${sessionReportCard()}`; }
+  if(sessionState.phase==='intro'){ const w=weakestCats(1)[0]; return `<div class="card problem-hero"><div class="eyebrow">Daily Rep</div><h2>Five questions. One honest sitting.</h2><p class="lede">A short mixed set that prioritizes what you missed and what you have not seen. Answer like a manager is across the table, then read every model answer.</p><div class="session-start"><button class="ghost session-cta" data-session-start>Start today&rsquo;s rep</button>${w&&w.pct<100?`<span class="session-note">Current weakest category: ${esc(w.cat)} at ${w.pct} percent.</span>`:w?`<span class="session-note">All drilled categories are clean so far. This rep mixes in unseen prompts.</span>`:'<span class="session-note">First rep: we will mix fundamentals and judgment.</span>'}</div></div>${repHistoryCard()}${sessionReportCard()}`; }
   const qi=sessionState.qs[sessionState.idx]; const q=DEEP_QS[qi]; const pick=sessionState.picks[qi]; const letters=['A','B','C','D']; const strongIdx=q.options.findIndex(o=>o[0]==='strong'); const parts=qVisualParts(q);
   if(sessionState.phase==='run'){
     const dots=sessionState.qs.map((x,i)=>`<span class="sdot ${i<sessionState.idx?'done':''} ${i===sessionState.idx?'now':''}"></span>`).join('');
@@ -4838,13 +4858,13 @@ function renderSession(){
   let pts=0, tiers={strong:0,weak:0,trap:0}; const rows=sessionState.qs.map(i2=>{ const qq=DEEP_QS[i2]; const pk=sessionState.picks[i2]; const t=pk!=null?qTier(qq,pk):'trap'; tiers[t]++; pts+=t==='strong'?10:t==='weak'?5:0; return `<tr><td>${esc(qq.cat)}</td><td>${esc(qq.q.slice(0,86))}${qq.q.length>86?'&hellip;':''}</td><td class="t-${t}">${t}</td></tr>`; }).join('');
   const w2=weakestCats(1)[0];
   return `<div class="card problem-hero"><div class="eyebrow">Session report</div><h2>${pts}/${sessionState.qs.length*10} points this rep.</h2><p class="lede">${tiers.strong} strong &middot; ${tiers.weak} partial &middot; ${tiers.trap} trap. Strong answers state the logic, the caveat, and the next step.</p></div>
-  <div class="card"><div class="eyebrow">This session</div><h2 style="font-size:22px">Question by question</h2><div class="problem-table-wrap" style="margin-top:14px"><table class="problem-table"><thead><tr><th>Category</th><th>Prompt</th><th>Result</th></tr></thead><tbody>${rows}</tbody></table></div><div class="session-next"><button class="ghost session-cta" data-session-start>Run another rep</button>${w2&&w2.pct<100?`<button class="ghost" data-session-drill="${esc(w2.cat)}">Drill weakest: ${esc(w2.cat)}</button>`:''}<button class="ghost" data-view="review">Open review</button></div></div>${sessionReportCard()}`;
+  <div class="card"><div class="eyebrow">This session</div><h2 style="font-size:22px">Question by question</h2><div class="problem-table-wrap" style="margin-top:14px"><table class="problem-table"><thead><tr><th>Category</th><th>Prompt</th><th>Result</th></tr></thead><tbody>${rows}</tbody></table></div><div class="session-next"><button class="ghost session-cta" data-session-start>Run another rep</button>${w2&&w2.pct<100?`<button class="ghost" data-session-drill="${esc(w2.cat)}">Drill weakest: ${esc(w2.cat)}</button>`:''}<button class="ghost" data-view="review">Open review</button></div></div>${repHistoryCard()}${sessionReportCard()}`;
 }
 function sessionReportCard(){ const st=categoryStats().filter(c=>c.answered>0); if(!st.length) return ''; const rows=st.map(c=>Object.assign({pct:Math.round(c.pts/(c.answered*10)*100)},c)).sort((a,b)=>a.pct-b.pct).slice(0,6); return `<div class="card"><div class="eyebrow">Readiness report</div><h2 style="font-size:22px">Category scorecard</h2><div class="report-rows">${rows.map(r=>`<div class="report-row"><span class="report-cat">${esc(r.cat)}</span><div class="score-track"><i style="width:${r.pct}%"></i></div><span class="report-pct">${r.pct}%</span><button class="ghost report-go" data-session-drill="${esc(r.cat)}">Drill</button></div>`).join('')}</div><p class="fig-note" style="margin-top:14px">Percent of available points in answered questions per category. Drill the lowest rows first.</p></div>`; }
 function wireSession(){
   document.querySelectorAll('[data-session-start]').forEach(b=>b.onclick=()=>{ sessionState={phase:'run',qs:pickSessionQs(),idx:0,picks:{}}; render(); window.scrollTo({top:0,behavior:'smooth'}); });
   document.querySelectorAll('[data-session-pick]').forEach(b=>b.onclick=()=>{ const [i,oi]=b.getAttribute('data-session-pick').split(':').map(Number); if(sessionState.picks[i]!=null) return; sessionState.picks[i]=oi; practicalState.qbank[i]={i,oi}; savePractical(); render(); });
-  document.querySelectorAll('[data-session-next]').forEach(b=>b.onclick=()=>{ if(sessionState.idx+1<sessionState.qs.length){ sessionState.idx++; } else { sessionState.phase='done'; } render(); window.scrollTo({top:0,behavior:'smooth'}); });
+  document.querySelectorAll('[data-session-next]').forEach(b=>b.onclick=()=>{ if(sessionState.idx+1<sessionState.qs.length){ sessionState.idx++; } else { sessionState.phase='done'; logRep(); } render(); window.scrollTo({top:0,behavior:'smooth'}); });
   document.querySelectorAll('[data-session-drill]').forEach(b=>b.onclick=()=>{ practicalState.activeQCat=b.getAttribute('data-session-drill'); savePractical(); state.view='qbank'; render(); window.scrollTo({top:0,behavior:'smooth'}); });
   document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{ state.view=b.getAttribute('data-view'); render(); window.scrollTo({top:0,behavior:'smooth'}); });
 }
@@ -5007,6 +5027,14 @@ function renderProblemMap(c,idx){
   return `<div class="card problem-map-card"><div class="problem-map-head"><div class="problem-map-title"><div class="eyebrow">Visual case map</div><h3>See the trade-off before writing the answer.</h3><p>Use this as the mental map: decision, constraint, evidence, then recommendation. The numbers are qualitative training scores, not client data.</p></div><div class="problem-map-score">${d.scores.map(r=>`<div class="score-row"><span>${esc(r[0])}</span><div class="score-track"><i style="width:${r[1]}%"></i></div></div>`).join('')}</div></div><div class="problem-map-flow">${d.rows.map((r,i)=>`<div class="problem-map-step"><small>${String(i+1).padStart(2,'0')}</small><b>${esc(r[0])}</b><p>${esc(r[1])}</p></div>`).join('')}</div></div>`;
 }
 
+const CASE_HINTS=[
+ ["Start by writing the actual decision: fund which asset, for what milestone, before which financing date.","Structure it as risk-adjusted value: endpoint credibility, access path, cost to inflection, time, and option value per asset.","You should be converging on B as base case, with C preserved as a partnered option and A gated on safety and access evidence."],
+ ["Do not start from levers. Start from the enrollment funnel: identified, eligible, consented, retained.","Map each lever to the funnel stage it actually fixes, then check what it costs in evidence quality.","The defensible first move combines patient-support operations with selective EU expansion, gated by a 12-week metric set."],
+ ["Write down what actually binds uptake first: coverage, supply, adherence, or awareness.","Rank segments by evidence strength times access feasibility, not by population size.","Your wedge should be T2D plus obesity and high-CV-risk, with promotion tied to fill capacity and persistence."],
+ ["Separate what excites the CMO from what compliance can approve in 90 days.","Score each use case on reviewability: source traceability, human review, audit trail, claim boundaries.","Evidence gap mapping plus literature surveillance is the defensible pilot. Field-facing actions come later."]
+];
+let problemHintState={};
+function problemHintsCard(idx){ const hints=CASE_HINTS[idx]||[]; if(!hints.length) return ''; const shown=problemHintState[idx]||0; return `<div class="problem-box hint-box"><div class="eyebrow">Coached hints</div><h3>Stuck? Reveal one nudge at a time.</h3><div class="hint-list">${hints.slice(0,shown).map((h,i)=>`<div class="hint-item"><small>Hint ${i+1}</small><p>${esc(h)}</p></div>`).join('')}</div>${shown<hints.length?`<button class="ghost hint-btn" data-hint-reveal="${idx}">Reveal hint ${shown+1} of ${hints.length}</button>`:'<p class="fig-note">All hints revealed. Now say the full answer out loud before opening the recommendation spine.</p>'}</div>`; }
 function renderProblemLab(){
   const idx=Math.max(0,Math.min(COMPLEX_CASES.length-1,state.problemIndex||0));
   const c=COMPLEX_CASES[idx];
@@ -5016,7 +5044,7 @@ function renderProblemLab(){
     <div class="card problem-hero"><div class="eyebrow">Problem Lab</div><h2>${esc(c.title)}</h2><p class="lede">${esc(c.subtitle)}</p><div class="problem-switch">${tabs}</div></div>
     ${renderProblemMap(c,idx)}
     <div class="problem-layout"><div class="problem-box"><div class="eyebrow">Client decision</div><h3>${esc(c.decision)}</h3><p>${esc(c.situation)}</p><p class="partner-note"><b>Why this is hard:</b> ${esc(c.tensions.join(' '))}</p></div>
-    <div class="problem-box"><div class="eyebrow">What to solve out loud</div><h3>Three prompts</h3><ul>${c.questions.map(q=>`<li>${esc(q)}</li>`).join('')}</ul></div></div>
+    <div class="problem-box"><div class="eyebrow">What to solve out loud</div><h3>Three prompts</h3><ul>${c.questions.map(q=>`<li>${esc(q)}</li>`).join('')}</ul>${problemHintsCard(idx)}</div></div>
     <div class="problem-box"><div class="eyebrow">Data pack</div><h3>Use the data, but challenge it first.</h3><div class="problem-table-wrap"><table class="problem-table"><thead><tr>${c.data[0].map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${c.data.slice(1).map(r=>`<tr>${r.map(v=>`<td>${esc(v)}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>
     <div class="problem-layout"><div class="problem-box"><div class="eyebrow">Recommendation spine</div><h3>Partner-ready answer structure</h3><div class="decision-ladder">${c.recommendation.map(r=>`<div><b>${esc(r[0])}</b><span>${esc(r[1])}</span></div>`).join('')}</div></div>
     <div class="problem-box"><div class="eyebrow">Partner readout</div><h3>What separates a senior answer</h3><p>${esc(c.partner)}</p><p class="partner-note">Say the recommendation first, then the two facts that made it hard, then the condition that would change your answer.</p></div></div>
@@ -5024,6 +5052,7 @@ function renderProblemLab(){
 }
 function wireProblemLab(){
   document.querySelectorAll('[data-problem-index]').forEach(b=>b.onclick=()=>{ state.problemIndex=+b.getAttribute('data-problem-index'); render(); window.scrollTo({top:0,behavior:'smooth'}); });
+  document.querySelectorAll('[data-hint-reveal]').forEach(b=>b.onclick=()=>{ const i=+b.getAttribute('data-hint-reveal'); problemHintState[i]=(problemHintState[i]||0)+1; render(); });
 }
 
 /* ---------- Stakeholder Roleplay ---------- */
