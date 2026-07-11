@@ -849,6 +849,46 @@
   button.ghost.hint-btn,.hint-btn{background:transparent!important;color:#123c63!important;border:1px solid rgba(18,60,99,.35)!important;border-radius:999px!important;padding:8px 16px!important;font-size:13.5px!important;font-weight:600!important;margin-top:10px}
   button.ghost.hint-btn:hover{background:rgba(18,60,99,.06)!important}
 
+
+  /* ===== v60 weekly graph and case lab hints ===== */
+  .week-block{border-top:1px solid rgba(24,26,30,.10);margin-top:22px;padding-top:18px}
+  .week-head{display:flex;gap:18px;align-items:baseline;flex-wrap:wrap;margin-bottom:14px}
+  .week-head b{font-family:"IBM Plex Serif",Georgia,serif;font-size:16px;color:#16181d;font-weight:600}
+  .week-head span{font-size:13px;color:#6b6d72}
+  .week-grid{display:grid;grid-template-columns:repeat(14,1fr);gap:8px;align-items:end;height:90px}
+  .week-col{display:grid;grid-template-rows:1fr auto;justify-items:center;height:100%}
+  .week-col i{align-self:end;display:block;width:100%;max-width:26px;border-radius:5px 5px 0 0;background:#123c63}
+  .week-col i.empty{background:#e3dfd6}
+  .week-col i.today{background:#c8a668}
+  .week-col span{font-size:10.5px;color:#8a8577;margin-top:5px}
+  .hint-box-cl{border-top:1px solid rgba(24,26,30,.10);margin-top:22px;padding-top:18px}
+  @media(max-width:720px){.week-grid{gap:4px}.week-col span{font-size:9px}}
+
+
+  /* ===== v60.1 mobile coverage ===== */
+  @media(max-width:720px){
+    .rep-trend{gap:6px;height:96px}
+    .rep-bar{width:32px}
+    .rep-bar i{width:20px}
+    .sdots{justify-self:start}
+    .problem-switch{gap:12px;padding-top:14px}
+    .problem-tab{padding:8px 10px 8px 0!important;font-size:14px}
+    .hint-box,.hint-box-cl{padding-top:14px!important;margin-top:14px}
+    .q-solve-col{padding:18px 20px}
+    .session-next{padding:16px 20px;gap:12px}
+    .benchmark-head{gap:14px}
+    .focus-card{padding:24px 20px!important}
+  }
+
+
+  /* ===== v60.2 mobile nav shrink fix ===== */
+  @media(max-width:980px){
+    .side{display:flex!important;gap:14px!important}
+    .side .navbtn{flex:0 0 auto!important;width:auto!important;display:inline-flex!important;grid-template-columns:none!important}
+    .side .navbtn span:not(.num):not(.dot):not(.navmini){overflow:visible!important;text-overflow:clip!important;white-space:nowrap!important;max-width:none!important}
+    .side .side-reset{flex:0 0 auto!important}
+  }
+
 </style>
 </head>
 <body>
@@ -4437,7 +4477,7 @@ try { const u = JSON.parse(localStorage.getItem(UI_KEY)); if(u) uiState = Object
 function saveUI(){ localStorage.setItem(UI_KEY, JSON.stringify(uiState)); scheduleCloudSave(); }
 function applyFocusMode(){ document.body.classList.toggle("focus-mode", !!uiState.focus); const b=document.getElementById("focusBtn"); if(b) b.textContent=uiState.focus?"Exit focus":"Focus"; }
 
-const READYTOCONSULT_VERSION = "2.3.0";
+const READYTOCONSULT_VERSION = "2.4.0";
 const SUPABASE_URL = "https://oergojtnxmjztjgadkkv.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_WdMMBeui--DSDVloYcTWeg_L9WAXcKA";
 const NOTEBOOK_KEY = "readytoconsult-notebook-v17";
@@ -4579,7 +4619,7 @@ function render(){
 
 function renderFoot(){
   document.getElementById("foot").innerHTML =
-    "ReadyToConsult v2.3 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
+    "ReadyToConsult v2.4 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
 }
 
 /* ---------- Home ---------- */
@@ -4745,6 +4785,17 @@ function wireLevel(i){
 
 
 /* ---------- Case Study Lab ---------- */
+const CASE_LAB_HINTS=[
+ ["Frame it as flow: 1,200 in versus 960 out. The 240 gap is the problem statement, not the software choice.","Compare four levers against the gap: hire, outsource, workflow waste removal, and triage. Cost each one per month.","A pilot that removes duplicate work and cuts non-case intake nearly closes the gap. Recommend the system only if pilot metrics prove it."],
+ ["The filing date is credible only if the critical path is credible. Find which module depends on the dirty registration data.","Separate launch-critical inconsistencies from documentation nuisances. Only the first group can move the date.","Answer with a decision page: file-with-focused-remediation, the named source of truth, and a governance owner."],
+ ["Do not add sites yet. Write the funnel first: identified, screened, eligible, consented, retained.","Screen-failure reasons by criterion tell you whether this is a criteria problem, a site problem, or a patient-burden problem.","Combine patient-support operations with selective site adds, and protect endpoint cleanliness in front of the regulator."],
+ ["Start from 120,000 diagnosed and walk it down honestly: eligible, access-cleared, referred, treated.","The biggest leak is access and referral friction. More promotion does not fix a PA denial.","Anchor year-1 on roughly 3,960 patients and put field effort where referrals actually convert."],
+ ["A covered drug can still be restricted. Ask what the payer is objecting to: efficacy, budget impact, or durability.","Separate the comparative-evidence gap from the budget question. They need different responses.","Offer an evidence plan plus an outcomes-based option instead of arguing the current data harder."],
+ ["The flagged record is the symptom. Ask why the system allowed it: access, training, process, or governance.","Trace the finding to a root cause category before writing any CAPA.","Recommend the system fix plus a recurrence metric. Closing the CAPA on time is not the goal."]
+];
+let caseLabHintState={};
+function caseLabHintsCard(idx){ const hints=CASE_LAB_HINTS[idx]||[]; if(!hints.length) return ''; const shown=caseLabHintState[idx]||0; return `<div class="hint-box-cl"><div class="eyebrow">Coached hints</div>${hints.slice(0,shown).map((h,i)=>`<div class="hint-item"><small>Hint ${i+1}</small><p>${esc(h)}</p></div>`).join('')}${shown<hints.length?`<button class="ghost hint-btn" data-cl-hint="${idx}">Reveal hint ${shown+1} of ${hints.length}</button>`:`<p class="fig-note">All hints used. Say the full recommendation out loud before reading the deck spine below.</p>`}</div>`; }
+
 function renderCaseLab(){
   const idx = Math.max(0, Math.min(DATA.caseStudies.length-1, state.caseIndex || 0));
   const c=DATA.caseStudies[idx];
@@ -4759,6 +4810,7 @@ function renderCaseLab(){
       <p>${esc(c.prompt)}</p>
     </div>
     ${caseFigure(idx)}
+    ${caseLabHintsCard(idx)}
     <div class="callout"><b>How to use this lab:</b> Read the prompt, say the issue tree out loud, run the math by hand, then practice the recommendation deck. This is meant to feel like a real Veeva take-home case: structured, quantitative, Veeva-aware, and honest about assumptions.</div>
     <div style="margin-top:16px"><button class="ghost" id="caseStart" style="background:var(--accent);color:#fff;border-color:var(--accent);padding:10px 18px;font-size:14px">Practice related drills</button></div>
   </div>
@@ -4828,6 +4880,7 @@ function wireCaseLab(){
   const m=document.getElementById("main");
   m.querySelectorAll('.opt[data-key]:not([disabled])').forEach(o=>{ o.onclick=()=>{ state.answers[o.getAttribute('data-key')]=+o.getAttribute('data-oi'); save(); render(); }; });
   m.querySelectorAll('[data-retry]').forEach(r=>{ r.onclick=()=>{ delete state.answers[r.getAttribute('data-retry')]; save(); render(); }; });
+  document.querySelectorAll('[data-cl-hint]').forEach(b=>b.onclick=()=>{ const i=+b.getAttribute('data-cl-hint'); caseLabHintState[i]=(caseLabHintState[i]||0)+1; render(); window.scrollTo({top:document.querySelector('.hint-box-cl')?.offsetTop-120||0,behavior:'smooth'}); });
 }
 
 
@@ -4839,7 +4892,13 @@ function wireCaseLab(){
 let sessionState={phase:'intro',qs:[],idx:0,picks:{}};
 function logRep(){ let pts=0; const tiers={strong:0,weak:0,trap:0}; sessionState.qs.forEach(i=>{ const q=DEEP_QS[i]; const pk=sessionState.picks[i]; const t=pk!=null?qTier(q,pk):'trap'; tiers[t]++; pts+=t==='strong'?10:t==='weak'?5:0; }); practicalState.repLog=practicalState.repLog||[]; practicalState.repLog.push({at:new Date().toISOString(), day:new Date().toISOString().slice(0,10), pts, max:sessionState.qs.length*10, strong:tiers.strong, weak:tiers.weak, trap:tiers.trap}); if(practicalState.repLog.length>60) practicalState.repLog=practicalState.repLog.slice(-60); savePractical(); }
 function repStreak(){ const log=practicalState.repLog||[]; if(!log.length) return 0; const days=[...new Set(log.map(r=>r.day))].sort().reverse(); const one=86400000; let streak=0; let cursor=new Date(new Date().toISOString().slice(0,10)); if(days[0]!==cursor.toISOString().slice(0,10)){ cursor=new Date(cursor.getTime()-one); if(days[0]!==cursor.toISOString().slice(0,10)) return 0; } for(const d of days){ if(d===cursor.toISOString().slice(0,10)){ streak++; cursor=new Date(cursor.getTime()-one); } else break; } return streak; }
-function repHistoryCard(){ const log=(practicalState.repLog||[]).slice(-8); if(!log.length) return ''; const streak=repStreak(); const best=Math.max(...(practicalState.repLog||[]).map(r=>r.pts)); return `<div class="card"><div class="eyebrow">Your reps</div><h2 style="font-size:22px">Recent sessions</h2><div class="rep-trend">${log.map(r=>{ const pct=Math.round(r.pts/r.max*100); return `<div class="rep-bar" title="${esc(r.day)}: ${r.pts}/${r.max}"><i style="height:${Math.max(8,pct)}%"></i><span>${r.pts}</span></div>`; }).join('')}</div><div class="rep-meta"><span><b>${streak}</b> day streak</span><span><b>${best}</b> best score</span><span><b>${(practicalState.repLog||[]).length}</b> total reps</span></div></div>`; }
+function repHistoryCard(){ const all=practicalState.repLog||[]; const log=all.slice(-8); if(!log.length) return ''; const streak=repStreak(); const best=Math.max(...all.map(r=>r.pts));
+  const one=86400000; const today=new Date(new Date().toISOString().slice(0,10)).getTime(); const days=[]; for(let i=13;i>=0;i--){ const d=new Date(today-i*one).toISOString().slice(0,10); const dayReps=all.filter(r=>r.day===d); const bestPct=dayReps.length?Math.max(...dayReps.map(r=>Math.round(r.pts/r.max*100))):0; days.push({d,bestPct,n:dayReps.length}); }
+  const weekAvg=(arr)=>{ const withReps=arr.filter(x=>x.n); return withReps.length?Math.round(withReps.reduce((a,x)=>a+x.bestPct,0)/withReps.length):0; };
+  const thisWeek=weekAvg(days.slice(7)), lastWeek=weekAvg(days.slice(0,7));
+  const trendTxt=thisWeek&&lastWeek?(thisWeek>=lastWeek?`Up ${thisWeek-lastWeek} points vs last week.`:`Down ${lastWeek-thisWeek} points vs last week.`):'Build a two-week base to see the trend.';
+  return `<div class="card"><div class="eyebrow">Your reps</div><h2 style="font-size:22px">Recent sessions</h2><div class="rep-trend">${log.map(r=>{ const pct=Math.round(r.pts/r.max*100); return `<div class="rep-bar" title="${esc(r.day)}: ${r.pts}/${r.max}"><i style="height:${Math.max(8,pct)}%"></i><span>${r.pts}</span></div>`; }).join('')}</div><div class="rep-meta"><span><b>${streak}</b> day streak</span><span><b>${best}</b> best score</span><span><b>${all.length}</b> total reps</span></div>
+  <div class="week-block"><div class="week-head"><b>Last 14 days</b><span>${esc(trendTxt)} This week ${thisWeek} percent, last week ${lastWeek} percent.</span></div><div class="week-grid">${days.map(x=>`<div class="week-col" title="${esc(x.d)}: ${x.n?x.bestPct+' percent best':'no rep'}"><i style="height:${Math.max(x.n?10:3,x.bestPct)}%" class="${x.n?'':'empty'} ${x.d===new Date().toISOString().slice(0,10)?'today':''}"></i><span>${x.d.slice(8)}</span></div>`).join('')}</div></div></div>`; }
 function qTier(q,oi){ return (q.options[oi]&&q.options[oi][0])||'trap'; }
 function categoryStats(){ const m={}; DEEP_QS.forEach((q,i)=>{ m[q.cat]=m[q.cat]||{cat:q.cat,total:0,answered:0,pts:0}; m[q.cat].total++; const a=practicalState.qbank[i]; if(a){ m[q.cat].answered++; const t=qTier(q,a.oi); m[q.cat].pts+=t==='strong'?10:t==='weak'?5:0; } }); return Object.values(m); }
 function weakestCats(n){ const st=categoryStats().filter(c=>c.answered>0).map(c=>Object.assign({pct:Math.round(c.pts/(c.answered*10)*100)},c)).sort((a,b)=>a.pct-b.pct); return st.slice(0,n||3); }
