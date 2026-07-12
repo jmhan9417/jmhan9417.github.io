@@ -4880,7 +4880,7 @@ function renderSide(){
   h+='<div class="side-reset"><button class="ghost" id="resetBtn">Reset progress</button></div>';
   side.innerHTML=h;
   side.querySelectorAll("[data-view]").forEach(b=> b.onclick=()=>{ state.view=b.getAttribute("data-view"); render(); window.scrollTo({top:0,behavior:"smooth"}); });
-  const rb=document.getElementById("resetBtn"); if(rb) rb.onclick=()=>{ if(confirm("Clear all answers and reset both meters to 0 percent?")){ state.answers={}; save(); render(); } };
+  const rb=document.getElementById("resetBtn"); if(rb) rb.onclick=()=>{ if(confirm("Reset all progress? This clears lesson answers, drills and Daily Rep history, Interview Room cases, Capstone, Strategy, and Valuation Lab work. Notebook entries are kept.")){ state.answers={}; try{[STORE_KEY,INTERVIEW_KEY,PRACTICAL_KEY,CAPSTONE_KEY,STRAT_KEY,VAL_KEY].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});}catch(e){} save(); location.reload(); } };
 }
 function navBtn(view,label,icon,active){
   return `<button class="navbtn ${active?'active':''}" data-view="${view}"><span class="num">${icon||'&#9679;'}</span><span style="flex:1">${label}</span></button>`;
@@ -4944,15 +4944,17 @@ try{const v=JSON.parse(localStorage.getItem(VAL_KEY));if(v)valuationState={mode:
 function valSave(){localStorage.setItem(VAL_KEY,JSON.stringify(valuationState));}
 function valNum(x,d){const n=Number(x);return Number.isFinite(n)?n:d;}
 function valMoney(x){if(!Number.isFinite(x))return 'Invalid';const a=Math.abs(x);return (x<0?'−':'')+'$'+(a>=1000?(a/1000).toFixed(2)+'B':a.toFixed(a>=100?0:1)+'M');}
+function valClamp(v,lo,hi){return Math.min(hi,Math.max(lo,v));}
 function dcfCalc(input){
-  const x=Object.assign({},input),g=x.growth/100,w=x.wacc/100,tg=x.tg/100,tax=x.tax/100;
+  const x=Object.assign({},input);x.rev1=valClamp(x.rev1,0,1e7);x.growth=valClamp(x.growth,-50,100);x.ebitda=valClamp(x.ebitda,-100,100);x.da=valClamp(x.da,0,100);x.capex=valClamp(x.capex,0,100);x.nwc=valClamp(x.nwc,-100,100);x.tax=valClamp(x.tax,0,60);x.wacc=valClamp(x.wacc,0.1,60);x.tg=valClamp(x.tg,-10,50);x.debt=valClamp(x.debt,0,1e7);x.cash=valClamp(x.cash,0,1e7);
+  const g=x.growth/100,w=x.wacc/100,tg=x.tg/100,tax=x.tax/100;
   const fcfMargin=((x.ebitda-x.da)/100)*(1-tax)+x.da/100-x.capex/100-x.nwc/100;
   let rev=x.rev1,rows=[],pv=0;
   for(let y=1;y<=5;y++){if(y>1)rev*=1+g;const fcf=rev*fcfMargin,df=1/Math.pow(1+w,y),p=fcf*df;rows.push({y,rev,fcf,df,pv:p});pv+=p;}
   const last=rows[4].fcf,valid=w>tg,tv=valid?last*(1+tg)/(w-tg):NaN,pvTv=valid?tv/Math.pow(1+w,5):NaN,ev=pv+pvTv,equity=ev-x.debt+x.cash;
   return{rows,fcfMargin,pv,tv,pvTv,ev,equity,valid};
 }
-function rnpvCalc(input){const x=Object.assign({},input),p2=x.p2/100,p3=x.p3/100,pa=x.approval/100,cum=p2*p3*pa,gross=x.value*cum,cost=x.cost2+p2*x.cost3+p2*p3*x.costFile,rnpv=gross-cost+x.platform,gap=x.ask-rnpv;return{cum,gross,cost,rnpv,gap};}
+function rnpvCalc(input){const x=Object.assign({},input);x.value=valClamp(x.value,0,1e7);x.p2=valClamp(x.p2,0,100);x.p3=valClamp(x.p3,0,100);x.approval=valClamp(x.approval,0,100);x.cost2=valClamp(x.cost2,0,1e6);x.cost3=valClamp(x.cost3,0,1e6);x.costFile=valClamp(x.costFile,0,1e6);x.platform=valClamp(x.platform,-1e6,1e6);x.ask=valClamp(x.ask,0,1e7);const p2=x.p2/100,p3=x.p3/100,pa=x.approval/100,cum=p2*p3*pa,gross=x.value*cum,cost=x.cost2+p2*x.cost3+p2*p3*x.costFile,rnpv=gross-cost+x.platform,gap=x.ask-rnpv;return{cum,gross,cost,rnpv,gap};}
 function valInput(key,label,value,note,step){return `<div class="val-input"><label>${label}${note?`<small>${note}</small>`:''}</label><input type="number" step="${step||1}" value="${value}" data-val-key="${key}"></div>`;}
 function renderDcfModel(){const x=valuationState.dcf,c=dcfCalc(x);const ws=[Math.max(1,x.wacc-2),x.wacc,x.wacc+2],gs=[Math.max(0,x.tg-1),x.tg,x.tg+1];return `<div class="val-layout"><div class="card val-controls"><div class="val-controls-head"><h3>Operating assumptions</h3><p>All currency inputs are $M. Forecast period is five years.</p></div><div class="val-inputs">
 ${valInput('rev1','Year-1 revenue',x.rev1,'$M')}${valInput('growth','Annual revenue growth',x.growth,'%')}${valInput('ebitda','EBITDA margin',x.ebitda,'% of revenue')}${valInput('da','D&A',x.da,'% of revenue')}${valInput('capex','Capex',x.capex,'% of revenue')}${valInput('nwc','Change in NWC',x.nwc,'% of revenue')}${valInput('tax','Tax rate',x.tax,'%')}${valInput('wacc','WACC',x.wacc,'%')}${valInput('tg','Terminal growth',x.tg,'%')}${valInput('debt','Debt',x.debt,'$M')}${valInput('cash','Cash',x.cash,'$M')}</div></div>
@@ -5009,7 +5011,8 @@ function rnpvTreeCard(c,x){
   return `<div class="card"><div class="eyebrow">Follow the odds</div><h2 style="font-size:21px">Your inputs, as a probability tree</h2><div style="margin-top:12px">${s}</div></div>`;
 }
 function renderValuationLab(){const d=valuationState.mode==='dcf';return `<div class="card hero valuation-hero"><div class="eyebrow">Valuation Lab</div><h2>Build the model, then challenge the model.</h2><p class="lede">Use traditional DCF for operating cash flow and rNPV for binary pipeline risk. Change the assumptions, watch value move, and explain what evidence would justify the base case.</p><div class="val-tabs"><button class="val-tab ${d?'active':''}" data-val-mode="dcf">Traditional DCF</button><button class="val-tab ${!d?'active':''}" data-val-mode="rnpv">Biotech rNPV</button></div></div><div class="card"><div class="val-method"><div><b>1. Forecast</b><span>Revenue, margin, reinvestment, or stage-gated pipeline cash flow.</span></div><div><b>2. Risk and time</b><span>Use WACC for UFCF. Use explicit PTRS for binary development risk.</span></div><div><b>3. Bridge</b><span>Move from enterprise or asset value to equity, deal ask, or portfolio value.</span></div><div><b>4. Challenge</b><span>Sensitivity, break-even thresholds, downside, and what changes the answer.</span></div></div></div>${d?renderDcfModel():renderRnpvModel()}<div class="card"><div class="eyebrow">Interview rule</div><h2 style="font-size:21px">A model is a structured argument, not a fact</h2><p class="val-note" style="font-size:14px">State the valuation range, the two assumptions that matter most, the evidence behind them, and the decision or deal structure that protects the downside. Never hide technical risk in both PTRS and an extreme discount rate, and never let terminal value conceal a drug's loss-of-exclusivity curve.</p></div>`;}
-function wireValuationLab(){document.querySelectorAll('[data-val-mode]').forEach(b=>b.onclick=()=>{valuationState.mode=b.getAttribute('data-val-mode');valSave();render();window.scrollTo({top:0,behavior:'smooth'});});document.querySelectorAll('[data-val-key]').forEach(inp=>inp.onchange=()=>{const bucket=valuationState.mode==='dcf'?valuationState.dcf:valuationState.rnpv;bucket[inp.getAttribute('data-val-key')]=valNum(inp.value,bucket[inp.getAttribute('data-val-key')]);valSave();render();});}
+function valRefreshResults(){const wrap=document.querySelector('.val-results');if(!wrap){render();return;}const d=valuationState.mode==='dcf';const htmlStr=d?renderDcfModel():renderRnpvModel();const m=htmlStr.match(/<div class="val-results">([\s\S]*)<\/div><\/div>$/);if(m){wrap.innerHTML=m[1];}else{render();}}
+function wireValuationLab(){document.querySelectorAll('[data-val-mode]').forEach(b=>b.onclick=()=>{valuationState.mode=b.getAttribute('data-val-mode');valSave();render();window.scrollTo({top:0,behavior:'smooth'});});document.querySelectorAll('[data-val-key]').forEach(inp=>inp.onchange=()=>{const bucket=valuationState.mode==='dcf'?valuationState.dcf:valuationState.rnpv;bucket[inp.getAttribute('data-val-key')]=valNum(inp.value,bucket[inp.getAttribute('data-val-key')]);valSave();valRefreshResults();});}
 
 function render(){
   renderSide(); updateMeters();
@@ -5040,13 +5043,14 @@ function render(){
 
 function renderFoot(){
   document.getElementById("foot").innerHTML =
-    "ReadyToConsult v3.1 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
+    "ReadyToConsult v3.2 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
 }
 
 /* ---------- Home ---------- */
 const CASE_PULSE=[
  {tab:'Safety',kicker:'Operating model',title:'When does the backlog actually start shrinking?',kind:'bars',rows:[['Monthly intake',1250,95,''],['Current closures',980,74,'risk'],['Vendor + AI scenario',1317,100,'']],story:'Capacity barely crosses intake after the proposed intervention. The strategic question is not whether the line turns positive, but whether quality-adjusted throughput holds.',question:'Would you fund the full rollout or a gated pilot?',action:'Key tension · 67-case monthly buffer versus 3,600-case backlog'},
  {tab:'Launch',kicker:'Market access',title:'A large market can collapse inside the patient funnel.',kind:'funnel',rows:[['Diagnosed','120,000',100],['Eligible','72,000',78],['Access-cleared','39,600',58],['Referred','7,920',38],['Treated','3,960',25]],story:'The diagnosed population is not the commercial opportunity. Coverage, referral, and treatment initiation determine how many patients actually start therapy.',question:'Which funnel leak deserves the next dollar of investment?',action:'Key tension · Awareness versus access and referral conversion'},
+ {tab:'Deal',kicker:'BD and valuation',title:'The ask is $800M. The math says $431M.',kind:'bars',rows:[['Seller ask',800,100,''],['Risk-adjusted value',431,54,'risk'],['Gap to justify',369,46,'']],story:'A Phase 2 asset is worth its approved value times a 19.8% cumulative probability of approval, minus stage-gated costs. Any premium above that must be earned by platform value, follow-on assets, or contingent structure.',question:'Meet the ask, walk away, or restructure with milestones?',action:'Key tension \u00b7 Comparable-deal headlines versus expected value'},
  {tab:'Trial',kicker:'Clinical operations',title:'More sites do not always mean faster enrollment.',kind:'bars',rows:[['Target pace',30,100,''],['Current pace',22,73,'risk'],['With rescue levers',30,100,'']],story:'The eight-patient monthly gap can be solved with new sites, better screen conversion, patient support, or a combination. Activation speed alone can mislead.',question:'Would you add eight sites or fix conversion first?',action:'Key tension · Speed versus randomized-patient yield'}
 ];
 const PULSE_CHOICES=[
@@ -5644,7 +5648,7 @@ function renderRoleplay(){
 function wireRoleplay(){}
 
 /* ---------- Glossary ---------- */
-const CATS = ["All","Industry","Stakeholder","Consulting Method","Communication","Finance","Regulatory","Clinical Science","Quality","Manufacturing","Commercial","Market Access","HEOR and Evidence","Digital and AI","Operations","Implementation","Veeva Domain","Fit and Behavioral"];
+const CATS = ["All","Industry","Stakeholder","Consulting Method","Communication","Finance","Portfolio","Deals","Regulatory","Clinical Science","Quality","Manufacturing","Commercial","Market Access","HEOR and Evidence","Digital and AI","Operations","Implementation","Veeva Domain","Fit and Behavioral"];
 function renderGlossaryShell(){
   const q = state.glossaryQuery || "";
   return `<div class="card">
@@ -6034,7 +6038,7 @@ function renderCertificate(){
       <div class="cert-sub">R&amp;D Business Consultant preparation</div>
       <div class="cert-awarded">Awarded to</div>
       <div class="cert-name">Minseok "Joey" Han, PharmD, MS Regulatory Science</div>
-      <div class="cert-line">For completing all ${cp.total} lessons across 7 units and ${DATA.caseStudies.length} case studies, reaching ${cp.k}% knowledge and ${cp.r}% interview readiness.</div>
+      <div class="cert-line">For completing all ${cp.total} lessons across ${COURSE.units.length} units and ${DATA.caseStudies.length} case studies, reaching ${cp.k}% knowledge and ${cp.r}% interview readiness.</div>
       <div class="cert-foot"><span>${esc(d)}</span><span>Independent educational course, not affiliated with Veeva Systems</span></div>
     </div>
   </div>`;
@@ -6044,7 +6048,7 @@ function renderAbout(){
   return `<div class="card hero"><div class="eyebrow">About this course</div><h2>An independent life sciences consulting interview course</h2><p class="lede">A self-paced, learn-then-drill course that teaches the background knowledge and interview skills for a life sciences and R&D business consulting role, then drills them with scored feedback.</p></div>
   <div class="card"><h2 style="font-size:19px;margin-bottom:8px">Important disclaimer</h2><p style="font-size:14.5px;color:#39434f">This course is an independent educational resource. It is <b>not affiliated with, authorized by, or endorsed by Veeva Systems Inc.</b> or any other company named for teaching context. Company, product, and program names are used only to describe a realistic interview and industry setting. Embedded videos are third-party content hosted on YouTube by their respective owners.</p></div>
   <div class="card"><h2 style="font-size:19px;margin-bottom:8px">What is inside</h2><ul style="font-size:14.3px;color:#39434f;padding-left:18px;line-height:1.7">
-    <li>${DATA.levels.length} lessons across the full curriculum, ${DATA.caseStudies.length} full case studies, a stakeholder roleplay, and a searchable knowledge base.</li>
+    <li>${DATA.levels.length} lessons across the full curriculum, ${DATA.caseStudies.length} full case studies, an interactive Valuation Lab, a stakeholder roleplay, and a searchable knowledge base.</li>
     <li>Each lesson teaches a concept, then scores you on a knowledge check and an application scenario.</li>
     <li>Intellectual honesty is scored: in several drills the precise honest answer beats the confident inflated one.</li>
     <li>Domain content is drawn from public, reputable sources; the Your Story Bank lesson is grounded in the learner's real resume.</li>
@@ -6101,6 +6105,7 @@ V18_TERMS.push(
   {term:"Time to peak",cat:"Commercial",def:"Number of years from launch until the product reaches peak annual sales.",ex:"Oncology products may ramp differently from broad primary-care therapies."},
   {term:"Erosion curve",cat:"Commercial",def:"Modeled revenue decline after competitor entry, safety events, price pressure, or loss of exclusivity.",ex:"A sharp LOE erosion curve is more credible than perpetual growth for one drug."},
   {term:"PTRS",cat:"Portfolio",def:"Probability of technical and regulatory success, often modeled as stage-specific and cumulative probabilities.",ex:"Commercial value is weighted by cumulative PTRS through approval."},
+  {term:"rNPV",cat:"Portfolio",def:"Risk-adjusted net present value. Commercial value weighted by cumulative probability of success, minus development costs weighted by the probability of reaching each stage.",ex:"A Phase 2 asset with 40%, 55%, and 90% stage probabilities has 19.8% cumulative PTRS, so rNPV is 19.8% of approved value minus expected stage-gated costs."},
   {term:"Cumulative probability",cat:"Portfolio",def:"Product of sequential conditional probabilities required to reach a later outcome.",ex:"40% x 55% x 90% equals 19.8% probability of approval."},
   {term:"Stage-gated cost",cat:"Portfolio",def:"Cost incurred only if the program successfully reaches the stage that requires it.",ex:"Phase 3 cost is weighted by probability of passing Phase 2."},
   {term:"Probability-weighted cash flow",cat:"Portfolio",def:"Cash flow multiplied by the probability that the state required to generate it occurs.",ex:"Approval-dependent revenue receives cumulative probability through approval."},
@@ -6255,7 +6260,7 @@ function guidedRoadmapCard(){
   return `<div class="roadmap-card">
     <div class="roadmap-head"><div><div class="eyebrow">Guided Roadmap</div><h2>Start here. Stop when you can explain it.</h2></div><p>You do not need to finish everything. The goal is to become interview-ready: learn the language, run the cases, then practice judgment under pressure.</p></div>
     <div class="roadmap-steps">${steps.map(s=>`<div class="roadstep"><div class="n">${s[0]}</div><h3>${s[1]}</h3><p>${s[2]}</p><div class="done">Done when: ${s[3]}</div></div>`).join('')}</div>
-    <div class="roadmap-bottom"><div class="roadmap-note"><b>The best route</b>Curriculum → Case Lab → Capstone → Studio → Drills → Review missed. Do not start with drills unless you already know the basics.</div><div class="roadmap-note"><b>One session rule</b>One lesson set, one case, or five drills. Small reps compound faster than cramming.</div></div>
+    <div class="roadmap-bottom"><div class="roadmap-note"><b>The best route</b>Curriculum → Case Lab → Capstone → Valuation Lab → Studio → Drills → Review missed. Do not start with drills unless you already know the basics.</div><div class="roadmap-note"><b>One session rule</b>One lesson set, one case, or five drills. Small reps compound faster than cramming.</div></div>
     <div class="roadmap-actions"><button class="ghost" data-view="syllabus">Start with Curriculum</button><button class="ghost" data-view="case">Run your first case</button><button class="ghost" data-view="practical">Go to Studio</button></div>
   </div>`;
 }
