@@ -4919,10 +4919,10 @@ if(st===3){const n=parseFloat(w.math);const checked=w.mathChecked;const ok=Numbe
 if(st===4)return stageShell(5,'Handle the interviewer challenge',`<div class="interviewer-scene"><div class="interviewer-avatar" aria-hidden="true">PL</div><div class="pressure-card"><small>Practice Leader · live pushback</small><p>${esc(c.pressure)}</p></div></div><p class="sub">A strong response acknowledges the challenge, protects the recommendation, and names what evidence would change it.</p><div class="insight-options">${c.pressureOptions.map((x,i)=>`<button data-int-pressure="${i}" class="${w.pressure===i?'selected':''} ${w.submitted&&w.pressure===i?x[1]:''}" aria-pressed="${w.pressure===i}">${esc(x[0])}</button>`).join('')}</div>${nextButtons(st)}`);
 const sc=interviewScore(c,w);const submitted=w.submitted;const dims=[['Structure',sc.clarify+sc.structure,25],['Analysis',sc.analysis,40],['Judgment',sc.judgment,15],['Synthesis',sc.synthesis,20]];return stageShell(6,'Deliver the 90-second recommendation',`<p class="interview-prompt">Lead with the answer. Give two or three reasons, quantify the most important finding, name one risk, and close with a next step.</p><div class="synthesis-box"><textarea id="intSynthesis" placeholder="Write the recommendation you would say out loud...">${esc(w.synthesis)}</textarea></div><div class="rubric-list" id="synthChecks" aria-label="Recommendation quality signals">${synthesisSignals(w.synthesis,c).map((s,i)=>`<label class="synth-check${s.pass?' on':''}" id="synthchk-${i}" aria-label="${s.label}: ${s.pass?'detected':'not yet detected'}"><span class="synth-dot" aria-hidden="true">${s.pass?'\u2713':'\u25CB'}</span><span>${s.label}${s.strong?' \u2605':''}</span></label>`).join('')}</div><p class="synth-hint" id="synthHint" aria-live="polite">Auto-detected from your words as you type (not self-reported). Lead with the decision, cite the key number, name a risk, and end on a gate.</p><div class="delivery-meter" id="deliveryMeter" aria-live="polite" aria-label="Delivery estimate"></div><div class="interview-actions"><button class="ghost primary" id="intSubmit">${submitted?'Re-score case':'Submit case'}</button><button class="ghost" data-int-stage="4">Back to challenge</button></div>${submitted?`<div class="card" style="margin:26px 0 0"><div class="interview-report"><div class="score-ring" style="--score:${sc.total}"><b>${sc.total}</b></div><div><div class="eyebrow">Interview readiness</div><h3 style="font-size:28px;margin:8px 0 16px">${sc.total>=85?'Interview ready':sc.total>=70?'Close, but tighten the weak dimension':'Needs another coached run'}</h3><div class="score-bars">${dims.map(d=>{const pct=Math.round(d[1]/d[2]*100);return `<div class="score-line"><span>${d[0]}</span><div class="score-track"><i style="width:${pct}%"></i></div><b>${pct}%</b></div>`;}).join('')}</div></div></div><div class="pressure-card" style="margin-bottom:0"><small>How your synthesis scored</small><div class="rubric-list" style="margin-top:10px">${synthesisSignals(w.synthesis,c).map(s=>`<label class="synth-check${s.pass?' on':''}" aria-label="${s.label}: ${s.pass?'met':'missing'}"><span class="synth-dot" aria-hidden="true">${s.pass?'\u2713':'\u25CB'}</span><span>${s.label}</span></label>`).join('')}</div><p class="calib-note">Readiness is a heuristic estimate from your structure, math accuracy, and recommendation language \u2014 not a prediction of a real interview result. Synthesis is scored from your words, not a checklist.</p></div><div class="pressure-card" style="margin-bottom:0"><small>Model synthesis</small><p>${esc(c.model)}</p></div></div>`:''}`);}
 function interviewStageReady(c,w,st){if(st===0)return w.clarifiers.length>=2;if(st===1)return w.branches.length>=3;if(st===2)return w.insight!=null;if(st===3)return w.mathChecked&&Number.isFinite(parseFloat(w.math));if(st===4)return w.pressure!=null;return (w.synthesis||'').trim().length>=40;} function interviewStagePrompt(st){return ['Select at least two decision-relevant clarifying questions.','Select at least three branches before continuing.','Choose the insight you would say aloud.','Enter and lock a numeric answer before continuing.','Respond to the interviewer challenge.','Write your recommendation \u2014 it is scored on decision-first, reasons, a number, a risk, and a next step.'][st]||'Complete this stage first.';} function nextButtons(st){return `<div class="interview-actions">${st>0?`<button class="ghost" data-int-stage="${st-1}">Back</button>`:''}<button class="ghost primary" data-int-stage="${Math.min(5,st+1)}">Continue to ${['structure','exhibit','math','challenge','synthesis','report'][st]}</button></div>`;}
-function renderInterviewRoom(){const c=INTERVIEW_CASES[interviewState.caseIndex],w=interviewWork();return `<div class="card interview-hero"><div class="interview-hero-grid"><div><div class="eyebrow">Interview Room</div><h2>Work the case while the clock is running.</h2><p class="sub">Four original life sciences cases built around the actual interview sequence: clarify, structure, read an exhibit, calculate, handle pushback, and synthesize.</p></div><div class="interview-clock"><small>Case clock</small><b id="interviewTimerFace" role="timer" aria-live="polite">35:00</b><button class="ghost" id="interviewStart">${w.started?'Reset 35 min':'Start 35 min'}</button></div></div></div><div class="interview-cases">${INTERVIEW_CASES.map((x,i)=>`<button class="interview-case-card ${i===interviewState.caseIndex?'active':''}" data-int-case="${i}"><small>Case ${i+1} · ${esc(x.domain)}</small><h3>${esc(x.title)}</h3><p>${esc(x.decision)}</p><div class="case-difficulty" aria-label="Difficulty ${x.difficulty} of 5">${[1,2,3,4,5].map(n=>`<i class="${n<=x.difficulty?'on':''}"></i>`).join('')}</div></button>`).join('')}</div>${interviewStageNav()}${renderInterviewStage(c,w)}`;}
+function renderInterviewRoom(){const c=INTERVIEW_CASES[interviewState.caseIndex],w=interviewWork();return `<div class="card interview-hero"><div class="interview-hero-grid"><div><div class="eyebrow">Interview Room</div><h2>Work the case while the clock is running.</h2><p class="sub">Four original life sciences cases built around the actual interview sequence: clarify, structure, read an exhibit, calculate, handle pushback, and synthesize.</p></div><div class="interview-clock"><small>Case clock</small><b id="interviewTimerFace" role="timer" aria-live="polite">35:00</b><button class="ghost" id="interviewStart">${w.started?'Reset 35 min':'Start 35 min'}</button></div></div></div><div class="interview-cases">${INTERVIEW_CASES.map((x,i)=>`<button class="interview-case-card ${i===interviewState.caseIndex?'active':''}" data-int-case="${i}"><small>Case ${i+1} · ${esc(x.domain)}${(typeof isPro==="function"&&i>=FREE_INTERVIEW_CASES&&!isPro())?' <span class="pro-lock-badge">Pro</span>':''}</small><h3>${esc(x.title)}</h3><p>${esc(x.decision)}</p><div class="case-difficulty" aria-label="Difficulty ${x.difficulty} of 5">${[1,2,3,4,5].map(n=>`<i class="${n<=x.difficulty?'on':''}"></i>`).join('')}</div></button>`).join('')}</div>${interviewStageNav()}${renderInterviewStage(c,w)}`;}
 function wireInterviewRoom(){
   startInterviewTimer();
-  document.querySelectorAll('[data-int-case]').forEach(b=>b.onclick=()=>{interviewState.caseIndex=+b.dataset.intCase;interviewState.stage=0;saveInterview();render();window.scrollTo({top:0,behavior:'smooth'});});
+  document.querySelectorAll('[data-int-case]').forEach(b=>b.onclick=()=>{const _ci=+b.dataset.intCase;if(typeof isPro==="function"&&_ci>=FREE_INTERVIEW_CASES&&!isPro()){state.view="pricing";render();window.scrollTo({top:0,behavior:"smooth"});return;}interviewState.caseIndex=_ci;interviewState.stage=0;saveInterview();render();window.scrollTo({top:0,behavior:'smooth'});});
   document.querySelectorAll('[data-int-stage]').forEach(b=>b.onclick=()=>{const target=+b.dataset.intStage,w=interviewWork(),c=INTERVIEW_CASES[interviewState.caseIndex],current=interviewState.stage;if(target>current){if(target>current+1||target>w.maxStage+1)return;if(!interviewStageReady(c,w,current)){w.notice=interviewStagePrompt(current);saveInterview();render();return;}w.maxStage=Math.max(w.maxStage,target);}w.notice='';interviewState.stage=target;saveInterview();render();window.scrollTo({top:0,behavior:'smooth'});});
   const start=document.getElementById('interviewStart');if(start)start.onclick=()=>{const w=interviewWork();w.started=true;w.endAt=Date.now()+35*60*1000;w.timedOut=false;saveInterview();render();};
   const toggle=(sel,key,max)=>document.querySelectorAll(sel).forEach(b=>b.onclick=()=>{const w=interviewWork(),i=+(b.dataset[key]);const arr=key==='intClarifier'?w.clarifiers:w.branches;const at=arr.indexOf(i);if(at>=0){arr.splice(at,1);w.notice='';}else if(arr.length<max){arr.push(i);w.notice='';}else{w.notice='Four selections maximum. Deselect one before replacing it.';}saveInterview();render();});
@@ -5015,9 +5015,211 @@ function renderValuationLab(){const d=valuationState.mode==='dcf';return `<div c
 function valRefreshResults(){const wrap=document.querySelector('.val-results');if(!wrap){render();return;}const d=valuationState.mode==='dcf';const htmlStr=d?renderDcfModel():renderRnpvModel();const m=htmlStr.match(/<div class="val-results">([\s\S]*)<\/div><\/div>$/);if(m){wrap.innerHTML=m[1];}else{render();}}
 function wireValuationLab(){document.querySelectorAll('[data-val-mode]').forEach(b=>b.onclick=()=>{valuationState.mode=b.getAttribute('data-val-mode');valSave();render();window.scrollTo({top:0,behavior:'smooth'});});document.querySelectorAll('[data-val-key]').forEach(inp=>inp.onchange=()=>{const bucket=valuationState.mode==='dcf'?valuationState.dcf:valuationState.rnpv;bucket[inp.getAttribute('data-val-key')]=valNum(inp.value,bucket[inp.getAttribute('data-val-key')]);valSave();valRefreshResults();});}
 
+/* ===== PAID LAYER START ===== */
+/* ============================================================
+   ReadyToConsult — Paid tier layer (free preview + Pro unlock)
+   Self-contained. Owner sets RTC_PRODUCT after creating the store.
+   ============================================================ */
+const RTC_PRODUCT = {
+  price: 29,                                   // USD, one-time — change freely
+  currency: "USD",
+  gumroadUrl: "https://gumroad.com/l/readytoconsult",   // REPLACE with your Gumroad product URL
+  gumroadProductId: "",                        // REPLACE: Gumroad Product → Settings → Advanced → "Product ID" (for license verify)
+  gumroadPermalink: "readytoconsult",          // REPLACE: the /l/<permalink> slug (fallback for license verify)
+  contactEmail: "jmhan9417@gmail.com"          // REPLACE if you want a support alias
+};
+const ENTITLE_KEY = "rtc_entitlement_v1";
+const FREE_INTERVIEW_CASES = 1;                // first N interview cases are free
+const FREE_LESSONS = 4;                         // first N curriculum lessons (Unit 1) are free
+const PRO_VIEWS = ["case","capstone","strategy","valuation","problem","roleplay","practical","qbank","session","certificate"];
+
+function entitlement(){ try { return JSON.parse(localStorage.getItem(ENTITLE_KEY) || "null"); } catch(e){ return null; } }
+function isPro(){ const e = entitlement(); return !!(e && e.pro); }
+function setPro(info){ localStorage.setItem(ENTITLE_KEY, JSON.stringify(Object.assign({ pro:true, at:Date.now() }, info || {}))); }
+function clearPro(){ localStorage.removeItem(ENTITLE_KEY); }
+function storeConfigured(){ return !!(RTC_PRODUCT.gumroadProductId || RTC_PRODUCT.gumroadPermalink); }
+
+async function verifyLicense(key){
+  key = (key || "").trim();
+  if(!key) return { ok:false, msg:"Enter the license key from your receipt." };
+  if(!storeConfigured()) return { ok:false, msg:"The store is not connected yet. (Owner: set RTC_PRODUCT.gumroadProductId.)" };
+  try {
+    const body = new URLSearchParams();
+    if(RTC_PRODUCT.gumroadProductId) body.set("product_id", RTC_PRODUCT.gumroadProductId);
+    else body.set("product_permalink", RTC_PRODUCT.gumroadPermalink);
+    body.set("license_key", key);
+    body.set("increment_uses_count", "false");
+    const r = await fetch("https://api.gumroad.com/v2/licenses/verify", {
+      method:"POST", headers:{ "Content-Type":"application/x-www-form-urlencoded" }, body
+    });
+    const j = await r.json();
+    const refunded = j && j.purchase && (j.purchase.refunded || j.purchase.chargebacked || j.purchase.disputed);
+    if(j && j.success && !refunded){
+      setPro({ key:key, email:(j.purchase && j.purchase.email) || "" });
+      return { ok:true };
+    }
+    return { ok:false, msg:(j && j.message) || "That license key was not recognized." };
+  } catch(e){
+    return { ok:false, msg:"Could not reach the license server. Check your connection and retry." };
+  }
+}
+
+function viewLocked(v){
+  if(isPro()) return false;
+  if(PRO_VIEWS.indexOf(v) >= 0) return true;
+  if(v && v.indexOf("level-") === 0){ const i = +v.split("-")[1]; if(i >= FREE_LESSONS) return true; }
+  return false;
+}
+
+const PRO_FEATURES = [
+  "All 4 timed Interview Room cases with scored synthesis and delivery feedback",
+  "The full 8-unit, 32-lesson curriculum",
+  "Problem Lab and Valuation Lab (live DCF + biotech rNPV)",
+  "Capstone, Strategy Lab, and stakeholder Roleplay",
+  "Studio, Drills, and Daily Rep spaced practice",
+  "Completion certificate and cloud progress sync"
+];
+
+function renderPricing(lockNote){
+  const p = RTC_PRODUCT.price, pro = isPro();
+  const buy = `<div class="pro-price"><span class="pro-amt">$${p}</span><span class="pro-unit">one-time · lifetime access</span></div>
+    <div class="pro-cta"><a class="ghost primary pro-buy" href="${RTC_PRODUCT.gumroadUrl}" target="_blank" rel="noopener">Buy for $${p} &rarr;</a></div>`;
+  const unlock = `<div class="card"><h2 class="pro-h">Already purchased?</h2>
+      <p class="pro-sub">Paste the license key from your Gumroad receipt to unlock this browser instantly.</p>
+      <div class="pro-lic"><input id="licKey" class="pro-input" placeholder="XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX" autocomplete="off" spellcheck="false"><button class="ghost primary" id="licBtn" type="button">Unlock</button></div>
+      <p class="auth-msg" id="licMsg" role="status" aria-live="polite"></p></div>`;
+  const manage = `<div class="card"><h2 class="pro-h">Manage access</h2>
+      <p class="pro-sub">Pro is active on this browser. License on file: <code>${(entitlement() && entitlement().key) || "—"}</code></p>
+      <button class="ghost" id="proSignout" type="button">Remove license from this browser</button></div>`;
+  return `<div class="card hero"><div class="eyebrow">${pro ? "Your plan" : "Upgrade to Pro"}</div>
+      <h2>${pro ? "You have full access." : "Unlock the full interview prep kit."}</h2>
+      <p class="lede">${pro ? "Thank you for supporting an independent tool. Everything is unlocked on this browser." : (lockNote || "Run the free sample case and Unit 1 for as long as you like. Upgrade once to open every case, lab, and lesson &mdash; no subscription.")}</p>
+      ${pro ? "" : buy}</div>
+    <div class="card"><h2 class="pro-h">What Pro includes</h2><ul class="pro-list">${PRO_FEATURES.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+    ${pro ? manage : unlock}
+    <p class="pro-fine">Independent educational product. <strong>Not affiliated with, authorized by, or endorsed by Veeva Systems, Inc. or any other company named for teaching context.</strong> Company and product names are trademarks of their owners, used here only to describe publicly known interview and industry topics. Feedback is generated by a rule-based engine, not a live human coach or a large language model. <a href="#" data-view="legal">Terms, Privacy &amp; Refunds &rsaquo;</a></p>`;
+}
+function wirePricing(){
+  const b = document.getElementById("licBtn");
+  if(b) b.onclick = async () => {
+    const m = document.getElementById("licMsg"), k = document.getElementById("licKey").value;
+    m.textContent = "Checking your license…"; m.className = "auth-msg";
+    const r = await verifyLicense(k);
+    if(r.ok){ m.textContent = "Unlocked. Enjoy the full kit."; m.className = "auth-msg ok"; updateProButton(); setTimeout(()=>{ state.view = "home"; render(); }, 700); }
+    else { m.textContent = r.msg; m.className = "auth-msg err"; }
+  };
+  const so = document.getElementById("proSignout");
+  if(so) so.onclick = () => { clearPro(); updateProButton(); render(); };
+}
+
+function renderPaywall(feature){
+  const note = (feature ? "&ldquo;" + feature + "&rdquo; is part of Pro. " : "") + "Run the free sample case and Unit 1 as much as you like, then upgrade once to open everything.";
+  return `<div class="card pro-lockcard"><div class="eyebrow">Pro feature</div>
+      <h2>${feature ? feature : "This is a Pro feature"}</h2>
+      <p class="lede">${note}</p></div>` + renderPricing(" ");
+}
+
+const RTC_LEGAL = `
+<h3>Terms of Service</h3>
+<p>ReadyToConsult ("the Service") is an independent, self-paced educational tool for practicing life-sciences consulting interview skills. By using or purchasing access to the Service you agree to these terms.</p>
+<ul>
+<li><strong>What you get.</strong> A one-time purchase grants a single person a personal, non-transferable license to the Pro content for the lifetime of the product. It is a study aid, not certification, accreditation, employment, or a guarantee of any interview outcome.</li>
+<li><strong>Acceptable use.</strong> Do not resell, redistribute, publish, or share the content or your license key. The training cases are original teaching material; please do not copy them into other products.</li>
+<li><strong>No affiliation.</strong> The Service is not affiliated with, authorized by, or endorsed by Veeva Systems, Inc. or any other company referenced for teaching context. All trademarks belong to their owners.</li>
+<li><strong>No warranty.</strong> The Service is provided "as is," without warranty of any kind. Automated feedback is heuristic and may be imperfect. We are not liable for interview results or any indirect damages.</li>
+</ul>
+<h3>Privacy Policy</h3>
+<ul>
+<li><strong>What we store.</strong> Your progress is saved in your own browser (localStorage). If you sign in, your email and progress are stored with our authentication provider (Supabase) only to sync your account across devices.</li>
+<li><strong>Payments.</strong> Purchases are processed by our payment provider (Gumroad). We never see or store your full card details. License verification sends only your license key to the provider.</li>
+<li><strong>No selling of data.</strong> We do not sell your personal data or send marketing you did not ask for.</li>
+<li><strong>Your control.</strong> You can reset local progress anytime from the sidebar, or remove your license from a browser on the Upgrade page.</li>
+</ul>
+<h3>Refund Policy</h3>
+<p>Because this is instantly accessible digital content, we offer a <strong>14-day, no-questions-asked refund</strong>. If the kit is not a fit, email us within 14 days of purchase and we will refund you in full and deactivate the license.</p>
+`;
+function renderLegal(){
+  return `<div class="card hero"><div class="eyebrow">Legal</div><h2>Terms, Privacy &amp; Refunds</h2>
+      <p class="lede">Plain-language policies for ReadyToConsult.</p></div>
+    <div class="card pro-legal">${RTC_LEGAL}</div>
+    <p class="pro-fine">Questions? Email <a href="mailto:${RTC_PRODUCT.contactEmail}">${RTC_PRODUCT.contactEmail}</a>. <a href="#" data-view="pricing">Back to Upgrade &rsaquo;</a></p>`;
+}
+function wireLegal(){}
+
+function updateProButton(){
+  const b = document.getElementById("proBtn");
+  if(!b) return;
+  if(isPro()){ b.textContent = "Pro \u2713"; b.classList.add("is-pro"); b.title = "Full access unlocked"; }
+  else { b.textContent = "Get Pro"; b.classList.remove("is-pro"); b.title = "Unlock every case, lab, and lesson"; }
+}
+
+/* one-time: styles + header Pro button + global in-content nav delegation */
+(function proInit(){
+  var css = `
+  .topbtn#proBtn{border-color:rgba(185,133,47,.55);color:var(--gold);font-weight:600}
+  .topbtn#proBtn.is-pro{border-color:rgba(22,122,86,.5);color:var(--green)}
+  .pro-price{display:flex;align-items:baseline;gap:12px;margin:6px 0 18px}
+  .pro-amt{font-family:Georgia,'Times New Roman',serif;font-size:44px;font-weight:600;color:var(--navy);letter-spacing:-.5px}
+  .pro-unit{font-size:13.5px;color:var(--muted)}
+  .pro-cta .pro-buy{display:inline-block;text-decoration:none;color:#fff !important}
+  .pro-cta .pro-buy:hover{color:#fff !important}
+  .pro-h{font-size:19px;margin-bottom:8px}
+  .pro-sub{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+  .pro-list{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .pro-list li{position:relative;padding-left:26px;font-size:14.5px;line-height:1.5;color:var(--ink)}
+  .pro-list li:before{content:"\u2713";position:absolute;left:0;top:0;color:var(--green);font-weight:700}
+  .pro-lic{display:flex;gap:10px;flex-wrap:wrap}
+  .pro-input{flex:1;min-width:220px;padding:12px 14px;border:1px solid var(--line);border-radius:var(--radius-sm);font:inherit;font-size:14px;background:var(--card);letter-spacing:.5px}
+  .pro-input:focus{outline:none;border-color:var(--navy2)}
+  .auth-msg.ok{color:var(--green)}
+  .pro-fine{font-size:12px;color:var(--muted);line-height:1.6;margin-top:16px;max-width:70ch}
+  .pro-legal h3{font-size:16px;margin:22px 0 8px;color:var(--navy)}
+  .pro-legal h3:first-child{margin-top:2px}
+  .pro-legal p,.pro-legal li{font-size:13.5px;line-height:1.65;color:var(--ink)}
+  .pro-legal ul{padding-left:20px;display:grid;gap:8px;margin:6px 0}
+  .pro-lockcard{border-top:3px solid var(--gold)}
+  .pro-lock-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:var(--gold);border:1px solid rgba(185,133,47,.4);background:var(--soft-gold);border-radius:999px;padding:2px 9px;vertical-align:middle;margin-left:8px}
+  .foot-legal{margin-left:6px}
+  .foot-legal a{color:inherit;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+  @media(max-width:520px){.pro-amt{font-size:36px}}
+  `;
+  var s = document.createElement("style"); s.id = "pro-styles"; s.textContent = css;
+  (document.head || document.documentElement).appendChild(s);
+
+  // header Pro button (inserted before authBtn)
+  function mountProBtn(){
+    if(document.getElementById("proBtn")) return;
+    var auth = document.getElementById("authBtn");
+    if(!auth) return;
+    var b = document.createElement("button");
+    b.className = "topbtn"; b.id = "proBtn"; b.type = "button"; b.textContent = "Get Pro";
+    b.onclick = function(){ state.view = "pricing"; render(); window.scrollTo({top:0,behavior:"smooth"}); };
+    auth.parentNode.insertBefore(b, auth);
+    updateProButton();
+  }
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", mountProBtn);
+  else mountProBtn();
+
+  // in-content nav links (data-view) outside the sidebar
+  document.addEventListener("click", function(e){
+    var t = e.target.closest ? e.target.closest("[data-view]") : null;
+    if(!t) return;
+    if(t.closest("#side")) return;          // sidebar wires its own
+    e.preventDefault();
+    state.view = t.getAttribute("data-view");
+    render();
+    window.scrollTo({ top:0, behavior:"smooth" });
+  });
+})();
+
+/* ===== PAID LAYER END ===== */
+
 function render(){
-  renderSide(); updateMeters();
+  renderSide(); updateMeters(); if(typeof updateProButton==="function") updateProButton();
   const m=document.getElementById("main");
+  if(state.view==="pricing"){ m.innerHTML=renderPricing(); wirePricing(); renderFoot(); afterRender(); if(typeof mountCoach==="function") mountCoach(); return; }
+  if(state.view==="legal"){ m.innerHTML=renderLegal(); wireLegal(); renderFoot(); afterRender(); if(typeof mountCoach==="function") mountCoach(); return; }
+  if(typeof viewLocked==="function" && viewLocked(state.view)){ m.innerHTML=renderPaywall({case:"Case Lab",capstone:"Capstone",strategy:"Strategy Lab",valuation:"Valuation Lab",problem:"Problem Lab",roleplay:"Roleplay",practical:"Studio",qbank:"Drills",session:"Daily Rep",certificate:"Certificate"}[state.view]||(state.view&&state.view.indexOf("level-")===0?"This lesson":"")); wirePricing(); renderFoot(); afterRender(); if(typeof mountCoach==="function") mountCoach(); return; }
   if(state.view==="home"){ m.innerHTML=renderHome(); wireHome(); }
   else if(state.view==="interview"){ m.innerHTML=renderInterviewRoom(); wireInterviewRoom(); }
   else if(state.view==="case"){ m.innerHTML=renderCaseLab(); wireCaseLab(); }
@@ -5044,7 +5246,7 @@ function render(){
 
 function renderFoot(){
   document.getElementById("foot").innerHTML =
-    "ReadyToConsult v3.5 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
+    "ReadyToConsult v3.5 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by Veeva Systems or any company named for teaching context &nbsp;&middot;&nbsp; <span class=\"foot-legal\"><a data-view=\"pricing\">Upgrade</a> &middot; <a data-view=\"legal\">Terms &amp; Refunds</a></span>";
 }
 
 /* ---------- Home ---------- */
