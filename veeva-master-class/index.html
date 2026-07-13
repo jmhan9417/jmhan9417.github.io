@@ -1044,6 +1044,18 @@ body{background:#f6f6f3!important;color:#1d2630!important}.card{background:#fff!
   .course-menu[open] .course-menu-panel{grid-template-columns:1fr}.hero:after{right:-60px!important;top:-80px!important;width:200px!important;height:200px!important}.search{min-width:0!important;width:100%}.ringm{min-width:0!important;padding-right:10px!important}.ringlab small{font-size:8.5px}.term-pop{max-width:min(calc(100vw - 20px),280px)!important}.strat-tab,.cap-tab,.studio-tab,.q-tab{white-space:normal!important}.choice-card{overflow-wrap:break-word}.top-inner{gap:10px}.brand span{display:none}.meters{gap:6px}.ring{width:40px;height:40px}.path-now .ghost,.syllabus-next .ghost{width:100%}.visual-card .vthumb,.visual-home-card .vthumb{object-fit:contain!important;background:#0f2a43!important}
 }
 
+/* ===== v3.6.3 keep the left rail on tablet and narrow desktop ===== */
+@media(min-width:721px) and (max-width:980px){
+  .wrap{grid-template-columns:188px minmax(0,1fr)!important;gap:24px!important;padding:24px 20px 72px!important;align-items:start!important}
+  nav.side{display:block!important;position:sticky!important;top:18px!important;z-index:20!important;padding:10px!important;border-radius:18px!important;background:rgba(251,251,253,.94)!important;overflow:auto!important;max-height:calc(100vh - 36px)!important;box-shadow:none!important}
+  .course-menu>summary{display:none!important}
+  .course-menu-panel{display:block!important;max-height:none!important;overflow:visible!important;padding:0!important;border:0!important}
+  .course-menu-panel .navhdr{display:block!important;margin:14px 10px 8px!important;padding:0!important}
+  .course-menu-panel .navbtn{display:grid!important;grid-template-columns:1fr!important;width:100%!important;white-space:normal!important;padding:7px 10px!important;min-height:0!important}
+  .course-menu-panel .navbtn span:not(.num):not(.dot):not(.navmini){white-space:normal!important;overflow:visible!important;text-overflow:clip!important}
+  .course-menu-panel .side-reset{display:block!important}
+}
+
 /* ===== v3.6.1 focused home ===== */
 .home-library{border:1px solid #dfe3e6;border-radius:22px;background:#fff;overflow:hidden}.home-library>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:88px;padding:20px 24px;cursor:pointer;color:#16233a}.home-library>summary::-webkit-details-marker{display:none}.home-library>summary span{display:grid;gap:4px}.home-library>summary small{color:#8a6d3f;font-size:10.5px;font-weight:750;text-transform:uppercase;letter-spacing:.07em}.home-library>summary b{font-family:"IBM Plex Serif",Georgia,serif;font-size:21px;line-height:1.25}.home-library>summary i{font-style:normal;font-size:24px;color:#647084;transition:transform .16s}.home-library[open]>summary{border-bottom:1px solid #dfe3e6}.home-library[open]>summary i{transform:rotate(180deg)}.home-library-intro{display:flex;gap:8px 18px;align-items:baseline;flex-wrap:wrap;padding:16px 24px;background:#f7f8f8;color:#647084;font-size:13px}.home-library-intro b{color:#16233a}.home-library-body{padding:22px 22px 1px}.home-library-body>.card:last-child{margin-bottom:21px}
 @media(max-width:720px){.simple-hero{padding-top:56px!important;padding-bottom:52px!important}.home-library>summary{padding:18px 20px;min-height:78px}.home-library>summary b{font-size:18px}.home-library-body{padding:14px 14px 1px}.home-library-intro{padding:14px 20px}}
@@ -4800,7 +4812,7 @@ try { const u = JSON.parse(localStorage.getItem(UI_KEY)); if(u) uiState = Object
 function saveUI(){ localStorage.setItem(UI_KEY, JSON.stringify(uiState)); scheduleCloudSave(); }
 function applyFocusMode(){ document.body.classList.toggle("focus-mode", !!uiState.focus); const b=document.getElementById("focusBtn"); if(b) b.textContent=uiState.focus?"Exit focus":"Focus"; }
 
-const READYTOCONSULT_VERSION = "3.6.2";
+const READYTOCONSULT_VERSION = "3.6.3";
 const SUPABASE_URL = "https://oergojtnxmjztjgadkkv.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_WdMMBeui--DSDVloYcTWeg_L9WAXcKA";
 const NOTEBOOK_KEY = "readytoconsult-notebook-v17";
@@ -4911,7 +4923,7 @@ function renderSide(){
   h+=navBtn("certificate","Certificate","★",state.view==="certificate");
   h+=navBtn("about","About","ⓘ",state.view==="about");
   h+='<div class="side-reset"><button class="ghost" id="resetBtn">Reset progress</button></div>';
-  const desktopMenuOpen=(window.innerWidth||0)>980;
+  const desktopMenuOpen=(window.innerWidth||0)>720;
   side.innerHTML='<details class="course-menu"'+(desktopMenuOpen?' open':'')+'><summary><span><small>Course menu</small><b>'+esc(currentLabel)+'</b></span><i aria-hidden="true">⌄</i></summary><div class="course-menu-panel">'+h+'</div></details>';
   side.querySelectorAll("[data-view]").forEach(b=> b.onclick=()=>{ state.view=b.getAttribute("data-view"); render(); window.scrollTo({top:0,behavior:"smooth"}); });
   const rb=document.getElementById("resetBtn"); if(rb) rb.onclick=()=>{ if(confirm("Reset all progress? This clears lesson answers, drills and Daily Rep history, Interview Room cases, Capstone, Strategy, and Valuation Lab work. Notebook entries are kept.")){ state.answers={}; try{[STORE_KEY,INTERVIEW_KEY,PRACTICAL_KEY,CAPSTONE_KEY,STRAT_KEY,VAL_KEY].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});}catch(e){} save(); location.reload(); } };
@@ -5077,7 +5089,7 @@ function render(){
 
 function renderFoot(){
   document.getElementById("foot").innerHTML =
-    "ReadyToConsult v3.6.2 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
+    "ReadyToConsult v3.6.3 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
 }
 
 /* ---------- Home ---------- */
