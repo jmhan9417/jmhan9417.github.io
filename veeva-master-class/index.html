@@ -1019,6 +1019,31 @@ body{background:#f6f6f3!important;color:#1d2630!important}.card{background:#fff!
 @media(max-width:900px){.val-layout{grid-template-columns:1fr}.val-kpis{grid-template-columns:1fr}.val-method{grid-template-columns:1fr}.val-method div{border-right:0;border-bottom:1px solid #e5e8ea}.val-sens{grid-template-columns:72px repeat(3,minmax(64px,1fr));font-size:11px}}
 
 
+/* ===== v3.6 guided learning flow + responsive clarity ===== */
+.course-menu>summary{display:none;list-style:none}.course-menu>summary::-webkit-details-marker{display:none}.course-menu-panel{display:block}
+.path-now{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;background:#153b60;color:#fff;padding:22px 24px;margin:0 0 14px;border-radius:18px}.path-now small{display:block;color:#c9d8e7;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}.path-now b{display:block;font-family:"IBM Plex Serif",Georgia,serif;font-size:22px;line-height:1.22;margin-top:5px}.path-now span{display:block;color:#dfe8f0;font-size:13.5px;line-height:1.45;margin-top:5px}.path-now .ghost{background:#fff!important;color:#153b60!important;border-color:#fff!important;white-space:nowrap!important}
+.learning-spine{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border:1px solid #dfe3e6;border-radius:18px;overflow:hidden;background:#dfe3e6;gap:1px}.path-card{appearance:none;border:0;background:#fff;padding:20px 17px;text-align:left;cursor:pointer;min-width:0;transition:background .16s,transform .16s}.path-card:hover{background:#f3f7fb;transform:translateY(-2px)}.path-card span{display:block;color:#2f6feb;font-size:11px;font-weight:800}.path-card small{display:block;color:#8a6d3f;font-size:10px;text-transform:uppercase;letter-spacing:.06em;margin-top:16px}.path-card b{display:block;color:#16233a;font-size:17px;line-height:1.2;margin-top:4px}.path-card p{color:#647084;font-size:12.5px;line-height:1.42;margin:9px 0 0}.path-support{display:flex;gap:8px 16px;align-items:baseline;flex-wrap:wrap;padding:18px 2px 0;color:#647084;font-size:13.5px;line-height:1.45}.path-support b{color:#16233a}.path-support span{max-width:780px}
+.syllabus-next{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center;margin-top:18px;padding:16px 18px;background:rgba(255,255,255,.78);border:1px solid rgba(21,59,96,.15);border-radius:14px;position:relative;z-index:1}.syllabus-next small{display:block;color:#647084;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:750}.syllabus-next b{display:block;color:#16233a;font-size:14px;line-height:1.35;margin-top:3px}.syllabus-next .ghost{background:#153b60!important;color:#fff!important;border-color:#153b60!important;white-space:nowrap!important}
+.table-scroll,.data-viz-scroll{width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;-webkit-overflow-scrolling:touch;scrollbar-color:#9db2c7 #eef1f3}.table-scroll:focus-visible,.data-viz-scroll:focus-visible{outline:3px solid rgba(47,111,235,.35);outline-offset:3px}.table-scroll{margin-top:8px}.table-scroll .val-table{min-width:560px}.data-viz-scroll{margin-top:12px}.data-viz-scroll svg{display:block;width:100%;height:auto;min-height:0}
+@media(max-width:1180px){.learning-spine{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:980px){
+  nav.side{display:block!important;position:sticky!important;top:0!important;z-index:35!important;padding:0!important;border-radius:14px!important;background:rgba(255,255,255,.96)!important;overflow:visible!important;box-shadow:0 8px 24px rgba(20,41,61,.10)!important}
+  .course-menu>summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:52px;padding:10px 14px;cursor:pointer;color:#16233a}.course-menu>summary span{display:grid}.course-menu>summary small{color:#647084;font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:750}.course-menu>summary b{font-size:14px;line-height:1.25}.course-menu>summary i{font-style:normal;font-size:20px;color:#647084;transition:transform .16s}.course-menu[open]>summary i{transform:rotate(180deg)}
+  .course-menu:not([open]) .course-menu-panel{display:none!important}.course-menu[open] .course-menu-panel{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 14px;max-height:min(70dvh,620px);overflow:auto;padding:4px 14px 14px;border-top:1px solid #e2e6e9}.course-menu-panel .navhdr{grid-column:1/-1!important;margin:10px 0 2px!important;padding:0!important}.course-menu-panel .navbtn{display:flex!important;width:100%!important;white-space:normal!important;padding:10px 0!important;min-height:44px!important}.course-menu-panel .navbtn span:not(.num):not(.dot):not(.navmini){white-space:normal!important;overflow:visible!important;text-overflow:clip!important}.course-menu-panel .side-reset{grid-column:1/-1}
+  .path-now,.syllabus-next{grid-template-columns:1fr}.path-now .ghost,.syllabus-next .ghost{justify-self:start}
+}
+@media(max-width:720px){
+  .learning-spine{grid-template-columns:1fr}.path-card{padding:18px 20px}.path-card small{margin-top:8px}.path-now{padding:20px}.path-now b{font-size:20px}
+  .case-switch{display:grid!important;grid-template-columns:1fr!important;gap:0!important;overflow:visible!important}.case-switch .casebtn{width:100%!important;margin:0!important;padding:10px 0!important;white-space:normal!important;text-align:left!important;line-height:1.35!important;overflow-wrap:anywhere!important}
+  .study-figure{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:8px}.study-figure .fig-label{position:sticky;left:0;width:max-content;max-width:calc(100vw - 76px)}.study-figure .fig-label:after{content:" · swipe to inspect";color:#2f6feb}.study-figure svg{min-width:620px;width:620px!important;max-width:none!important}
+  .visual-card .visual-surface,.visual-card .diagram{overflow-x:auto!important;-webkit-overflow-scrolling:touch}.visual-card .diagram svg{width:620px!important;min-width:620px!important;max-width:none!important;min-height:0!important;height:auto!important}
+  .data-viz-scroll svg{width:620px;min-width:620px;max-width:none}.data-viz-scroll:after,.table-scroll:after{content:"Swipe to see the full figure";display:block;position:sticky;left:0;width:max-content;color:#647084;font-size:11px;padding-top:7px}
+  .table-scroll:after{content:"Swipe to see every column"}.card h2,.card h3,.card h4,.opt,.clarifier,.structure-choice{overflow-wrap:anywhere}
+}
+@media(max-width:560px){
+  .course-menu[open] .course-menu-panel{grid-template-columns:1fr}.hero:after{right:-60px!important;top:-80px!important;width:200px!important;height:200px!important}.search{min-width:0!important;width:100%}.ringm{min-width:0!important;padding-right:10px!important}.ringlab small{font-size:8.5px}.term-pop{max-width:min(calc(100vw - 20px),280px)!important}.strat-tab,.cap-tab,.studio-tab,.q-tab{white-space:normal!important}.choice-card{overflow-wrap:break-word}.top-inner{gap:10px}.brand span{display:none}.meters{gap:6px}.ring{width:40px;height:40px}.path-now .ghost,.syllabus-next .ghost{width:100%}.visual-card .vthumb,.visual-home-card .vthumb{object-fit:contain!important;background:#0f2a43!important}
+}
+
 </style>
 </head>
 <body>
@@ -4771,7 +4796,7 @@ try { const u = JSON.parse(localStorage.getItem(UI_KEY)); if(u) uiState = Object
 function saveUI(){ localStorage.setItem(UI_KEY, JSON.stringify(uiState)); scheduleCloudSave(); }
 function applyFocusMode(){ document.body.classList.toggle("focus-mode", !!uiState.focus); const b=document.getElementById("focusBtn"); if(b) b.textContent=uiState.focus?"Exit focus":"Focus"; }
 
-const READYTOCONSULT_VERSION = "3.5.0";
+const READYTOCONSULT_VERSION = "3.6.0";
 const SUPABASE_URL = "https://oergojtnxmjztjgadkkv.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_WdMMBeui--DSDVloYcTWeg_L9WAXcKA";
 const NOTEBOOK_KEY = "readytoconsult-notebook-v17";
@@ -4858,28 +4883,31 @@ function renderErrorCard(title, body){ return `<div class="card"><div class="eye
 /* ---------- Sidebar ---------- */
 function renderSide(){
   const side=document.getElementById("side");
-  let h='<div class="navhdr">Learn</div>';
+  const labels={home:"Overview",syllabus:"Curriculum",case:"Case Lab",valuation:"Valuation Lab",practical:"Analyst Studio",interview:"Interview Room",capstone:"Capstone",problem:"Problem Lab",strategy:"Strategy Lab",roleplay:"Roleplay",session:"Daily Rep",qbank:"Drills",review:"Review missed",notebook:"Notebook",glossary:"Glossary",certificate:"Certificate",about:"About"};
+  const currentLabel=state.view.startsWith("level-")?"Lesson "+((+state.view.split("-")[1])+1):labels[state.view]||"Course";
+  let h='<div class="navhdr">Start</div>';
   h+=navBtn("home","Overview","",state.view==="home");
-  h+=navBtn("syllabus","Curriculum","☷",state.view==="syllabus");
-  h+='<div class="navhdr">Practice</div>';
-  h+=navBtn("interview","Interview Room","I",state.view==="interview");
-  h+=navBtn("case","Case Lab","C",state.view==="case");
-  h+=navBtn("capstone","Capstone","M",state.view==="capstone");
-  h+=navBtn("strategy","Strategy","S",state.view==="strategy");
-  h+=navBtn("valuation","Valuation Lab","V",state.view==="valuation");
+  h+=navBtn("syllabus","1 · Curriculum","☷",state.view==="syllabus"||state.view.startsWith("level-"));
+  h+='<div class="navhdr">Core path</div>';
+  h+=navBtn("case","2 · Case Lab","C",state.view==="case");
+  h+=navBtn("valuation","3 · Valuation Lab","V",state.view==="valuation");
+  h+=navBtn("practical","4 · Analyst Studio","A",state.view==="practical");
+  h+=navBtn("interview","5 · Interview Room","I",state.view==="interview");
+  h+=navBtn("capstone","6 · Capstone","M",state.view==="capstone");
+  h+='<div class="navhdr">Deep practice</div>';
   h+=navBtn("problem","Problem Lab","P",state.view==="problem");
+  h+=navBtn("strategy","Strategy Lab","S",state.view==="strategy");
   h+=navBtn("roleplay","Roleplay","R",state.view==="roleplay");
-  h+=navBtn("practical","Studio","A",state.view==="practical");
-  h+=navBtn("qbank","Drills","Q",state.view==="qbank");
   h+=navBtn("session","Daily Rep","5",state.view==="session");
-  h+='<div class="navhdr">Support</div>';
-  h+=navBtn("notebook","Notebook","N",state.view==="notebook");
+  h+=navBtn("qbank","Drills","Q",state.view==="qbank");
+  h+='<div class="navhdr">Review and tools</div>';
   h+=navBtn("review","Review missed"+(missedCount()?" ("+missedCount()+")":""),"⚑",state.view==="review");
+  h+=navBtn("notebook","Notebook","N",state.view==="notebook");
   h+=navBtn("glossary","Glossary","☰",state.view==="glossary");
   h+=navBtn("certificate","Certificate","★",state.view==="certificate");
   h+=navBtn("about","About","ⓘ",state.view==="about");
   h+='<div class="side-reset"><button class="ghost" id="resetBtn">Reset progress</button></div>';
-  side.innerHTML=h;
+  side.innerHTML='<details class="course-menu"><summary><span><small>Course menu</small><b>'+esc(currentLabel)+'</b></span><i aria-hidden="true">⌄</i></summary><div class="course-menu-panel">'+h+'</div></details>';
   side.querySelectorAll("[data-view]").forEach(b=> b.onclick=()=>{ state.view=b.getAttribute("data-view"); render(); window.scrollTo({top:0,behavior:"smooth"}); });
   const rb=document.getElementById("resetBtn"); if(rb) rb.onclick=()=>{ if(confirm("Reset all progress? This clears lesson answers, drills and Daily Rep history, Interview Room cases, Capstone, Strategy, and Valuation Lab work. Notebook entries are kept.")){ state.answers={}; try{[STORE_KEY,INTERVIEW_KEY,PRACTICAL_KEY,CAPSTONE_KEY,STRAT_KEY,VAL_KEY].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});}catch(e){} save(); location.reload(); } };
 }
@@ -4960,12 +4988,12 @@ function valInput(key,label,value,note,step){return `<div class="val-input"><lab
 function renderDcfModel(){const x=valuationState.dcf,c=dcfCalc(x);const ws=[Math.max(1,x.wacc-2),x.wacc,x.wacc+2],gs=[Math.max(0,x.tg-1),x.tg,x.tg+1];return `<div class="val-layout"><div class="card val-controls"><div class="val-controls-head"><h3>Operating assumptions</h3><p>All currency inputs are $M. Forecast period is five years.</p></div><div class="val-inputs">
 ${valInput('rev1','Year-1 revenue',x.rev1,'$M')}${valInput('growth','Annual revenue growth',x.growth,'%')}${valInput('ebitda','EBITDA margin',x.ebitda,'% of revenue')}${valInput('da','D&A',x.da,'% of revenue')}${valInput('capex','Capex',x.capex,'% of revenue')}${valInput('nwc','Change in NWC',x.nwc,'% of revenue')}${valInput('tax','Tax rate',x.tax,'%')}${valInput('wacc','WACC',x.wacc,'%',0.5)}${valInput('tg','Terminal growth',x.tg,'%',0.5)}${valInput('debt','Debt',x.debt,'$M')}${valInput('cash','Cash',x.cash,'$M')}</div></div>
 <div class="val-results"><div class="val-kpis"><div class="val-kpi"><small>Enterprise value</small><b>${valMoney(c.ev)}</b><p>PV of explicit UFCF plus terminal value.</p></div><div class="val-kpi"><small>Equity value</small><b>${valMoney(c.equity)}</b><p>EV minus debt plus cash.</p></div><div class="val-kpi"><small>Terminal-value share</small><b>${c.valid?(c.ev>0?Math.round(c.pvTv/c.ev*100)+'%':'\u2014'):'Invalid'}</b><p>${c.valid?'High shares demand stronger sensitivity.':'WACC must exceed terminal growth.'}</p></div></div>
-${dcfFlowCard(c,x)}<div class="card"><div class="eyebrow">Five-year cash flow</div><h2 style="font-size:21px">From operating forecast to UFCF</h2><div class="val-formula">UFCF = EBIT × (1 − tax) + D&A − capex − change in NWC<br>UFCF margin = ${(c.fcfMargin*100).toFixed(2)}% of revenue</div><table class="val-table"><thead><tr><th>Year</th><th>Revenue</th><th>UFCF</th><th>Discount factor</th><th>PV</th></tr></thead><tbody>${c.rows.map(r=>`<tr><td>${r.y}</td><td>${valMoney(r.rev)}</td><td>${valMoney(r.fcf)}</td><td>${r.df.toFixed(3)}</td><td>${valMoney(r.pv)}</td></tr>`).join('')}<tr><td><b>Terminal</b></td><td></td><td>${valMoney(c.tv)}</td><td>${(1/Math.pow(1+x.wacc/100,5)).toFixed(3)}</td><td><b>${valMoney(c.pvTv)}</b></td></tr></tbody></table></div>
+${dcfFlowCard(c,x)}<div class="card"><div class="eyebrow">Five-year cash flow</div><h2 style="font-size:21px">From operating forecast to UFCF</h2><div class="val-formula">UFCF = EBIT × (1 − tax) + D&A − capex − change in NWC<br>UFCF margin = ${(c.fcfMargin*100).toFixed(2)}% of revenue</div><div class="table-scroll" tabindex="0" aria-label="Five-year cash flow table. Scroll horizontally on a small screen."><table class="val-table"><thead><tr><th>Year</th><th>Revenue</th><th>UFCF</th><th>Discount factor</th><th>PV</th></tr></thead><tbody>${c.rows.map(r=>`<tr><td>${r.y}</td><td>${valMoney(r.rev)}</td><td>${valMoney(r.fcf)}</td><td>${r.df.toFixed(3)}</td><td>${valMoney(r.pv)}</td></tr>`).join('')}<tr><td><b>Terminal</b></td><td></td><td>${valMoney(c.tv)}</td><td>${(1/Math.pow(1+x.wacc/100,5)).toFixed(3)}</td><td><b>${valMoney(c.pvTv)}</b></td></tr></tbody></table></div></div>
 <div class="card"><div class="eyebrow">Sensitivity</div><h2 style="font-size:21px">Enterprise value across WACC and terminal growth</h2><div class="val-sens"><div class="head">g \ WACC</div>${ws.map(v=>`<div class="head">${v.toFixed(1)}%</div>`).join('')}${gs.map(g=>`<div class="head">${g.toFixed(1)}%</div>${ws.map(w=>{const q=dcfCalc(Object.assign({},x,{wacc:w,tg:g}));const base=w===x.wacc&&g===x.tg;return `<div class="${base?'base':''}">${valMoney(q.ev)}</div>`;}).join('')}`).join('')}</div><p class="val-note">Do not pick the most favorable cell. Explain what evidence supports the risk and long-run growth assumptions.</p></div></div></div>`;}
 function renderRnpvModel(){const x=valuationState.rnpv,c=rnpvCalc(x);const ps=[Math.max(1,x.p2-10),x.p2,Math.min(99,x.p2+10)],vs=[x.value*.8,x.value,x.value*1.2];return `<div class="val-layout"><div class="card val-controls"><div class="val-controls-head"><h3>Lead-asset assumptions</h3><p>Approved value is present value today if approval occurs. Costs are stage-gated.</p></div><div class="val-inputs">
 ${valInput('value','Approved commercial value',x.value,'$M')}${valInput('p2','Phase 2 pass',x.p2,'%')}${valInput('p3','Phase 3 pass',x.p3,'%')}${valInput('approval','Approval after Phase 3',x.approval,'%')}${valInput('cost2','Phase 2 cost now',x.cost2,'$M')}${valInput('cost3','Phase 3 cost',x.cost3,'$M if Phase 2 passes')}${valInput('costFile','Filing cost',x.costFile,'$M if Phase 3 passes')}${valInput('platform','Risk-adjusted platform value',x.platform,'$M, keep separate')}${valInput('ask','Seller ask',x.ask,'$M')}</div></div>
 <div class="val-results"><div class="val-kpis"><div class="val-kpi"><small>Cumulative approval probability</small><b>${(c.cum*100).toFixed(1)}%</b><p>${x.p2}% × ${x.p3}% × ${x.approval}%.</p></div><div class="val-kpi"><small>Lead + platform rNPV</small><b>${valMoney(c.rnpv)}</b><p>Risk-adjusted value minus expected costs.</p></div><div class="val-kpi"><small>Ask minus rNPV</small><b>${valMoney(c.gap)}</b><p>${c.gap>0?'Gap needs pipeline, synergy, or contingency.':'Ask is below modeled rNPV.'}</p></div></div>
-${rnpvTreeCard(c,x)}<div class="card"><div class="eyebrow">Stage-gated value</div><h2 style="font-size:21px">Do not weight every cost by approval probability</h2><div class="val-formula">Risk-adjusted commercial value = ${x.p2}% × ${x.p3}% × ${x.approval}% × ${valMoney(x.value)} = ${valMoney(c.gross)}<br>Expected costs = ${valMoney(x.cost2)} + ${x.p2}% × ${valMoney(x.cost3)} + ${x.p2}% × ${x.p3}% × ${valMoney(x.costFile)} = ${valMoney(c.cost)}<br>rNPV = commercial value − expected costs + platform value = ${valMoney(c.rnpv)}</div><table class="val-table"><thead><tr><th>Cash flow</th><th>Trigger probability</th><th>Nominal</th><th>Expected value</th></tr></thead><tbody><tr><td>Approved commercial value</td><td>${(c.cum*100).toFixed(1)}%</td><td>${valMoney(x.value)}</td><td>${valMoney(c.gross)}</td></tr><tr><td>Phase 2 cost</td><td>100%</td><td>${valMoney(x.cost2)}</td><td>${valMoney(x.cost2)}</td></tr><tr><td>Phase 3 cost</td><td>${x.p2}%</td><td>${valMoney(x.cost3)}</td><td>${valMoney(x.cost3*x.p2/100)}</td></tr><tr><td>Filing cost</td><td>${(x.p2*x.p3/100).toFixed(1)}%</td><td>${valMoney(x.costFile)}</td><td>${valMoney(x.costFile*x.p2*x.p3/10000)}</td></tr></tbody></table></div>
+${rnpvTreeCard(c,x)}<div class="card"><div class="eyebrow">Stage-gated value</div><h2 style="font-size:21px">Do not weight every cost by approval probability</h2><div class="val-formula">Risk-adjusted commercial value = ${x.p2}% × ${x.p3}% × ${x.approval}% × ${valMoney(x.value)} = ${valMoney(c.gross)}<br>Expected costs = ${valMoney(x.cost2)} + ${x.p2}% × ${valMoney(x.cost3)} + ${x.p2}% × ${x.p3}% × ${valMoney(x.costFile)} = ${valMoney(c.cost)}<br>rNPV = commercial value − expected costs + platform value = ${valMoney(c.rnpv)}</div><div class="table-scroll" tabindex="0" aria-label="Stage-gated value table. Scroll horizontally on a small screen."><table class="val-table"><thead><tr><th>Cash flow</th><th>Trigger probability</th><th>Nominal</th><th>Expected value</th></tr></thead><tbody><tr><td>Approved commercial value</td><td>${(c.cum*100).toFixed(1)}%</td><td>${valMoney(x.value)}</td><td>${valMoney(c.gross)}</td></tr><tr><td>Phase 2 cost</td><td>100%</td><td>${valMoney(x.cost2)}</td><td>${valMoney(x.cost2)}</td></tr><tr><td>Phase 3 cost</td><td>${x.p2}%</td><td>${valMoney(x.cost3)}</td><td>${valMoney(x.cost3*x.p2/100)}</td></tr><tr><td>Filing cost</td><td>${(x.p2*x.p3/100).toFixed(1)}%</td><td>${valMoney(x.costFile)}</td><td>${valMoney(x.costFile*x.p2*x.p3/10000)}</td></tr></tbody></table></div></div>
 <div class="card"><div class="eyebrow">Sensitivity</div><h2 style="font-size:21px">rNPV across Phase 2 probability and approved value</h2><div class="val-sens"><div class="head">Value \ P2</div>${ps.map(v=>`<div class="head">${v.toFixed(0)}%</div>`).join('')}${vs.map(v=>`<div class="head">${valMoney(v)}</div>${ps.map(p=>{const q=rnpvCalc(Object.assign({},x,{p2:p,value:v}));const base=p===x.p2&&v===x.value;return `<div class="${base?'base':''}">${valMoney(q.rnpv)}</div>`;}).join('')}`).join('')}</div><p class="val-note">Ask what clinical evidence can move Phase 2 probability, and whether the approved-value model already reflects access, competition, and LOE.</p></div></div></div>`;}
 function valFlowNode(x,t,sub,dark){return `<div class="vf-node ${dark?'vf-dark':''}"><b>${t}</b><small>${sub}</small></div>`;}
 function dcfFlowCard(c,x){
@@ -4985,7 +5013,7 @@ function dcfFlowCard(c,x){
   bars.forEach((b,i)=>{const inside=vals[i][2]===1&&b[2]>34;const ty=inside?b[1]+21:b[1]-8;s+=`<text x='${b[0]+bw/2}' y='${ty.toFixed(1)}' text-anchor='middle' font-family="'IBM Plex Serif',Georgia,serif" font-size='${inside?13.5:12}' font-weight='700' fill='${inside?'#fff':vals[i][1]}'>${vals[i][0]}</text>`;});
   names.forEach((n,i)=>{s+=`<text x='${xs[i]+bw/2}' y='${base+17}' text-anchor='middle' font-family='Inter,sans-serif' font-size='10.6' font-weight='600' fill='#5a6675'>${n[0]}</text>`;if(n[1])s+=`<text x='${xs[i]+bw/2}' y='${base+30}' text-anchor='middle' font-family='Inter,sans-serif' font-size='10.6' font-weight='600' fill='#5a6675'>${n[1]}</text>`;});
   s+=`<text x='380' y='356' text-anchor='middle' font-family='Inter,sans-serif' font-size='10.8' fill='#5a6675'>${c.ev>0?`Terminal value is ${Math.round(c.pvTv/c.ev*100)}% of EV. If that share is high, sensitivity on WACC and g is the real answer.`:'Enterprise value is zero at these inputs. Raise margins or growth to see the waterfall.'}</text></svg>`;
-  return `<div class="card"><div class="eyebrow">Follow the money</div><h2 style="font-size:21px">Your inputs, as a value waterfall</h2><div style="margin-top:12px">${s}</div></div>`;
+  return `<div class="card"><div class="eyebrow">Follow the money</div><h2 style="font-size:21px">Your inputs, as a value waterfall</h2><div class="data-viz-scroll" tabindex="0" aria-label="DCF value waterfall. Scroll horizontally on a small screen.">${s}</div></div>`;
 }
 function rnpvTreeCard(c,x){
   const nw=128,nh=50,ny=36,xsn=[24,214,404,594];
@@ -5009,7 +5037,7 @@ function rnpvTreeCard(c,x){
   if(frac>0.12)s+=`<text x='${150+480*frac/2}' y='293' text-anchor='middle' font-family='Inter,sans-serif' font-size='10' font-weight='800' fill='#fff'>rNPV ${valMoney(c.rnpv)}</text>`;
   if(frac<0.94)s+=`<text x='${150+480*frac+(480-480*frac)/2}' y='293' text-anchor='middle' font-family='Inter,sans-serif' font-size='10' font-weight='800' fill='#8a7a55'>${c.gap>0?valMoney(c.gap)+' gap':'covered'}</text>`;
   s+=`<text x='380' y='321' text-anchor='middle' font-family='Inter,sans-serif' font-size='10.6' fill='#5a6675'>Weight the payoff by cumulative approval, each cost by its own gate, and never double-count risk in the discount rate.</text></svg>`;
-  return `<div class="card"><div class="eyebrow">Follow the odds</div><h2 style="font-size:21px">Your inputs, as a probability tree</h2><div style="margin-top:12px">${s}</div></div>`;
+  return `<div class="card"><div class="eyebrow">Follow the odds</div><h2 style="font-size:21px">Your inputs, as a probability tree</h2><div class="data-viz-scroll" tabindex="0" aria-label="rNPV probability tree. Scroll horizontally on a small screen.">${s}</div></div>`;
 }
 function renderValuationLab(){const d=valuationState.mode==='dcf';return `<div class="card hero valuation-hero"><div class="eyebrow">Valuation Lab</div><h2>Build the model, then challenge the model.</h2><p class="lede">Use traditional DCF for operating cash flow and rNPV for binary pipeline risk. Change the assumptions, watch value move, and explain what evidence would justify the base case.</p><div class="val-tabs"><button class="val-tab ${d?'active':''}" data-val-mode="dcf">Traditional DCF</button><button class="val-tab ${!d?'active':''}" data-val-mode="rnpv">Biotech rNPV</button></div></div><div class="card"><div class="val-method"><div><b>1. Forecast</b><span>Revenue, margin, reinvestment, or stage-gated pipeline cash flow.</span></div><div><b>2. Risk and time</b><span>Use WACC for UFCF. Use explicit PTRS for binary development risk.</span></div><div><b>3. Bridge</b><span>Move from enterprise or asset value to equity, deal ask, or portfolio value.</span></div><div><b>4. Challenge</b><span>Sensitivity, break-even thresholds, downside, and what changes the answer.</span></div></div></div>${d?renderDcfModel():renderRnpvModel()}<div class="card"><div class="eyebrow">Interview rule</div><h2 style="font-size:21px">A model is a structured argument, not a fact</h2><p class="val-note" style="font-size:14px">State the valuation range, the two assumptions that matter most, the evidence behind them, and the decision or deal structure that protects the downside. Never hide technical risk in both PTRS and an extreme discount rate, and never let terminal value conceal a drug's loss-of-exclusivity curve.</p></div>`;}
 function valRefreshResults(){const wrap=document.querySelector('.val-results');if(!wrap){render();return;}const d=valuationState.mode==='dcf';const htmlStr=d?renderDcfModel():renderRnpvModel();const m=htmlStr.match(/<div class="val-results">([\s\S]*)<\/div><\/div>$/);if(m){wrap.innerHTML=m[1];}else{render();}}
@@ -5044,7 +5072,7 @@ function render(){
 
 function renderFoot(){
   document.getElementById("foot").innerHTML =
-    "ReadyToConsult v3.5 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
+    "ReadyToConsult v3.6 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
 }
 
 /* ---------- Home ---------- */
@@ -6005,9 +6033,12 @@ function courseProgress(){
 }
 function renderSyllabus(){
   const cp=courseProgress();
-  let h=`<div class="card hero"><div class="eyebrow">Syllabus</div><h2>Course syllabus and progress</h2><p class="lede">${COURSE.units.length} units and ${DATA.levels.length} lessons, plus ${DATA.caseStudies.length} full case studies, a stakeholder roleplay, and a searchable knowledge base. Work top to bottom or jump anywhere. Progress saves in your browser.</p>
+  const nextIndex=DATA.levels.findIndex((_,i)=>!levelDone(i));
+  const nextView=nextIndex>=0?'level-'+nextIndex:'case';
+  const nextLabel=nextIndex>=0?'Continue with lesson '+(nextIndex+1):'Continue to Case Lab';
+  let h=`<div class="card hero"><div class="eyebrow">Step 1 · Curriculum</div><h2>Learn the foundations in order</h2><p class="lede">Complete lessons 1–32 from top to bottom. Each lesson gives you the concept, a visual model, and drills. After lesson 32, continue to Case Lab. The other labs are practice tools, not prerequisites.</p>
     <div class="legend" style="margin-top:16px"><div class="lg"><b>${cp.done}/${cp.total}</b> lessons complete</div><div class="lg"><b>${cp.k}%</b> knowledge</div><div class="lg"><b>${cp.r}%</b> interview readiness</div></div>
-    <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap"><button class="ghost" data-view="level-0" style="background:var(--accent);color:#fff;border-color:var(--accent)">Start Unit 1</button></div>
+    <div class="syllabus-next"><div><small>Next required step</small><b>${nextIndex>=0?'Lesson '+(nextIndex+1)+': '+esc(DATA.levels[nextIndex].title):'Case Lab: apply what you learned'}</b></div><button class="ghost" data-view="${nextView}">${nextLabel} ›</button></div>
   </div>`;
   COURSE.units.forEach((u)=>{
     const parts=u.title.split(": ");
@@ -6251,19 +6282,23 @@ function closeAuthModal(){ const m=document.getElementById('authModal'); if(m) m
 async function sendMagicLink(){ const el=document.getElementById('authEmail'); const msg=document.getElementById('authMsg'); const email=el&&el.value.trim(); if(!email){ msg.textContent='Enter an email first'; msg.className='auth-msg err'; return; } const {error}=await cloud.client.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin}}); if(error){ msg.textContent=error.message; msg.className='auth-msg err'; } else { msg.textContent='Magic link sent. Check your email.'; msg.className='auth-msg'; } }
 
 function guidedRoadmapCard(){
+  const cp=courseProgress();
+  const nextIndex=DATA.levels.findIndex((_,i)=>!levelDone(i));
+  const nextView=nextIndex>=0?'level-'+nextIndex:'case';
+  const nextTitle=nextIndex>=0?'Lesson '+(nextIndex+1)+': '+DATA.levels[nextIndex].title:'Case Lab: choose your first guided case';
   const steps=[
-    ['01','Curriculum','Learn the basic language first.','Core consulting, R&D, value chain, market access.'],
-    ['02','Case Lab','See what a clean answer looks like.','Finish two cases you can explain out loud.'],
-    ['03','Capstone','Turn data into a recommendation.','Build one clear, slide-ready answer.'],
-    ['04','Studio','Practice messy analyst work.','Run Case A, B, and C end to end.'],
-    ['05','Drills','Sharpen weak spots fast.','Do five at a time. Review the misses.'],
-    ['06','Notebook','Save your own answer patterns.','Keep reusable structures, phrases, and insights.']
+    ['01','Learn','Curriculum','Lessons 1–32, in order. Build the language before the pressure.','syllabus'],
+    ['02','Apply','Case Lab','Work two coached cases and explain the math out loud.','case'],
+    ['03','Model','Valuation Lab','Build one DCF and one rNPV, then challenge the assumptions.','valuation'],
+    ['04','Build','Analyst Studio','Turn messy facts into a clear recommendation.','practical'],
+    ['05','Perform','Interview Room','Run a timed case from clarification through synthesis.','interview'],
+    ['06','Prove','Capstone','Deliver one slide-ready, answer-first recommendation.','capstone']
   ];
   return `<div class="roadmap-card">
-    <div class="roadmap-head"><div><div class="eyebrow">Guided Roadmap</div><h2>Start here. Stop when you can explain it.</h2></div><p>You do not need to finish everything. The goal is to become interview-ready: learn the language, run the cases, then practice judgment under pressure.</p></div>
-    <div class="roadmap-steps">${steps.map(s=>`<div class="roadstep"><div class="n">${s[0]}</div><h3>${s[1]}</h3><p>${s[2]}</p><div class="done">Done when: ${s[3]}</div></div>`).join('')}</div>
-    <div class="roadmap-bottom"><div class="roadmap-note"><b>The best route</b>Curriculum → Case Lab → Capstone → Valuation Lab → Studio → Drills → Review missed. Do not start with drills unless you already know the basics.</div><div class="roadmap-note"><b>One session rule</b>One lesson set, one case, or five drills. Small reps compound faster than cramming.</div></div>
-    <div class="roadmap-actions"><button class="ghost" data-view="syllabus">Start with Curriculum</button><button class="ghost" data-view="case">Run your first case</button><button class="ghost" data-view="practical">Go to Studio</button></div>
+    <div class="roadmap-head"><div><div class="eyebrow">Your learning path</div><h2>One route. Six steps.</h2></div><p>Follow the numbered path once. Use Daily Rep, Drills, and Review missed only to sharpen weak spots along the way.</p></div>
+    <div class="path-now"><div><small>Recommended now · ${cp.done}/${cp.total} lessons complete</small><b>${esc(nextTitle)}</b><span>${nextIndex>=0?'Finish the drills in this lesson before moving forward.':'The foundation is complete. Start applying it to a guided case.'}</span></div><button class="ghost" data-view="${nextView}">${nextIndex>=0?'Continue learning':'Open Case Lab'} ›</button></div>
+    <div class="learning-spine">${steps.map(s=>`<button class="path-card" data-view="${s[4]}"><span>${s[0]}</span><small>${s[1]}</small><b>${s[2]}</b><p>${s[3]}</p></button>`).join('')}</div>
+    <div class="path-support"><b>Practice tools are not extra steps.</b><span>Problem Lab, Strategy Lab, and Roleplay are optional depth. Notebook and Glossary support every step. After any practice session, use Review missed.</span></div>
   </div>`;
 }
 
