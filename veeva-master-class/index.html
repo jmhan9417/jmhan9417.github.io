@@ -4800,7 +4800,7 @@ try { const u = JSON.parse(localStorage.getItem(UI_KEY)); if(u) uiState = Object
 function saveUI(){ localStorage.setItem(UI_KEY, JSON.stringify(uiState)); scheduleCloudSave(); }
 function applyFocusMode(){ document.body.classList.toggle("focus-mode", !!uiState.focus); const b=document.getElementById("focusBtn"); if(b) b.textContent=uiState.focus?"Exit focus":"Focus"; }
 
-const READYTOCONSULT_VERSION = "3.6.1";
+const READYTOCONSULT_VERSION = "3.6.2";
 const SUPABASE_URL = "https://oergojtnxmjztjgadkkv.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_WdMMBeui--DSDVloYcTWeg_L9WAXcKA";
 const NOTEBOOK_KEY = "readytoconsult-notebook-v17";
@@ -4911,7 +4911,8 @@ function renderSide(){
   h+=navBtn("certificate","Certificate","★",state.view==="certificate");
   h+=navBtn("about","About","ⓘ",state.view==="about");
   h+='<div class="side-reset"><button class="ghost" id="resetBtn">Reset progress</button></div>';
-  side.innerHTML='<details class="course-menu"><summary><span><small>Course menu</small><b>'+esc(currentLabel)+'</b></span><i aria-hidden="true">⌄</i></summary><div class="course-menu-panel">'+h+'</div></details>';
+  const desktopMenuOpen=(window.innerWidth||0)>980;
+  side.innerHTML='<details class="course-menu"'+(desktopMenuOpen?' open':'')+'><summary><span><small>Course menu</small><b>'+esc(currentLabel)+'</b></span><i aria-hidden="true">⌄</i></summary><div class="course-menu-panel">'+h+'</div></details>';
   side.querySelectorAll("[data-view]").forEach(b=> b.onclick=()=>{ state.view=b.getAttribute("data-view"); render(); window.scrollTo({top:0,behavior:"smooth"}); });
   const rb=document.getElementById("resetBtn"); if(rb) rb.onclick=()=>{ if(confirm("Reset all progress? This clears lesson answers, drills and Daily Rep history, Interview Room cases, Capstone, Strategy, and Valuation Lab work. Notebook entries are kept.")){ state.answers={}; try{[STORE_KEY,INTERVIEW_KEY,PRACTICAL_KEY,CAPSTONE_KEY,STRAT_KEY,VAL_KEY].forEach(k=>{try{localStorage.removeItem(k)}catch(e){}});}catch(e){} save(); location.reload(); } };
 }
@@ -5076,7 +5077,7 @@ function render(){
 
 function renderFoot(){
   document.getElementById("foot").innerHTML =
-    "ReadyToConsult v3.6.1 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
+    "ReadyToConsult v3.6.2 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
 }
 
 /* ---------- Home ---------- */
