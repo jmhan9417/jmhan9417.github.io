@@ -5697,6 +5697,176 @@ const CASE_HINTS=[
 ];
 let problemHintState={};
 function problemHintsCard(idx){ const hints=CASE_HINTS[idx]||[]; if(!hints.length) return ''; const shown=problemHintState[idx]||0; return `<div class="problem-box hint-box"><div class="eyebrow">Coached hints</div><h3>Stuck? Reveal one nudge at a time.</h3><div class="hint-list">${hints.slice(0,shown).map((h,i)=>`<div class="hint-item"><small>Hint ${i+1}</small><p>${esc(h)}</p></div>`).join('')}</div>${shown<hints.length?`<button class="ghost hint-btn" data-hint-reveal="${idx}">Reveal hint ${shown+1} of ${hints.length}</button>`:'<p class="fig-note">All hints revealed. Now say the full answer out loud before opening the recommendation spine.</p>'}</div>`; }
+
+/* ===== ReadyToConsult case media (diagrams + video + references) ===== */
+/* ---------- Case media: diagrams + video + references (ReadyToConsult) ---------- */
+const CM_C={navy:'#123c63',navy2:'#16334e',bronze:'#a1793a',bronzeSoft:'#f4ecdd',ink:'#5a6675',quiet:'#97a0ab',line:'#c7d0da',card:'#ffffff',border:'#e4ddcf',bg:'#fbfaf7',good:'#3f7d55',bad:'#b0575a'};
+function cmEsc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function cmWrap(str,x,y,maxChars,size,fill,weight,lh,maxLines){
+  const words=String(str).split(' ');const lines=[];let cur='';
+  words.forEach(w=>{if((cur+' '+w).trim().length>maxChars){if(cur)lines.push(cur);cur=w;}else cur=(cur+' '+w).trim();});
+  if(cur)lines.push(cur);
+  return lines.slice(0,maxLines||2).map((l,i)=>`<text x='${x}' y='${y+i*(lh||size+3)}' font-size='${size}' fill='${fill}' font-weight='${weight||600}'>${cmEsc(l)}</text>`).join('');
+}
+function cmSvg(inner,aria,h){return `<svg viewBox='0 0 720 ${h}' role='img' aria-label='${cmEsc(aria)}' xmlns='http://www.w3.org/2000/svg' font-family='Inter,-apple-system,BlinkMacSystemFont,sans-serif'><rect x='0' y='0' width='720' height='${h}' rx='16' fill='${CM_C.bg}'/><defs><marker id='cmAr' markerWidth='9' markerHeight='9' refX='6' refY='4' orient='auto'><path d='M1 1 L6 4 L1 7' fill='none' stroke='${CM_C.line}' stroke-width='1.7'/></marker></defs>${inner}</svg>`;}
+function cmEyebrow(t){return `<text x='24' y='30' font-size='11' letter-spacing='1.5' fill='${CM_C.bronze}' font-weight='700'>${cmEsc(t.toUpperCase())}</text>`;}
+function cmInsight(t,y){return `<text x='24' y='${y}' font-size='12' fill='${CM_C.ink}'><tspan fill='${CM_C.bronze}' font-weight='700'>Read &rsaquo; </tspan>${cmEsc(t)}</text>`;}
+
+/* Horizontal step flow */
+function cmFlow(eyebrow,steps,insight,aria){
+  const n=steps.length,gap=14,pad=24,w=(720-pad*2-gap*(n-1))/n,y=48,bh=104;
+  let x=pad,body=cmEyebrow(eyebrow);
+  const mc=Math.floor((w-28)/6.6);
+  steps.forEach((s,i)=>{
+    const em=!!s.emph;
+    body+=`<rect x='${x}' y='${y}' width='${w}' height='${bh}' rx='11' fill='${em?CM_C.navy:CM_C.card}' stroke='${em?CM_C.navy:CM_C.border}'/>`;
+    body+=`<text x='${x+15}' y='${y+24}' font-size='10' letter-spacing='.8' fill='${em?'#c8a668':CM_C.bronze}' font-weight='700'>${cmEsc(s.k||('0'+(i+1)).slice(-2))}</text>`;
+    body+=cmWrap(s.label,x+15,y+45,mc,12.5,em?'#ffffff':CM_C.navy,700,15,2);
+    if(s.sub)body+=cmWrap(s.sub,x+15,y+bh-20,Math.floor((w-28)/5.2),10,em?'rgba(255,255,255,.78)':CM_C.ink,500,12,2);
+    if(i<n-1)body+=`<path d='M${x+w+1} ${y+bh/2} H ${x+w+gap-1}' stroke='${CM_C.line}' stroke-width='2' marker-end='url(#cmAr)'/>`;
+    x+=w+gap;
+  });
+  return cmSvg(body+cmInsight(insight,y+bh+30),aria,y+bh+48);
+}
+/* Vertical funnel with bottleneck highlight */
+function cmFunnel(eyebrow,rows,insight,aria){
+  const pad=24,top=48,rh=30,gapR=9;let body=cmEyebrow(eyebrow);
+  const max=Math.max(...rows.map(r=>r.v));
+  rows.forEach((r,i)=>{
+    const y=top+i*(rh+gapR);const wMax=430;const w=Math.max(120,wMax*(r.v/max));
+    const bn=!!r.bottleneck;
+    body+=`<rect x='${pad}' y='${y}' width='${w}' height='${rh}' rx='7' fill='${bn?CM_C.navy:'#eef1f5'}' stroke='${bn?CM_C.navy:'#dbe0e6'}'/>`;
+    body+=`<text x='${pad+13}' y='${y+19.5}' font-size='11.5' fill='${bn?'#ffffff':CM_C.navy}' font-weight='${bn?700:600}'>${cmEsc(r.label)}</text>`;
+    body+=`<text x='${pad+w+12}' y='${y+19.5}' font-size='11.5' fill='${CM_C.ink}' font-weight='700'>${cmEsc(r.note||'')}</text>`;
+    if(bn)body+=`<text x='680' y='${y+19.5}' text-anchor='end' font-size='10' fill='${CM_C.bronze}' font-weight='700'>&#9664; bottleneck</text>`;
+  });
+  const h=top+rows.length*(rh+gapR)+30;
+  return cmSvg(body+cmInsight(insight,h-6),aria,h+8);
+}
+/* Option levers with impact bars */
+function cmLevers(eyebrow,rows,insight,aria){
+  const pad=24,top=48,rh=34,gapR=10;let body=cmEyebrow(eyebrow);
+  rows.forEach((r,i)=>{
+    const y=top+i*(rh+gapR);
+    const pick=!!r.pick;
+    body+=`<rect x='${pad}' y='${y}' width='672' height='${rh}' rx='8' fill='${pick?'#f4ecdd':CM_C.card}' stroke='${pick?'#e3cfa4':CM_C.border}'/>`;
+    body+=`<text x='${pad+14}' y='${y+21}' font-size='12' fill='${CM_C.navy}' font-weight='${pick?700:600}'>${cmEsc(r.label)}</text>`;
+    // impact bar
+    const bx=344,bw=200,val=Math.max(0,Math.min(1,r.impact));
+    body+=`<rect x='${bx}' y='${y+11}' width='${bw}' height='12' rx='6' fill='#edf0f4'/>`;
+    body+=`<rect x='${bx}' y='${y+11}' width='${bw*val}' height='12' rx='6' fill='${pick?CM_C.bronze:CM_C.navy}'/>`;
+    body+=`<text x='${bx+bw+12}' y='${y+21}' font-size='10.5' fill='${CM_C.ink}'>${cmEsc(r.tag||'')}</text>`;
+    if(pick)body+=`<text x='${pad+14}' y='${y+21}' opacity='0'></text><circle cx='${pad+672-16}' cy='${y+rh/2}' r='0'/>`;
+  });
+  const h=top+rows.length*(rh+gapR)+30;
+  return cmSvg(body+cmInsight(insight,h-6),aria,h+8);
+}
+
+const CASE_DIAGRAMS=[
+  // 0 Portfolio triage
+  cmLevers('Risk-adjusted value, not biggest TAM',[
+    {label:'Asset A · oral immunology (large, crowded)',impact:.5,tag:'safety / step-edit risk'},
+    {label:'Asset B · rare enzyme (clean biomarker)',impact:.82,tag:'best inflection',pick:true},
+    {label:'Asset C · fastest trial (crowded set)',impact:.44,tag:'weak differentiation'}
+  ],'Fund the best risk-adjusted path to the next financing, keep option value on the upside asset.','Portfolio triage: three assets ranked by risk-adjusted value'),
+  // 1 Trial rescue
+  cmFunnel('Fix the binding step in the enrollment funnel',[
+    {label:'Identified / diagnosed pool',v:100,note:'adequate'},
+    {label:'Reach a participating site',v:72,note:'travel burden'},
+    {label:'Screen → consent',v:44,note:'slow US activation',bottleneck:true},
+    {label:'Retained to endpoint',v:33,note:'protect data quality'}
+  ],'Combine patient-support ops with selected EU centers; do not loosen criteria first.','Rare disease enrollment funnel with consent bottleneck'),
+  // 2 GLP-1 launch
+  cmFlow('Demand is not the constraint',[
+    {label:'Enormous post-approval demand',sub:'obesity + T2D',emph:false},
+    {label:'Fill capacity capped',sub:'supply binds',emph:false},
+    {label:'Payer prior-auth gate',sub:'coverage friction',emph:false},
+    {label:'Wedge: T2D + high-CV-risk',sub:'clearest evidence',emph:true}
+  ],'Lead with the segment that has the strongest evidence, not the largest pool.','GLP-1 launch flow from demand to evidence-led wedge segment'),
+  // 3 AI evidence engine
+  cmFlow('Design the minimum safe operating model',[
+    {label:'Candidate AI use cases',sub:'KOL, gap map, MSL',emph:false},
+    {label:'Governance gate',sub:'traceability + audit',emph:false},
+    {label:'Human review workflow',sub:'claim boundaries',emph:false},
+    {label:'Measurable evidence value',sub:'90-day pilot',emph:true}
+  ],'Start with reviewable evidence-gap mapping; defer field-facing AI until controls exist.','AI evidence engine flow through governance to measurable value'),
+  // 4 Biosimilar / LOE
+  cmLevers('Defend the defensible, protect margin, grow the pie',[
+    {label:'Blanket price defense',impact:.35,tag:'erodes margin now'},
+    {label:'SC formulation + continuity (specialist segment)',impact:.7,tag:'real switching friction',pick:true},
+    {label:'Label expansion (only lever that grows market)',impact:.78,tag:'timing risk',pick:true},
+    {label:'Match biosimilar discounts on all volume',impact:.2,tag:'value-destructive'}
+  ],'Segment, do not blanket-defend; let commoditized volume erode on purpose.','Biosimilar LOE response levers ranked by value'),
+  // 5 Biomarker testing
+  cmFunnel('The drug is a diagnosis problem, not a demand problem',[
+    {label:'Diagnosed → specialist',v:60,note:'6,000 / 10k'},
+    {label:'Specialist → tested',v:30,note:'largest drop',bottleneck:true},
+    {label:'Tested → positive',v:12,note:'true eligible'},
+    {label:'Positive → treated',v:9,note:'prescribe'}
+  ],'Invest in reflex testing at diagnosis + faster turnaround before adding sales reps.','Precision oncology testing funnel with testing bottleneck'),
+  // 6 Medicare negotiation
+  cmFlow('Resist the single-product reflex',[
+    {label:'Product selected for negotiation',sub:'price in a few years',emph:false},
+    {label:'Reflex: defend the one drug',sub:'short-term',emph:false},
+    {label:'Durable: portfolio strategy',sub:'where revenue concentrates',emph:true},
+    {label:'Sequence new assets sensibly',sub:'plan to negotiated price',emph:false}
+  ],'Protect value at the portfolio level; let clinical rationale lead development.','Medicare negotiation response shifting from single product to portfolio'),
+  // 7 M&A pipeline
+  cmFlow('Separate sentiment from value',[
+    {label:'Legacy X + Acquired Y overlap',sub:'same indication',emph:false},
+    {label:'Consolidate duplicate platform now',sub:'obvious redundancy',emph:false},
+    {label:'Differentiation + risk gate',sub:'defensible profile',emph:false},
+    {label:'Advance the deal-thesis asset',sub:'even over legacy',emph:true}
+  ],'Cut the redundancy immediately, then make the hard late-stage call on differentiation.','M&A pipeline rationalization from overlap to differentiated advance')
+];
+
+const CASE_VIDEOS=[
+  {id:'zGmthgDgLbQ',title:'Risk-Adjusted DCF Valuation of a Pharma / Biotech Company',note:'How rNPV and probability-of-success shape which asset is worth funding.'},
+  {id:'XTQ0LTz5w2Q',title:'Challenges of Recruiting Patients for Rare Disease Clinical Trials',note:'Why enrollment stalls and where the real bottlenecks sit in rare disease.'},
+  {id:'KTnpL9dY-9w',title:'Navigating US Payer Evidence Needs to Optimise Market Access',note:'What payers actually require before they cover and reimburse a launch.'},
+  {id:'yuzuBChwCx8',title:'What Is Real-World Evidence?',note:'RWD vs RWE and why traceability decides whether AI output is usable.'},
+  {id:'7CNYLbnvhug',title:'Pharma Pricing: Strategies for Loss of Exclusivity',note:'Defend, harvest, or reinvest as biosimilars approach an off-patent brand.'},
+  {id:'EvzA9n-Sklo',title:'Biomarker-Based Companion Diagnostics Enabling Precision Oncology',note:'Why testing rates, not prescribing, often gate a targeted therapy.'},
+  {id:'fVYfBsdHNHM',title:'How the Inflation Reduction Act Aims to Reduce Prescription Drug Costs',note:'The mechanics of Medicare price negotiation driving portfolio strategy.'},
+  {id:'Mx4OWgTEVeY',title:'Pharma Mergers and Acquisitions',note:'How deal logic and pipeline overlap force post-close rationalization.'}
+];
+
+const CASE_REFS=[
+  [['Alacrita','When to use NPV vs rNPV for pharma assets','https://www.alacrita.com/whitepapers/valuing-pharmaceutical-assets-when-to-use-npv-vs-rnpv'],['Analysis Group','Biotech asset valuation methods (PDF)','https://www.analysisgroup.com/globalassets/insights/publishing/2024-biotech-asset-valuation-methods.pdf'],['Evaluate','Oncology asset prioritization case study','https://www.evaluate.com/thought-leadership/oncology-asset-prioritization-case-study/']],
+  [['FDA','Rare Diseases at FDA','https://www.fda.gov/patients/rare-diseases-fda'],['DaVita Clinical Research','Recruitment strategies for rare diseases','https://davitaclinicalresearch.com/blog/cracking-the-code-patient-recruitment-strategies-for-rare-diseases/'],['Citeline','Rare disease R&D and trial feasibility','https://www.citeline.com/en/resources/rare-disease-r-and-d']],
+  [['ICER / NIH PMC','Affordable access to GLP-1 medications','https://pmc.ncbi.nlm.nih.gov/articles/PMC12403326'],['KFF','Medicaid coverage of and spending on GLP-1s','https://www.kff.org/affordable-care-act/issue-brief/medicaid-coverage-of-and-spending-on-glp-1s/']],
+  [['Pharmaphorum','AI for a more agile Medical Affairs team','https://pharmaphorum.com/digital/ai-enables-more-agile-medical-affairs-team'],['NIH PMC','AI in Medical Affairs: a literature review','https://pmc.ncbi.nlm.nih.gov/articles/PMC11473552/'],['IntuitionLabs','GenAI in Medical Affairs: compliance guardrails','https://intuitionlabs.ai/articles/genai-medical-affairs-compliance']],
+  [['PubMed','Biosimilar market dynamics and net prices','https://pubmed.ncbi.nlm.nih.gov/39378044'],['IQVIA','The rules of loss of exclusivity are being rewritten','https://www.iqvia.com/locations/united-states/blogs/2025/07/the-rules-of-loss-of-exclusivity-are-being-rewritten'],['FDA','Biosimilar basics','https://www.fda.gov/drugs/biosimilars/biosimilar-basics-patients']],
+  [['Foundation Medicine','Companion diagnostics explained','https://www.foundationmedicine.com/blog/companion-diagnostics-explained-their-critical-role-cancer-care-and-our-latest-approvals'],['NIH PMC','Companion diagnostics: regulatory and clinical evolution','https://pmc.ncbi.nlm.nih.gov/articles/PMC12950518/'],['Friends of Cancer Research','Biomarker-driven diagnostic development','https://friendsofcancerresearch.org/news/oncology-times-biomarker-driven-development-of-diagnostics-for-rare-diseases/']],
+  [['KFF','Key facts about Medicare drug price negotiation','https://www.kff.org/medicare/key-facts-about-medicare-drug-price-negotiation/'],['CMS','Drugs selected for the negotiation program','https://www.cms.gov/newsroom/press-releases/cms-announces-selection-drugs-third-cycle-medicare-drug-price-negotiation-program-including-first'],['Mintz','IRA update: what is changing in drug pricing','https://www.mintz.com/insights-center/viewpoints/2026-06-22-inflation-reduction-act-update-whats-changing-drug-pricing']],
+  [['DealRoom','The seven M&A pipeline stages','https://dealroom.net/blog/m-a-pipeline-stages'],['Acquis Consulting','Post-merger integration in pharma M&A','https://www.acquisconsulting.com/our-thinking/post-merger-integration-maximizing-value-in-pharmaceutical-ma-deals/'],['Laboratorios Rubio','Pharma and biotech M&A trends','https://www.laboratoriosrubio.com/en/pharmas-biotech-ma/']]
+];
+
+function renderCaseMedia(idx){
+  const dia=CASE_DIAGRAMS[idx]||'';
+  const v=CASE_VIDEOS[idx];
+  const refs=CASE_REFS[idx]||[];
+  const videoBlock=v?`<div class="case-media-block"><div class="eyebrow">Watch &middot; ${cmEsc(v.title)}</div><div class="case-video"><iframe src="https://www.youtube-nocookie.com/embed/${v.id}?rel=0" title="${cmEsc(v.title)}" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div><p class="case-video-note">${cmEsc(v.note)}</p></div>`:'';
+  const refBlock=refs.length?`<div class="case-media-block"><div class="eyebrow">Go deeper &middot; references</div><div class="case-refs">${refs.map(r=>`<a class="case-ref" href="${r[2]}" target="_blank" rel="noopener noreferrer"><span class="case-ref-src">${cmEsc(r[0])}</span><span class="case-ref-desc">${cmEsc(r[1])}</span><span class="case-ref-go">&rsaquo;</span></a>`).join('')}</div></div>`:'';
+  return `<div class="card case-media"><div class="eyebrow">See it &middot; watch it &middot; read it</div><h3>Make the case concrete</h3><div class="case-diagram">${dia}</div>${videoBlock}${refBlock}</div>`;
+}
+
+/* inject case-media styles */
+(function(){if(document.getElementById('case-media-css'))return;var s=document.createElement('style');s.id='case-media-css';s.textContent=`.case-media .case-diagram{margin:14px 0 6px}
+.case-media .case-diagram svg{width:100%;height:auto;display:block;border:1px solid rgba(0,0,0,.06);border-radius:14px}
+.case-media-block{margin-top:22px;padding-top:20px;border-top:1px solid rgba(0,0,0,.08)}
+.case-video{position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#0f1c2e;box-shadow:0 10px 30px rgba(15,28,50,.12)}
+.case-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.case-video-note{font-size:13.5px;color:#6e6e73;margin:10px 2px 0;line-height:1.5}
+.case-refs{display:grid;gap:8px}
+.case-ref{display:grid;grid-template-columns:150px 1fr auto;align-items:center;gap:14px;padding:13px 16px;border:1px solid rgba(0,0,0,.09);border-radius:12px;background:#fff;text-decoration:none;transition:border-color .15s,transform .15s,box-shadow .15s}
+.case-ref:hover{border-color:#c8a668;transform:translateY(-1px);box-shadow:0 8px 20px rgba(15,28,50,.06)}
+.case-ref-src{font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#8a6d3f}
+.case-ref-desc{font-size:14px;color:#28323f;font-weight:600;line-height:1.35}
+.case-ref-go{font-size:20px;color:#123c63;font-weight:700}
+@media(max-width:640px){.case-ref{grid-template-columns:1fr auto;row-gap:4px}.case-ref-src{grid-column:1}.case-ref-desc{grid-column:1}.case-ref-go{grid-row:1/3;grid-column:2}}
+`;document.head.appendChild(s);})();
+
 function renderProblemLab(){
   const idx=Math.max(0,Math.min(COMPLEX_CASES.length-1,state.problemIndex||0));
   const c=COMPLEX_CASES[idx];
@@ -5710,6 +5880,7 @@ function renderProblemLab(){
     <div class="problem-box"><div class="eyebrow">Data pack</div><h3>Use the data, but challenge it first.</h3><div class="problem-table-wrap"><table class="problem-table"><thead><tr>${c.data[0].map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${c.data.slice(1).map(r=>`<tr>${r.map(v=>`<td>${esc(v)}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>
     <div class="problem-layout"><div class="problem-box"><div class="eyebrow">Recommendation spine</div><h3>Partner-ready answer structure</h3><div class="decision-ladder">${c.recommendation.map(r=>`<div><b>${esc(r[0])}</b><span>${esc(r[1])}</span></div>`).join('')}</div></div>
     <div class="problem-box"><div class="eyebrow">Partner readout</div><h3>What separates a senior answer</h3><p>${esc(c.partner)}</p><p class="partner-note">Say the recommendation first, then the two facts that made it hard, then the condition that would change your answer.</p></div></div>
+    ${renderCaseMedia(idx)}
   </div>`;
 }
 function wireProblemLab(){
