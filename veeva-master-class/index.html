@@ -4964,7 +4964,7 @@ if(st===3){const n=parseFloat(w.math);const checked=w.mathChecked;const ok=Numbe
 if(st===4)return stageShell(5,'Handle the interviewer challenge',`<div class="interviewer-scene"><div class="interviewer-avatar" aria-hidden="true">PL</div><div class="pressure-card"><small>Practice Leader · live pushback</small><p>${esc(c.pressure)}</p></div></div><p class="sub">A strong response acknowledges the challenge, protects the recommendation, and names what evidence would change it.</p><div class="insight-options">${c.pressureOptions.map((x,i)=>`<button data-int-pressure="${i}" class="${w.pressure===i?'selected':''} ${w.submitted&&w.pressure===i?x[1]:''}" aria-pressed="${w.pressure===i}">${esc(x[0])}</button>`).join('')}</div>${nextButtons(st)}`);
 const sc=interviewScore(c,w);const submitted=w.submitted;const dims=[['Structure',sc.clarify+sc.structure,25],['Analysis',sc.analysis,40],['Judgment',sc.judgment,15],['Synthesis',sc.synthesis,20]];return stageShell(6,'Deliver the 90-second recommendation',`<p class="interview-prompt">Lead with the answer. Give two or three reasons, quantify the most important finding, name one risk, and close with a next step.</p><div class="synthesis-box"><textarea id="intSynthesis" placeholder="Write the recommendation you would say out loud...">${esc(w.synthesis)}</textarea></div><div class="rubric-list" id="synthChecks" aria-label="Recommendation quality signals">${synthesisSignals(w.synthesis,c).map((s,i)=>`<label class="synth-check${s.pass?' on':''}" id="synthchk-${i}" aria-label="${s.label}: ${s.pass?'detected':'not yet detected'}"><span class="synth-dot" aria-hidden="true">${s.pass?'\u2713':'\u25CB'}</span><span>${s.label}${s.strong?' \u2605':''}</span></label>`).join('')}</div><p class="synth-hint" id="synthHint" aria-live="polite">Auto-detected from your words as you type (not self-reported). Lead with the decision, cite the key number, name a risk, and end on a gate.</p><div class="delivery-meter" id="deliveryMeter" aria-live="polite" aria-label="Delivery estimate"></div><div class="interview-actions"><button class="ghost primary" id="intSubmit">${submitted?'Re-score case':'Submit case'}</button><button class="ghost" data-int-stage="4">Back to challenge</button></div>${submitted?`<div class="card" style="margin:26px 0 0"><div class="interview-report"><div class="score-ring" style="--score:${sc.total}"><b>${sc.total}</b></div><div><div class="eyebrow">Interview readiness</div><h3 style="font-size:28px;margin:8px 0 16px">${sc.total>=85?'Interview ready':sc.total>=70?'Close, but tighten the weak dimension':'Needs another coached run'}</h3><div class="score-bars">${dims.map(d=>{const pct=Math.round(d[1]/d[2]*100);return `<div class="score-line"><span>${d[0]}</span><div class="score-track"><i style="width:${pct}%"></i></div><b>${pct}%</b></div>`;}).join('')}</div></div></div><div class="pressure-card" style="margin-bottom:0"><small>How your synthesis scored</small><div class="rubric-list" style="margin-top:10px">${synthesisSignals(w.synthesis,c).map(s=>`<label class="synth-check${s.pass?' on':''}" aria-label="${s.label}: ${s.pass?'met':'missing'}"><span class="synth-dot" aria-hidden="true">${s.pass?'\u2713':'\u25CB'}</span><span>${s.label}</span></label>`).join('')}</div><p class="calib-note">Readiness is a heuristic estimate from your structure, math accuracy, and recommendation language \u2014 not a prediction of a real interview result. Synthesis is scored from your words, not a checklist.</p></div><div class="pressure-card" style="margin-bottom:0"><small>Model synthesis</small><p>${esc(c.model)}</p></div></div>`:''}`);}
 function interviewStageReady(c,w,st){if(st===0)return w.clarifiers.length>=2;if(st===1)return w.branches.length>=3;if(st===2)return w.insight!=null;if(st===3)return w.mathChecked&&Number.isFinite(parseFloat(w.math));if(st===4)return w.pressure!=null;return (w.synthesis||'').trim().length>=40;} function interviewStagePrompt(st){return ['Select at least two decision-relevant clarifying questions.','Select at least three branches before continuing.','Choose the insight you would say aloud.','Enter and lock a numeric answer before continuing.','Respond to the interviewer challenge.','Write your recommendation \u2014 it is scored on decision-first, reasons, a number, a risk, and a next step.'][st]||'Complete this stage first.';} function nextButtons(st){return `<div class="interview-actions">${st>0?`<button class="ghost" data-int-stage="${st-1}">Back</button>`:''}<button class="ghost primary" data-int-stage="${Math.min(5,st+1)}">Continue to ${['structure','exhibit','math','challenge','synthesis','report'][st]}</button></div>`;}
-function renderInterviewRoom(){const c=INTERVIEW_CASES[interviewState.caseIndex],w=interviewWork();return `<div class="card interview-hero"><div class="interview-hero-grid"><div><div class="eyebrow">Interview Room</div><h2>Work the case while the clock is running.</h2><p class="sub">Four original life sciences cases built around the actual interview sequence: clarify, structure, read an exhibit, calculate, handle pushback, and synthesize.</p></div><div class="interview-clock"><small>Case clock</small><b id="interviewTimerFace" role="timer" aria-live="polite">35:00</b><button class="ghost" id="interviewStart">${w.started?'Reset 35 min':'Start 35 min'}</button></div></div></div><div class="interview-cases">${INTERVIEW_CASES.map((x,i)=>`<button class="interview-case-card ${i===interviewState.caseIndex?'active':''}" data-int-case="${i}"><small>Case ${i+1} · ${esc(x.domain)}</small><h3>${esc(x.title)}</h3><p>${esc(x.decision)}</p><div class="case-difficulty" aria-label="Difficulty ${x.difficulty} of 5">${[1,2,3,4,5].map(n=>`<i class="${n<=x.difficulty?'on':''}"></i>`).join('')}</div></button>`).join('')}</div>${interviewStageNav()}${renderInterviewStage(c,w)}`;}
+function renderInterviewRoom(){const c=INTERVIEW_CASES[interviewState.caseIndex],w=interviewWork();return `<div class="card interview-hero"><div class="interview-hero-grid"><div><div class="eyebrow">Interview Room</div><h2>Work the case while the clock is running.</h2><p class="sub">Four original life sciences cases built around the actual interview sequence: clarify, structure, read an exhibit, calculate, handle pushback, and synthesize.</p></div><div class="interview-clock"><small>Case clock</small><b id="interviewTimerFace" role="timer" aria-live="polite">35:00</b><button class="ghost" id="interviewStart">${w.started?'Reset 35 min':'Start 35 min'}</button></div></div></div><div class="interview-cases">${INTERVIEW_CASES.map((x,i)=>`<button class="interview-case-card ${i===interviewState.caseIndex?'active':''}" data-int-case="${i}"><small>Case ${i+1} · ${esc(x.domain)}</small><h3>${esc(x.title)}</h3><p>${esc(x.decision)}</p><div class="case-difficulty" aria-label="Difficulty ${x.difficulty} of 5">${[1,2,3,4,5].map(n=>`<i class="${n<=x.difficulty?'on':''}"></i>`).join('')}</div></button>`).join('')}</div>${interviewStageNav()}${renderInterviewStage(c,w)}${renderCaseLabMedia(interviewState.caseIndex)}`;}
 function wireInterviewRoom(){
   startInterviewTimer();
   document.querySelectorAll('[data-int-case]').forEach(b=>b.onclick=()=>{interviewState.caseIndex=+b.dataset.intCase;interviewState.stage=0;saveInterview();render();window.scrollTo({top:0,behavior:'smooth'});});
@@ -5233,6 +5233,7 @@ function renderLevel(i){
   h+=plainBox(i);
   h+=lessonWorkbench(i);
   h+=mediaCard(i);
+  h+=lessonRefsBlock(i);
 
   l.drills.forEach((d,di)=>{ h+=renderDrill(i,di,d); });
 
@@ -6758,7 +6759,7 @@ DEEP_QS.push(
   {cat:"Operations", diff:"Partner", q:"A sponsor wants to cut clinical operations cost by centralizing monitoring, but site burden and data-query cycle time are worsening. What is the right problem statement?", options:[["strong","This is a throughput and quality trade-off, not just a cost case. Analyze monitoring productivity, query cycle time, protocol complexity, site burden, risk-based monitoring thresholds, and patient-impact metrics."],["weak","Centralize monitoring and negotiate stronger site-service SLAs, since the direct cost savings are contractual while the query-cycle risk is speculative and can be managed by exception reporting."],["trap","Centralize and raise per-monitor query throughput targets while trimming site training budgets, since standardized central processes should absorb the quality risk at lower unit cost."]]}
 );
 
-function renderDeepQBank(){ const cats=['All',...Array.from(new Set(DEEP_QS.map(q=>q.cat)))]; const active=practicalState.activeQCat||'All'; let list=DEEP_QS.map((q,i)=>Object.assign({i},q)).filter(q=>active==='All'||q.cat===active); const compactAll=active==='All'; const sc=practicalScore(); return `<div class="card studio-hero drill-hero"><div class="eyebrow">Drills</div><h2>Sharp reps for messy judgment.</h2><p class="lede">Not trivia. These prompts train the kind of answer you can defend when a manager pushes back.</p><div class="section-guide" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.22);color:#eef7ff"><b style="color:#fff">Drill flow:</b> choose one category, answer a few prompts, then review the misses while the logic is fresh.</div><div class="studio-progress"><div class="mini"><h4>${sc.qAnswered}/${sc.qTotal}</h4><p>answered</p></div><div class="mini"><h4>${sc.qPts}/${sc.qMax}</h4><p>points</p></div><div class="mini"><h4>${sc.qMax?Math.round(sc.qPts/sc.qMax*100):0}%</h4><p>practical score</p></div></div><div class="q-tabs">${cats.map(c=>`<button class="q-tab ${active===c?'active':''}" data-q-cat="${esc(c)}">${esc(c)}</button>`).join('')}</div></div><div class="qbank-grid ${compactAll?'compact':''}">${list.map(q=>renderDeepQ(q)).join('')}</div>${compactAll?`<div class="show-all-note"><b>Keep it focused:</b> the default view shows five prompts. Pick a category when you want a targeted rep.</div>`:''}`; }
+function renderDeepQBank(){ const cats=['All',...Array.from(new Set(DEEP_QS.map(q=>q.cat)))]; const active=practicalState.activeQCat||'All'; let list=DEEP_QS.map((q,i)=>Object.assign({i},q)).filter(q=>active==='All'||q.cat===active); const compactAll=active==='All'; const sc=practicalScore(); return `<div class="card studio-hero drill-hero"><div class="eyebrow">Drills</div><h2>Sharp reps for messy judgment.</h2><p class="lede">Not trivia. These prompts train the kind of answer you can defend when a manager pushes back.</p><div class="section-guide" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.22);color:#eef7ff"><b style="color:#fff">Drill flow:</b> choose one category, answer a few prompts, then review the misses while the logic is fresh.</div><div class="studio-progress"><div class="mini"><h4>${sc.qAnswered}/${sc.qTotal}</h4><p>answered</p></div><div class="mini"><h4>${sc.qPts}/${sc.qMax}</h4><p>points</p></div><div class="mini"><h4>${sc.qMax?Math.round(sc.qPts/sc.qMax*100):0}%</h4><p>practical score</p></div></div><div class="q-tabs">${cats.map(c=>`<button class="q-tab ${active===c?'active':''}" data-q-cat="${esc(c)}">${esc(c)}</button>`).join('')}</div></div>${renderDrillsMedia()}<div class="qbank-grid ${compactAll?'compact':''}">${list.map(q=>renderDeepQ(q)).join('')}</div>${compactAll?`<div class="show-all-note"><b>Keep it focused:</b> the default view shows five prompts. Pick a category when you want a targeted rep.</div>`:''}`; }
 function renderDeepQ(q){
   const ans=practicalState.qbank[q.i];
   const chosen=ans&&q.options[ans.oi];
@@ -7014,6 +7015,99 @@ AUTHORED_LENGTH_BALANCE.forEach(function(x){
 
 applyFocusMode();
 capTimerTick();
+
+/* ===== topic media block ===== */
+/* ===== ReadyToConsult topic media: fill lesson videos + add references + Case Lab / Drills media ===== */
+const TOPIC_VIDEO={
+  valuation:{id:'zGmthgDgLbQ',title:'Risk-Adjusted DCF Valuation of a Pharma / Biotech Company'},
+  rare:{id:'XTQ0LTz5w2Q',title:'Recruiting Patients for Rare Disease Clinical Trials'},
+  access:{id:'KTnpL9dY-9w',title:'Navigating US Payer Evidence to Optimise Market Access'},
+  rwe:{id:'yuzuBChwCx8',title:'What Is Real-World Evidence?'},
+  loe:{id:'7CNYLbnvhug',title:'Pharma Pricing: Strategies for Loss of Exclusivity'},
+  cdx:{id:'EvzA9n-Sklo',title:'Companion Diagnostics Enabling Precision Oncology'},
+  ira:{id:'fVYfBsdHNHM',title:'How the Inflation Reduction Act Cuts Drug Costs'},
+  mna:{id:'Mx4OWgTEVeY',title:'Pharma Mergers and Acquisitions'},
+  framework:{id:'zObw5jwmUnk',title:'Build MECE Case-Interview Frameworks'},
+  casemath:{id:'ZaVBHRn-ZRQ',title:'Case Interview Math: Everything in 20 Minutes'},
+  marketsizing:{id:'Qz2DJ9QYYA0',title:'Consulting Market Sizing in 7 Minutes'},
+  pyramid:{id:'j4Y3TdVVBCA',title:'The Minto Pyramid Principle, Explained'},
+  drugdev:{id:'ZHvcUfpdQrY',title:'An Overview of the Drug Development Process'},
+  pv:{id:'U8atGcnOY00',title:'Understanding Pharmacovigilance'},
+  regsub:{id:'oLXgANl-8e8',title:'FDA Drug Approval: NDA, eCTD & Review'},
+  trials:{id:'Xpz9044N4to',title:'Phases of Clinical Trials, Explained'},
+  quality:{id:'mFwA2KTiPwI',title:'What Is Good Manufacturing Practice (GMP)?'},
+  heor:{id:'VYGPeF9I_ug',title:'HEOR: Health Economics & Outcomes Research'},
+  aipharma:{id:'3iOjnDfDPc0',title:'How AI Could Transform Drug Development'},
+  modality:{id:'WCC2dJGX7pQ',title:'Small Molecule vs Biologics'},
+  cellgene:{id:'IQa4qJ8xcf0',title:'What Is Cell & Gene Therapy?'},
+  ich:{id:'Ri1wgXqb-sk',title:'ICH Guidelines: A Complete Overview'},
+  fda:{id:'bMEFp8cl19c',title:'What Does the FDA Regulate?'}
+};
+const TOPIC_REFS_NEW={
+  framework:[['untools','Issue trees for structured problem solving','https://untools.co/issue-tree/'],['PrepLounge','Structure ideas like a strategy consultant','https://www.preplounge.com/en/bootcamp.php/case-cracking-toolbox/structure-your-thoughts-like-a-strategy-consultant/issue-tree']],
+  casemath:[['untools','First-principles reasoning','https://untools.co/first-principles/'],['PrepLounge','Market sizing method walkthrough','https://www.preplounge.com/en/bootcamp.php/case-cracking-toolbox/structure-your-thoughts-like-a-strategy-consultant/market-sizing']],
+  marketsizing:[['PrepLounge','Market sizing method walkthrough','https://www.preplounge.com/en/bootcamp.php/case-cracking-toolbox/structure-your-thoughts-like-a-strategy-consultant/market-sizing'],['untools','Issue trees for estimation','https://untools.co/issue-tree/']],
+  pyramid:[['untools','The Minto Pyramid Principle','https://untools.co/minto-pyramid/']],
+  drugdev:[['FDA','How drugs are developed and approved','https://www.fda.gov/how-drugs-are-developed-and-approved'],['NIH PMC','Overview of the drug development process','https://pmc.ncbi.nlm.nih.gov/articles/PMC9576412/']],
+  pv:[['WHO','Pharmacovigilance and drug safety','https://www.who.int/teams/regulation-prequalification/regulation-and-safety/pharmacovigilance'],['FDA','Adverse Event Reporting System (FAERS)','https://www.fda.gov/drugs/surveillance/questions-and-answers-fdas-adverse-event-reporting-system-faers']],
+  regsub:[['FDA','Investigational New Drug (IND) application','https://www.fda.gov/drugs/types-applications/investigational-new-drug-ind-application'],['FDA','New Drug Application (NDA)','https://www.fda.gov/drugs/types-applications/new-drug-application-nda']],
+  trials:[['FDA','Clinical research phases','https://www.fda.gov/patients/drug-development-process/step-3-clinical-research'],['NIH','Clinical research trial basics','https://www.nih.gov/health-information/nih-clinical-research-trials-you/basics']],
+  quality:[['FDA','Current Good Manufacturing Practice (CGMP)','https://www.fda.gov/drugs/pharmaceutical-quality-resources/current-good-manufacturing-practice-cgmp-regulations']],
+  heor:[['ISPOR','HEOR resources','https://www.ispor.org/heor-resources'],['ISPOR','About health economics & outcomes research','https://www.ispor.org/heor-resources/about-heor']],
+  aipharma:[['FDA','Artificial intelligence in medical products','https://www.fda.gov/science-research/science-and-research-special-topics/artificial-intelligence-and-medical-products'],['NIH PMC','AI in drug discovery and development','https://pmc.ncbi.nlm.nih.gov/articles/PMC10302550/']],
+  modality:[['FDA','Therapeutic biologics (BLA)','https://www.fda.gov/drugs/types-applications/therapeutic-biologics-applications-bla'],['FDA','Biosimilars','https://www.fda.gov/drugs/therapeutic-biologics-applications-bla/biosimilars']],
+  cellgene:[['FDA','Cellular & gene therapy products','https://www.fda.gov/vaccines-blood-biologics/cellular-gene-therapy-products'],['FDA','Approved cell & gene therapies','https://www.fda.gov/vaccines-blood-biologics/cellular-gene-therapy-products/approved-cellular-and-gene-therapy-products']],
+  ich:[['ICH','ICH guidelines','https://www.ich.org/page/ich-guidelines'],['ICH','Articles and procedures','https://www.ich.org/page/articles-procedures']],
+  fda:[['FDA','What we do','https://www.fda.gov/about-fda/what-we-do'],['FDA','Search FDA guidance documents','https://www.fda.gov/regulatory-information/search-fda-guidance-documents']]
+};
+function topicRefs(t){ if(TOPIC_REFS_NEW[t]) return TOPIC_REFS_NEW[t]; var map={valuation:0,rare:1,access:2,rwe:3,loe:4,cdx:5,ira:6,mna:7}; if(t in map && typeof CASE_REFS!=='undefined') return CASE_REFS[map[t]]||[]; return []; }
+function topicVideoBlock(t,label){ var v=TOPIC_VIDEO[t]; if(!v) return ''; return '<div class="case-media-block"><div class="eyebrow">'+cmEsc(label||('Watch \u00b7 '+v.title))+'</div><div class="case-video"><iframe src="https://www.youtube-nocookie.com/embed/'+v.id+'?rel=0" title="'+cmEsc(v.title)+'" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></div>'; }
+function refsList(refs){ return '<div class="case-refs">'+refs.map(function(r){return '<a class="case-ref" href="'+r[2]+'" target="_blank" rel="noopener noreferrer"><span class="case-ref-src">'+cmEsc(r[0])+'</span><span class="case-ref-desc">'+cmEsc(r[1])+'</span><span class="case-ref-go">\u203a</span></a>';}).join('')+'</div>'; }
+function refsBlock(t,label){ var refs=topicRefs(t); if(!refs.length) return ''; return '<div class="case-media-block"><div class="eyebrow">'+cmEsc(label||'Go deeper \u00b7 references')+'</div>'+refsList(refs)+'</div>'; }
+
+/* ---- Curriculum lessons: fill missing videos + add references ---- */
+const LESSON_TOPIC=['framework','framework','casemath','pyramid','drugdev','framework','pyramid','pv','valuation','framework','drugdev','drugdev','framework','regsub','trials','pv','quality','access','heor','rwe','aipharma','valuation','quality','fda','modality','cellgene','ich','valuation','marketsizing','valuation','mna','valuation'];
+const LESSON_VIDEO_FILL={1:'framework',2:'casemath',5:'framework',6:'pyramid',7:'pv',8:'valuation',9:'framework',11:'drugdev',12:'framework',13:'regsub',16:'quality',17:'access',20:'aipharma',21:'valuation',22:'quality',25:'cellgene',26:'ich',27:'valuation',28:'marketsizing',29:'valuation',30:'mna',31:'valuation'};
+(function fillLessonVideos(){ if(typeof MEDIA==='undefined') return; Object.keys(LESSON_VIDEO_FILL).forEach(function(k){ var v=TOPIC_VIDEO[LESSON_VIDEO_FILL[k]]; if(!v) return; MEDIA[k]=MEDIA[k]||{}; if(!MEDIA[k].videos||!MEDIA[k].videos.length){ MEDIA[k].videos=[{id:v.id,title:v.title,by:''}]; } }); })();
+function lessonRefsBlock(i){ var t=LESSON_TOPIC[i]; if(!t) return ''; var refs=topicRefs(t); if(!refs.length) return ''; return '<div class="card lesson-refs-card"><div class="eyebrow">Go deeper \u00b7 references</div>'+refsList(refs)+'</div>'; }
+
+/* ---- Case Lab diagrams (reuse flow / funnel / levers generators) ---- */
+const CASELAB_TOPIC=['pv','access','rare','mna'];
+const CASELAB_DIAGRAMS=[
+  cmFlow('A safe, sustainable safety operating model',[
+    {label:'Case intake',sub:'complete, coded, timely',emph:false},
+    {label:'Triage & rework check',sub:'find quality leakage',emph:false},
+    {label:'Signal detection',sub:'aggregate patterns',emph:false},
+    {label:'Benefit-risk decision',sub:'defensible action',emph:true}
+  ],'Fix net capacity (rework + leakage), not just headcount, to clear the backlog.','Pharmacovigilance operating model flow'),
+  cmFunnel('Launch value leaks at access, not awareness',[
+    {label:'Clinically eligible pool',v:100,note:'defined'},
+    {label:'Coverage / prior-auth cleared',v:52,note:'PA friction',bottleneck:true},
+    {label:'Referred to treatment',v:32,note:'site + specialist'},
+    {label:'Treated & persistent',v:21,note:'adherence'}
+  ],'Generate the payer evidence that unblocks access before spending on demand.','Oncology launch access funnel'),
+  (typeof CASE_DIAGRAMS!=='undefined'?CASE_DIAGRAMS[1]:''),
+  cmFlow('Pay for the pipeline, then prove it post-close',[
+    {label:'Deal thesis asset',sub:'why you bought',emph:true},
+    {label:'Diligence gate',sub:'differentiation + risk',emph:false},
+    {label:'Overlap consolidation',sub:'cut redundancy',emph:false},
+    {label:'Fund the differentiated program',sub:'protect the thesis',emph:false}
+  ],'Value the pipeline on risk-adjusted differentiation, not the headline acquisition price.','Biotech acquisition pipeline decision flow')
+];
+function renderCaseLabMedia(idx){ var t=CASELAB_TOPIC[idx]; if(!t) return ''; var dia=CASELAB_DIAGRAMS[idx]||''; return '<div class="card case-media"><div class="eyebrow">See it \u00b7 watch it \u00b7 read it</div><h3>Context for this case</h3>'+(dia?'<div class="case-diagram">'+dia+'</div>':'')+topicVideoBlock(t)+refsBlock(t)+'</div>'; }
+
+/* ---- Drills: foundations media ---- */
+const DRILLS_DIAGRAM=cmFlow('How to answer any judgment drill',[
+  {label:'Read the fact pattern',sub:'what is really asked',emph:false},
+  {label:'Name the tension',sub:'what pulls against what',emph:false},
+  {label:'Commit to a decision',sub:'defensible, not hedged',emph:true},
+  {label:'State what would change it',sub:'the disconfirming fact',emph:false}
+],'Strong answers lead with a decision and the one fact that would reverse it.','How to answer a judgment drill');
+function renderDrillsMedia(){ return '<div class="card case-media"><div class="eyebrow">Before you drill \u00b7 watch it \u00b7 read it</div><h3>The consulting reps behind these drills</h3><div class="case-diagram">'+DRILLS_DIAGRAM+'</div>'+topicVideoBlock('framework')+topicVideoBlock('casemath')+'<div class="case-media-block"><div class="eyebrow">Go deeper \u00b7 references</div>'+refsList(topicRefs('framework').concat(topicRefs('casemath')).slice(0,3))+'</div></div>'; }
+
+/* ---- styles for lesson refs card ---- */
+(function(){ if(document.getElementById('topic-media-css')) return; var s=document.createElement('style'); s.id='topic-media-css'; s.textContent='.lesson-refs-card .case-refs{margin-top:12px}.lesson-refs-card{margin-top:0}'; document.head.appendChild(s); })();
+
 initAuth();
 render();
 </script>
