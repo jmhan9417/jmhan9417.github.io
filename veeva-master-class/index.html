@@ -1407,6 +1407,46 @@ body{background:#f6f6f3!important;color:#1d2630!important}.card{background:#fff!
 @media(max-width:480px){.lesson-completion-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.lesson-completion-actions .ghost{width:100%!important;justify-content:center}.lesson-completion-actions .lesson-next:only-child{grid-column:1/-1}}
 @media(prefers-reduced-motion:reduce){.val-start-progress i,.val-course-step,.val-check-options button{transition:none}}
 
+/* v3.7.1: editorial hierarchy for major concepts */
+.concept-focus{margin:30px 0 2px;border-top:1px solid rgba(22,35,58,.2);border-bottom:1px solid rgba(22,35,58,.14)}
+.concept-focus-statement,.concept-focus-terms{display:grid;grid-template-columns:132px minmax(0,1fr);gap:26px;align-items:start;padding:22px 0}
+.concept-focus-terms{border-top:1px solid rgba(22,35,58,.1);padding-top:18px;padding-bottom:19px}
+.concept-focus small{padding-top:4px;color:#8a6d3f;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.concept-focus-statement strong{max-width:780px;color:#16233a;font:600 24px/1.28 "IBM Plex Serif",Georgia,serif;letter-spacing:-.018em;text-wrap:balance}
+.concept-focus-terms>div{display:flex;flex-wrap:wrap;gap:10px 24px}
+.concept-focus .chip{appearance:none!important;border:0!important;border-radius:0!important;margin:0!important;padding:2px 0!important;background:linear-gradient(transparent 57%,rgba(206,166,91,.34) 57%)!important;color:#16233a!important;font-size:14px!important;font-weight:750!important;line-height:1.35!important;cursor:pointer!important}
+.concept-focus .chip:hover,.concept-focus .chip:focus-visible{background:linear-gradient(transparent 43%,rgba(206,166,91,.5) 43%)!important;text-decoration:none!important}
+.val-key-band{display:grid;grid-template-columns:180px minmax(0,1fr);gap:22px 30px;padding:28px 50px 30px;border-bottom:1px solid #d9dde1;background:#f7f5ef}
+.val-key-copy{display:grid;align-content:start;gap:6px}
+.val-key-copy small,.val-key-formula>span{color:#8a6d3f;font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.val-key-copy strong{color:#16233a;font:600 19px/1.28 "IBM Plex Serif",Georgia,serif}
+.val-key-terms{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.val-key-terms>span{min-width:0;padding-top:10px;border-top:2px solid #b9852f}
+.val-key-terms small{display:block;color:#8a93a4;font-size:9px;font-weight:800;letter-spacing:.08em}
+.val-key-terms b{display:inline;margin-top:6px;color:#16233a;font-size:13px;line-height:1.35;background:linear-gradient(transparent 62%,rgba(206,166,91,.3) 62%)}
+.val-key-formula{grid-column:1/-1;display:grid;grid-template-columns:150px minmax(0,1fr);gap:30px;align-items:baseline;padding-top:19px;border-top:1px solid rgba(22,35,58,.16)}
+.val-key-formula code{color:#123c63;font:700 14px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:normal}
+.val-terms dl>div.is-core dt{display:inline;background:linear-gradient(transparent 60%,rgba(206,166,91,.28) 60%)}
+#main .term-def.chip{display:inline!important;border:0!important;border-radius:0!important;padding:0 .04em!important;margin:0!important;background:linear-gradient(transparent 60%,rgba(206,166,91,.32) 60%)!important;color:#16233a!important;font-weight:750!important;text-decoration:none!important;cursor:pointer!important;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+#main .term-def.chip:hover,#main .term-def.chip:focus-visible{background:linear-gradient(transparent 46%,rgba(206,166,91,.5) 46%)!important;color:#0f2f4d!important}
+@media(max-width:900px){.val-key-band{grid-template-columns:1fr}.val-key-terms{grid-template-columns:repeat(2,minmax(0,1fr))}.val-key-formula{grid-template-columns:1fr;gap:7px}}
+@media(max-width:720px){.concept-focus-statement,.concept-focus-terms{grid-template-columns:1fr;gap:8px;padding:18px 0}.concept-focus-statement strong{font-size:21px}.concept-focus-terms>div{gap:9px 18px}.val-key-band{padding:23px 24px 25px}.val-key-terms{gap:15px}.val-key-terms b{font-size:12.5px}}
+@media(max-width:480px){.val-key-terms{grid-template-columns:1fr 1fr}.val-key-formula code{font-size:12px}}
+/* v3.7.1: formula-first glossary and definition popovers */
+.term-pop{max-width:440px!important;max-height:min(72vh,620px);overflow:auto;padding:17px 19px!important}
+.term-pop .tp-def{margin-top:10px;color:#475363;line-height:1.5}
+.formula-block{margin-top:12px;padding:12px 0 11px;border-top:1px solid rgba(22,35,58,.16);border-bottom:1px solid rgba(22,35,58,.1)}
+.formula-kicker{margin-bottom:7px;color:#8a6d3f;font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.formula-lines{display:grid;gap:4px}
+.formula-lines code{display:block;color:#123c63;font:700 12.8px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:normal;overflow-wrap:anywhere}
+.formula-variables{margin-top:7px;color:#647084;font-size:11.3px;line-height:1.45}
+.formula-example{margin-top:7px;color:#39434f;font-size:11.5px;line-height:1.45}
+.formula-source,.formula-basis{display:inline-block;margin-top:8px;color:#123c63;font-size:10.8px;font-weight:700}
+.formula-source{text-decoration:underline;text-underline-offset:3px}
+.formula-basis{color:#6b7482;font-weight:650}
+.gitem .formula-block{margin:13px 0 12px;padding:13px 0 11px}
+.gitem .formula-lines code{font-size:12px}
+@media(max-width:480px){.term-pop{max-width:min(calc(100vw - 20px),360px)!important;padding:15px 16px!important}.formula-lines code{font-size:11.5px}}
 </style>
 </head>
 <body>
@@ -6020,8 +6060,10 @@ function renderValDeepDive(i){
 }
 function renderValFoundationCourse(){
   const total=VAL_FOUNDATIONS.length,definitions=VAL_FOUNDATIONS.reduce((n,x)=>n+x.terms.length,0),i=Math.max(0,Math.min(total-1,Number(valuationState.lesson)||0)),l=VAL_FOUNDATIONS[i],raw=valuationState.answers[String(i)],selected=raw===undefined?null:Number(raw),choice=selected===null?null:l.check.options[selected],correct=!!(choice&&choice.correct),best=l.check.options.find(o=>o.correct),done=valFoundationDoneCount(),pct=Math.round(done/total*100);
+  const valInlineTerms=l.terms.map(t=>t[0]),valInlineConcepts=new Set();
   const nav=VAL_FOUNDATIONS.map((x,idx)=>{const a=Number(valuationState.answers[String(idx)]),ok=Number.isInteger(a)&&x.check.options[a]&&x.check.options[a].correct;return `<button type="button" class="val-course-step ${idx===i?'active':''} ${ok?'done':''}" data-val-lesson="${idx}" ${idx===i?'aria-current="step"':''}><span>${ok?'✓':String(idx+1).padStart(2,'0')}</span><b>${esc(x.label)}</b><small>${ok?'Complete':idx===i?'Learning':'Not started'}</small></button>`;}).join('');
-  const terms=l.terms.map(t=>{const example=VAL_TERM_EXAMPLES[t[0]]||'';return `<div><dt>${esc(t[0])}</dt><dd>${esc(t[1])}${example?`<span class="val-term-example"><b>Life-sciences example</b>${esc(example)}</span>`:''}</dd></div>`;}).join('');
+  const terms=l.terms.map((t,termIdx)=>{const example=VAL_TERM_EXAMPLES[t[0]]||'';return `<div class="${termIdx<4?'is-core':''}"><dt>${esc(t[0])}</dt><dd>${esc(t[1])}${example?`<span class="val-term-example"><b>Life-sciences example</b>${esc(example)}</span>`:''}</dd></div>`;}).join('');
+  const keyTerms=l.terms.slice(0,4).map((t,termIdx)=>`<span><small>${String(termIdx+1).padStart(2,'0')}</small><b>${esc(t[0])}</b></span>`).join('');
   const flow=l.flow.map((s,idx)=>`<div class="val-concept-step"><small>${esc(s[0])}</small><b>${esc(s[1])}</b><span>${esc(s[2])}</span></div>${idx<l.flow.length-1?'<i aria-hidden="true">→</i>':''}`).join('');
   const worked=l.worked.lines.map(r=>`<div><span>${esc(r[0])}</span><b>${esc(r[1])}</b></div>`).join('');
   const options=l.check.options.map((o,idx)=>{const isChosen=selected===idx,cls=selected===null?'':(isChosen?(o.correct?'chosen correct':'chosen wrong'):(o.correct?'is-answer':''));return `<button type="button" class="${cls}" data-val-answer="${idx}" aria-pressed="${isChosen?'true':'false'}"><span>${String.fromCharCode(65+idx)}</span><b>${esc(o.text)}</b></button>`;}).join('');
@@ -6030,9 +6072,10 @@ function renderValFoundationCourse(){
   const next=i<total-1?`<button type="button" class="ghost val-next" data-val-lesson="${i+1}">Next lesson ›</button>`:`<div class="val-finish-actions"><button type="button" class="ghost" data-val-mode="npv">Open NPV calculator</button><button type="button" class="ghost" data-val-mode="dcf">Open DCF model</button><button type="button" class="ghost" data-val-mode="rnpv">Open rNPV model</button></div>`;
   return `<div class="card val-start-card"><div><div class="eyebrow">Start here · no finance background required</div><h2>Learn the language before touching the model.</h2><p>${definitions} plain-language definitions and examples move from revenue and cash to DCF, drug forecasts, and rNPV. Every lesson derives the formula, uses a public-company or real-deal anchor, flags common mistakes, and includes three problems. Three cumulative capstones and six source-backed company cases connect the full course.</p></div><div class="val-start-progress"><b>${done}/${total}</b><span>lessons mastered</span><div role="progressbar" aria-label="Valuation foundation progress" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${done}"><i style="width:${pct}%"></i></div></div></div>
   <div class="val-learn-layout"><nav class="card val-course-nav" aria-label="Valuation foundation lessons"><div class="val-course-nav-head"><small>Foundation course · ${definitions} definitions</small><b>From zero to model</b></div><div class="val-course-list">${nav}</div></nav>
-  <article class="card val-lesson"><header class="val-lesson-head"><div class="eyebrow">Lesson ${i+1} of ${total}</div><h2>${esc(l.title)}</h2><p>${esc(l.intro)}</p></header>
-  <section class="val-teaching"><div class="val-teaching-copy"><h3>What this means</h3>${l.teach.map(p=>`<p>${esc(p)}</p>`).join('')}</div><div class="val-terms"><h3>Definitions, in plain language</h3><dl>${terms}</dl></div></section>
-  <section class="val-concept"><h3>Follow the logic</h3><div class="val-concept-flow">${flow}</div><div class="val-course-formula"><span>Core formula</span><code>${esc(l.formula)}</code></div></section>
+  <article class="card val-lesson"><header class="val-lesson-head"><div class="eyebrow">Lesson ${i+1} of ${total}</div><h2>${esc(l.title)}</h2><p>${termify(l.intro,valInlineTerms,valInlineConcepts)}</p></header>
+  <aside class="val-key-band" aria-label="Key concepts and core formula"><div class="val-key-copy"><small>Key concepts</small><strong>Know these before you model.</strong></div><div class="val-key-terms">${keyTerms}</div><div class="val-key-formula"><span>Core formula</span><code>${esc(l.formula)}</code></div></aside>
+  <section class="val-teaching"><div class="val-teaching-copy"><h3>What this means</h3>${l.teach.map(p=>`<p>${termify(p,valInlineTerms,valInlineConcepts)}</p>`).join('')}</div><div class="val-terms"><h3>Definitions, in plain language</h3><dl>${terms}</dl></div></section>
+  <section class="val-concept"><h3>Follow the logic</h3><div class="val-concept-flow">${flow}</div></section>
   ${renderValStatementLab(i)}
   ${renderValDeepDive(i)}
   <section class="val-worked"><div class="val-section-label">Worked example</div><h3>${esc(l.worked.title)}</h3><div class="val-worked-lines">${worked}</div><p>${esc(l.worked.takeaway)}</p></section>
@@ -6153,7 +6196,7 @@ function render(){
 
 function renderFoot(){
   document.getElementById("foot").innerHTML =
-    "ReadyToConsult v3.7.0 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
+    "ReadyToConsult v3.7.1 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
 }
 
 /* ---------- Home ---------- */
@@ -6268,12 +6311,13 @@ const PLAIN_INTRO={
  30:"A deal worth up to 580 million dollars rarely pays 580 million. Most of it is milestone money you receive only if things go right years later, so shrink each piece by its odds and its timing. Royalties are a slice of future sales, so value them off the sales curve, not the headline percent. It is like a job offer of up to a number with most of it in future bonuses: the honest figure is the expected value, not the big headline.",
  31:"A valuation is an input, not the decision. At each go or no-go gate, ignore money already spent because it is gone, and ask whether the value of continuing beats the cost of the next step. Sometimes the smart move is to pay for one cheap experiment that removes the biggest doubt before betting big. And two assets that lean on the same science are not real diversification, because they can fail together."
 };
-function plainBox(i){ const t=PLAIN_INTRO[i]; if(!t) return ""; return `<div class="plain-box"><div class="pl-h">In plain terms</div><p>${esc(t)}</p></div>`; }
+function plainBox(i){ const t=PLAIN_INTRO[i]; if(!t) return ""; return `<div class="plain-box"><div class="pl-h">In plain terms</div><p>${termify(t,DATA.levels[i].concepts,new Set())}</p></div>`; }
 /* ---------- Level ---------- */
 function renderLevel(i){
   const l=DATA.levels[i];
   const lvA=l.drills.filter((d,di)=>state.answers[keyOf(i,di)]!=null).length;
   const lvP=l.drills.length?Math.round(lvA/l.drills.length*100):0;
+  const inlineConcepts=new Set();
   let h=`<div class="card">
     <div class="lvl-head">
       <div class="lvl-head-main"><div class="eyebrow">Level ${i+1} of ${DATA.levels.length}</div>
@@ -6284,13 +6328,11 @@ function renderLevel(i){
     <div class="lvl-progress"><i style="width:${lvP}%"></i></div>
     <div class="kbd-hint">Tip: press <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> to answer, <kbd>&larr;</kbd><kbd>&rarr;</kbd> to move between levels. Open a concept below if you want the definition.</div>
     ${objectivesBox(i)}
+    ${coreConceptBand(i)}
     <div class="brief">
       <div class="btag">What matters</div>
-      ${l.brief.map(p=>`<p>${esc(p)}</p>`).join("")}
-      <div class="we"><b>Example</b>${esc(l.worked)}</div>
-    </div>
-    <div class="concept-chips">
-      ${l.concepts.map(c=>`<span class="chip" data-term="${esc(c)}">${esc(c)}</span>`).join("")}
+      ${l.brief.map(p=>`<p>${termify(p,l.concepts,inlineConcepts)}</p>`).join("")}
+      <div class="we"><b>Example</b>${termify(l.worked,l.concepts,inlineConcepts)}</div>
     </div>
   </div>`;
 
@@ -6986,6 +7028,384 @@ function wireRoleplay(){}
 
 /* ---------- Glossary ---------- */
 const CATS = ["All","Industry","Stakeholder","Consulting Method","Communication","Finance","Portfolio","Deals","Regulatory","Clinical Science","Quality","Manufacturing","Commercial","Market Access","HEOR and Evidence","Digital and AI","Operations","Implementation","Veeva Domain","Fit and Behavioral"];
+const TERM_FORMULAS={
+  "profitability framework": {
+    "lines": [
+      "Profit = Revenue − Total Costs"
+    ],
+    "variables": "Total costs = fixed costs + variable costs for the period.",
+    "example": "$500M revenue − $420M total costs = $80M profit.",
+    "source": "https://www.investopedia.com/terms/n/netincome.asp",
+    "sourceLabel": "Investopedia: Net Income"
+  },
+  "revenue": {
+    "lines": [
+      "Revenue = Units Sold × Average Selling Price"
+    ],
+    "variables": "Units sold = volume; average selling price = realized price per unit.",
+    "example": "10,000 treated patients × $50,000 net price = $500M revenue.",
+    "source": "https://www.investopedia.com/ask/answers/09/how-companies-calculate-revenue.asp",
+    "sourceLabel": "Investopedia: Revenue"
+  },
+  "gross profit": {
+    "lines": [
+      "Gross Profit = Net Sales − COGS"
+    ],
+    "variables": "COGS = direct cost of goods or services sold.",
+    "example": "$500M net sales − $150M COGS = $350M gross profit.",
+    "source": "https://www.investopedia.com/terms/g/grossmargin.asp",
+    "sourceLabel": "Investopedia: Gross Margin"
+  },
+  "gross margin": {
+    "lines": [
+      "Gross Margin = (Net Sales − COGS) ÷ Net Sales × 100"
+    ],
+    "variables": "COGS = direct cost of goods or services sold.",
+    "example": "($500M − $150M) ÷ $500M = 70% gross margin.",
+    "source": "https://www.investopedia.com/terms/g/grossmargin.asp",
+    "sourceLabel": "Investopedia: Gross Margin"
+  },
+  "contribution margin": {
+    "lines": [
+      "Contribution Margin = Revenue − Variable Costs",
+      "Contribution Margin Ratio = Contribution Margin ÷ Revenue × 100"
+    ],
+    "variables": "Variable costs change with volume; fixed costs are excluded.",
+    "example": "$100 revenue − $60 variable cost = $40 contribution, or 40%.",
+    "source": "https://www.investopedia.com/terms/c/contributionmargin.asp",
+    "sourceLabel": "Investopedia: Contribution Margin"
+  },
+  "operating margin": {
+    "lines": [
+      "Operating Margin = Operating Income ÷ Revenue × 100"
+    ],
+    "variables": "Operating income is profit after operating expenses but before interest and tax.",
+    "example": "$130M operating income ÷ $500M revenue = 26%.",
+    "source": "https://www.investopedia.com/terms/o/operatingmargin.asp",
+    "sourceLabel": "Investopedia: Operating Margin"
+  },
+  "ebitda": {
+    "lines": [
+      "EBITDA = Net Income + Interest + Taxes + D&A",
+      "EBITDA = Operating Income + D&A"
+    ],
+    "variables": "D&A = depreciation and amortization.",
+    "example": "$100M + $10M interest + $20M tax + $30M D&A = $160M.",
+    "source": "https://www.investopedia.com/terms/e/ebitda.asp",
+    "sourceLabel": "Investopedia: EBITDA"
+  },
+  "ebit": {
+    "lines": [
+      "EBIT = Net Income + Interest Expense + Tax Expense"
+    ],
+    "variables": "EBIT measures earnings before financing and income tax.",
+    "example": "$100M net income + $10M interest + $20M tax = $130M EBIT.",
+    "source": "https://www.investopedia.com/terms/e/ebit.asp",
+    "sourceLabel": "Investopedia: EBIT"
+  },
+  "nopat": {
+    "lines": [
+      "NOPAT = EBIT × (1 − Tax Rate)"
+    ],
+    "variables": "NOPAT applies tax to operating profit without financing effects.",
+    "example": "$100M EBIT × (1 − 21%) = $79M NOPAT.",
+    "source": "https://www.investopedia.com/terms/n/nopat.asp",
+    "sourceLabel": "Investopedia: NOPAT"
+  },
+  "operating cash flow": {
+    "lines": [
+      "OCF = Net Income + Noncash Charges − Increase in NWC"
+    ],
+    "variables": "Simplified indirect method; NWC = net working capital.",
+    "example": "$100M net income + $30M D&A − $20M NWC increase = $110M OCF.",
+    "source": "https://www.investopedia.com/terms/o/operatingcashflow.asp",
+    "sourceLabel": "Investopedia: Operating Cash Flow"
+  },
+  "free cash flow": {
+    "lines": [
+      "FCF = Operating Cash Flow − Capital Expenditures"
+    ],
+    "variables": "Capital expenditures are cash invested in long-term operating assets.",
+    "example": "$150M OCF − $50M capex = $100M FCF.",
+    "source": "https://www.investopedia.com/terms/f/freecashflow.asp",
+    "sourceLabel": "Investopedia: Free Cash Flow"
+  },
+  "unlevered free cash flow (ufcf)": {
+    "lines": [
+      "UFCF = EBIT × (1 − Tax Rate) + D&A − Capex − ΔNWC"
+    ],
+    "variables": "UFCF excludes financing cash flows and belongs to debt and equity holders.",
+    "example": "$100M × 79% + $10M − $12M − $5M = $72M UFCF.",
+    "source": "https://www.investopedia.com/terms/f/freecashflow.asp",
+    "sourceLabel": "Investopedia: Free Cash Flow"
+  },
+  "levered free cash flow": {
+    "lines": [
+      "LFCF = Net Income + D&A − Capex − ΔNWC + Net Borrowing"
+    ],
+    "variables": "Net borrowing = debt issued minus debt repaid.",
+    "example": "$60M + $10M − $12M − $5M + $0 = $53M LFCF.",
+    "basis": "Standard equity cash-flow convention"
+  },
+  "net working capital": {
+    "lines": [
+      "NWC = Current Assets − Current Liabilities"
+    ],
+    "variables": "For DCF, analysts often use operating current assets and liabilities only.",
+    "example": "$150M current assets − $120M current liabilities = $30M NWC.",
+    "source": "https://www.investopedia.com/terms/w/workingcapital.asp",
+    "sourceLabel": "Investopedia: Working Capital"
+  },
+  "present value": {
+    "lines": [
+      "PV = FV ÷ (1 + r)ⁿ"
+    ],
+    "variables": "FV = future value; r = discount rate; n = number of periods.",
+    "example": "$1,000 ÷ 1.05⁵ = $783.53 today.",
+    "source": "https://www.investopedia.com/terms/p/presentvalue.asp",
+    "sourceLabel": "Investopedia: Present Value"
+  },
+  "discount factor": {
+    "lines": [
+      "Discount Factor = 1 ÷ (1 + r)ᵗ"
+    ],
+    "variables": "r = periodic discount rate; t = number of periods.",
+    "example": "At 10% for year 3: 1 ÷ 1.10³ = 0.751.",
+    "source": "https://www.investopedia.com/terms/p/presentvalue.asp",
+    "sourceLabel": "Investopedia: Present Value"
+  },
+  "dcf": {
+    "lines": [
+      "EV = Σₜ₌₁ⁿ [UFCFₜ ÷ (1 + WACC)ᵗ] + TVₙ ÷ (1 + WACC)ⁿ"
+    ],
+    "variables": "UFCFₜ = forecast cash flow; TVₙ = terminal value at the end of year n.",
+    "example": "$381M PV of explicit UFCF + $971M PV of terminal value = $1.352B EV.",
+    "source": "https://www.investopedia.com/terms/d/dcf.asp",
+    "sourceLabel": "Investopedia: DCF"
+  },
+  "npv": {
+    "lines": [
+      "NPV = Σ [CFₜ ÷ (1 + r)ᵗ]"
+    ],
+    "variables": "CF₀ is normally the negative initial investment; r = required return.",
+    "example": "−$100M initial cost + $143.84M PV of inflows = $43.84M NPV.",
+    "source": "https://www.investopedia.com/terms/n/npv.asp",
+    "sourceLabel": "Investopedia: NPV"
+  },
+  "wacc": {
+    "lines": [
+      "WACC = (E ÷ V × Rₑ) + (D ÷ V × Rᵈ × (1 − Tᶜ))"
+    ],
+    "variables": "E = equity; D = debt; V = E + D; Rₑ/Rᵈ = costs; Tᶜ = tax rate.",
+    "example": "80% equity at 10% + 20% debt at 5% after 25% tax = 8.75%.",
+    "source": "https://www.investopedia.com/terms/w/wacc.asp",
+    "sourceLabel": "Investopedia: WACC"
+  },
+  "break-even": {
+    "lines": [
+      "Break-even Units = Fixed Costs ÷ (Price per Unit − Variable Cost per Unit)"
+    ],
+    "variables": "Price minus variable cost is contribution margin per unit.",
+    "example": "$2M fixed cost ÷ ($100 − $60) = 50,000 units.",
+    "source": "https://www.investopedia.com/terms/b/breakevenanalysis.asp",
+    "sourceLabel": "Investopedia: Break-even Analysis"
+  },
+  "payback period": {
+    "lines": [
+      "Payback Period = Initial Investment ÷ Annual Cash Inflow"
+    ],
+    "variables": "This shortcut assumes even annual cash inflows.",
+    "example": "$650,000 ÷ $300,000 per year = 2.17 years.",
+    "source": "https://www.investopedia.com/terms/p/paybackperiod.asp",
+    "sourceLabel": "Investopedia: Payback Period"
+  },
+  "roi": {
+    "lines": [
+      "ROI = (Current Value − Investment Cost) ÷ Investment Cost × 100"
+    ],
+    "variables": "Current value includes the investment’s proceeds or project benefits.",
+    "example": "($950K − $650K) ÷ $650K = 46.2% ROI.",
+    "source": "https://www.investopedia.com/terms/r/returnoninvestment.asp",
+    "sourceLabel": "Investopedia: ROI"
+  },
+  "terminal value": {
+    "lines": [
+      "Terminal Value = FCFₙ × (1 + g) ÷ (WACC − g)"
+    ],
+    "variables": "FCFₙ = final forecast cash flow; g = perpetual growth rate.",
+    "example": "$100M × 1.02 ÷ (10% − 2%) = $1.275B.",
+    "source": "https://www.investopedia.com/terms/t/terminalvalue.asp",
+    "sourceLabel": "Investopedia: Terminal Value"
+  },
+  "perpetuity growth method": {
+    "lines": [
+      "Terminal Value = FCFₙ × (1 + g) ÷ (WACC − g)"
+    ],
+    "variables": "g must be lower than WACC.",
+    "example": "$100M × 1.02 ÷ (10% − 2%) = $1.275B.",
+    "source": "https://www.investopedia.com/terms/t/terminalvalue.asp",
+    "sourceLabel": "Investopedia: Terminal Value"
+  },
+  "exit multiple method": {
+    "lines": [
+      "Terminal Value = Terminal-year Metric × Exit Multiple"
+    ],
+    "variables": "The metric is commonly revenue, EBIT, or EBITDA.",
+    "example": "$160M terminal-year EBITDA × 8.0× = $1.28B.",
+    "source": "https://www.investopedia.com/terms/t/terminalvalue.asp",
+    "sourceLabel": "Investopedia: Terminal Value"
+  },
+  "market capitalization": {
+    "lines": [
+      "Market Cap = Share Price × Shares Outstanding"
+    ],
+    "variables": "Use the current share price and total outstanding common shares.",
+    "example": "$100 per share × 20M shares = $2.0B market cap.",
+    "source": "https://www.investopedia.com/terms/m/marketcapitalization.asp",
+    "sourceLabel": "Investopedia: Market Capitalization"
+  },
+  "enterprise value": {
+    "lines": [
+      "EV = Market Cap + Total Debt + Preferred Equity + Minority Interest − Cash",
+      "EV (DCF) = PV of Explicit UFCF + PV of Terminal Value"
+    ],
+    "variables": "The first line is the market bridge; the second is the DCF build.",
+    "example": "$5.9B market cap + $3.0B debt − $1.5B cash = $7.4B EV.",
+    "source": "https://www.investopedia.com/terms/e/enterprisevalue.asp",
+    "sourceLabel": "Investopedia: Enterprise Value"
+  },
+  "equity value": {
+    "lines": [
+      "Equity Value = EV − Debt − Preferred Equity − Minority Interest + Cash + Non-operating Assets"
+    ],
+    "variables": "Simple bridge: equity value = EV − net debt.",
+    "example": "$7.4B EV − $3.0B debt + $1.5B cash = $5.9B equity value.",
+    "source": "https://www.investopedia.com/terms/e/enterprisevalue.asp",
+    "sourceLabel": "Investopedia: Enterprise Value"
+  },
+  "ev-to-equity bridge": {
+    "lines": [
+      "Equity Value = EV − Net Debt − Preferred Equity − Minority Interest + Non-operating Assets"
+    ],
+    "variables": "Net debt = debt minus cash and cash equivalents.",
+    "example": "$7.4B EV − $1.5B net debt = $5.9B equity value.",
+    "source": "https://www.investopedia.com/terms/e/enterprisevalue.asp",
+    "sourceLabel": "Investopedia: Enterprise Value"
+  },
+  "net debt": {
+    "lines": [
+      "Net Debt = Short-term Debt + Long-term Debt − Cash and Cash Equivalents"
+    ],
+    "variables": "Net debt shows debt remaining after immediately available cash.",
+    "example": "$0.5B short-term + $2.5B long-term − $1.5B cash = $1.5B.",
+    "source": "https://www.investopedia.com/terms/n/netdebt.asp",
+    "sourceLabel": "Investopedia: Net Debt"
+  },
+  "net price": {
+    "lines": [
+      "Net Price = List Price × (1 − Gross-to-Net Rate)"
+    ],
+    "variables": "Gross-to-net includes rebates, chargebacks, discounts, and returns.",
+    "example": "$100 list price × (1 − 35%) = $65 net price.",
+    "basis": "Standard biopharma gross-to-net convention"
+  },
+  "gross-to-net": {
+    "lines": [
+      "Net Sales = Gross Sales − Rebates − Chargebacks − Discounts − Returns",
+      "Net Price = List Price × (1 − Gross-to-Net Rate)"
+    ],
+    "variables": "Use the deduction categories supported by the client’s data.",
+    "example": "$100 gross sales − $35 deductions = $65 net sales.",
+    "basis": "Standard biopharma gross-to-net convention"
+  },
+  "ptrs": {
+    "lines": [
+      "PTRS = P(Stage 1) × P(Stage 2 | Stage 1) × … × P(Approval | Prior Stage)"
+    ],
+    "variables": "Multiply sequential conditional probabilities through approval.",
+    "example": "40% × 55% × 90% = 19.8% cumulative PTRS.",
+    "basis": "Standard probability-of-success convention"
+  },
+  "cumulative probability": {
+    "lines": [
+      "Cumulative Probability = Π Stage-specific Conditional Probabilities"
+    ],
+    "variables": "Π means multiply each sequential probability.",
+    "example": "40% × 55% × 90% = 19.8%.",
+    "basis": "Standard probability convention"
+  },
+  "probability-weighted cash flow": {
+    "lines": [
+      "Probability-weighted Cash Flow = Cash Flow × Probability of Required State"
+    ],
+    "variables": "Match each cash flow to the probability that its prerequisite state occurs.",
+    "example": "$100M approval-dependent cash flow × 40% = $40M.",
+    "basis": "Standard expected-value convention"
+  },
+  "rnpv": {
+    "lines": [
+      "rNPV = Σ [pₜ × CFₜ ÷ (1 + r)ᵗ]"
+    ],
+    "variables": "pₜ = probability of reaching the state that generates CFₜ; costs are stage-gated.",
+    "example": "$500M approved-value PV × 19.8% PTRS − $40M expected cost PV = $59M.",
+    "basis": "Standard risk-adjusted valuation convention"
+  },
+  "pipeline sotp": {
+    "lines": [
+      "Pipeline SOTP = Σ Asset rNPV + Platform Value + Other Assets + Net Cash"
+    ],
+    "variables": "Keep each asset’s assumptions and probabilities separate.",
+    "example": "$120M + $80M asset rNPVs + $30M platform + $20M net cash = $250M.",
+    "basis": "Standard sum-of-the-parts convention"
+  },
+  "breakeven": {
+    "lines": [
+      "Break-even Units = Fixed Costs ÷ (Price per Unit − Variable Cost per Unit)"
+    ],
+    "variables": "Price minus variable cost is contribution margin per unit.",
+    "example": "$2M fixed cost ÷ ($100 − $60) = 50,000 units.",
+    "source": "https://www.investopedia.com/terms/b/breakevenanalysis.asp",
+    "sourceLabel": "Investopedia: Break-even Analysis"
+  },
+  "cost per enrolled patient": {
+    "lines": [
+      "Cost per Enrolled Patient = Total Recruitment Spend ÷ Incremental Patients Enrolled"
+    ],
+    "variables": "Use incremental enrollment attributable to the intervention, not total enrollment.",
+    "example": "$300,000 spend ÷ 48 incremental patients = $6,250 per patient.",
+    "basis": "Standard unit-cost calculation"
+  },
+  "risk-adjusted value": {
+    "lines": [
+      "Risk-adjusted Value = Unrisked Value × Cumulative Probability of Success"
+    ],
+    "variables": "Use the probability attached to the state required to realize the value.",
+    "example": "$500M unrisked value × 19.8% PTRS = $99M risk-adjusted value.",
+    "basis": "Standard expected-value convention"
+  },
+  "probability of success": {
+    "lines": [
+      "Cumulative PoS = Π Stage-specific Conditional Probabilities"
+    ],
+    "variables": "Π means multiply each sequential conditional probability.",
+    "example": "40% × 55% × 90% = 19.8% approval probability.",
+    "basis": "Standard probability convention"
+  },
+  "royalty": {
+    "lines": [
+      "Royalty Payment = Royalty Rate × Contract-defined Net Sales"
+    ],
+    "variables": "Read the agreement’s sales base, tiers, deductions, and territory rules.",
+    "example": "8% royalty × $500M eligible net sales = $40M payment.",
+    "basis": "Standard licensing convention"
+  }
+};
+function formulaMarkup(term){
+  const f=TERM_FORMULAS[String(term||'').toLowerCase()];
+  if(!f) return '';
+  const reference=f.source?`<a class="formula-source" href="${esc(f.source)}" target="_blank" rel="noopener noreferrer">${esc(f.sourceLabel||'Investopedia reference')} ↗</a>`:(f.basis?`<div class="formula-basis">Method · ${esc(f.basis)}</div>`:'');
+  return `<div class="formula-block"><div class="formula-kicker">Formula</div><div class="formula-lines">${f.lines.map(line=>`<code>${esc(line)}</code>`).join('')}</div>${f.variables?`<div class="formula-variables">${esc(f.variables)}</div>`:''}${f.example?`<div class="formula-example"><b>Numbers.</b> ${esc(f.example)}</div>`:''}${reference}</div>`;
+}
 function renderGlossaryShell(){
   const q = state.glossaryQuery || "";
   return `<div class="card">
@@ -7009,7 +7429,8 @@ function glossaryList(){
   const cat=state.glossaryCat||"All";
   const items=DATA.glossary.filter(g=>{
     const catOk = cat==="All" || g.cat===cat;
-    const s=(g.term+" "+g.def+" "+g.ex+" "+g.cat).toLowerCase();
+    const f=TERM_FORMULAS[g.term.toLowerCase()];
+    const s=(g.term+" "+g.def+" "+g.ex+" "+g.cat+" "+(f?f.lines.join(" ")+" "+(f.variables||"")+" "+(f.example||""):"")).toLowerCase();
     return catOk && (q==="" || s.includes(q));
   });
   const el=document.getElementById("glist");
@@ -7019,8 +7440,9 @@ function glossaryList(){
   el.innerHTML=(limit<items.length?`<div class="show-all-note"><b>Start with search.</b> Showing the first ${limit} of ${items.length} terms so the knowledge base stays readable. Search or choose a category to narrow it.</div>`:"")+shown.map(g=>`
     <div class="gitem">
       <h4>${esc(g.term)} <span class="gcat">${esc(g.cat)}</span></h4>
+      ${formulaMarkup(g.term)}
       <div class="def">${esc(g.def)}</div>
-      <div class="ex"><b>Example.</b> ${esc(g.ex)}</div>
+      <div class="ex"><b>Life-sciences example.</b> ${esc(g.ex)}</div>
     </div>`).join("");
 }
 function wireGlossary(){
@@ -7117,15 +7539,17 @@ function afterRender(){
   }
   if(changed){ const h2=m.querySelector("h2"); if(h2){ h2.setAttribute("tabindex","-1"); try{ h2.focus({preventScroll:true}); }catch(e){} } }
   wireTopActions();
+  highlightSiteConcepts();
   wireConceptPops();
   wireVideos();
   applyFocusMode();
 }
 function glossaryLookup(term){
   const t=(term||"").toLowerCase();
-  return DATA.glossary.find(g=>g.term.toLowerCase()===t)
-      || DATA.glossary.find(g=>g.term.toLowerCase().replace(/[^a-z0-9 ]/g,"").startsWith(t.replace(/[^a-z0-9 ]/g,"").split(" ")[0]))
-      || null;
+  const exact=DATA.glossary.find(g=>g.term.toLowerCase()===t);
+  if(exact) return exact;
+  if(TERM_FORMULAS[t]) return null;
+  return DATA.glossary.find(g=>g.term.toLowerCase().replace(/[^a-z0-9 ]/g,"").startsWith(t.replace(/[^a-z0-9 ]/g,"").split(" ")[0])) || null;
 }
 function closeTermPop(){ const ex=document.getElementById("termPop"); if(ex) ex.remove(); document.querySelectorAll(".chip.hot").forEach(c=>c.classList.remove("hot")); }
 function showTermPop(chip, term){
@@ -7135,23 +7559,29 @@ function showTermPop(chip, term){
   const g=glossaryLookup(term);
   const pop=document.createElement("div");
   pop.className="term-pop"; pop.id="termPop"; pop.dataset.term=term;
+  const formula=formulaMarkup(g?g.term:term);
   if(g){
-    pop.innerHTML=`<h5>${esc(g.term)}<span class="tp-cat">${esc(g.cat)}</span></h5><div>${esc(g.def)}</div><div class="tp-ex"><b>Example.</b> ${esc(g.ex)}</div><a class="tp-link" href="#" data-open-gloss="${esc(g.term)}">Open in glossary &rarr;</a>`;
+    pop.innerHTML=`<h5>${esc(g.term)}<span class="tp-cat">${esc(g.cat)}</span></h5>${formula}<div class="tp-def">${esc(g.def)}</div><div class="tp-ex"><b>Life-sciences example.</b> ${esc(g.ex)}</div><a class="tp-link" href="#" data-open-gloss="${esc(g.term)}">Open in glossary &rarr;</a>`;
+  } else if(formula){
+    pop.innerHTML=`<h5>${esc(term)}</h5>${formula}<a class="tp-link" href="#" data-open-gloss="${esc(term)}">Open glossary &rarr;</a>`;
   } else {
     pop.innerHTML=`<h5>${esc(term)}</h5><div>Concept taught in this level. Open the glossary for related terms.</div><a class="tp-link" href="#" data-open-gloss="${esc(term)}">Open glossary &rarr;</a>`;
   }
   document.body.appendChild(pop);
   chip.classList.add("hot");
   const r=chip.getBoundingClientRect();
-  const pw=Math.min(320, window.innerWidth-24);
+  const pw=Math.min(440, window.innerWidth-24);
   pop.style.width=pw+"px";
   let left=r.left+window.scrollX; if(left+pw>window.scrollX+window.innerWidth-12) left=window.scrollX+window.innerWidth-pw-12;
   pop.style.left=Math.max(window.scrollX+12,left)+"px";
-  pop.style.top=(r.bottom+window.scrollY+8)+"px";
+  const ph=pop.offsetHeight;
+  let top=r.bottom+window.scrollY+8;
+  if(top+ph>window.scrollY+window.innerHeight-12 && r.top>ph+16) top=r.top+window.scrollY-ph-8;
+  pop.style.top=Math.max(window.scrollY+12,top)+"px";
   pop.querySelector("[data-open-gloss]").onclick=(e)=>{ e.preventDefault(); const term2=e.currentTarget.getAttribute("data-open-gloss"); closeTermPop(); state.view="glossary"; state.glossaryQuery=term2; render(); window.scrollTo({top:0,behavior:"smooth"}); };
 }
 function wireConceptPops(){
-  document.querySelectorAll(".chip[data-term], .term-def[data-term]").forEach(c=>{ if(c.dataset.wired) return; c.dataset.wired="1"; c.onclick=(e)=>{ e.stopPropagation(); showTermPop(c, c.getAttribute("data-term")); }; c.onmouseenter=()=>{ if(c.classList.contains('term-def')) showTermPop(c, c.getAttribute('data-term')); }; c.onfocus=()=>showTermPop(c, c.getAttribute('data-term')); });
+  document.querySelectorAll(".chip[data-term], .term-def[data-term]").forEach(c=>{ if(c.dataset.wired) return; c.dataset.wired="1"; c.onclick=(e)=>{ e.stopPropagation(); showTermPop(c, c.getAttribute("data-term")); }; c.onmouseenter=()=>{ if(c.classList.contains('term-def')) showTermPop(c, c.getAttribute('data-term')); }; c.onfocus=()=>{ if(c.classList.contains('term-def')) showTermPop(c, c.getAttribute('data-term')); }; });
 }
 if(!window.__vkbd){
   window.__vkbd=1;
@@ -7341,6 +7771,11 @@ const COURSE={"units": [{"title": "Unit 1: Consulting Method and Communication",
 
 function objectivesBox(i){ const m=COURSE.meta[i]; if(!m) return ""; return `<div class="objectives"><div class="obj-h">Goal</div><p>${esc(m.obj)}</p></div>`; }
 function takeawayBox(i){ const m=COURSE.meta[i]; if(!m) return ""; return `<div class="card takeaway-card"><div class="tk-badge">Takeaway</div><p>${esc(m.take)}</p></div>`; }
+function coreConceptBand(i){
+  const l=DATA.levels[i],v=LESSON_VISUALS[i],m=COURSE.meta[i],rule=v&&v[10]?v[10]:(m&&m.take?m.take:l.subtitle);
+  const terms=(l.concepts||[]).map(c=>`<button type="button" class="chip" data-term="${esc(c)}">${esc(c)}</button>`).join("");
+  return `<section class="concept-focus" aria-label="Key concepts"><div class="concept-focus-statement"><small>Core concept</small><strong>${esc(rule)}</strong></div><div class="concept-focus-terms"><small>Key concepts</small><div>${terms}</div></div></section>`;
+}
 function courseProgress(){
   const total=DATA.levels.length; let done=0; for(let i=0;i<total;i++) if(levelDone(i)) done++;
   const k=computeKnowledge(), r=computeReadiness();
@@ -7486,16 +7921,23 @@ V18_TERMS.push(
 );
 V18_TERMS.forEach(t=>{ if(!DATA.glossary.some(g=>g.term.toLowerCase()===t.term.toLowerCase())) DATA.glossary.push(t); });
 function reEsc(s){ return String(s).replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
-function termify(txt){
+function termify(txt,extraTerms=[],usedTerms=null,maxTerms=Infinity){
   const source=String(txt);
-  const terms=V18_TERMS.concat(DATA.glossary.filter(g=>['rNPV','NPV','HEOR','RWE','ICSR','CAPA','gross-to-net','PoS','eCTD','RIM','Market access','Biosimilar','Interchangeability','Root cause','Operating model'].includes(g.term))).map(g=>g.term).sort((a,b)=>b.length-a.length);
+  const baseTerms=V18_TERMS.concat(DATA.glossary.filter(g=>['rNPV','NPV','HEOR','RWE','ICSR','CAPA','gross-to-net','PoS','eCTD','RIM','Market access','Biosimilar','Interchangeability','Root cause','Operating model'].includes(g.term))).map(g=>g.term);
+  const terms=[...new Map([...(extraTerms||[]),...baseTerms].filter(Boolean).map(t=>[String(t).toLowerCase(),String(t)])).values()].sort((a,b)=>b.length-a.length);
   const ranges=[];
   terms.forEach(term=>{
+    if(usedTerms&&usedTerms.size>=maxTerms) return;
+    const termKey=term.toLowerCase();
+    if(usedTerms&&usedTerms.has(termKey)) return;
     const rg=new RegExp('(^|[^A-Za-z0-9-])('+reEsc(term)+')(?=$|[^A-Za-z0-9-])','gi');
     let m;
     while((m=rg.exec(source))){
       const st=m.index+m[1].length, en=st+m[2].length;
-      if(!ranges.some(r=>st<r.e && en>r.s)) ranges.push({s:st,e:en,term});
+      if(!ranges.some(r=>st<r.e && en>r.s)){
+        ranges.push({s:st,e:en,term});
+        if(usedTerms){usedTerms.add(termKey);break;}
+      }
       if(m.index===rg.lastIndex) rg.lastIndex++;
     }
   });
@@ -7504,6 +7946,28 @@ function termify(txt){
   ranges.forEach(r=>{ out+=esc(source.slice(pos,r.s)); out+='<span class="term-def chip" tabindex="0" data-term="'+esc(r.term)+'">'+esc(source.slice(r.s,r.e))+'</span>'; pos=r.e; });
   out+=esc(source.slice(pos));
   return out;
+}
+function highlightSiteConcepts(){
+  const main=document.getElementById('main');
+  if(!main) return;
+  const explicit=['Life sciences consulting','Issue tree','Hypothesis-driven','Pyramid principle','Veeva Vault','Development Cloud','Operating model','Data governance','Market access','Access evidence','Real-world evidence','Pharmacovigilance','Benefit-risk','Data integrity','Data quality','Source of truth','Patient funnel','FDA guidance','Commercial platform','Risk-adjusted value','Capacity','NPV','DCF','rNPV','WACC','PTRS','CAPA','HEOR','RWE'];
+  const vocabulary=[...new Set([...explicit,...DATA.levels.flatMap(l=>l.concepts||[]),...V18_TERMS.map(t=>t.term)].filter(t=>String(t).length>=3))];
+  const used=new Set([...main.querySelectorAll('.term-def[data-term]')].map(el=>String(el.dataset.term||'').toLowerCase()));
+  const maxTerms=used.size+(state.view==='home'?8:12);
+  const walker=document.createTreeWalker(main,NodeFilter.SHOW_TEXT,{acceptNode(node){
+    const parent=node.parentElement,text=node.nodeValue||'';
+    if(!parent||!text.trim()||text.trim().length<3) return NodeFilter.FILTER_REJECT;
+    if(parent.closest('button,a,label,summary,input,textarea,select,option,code,pre,kbd,svg,script,style,.term-def,.concept-focus,.val-key-band,.eyebrow,.kind,.qmeta,.tier-tag,.case-tags,.chip,[contenteditable="true"]')) return NodeFilter.FILTER_REJECT;
+    if(!parent.closest('p,li,td,blockquote,.sub,.lede,.qtext,.speaker,.fb,.manager-note,.case-ref-desc,.lesson-copy,.scenario-copy,.q-card h3')) return NodeFilter.FILTER_REJECT;
+    return NodeFilter.FILTER_ACCEPT;
+  }});
+  const nodes=[];while(walker.nextNode()) nodes.push(walker.currentNode);
+  for(const node of nodes){
+    if(used.size>=maxTerms) break;
+    const html=termify(node.nodeValue,vocabulary,used,maxTerms);
+    if(!html.includes('term-def')) continue;
+    const template=document.createElement('template');template.innerHTML=html;node.replaceWith(template.content);
+  }
 }
 
 const ADV_CASES = [
