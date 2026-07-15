@@ -1106,6 +1106,307 @@ body{background:#f6f6f3!important;color:#1d2630!important}.card{background:#fff!
 .problem-preview-card .problem-preview-grid > div:first-child > .ghost{display:inline-flex!important;margin-top:26px!important}
 @media(max-width:720px){.problem-preview-card .problem-preview-grid > div:first-child > .ghost{margin-top:22px!important}}
 
+/* ===== v3.7 beginner-first valuation curriculum ===== */
+.valuation-hero h2{max-width:980px!important;font-size:clamp(42px,5vw,68px)!important;line-height:1.02!important;letter-spacing:-.04em!important;text-wrap:balance}
+.valuation-hero .lede{max-width:900px!important;font-size:17px!important;line-height:1.58!important}
+.valuation-hero .val-tabs{margin-top:28px}
+.val-tabs{column-gap:28px;row-gap:4px;align-items:end}
+.val-tab{min-height:44px;padding:11px 0 13px;font-size:13.5px;white-space:nowrap}
+.val-tab:focus-visible,.val-course-step:focus-visible,.val-check-options button:focus-visible,.val-lesson-actions button:focus-visible,.val-model-ready button:focus-visible{outline:3px solid rgba(47,111,235,.32);outline-offset:3px}
+.val-start-card{display:grid!important;grid-template-columns:minmax(0,1fr) 184px;gap:44px;align-items:end;padding:34px 38px!important}
+.val-start-card h2{font-size:clamp(28px,3.2vw,40px)!important;line-height:1.08!important;max-width:700px;margin-top:7px!important;text-wrap:balance}
+.val-start-card p{max-width:720px;margin:12px 0 0;color:#51606f;font-size:15px;line-height:1.62}
+.val-start-progress{display:grid;align-content:end;gap:3px;border-top:1px solid rgba(22,35,58,.18);padding-top:16px}
+.val-start-progress>b{font:600 36px/1 "IBM Plex Serif",Georgia,serif;color:#16233a;font-variant-numeric:tabular-nums}
+.val-start-progress>span{color:#647084;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.val-start-progress>div{height:5px;margin-top:10px;background:#e3e7ea;overflow:hidden;border-radius:999px}
+.val-start-progress i{display:block;height:100%;background:#b9852f;transition:width .22s ease}
+.val-learn-layout{display:grid;grid-template-columns:minmax(220px,260px) minmax(0,1fr);gap:24px;align-items:start}
+.val-course-nav{padding:0!important;overflow:auto;max-height:calc(100dvh - 96px);position:sticky;top:78px;scrollbar-color:#a8b3bd #f4f6f7}
+.val-course-nav-head{position:sticky;top:0;z-index:1;padding:22px 22px 17px;border-bottom:1px solid #e2e6e9;background:#fff}
+.val-course-nav-head small{display:block;color:#8a6d3f;font-size:10px;font-weight:750;letter-spacing:.08em;text-transform:uppercase}
+.val-course-nav-head b{display:block;margin-top:4px;color:#16233a;font:600 20px/1.2 "IBM Plex Serif",Georgia,serif}
+.val-course-list{display:grid}
+.val-course-step{appearance:none;width:100%;min-height:66px;display:grid;grid-template-columns:32px minmax(0,1fr);grid-template-rows:auto auto;column-gap:11px;align-items:center;padding:12px 16px;border:0;border-bottom:1px solid #eceef0;background:#fff;text-align:left;color:#16233a;cursor:pointer;transition:background .16s ease,color .16s ease}
+.val-course-step:last-child{border-bottom:0}
+.val-course-step:hover{background:#f7f8f8}
+.val-course-step>span{grid-row:1/3;width:30px;height:30px;display:grid;place-items:center;border:1px solid #cfd6dc;border-radius:50%;color:#647084;font-size:10px;font-weight:800;font-variant-numeric:tabular-nums}
+.val-course-step>b{min-width:0;font-size:13px;line-height:1.25;color:inherit}
+.val-course-step>small{font-size:10px;line-height:1.2;color:#8a93a4}
+.val-course-step.active{background:#f1f5f8;color:#123c63}
+.val-course-step.active>span{background:#123c63;border-color:#123c63;color:#fff}
+.val-course-step.done>span{background:#edf6ee;border-color:#b9d6bd;color:#376b3e;font-size:12px}
+.val-course-step.done>small{color:#4e7954}
+.val-lesson{padding:0!important;overflow:hidden;scroll-margin-top:92px}
+.val-lesson-head{padding:46px 50px 35px;border-bottom:1px solid #e1e5e8}
+.val-lesson-head h2{max-width:780px;margin-top:8px!important;font-size:clamp(34px,4.2vw,52px)!important;line-height:1.04!important;letter-spacing:-.035em!important;text-wrap:balance}
+.val-lesson-head p{max-width:760px;margin:17px 0 0;color:#51606f;font-size:16px;line-height:1.68}
+.val-lesson h3{font-size:22px;line-height:1.18}
+.val-teaching{display:grid;grid-template-columns:1fr;gap:34px;padding:40px 50px;border-bottom:1px solid #e1e5e8}
+.val-teaching-copy p{margin:13px 0 0;color:#39434f;font-size:15px;line-height:1.72}
+.val-teaching-copy p+p{margin-top:16px}
+.val-terms{border-top:1px solid rgba(22,35,58,.2);padding-top:16px}
+.val-terms h3{font-size:15px!important;margin-bottom:7px!important}
+.val-terms dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 30px;margin:0}
+.val-terms dl>div{padding:15px 0 17px;border-bottom:1px solid rgba(22,35,58,.09)}
+.val-terms dt{color:#16233a;font-size:14px;font-weight:750}
+.val-terms dd{margin:5px 0 0;color:#5c6875;font-size:13px;line-height:1.6}
+.val-term-example{display:block;margin-top:8px;color:#39434f;font-size:12.5px;line-height:1.58}
+.val-term-example b{display:block;margin-bottom:2px;color:#8a6d3f;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase}
+.val-concept{padding:38px 50px 42px;border-bottom:1px solid #e1e5e8}
+.val-concept>h3{margin-bottom:20px}
+.val-concept-flow{display:flex;align-items:stretch;gap:8px;overflow-x:auto;overscroll-behavior-inline:contain;padding-bottom:3px}
+.val-concept-step{flex:1;min-width:126px;display:grid;align-content:start;padding:17px 4px 15px;border-top:2px solid #123c63}
+.val-concept-step small{color:#8a6d3f;font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+.val-concept-step b{margin-top:7px;color:#16233a;font-size:13px;line-height:1.25}
+.val-concept-step span{margin-top:5px;color:#647084;font-size:11.5px;line-height:1.42}
+.val-concept-flow>i{align-self:center;color:#9aa4ad;font-style:normal;font-size:15px}
+.val-course-formula{display:grid;gap:7px;margin-top:24px;padding:17px 20px;border-radius:12px;background:#16233a;color:#f7f4ed;overflow-x:auto}
+.val-course-formula>span{color:#d8b36f;font-size:9.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.val-course-formula>code{color:#fff;font:650 13px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:-.01em;white-space:normal}
+.val-kpi.positive{background:#edf6ee}.val-kpi.positive b{color:#315d38}.val-kpi.negative{background:#fff0ed}.val-kpi.negative b{color:#97473d}
+.val-equation-card h2{margin-top:7px!important;font-size:24px!important;line-height:1.2!important}
+.val-npv-equation{display:flex;align-items:baseline;gap:14px;margin-top:20px;padding:21px 23px;border-radius:13px;background:#16233a;color:#fff;overflow-x:auto}
+.val-npv-equation>b{color:#d8b36f;font:700 22px/1 "IBM Plex Serif",Georgia,serif}.val-npv-equation>span{color:#b8c5d0;font-size:18px}.val-npv-equation>code{color:#fff;font:650 16px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:nowrap}
+.val-symbols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;margin-top:14px;border:1px solid #dfe3e6;background:#dfe3e6}
+.val-symbols>div{display:grid;gap:4px;padding:13px 14px;background:#fff}.val-symbols b{color:#123c63;font:750 13px ui-monospace,SFMono-Regular,Menlo,monospace}.val-symbols span{color:#647084;font-size:10.8px;line-height:1.4}
+.val-substitution{margin-top:14px;padding:14px 16px;border-radius:10px;background:#f5f6f7;color:#39434f;font:600 11.5px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;overflow-wrap:anywhere}
+.val-npv-decision{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(260px,.72fr);gap:30px;align-items:center;border-top:3px solid #b9852f!important}
+.val-npv-decision.positive{border-top-color:#5c9163!important}.val-npv-decision.negative{border-top-color:#c96457!important}
+.val-npv-decision h2{margin-top:7px!important;font-size:27px!important}.val-npv-decision p{margin:9px 0 0;color:#53606c;font-size:13px;line-height:1.6}.val-npv-decision>p{margin:0;padding-left:24px;border-left:1px solid #dfe3e6}
+.val-deep{padding:42px 50px 46px;border-bottom:1px solid #e1e5e8}
+.val-deep>h3{max-width:780px;margin-top:8px!important;font-size:29px!important;line-height:1.12!important;text-wrap:balance}
+.val-deep-intro{max-width:800px;margin:13px 0 0;color:#51606f;font-size:14.5px;line-height:1.67}
+.val-deep-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(280px,.92fr);gap:34px;align-items:start;margin-top:30px}
+.val-deep-kicker{color:#8a6d3f;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.val-derive ol{list-style:none;margin:10px 0 0;padding:0;border-top:1px solid rgba(22,35,58,.16)}
+.val-derive li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:13px;padding:15px 0;border-bottom:1px solid rgba(22,35,58,.1)}
+.val-derive li>span{width:28px;height:28px;display:grid;place-items:center;border:1px solid #cbd4da;border-radius:50%;color:#647084;font-size:10px;font-weight:800;font-variant-numeric:tabular-nums}
+.val-derive li b{display:block;color:#16233a;font-size:13.5px;line-height:1.35}
+.val-derive li code{display:block;margin-top:5px;color:#123c63;font:650 12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:normal}
+.val-derive li p{margin:6px 0 0;color:#5c6875;font-size:12.5px;line-height:1.55}
+.val-real{padding:23px 24px 22px;border:1px solid #dce1e5;border-radius:15px;background:#f7f7f4}
+.val-real h4{margin-top:7px;font-size:20px;line-height:1.2}
+.val-real>p{margin:10px 0 0;color:#4f5b66;font-size:12.8px;line-height:1.6}
+.val-real-facts{margin-top:16px;border-top:1px solid rgba(22,35,58,.14)}
+.val-real-facts>div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 16px;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(22,35,58,.09)}
+.val-real-facts span{color:#647084;font-size:11.5px}
+.val-real-facts b{color:#16233a;font-size:12px;font-variant-numeric:tabular-nums;text-align:right}
+.val-real-facts small{grid-column:1/-1;color:#7a848e;font-size:10.8px;line-height:1.45}
+.val-real>a{display:inline-flex;min-height:42px;align-items:center;margin-top:14px;color:#123c63;font-size:12px;font-weight:750;text-decoration:underline;text-underline-offset:3px}
+.val-real>a:focus-visible{outline:3px solid rgba(47,111,235,.3);outline-offset:3px}
+.val-source-note{display:block;color:#7a848e;font-size:9.8px;line-height:1.45}
+.val-deep-bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.92fr);gap:34px;align-items:stretch;margin-top:28px;padding-top:24px;border-top:1px solid rgba(22,35,58,.14)}
+.val-pitfalls ul{margin:10px 0 0;padding:0;list-style:none}
+.val-pitfalls li{position:relative;padding:8px 0 8px 20px;border-bottom:1px solid rgba(22,35,58,.08);color:#4f5b66;font-size:12.5px;line-height:1.5}
+.val-pitfalls li:last-child{border-bottom:0}
+.val-pitfalls li:before{content:"×";position:absolute;left:0;top:8px;color:#a84d43;font-weight:800}
+.val-consulting-lens{padding:20px 22px;border-radius:14px;background:#16233a;color:#dce5ec}
+.val-consulting-lens .val-deep-kicker{color:#d8b36f}
+.val-consulting-lens p{margin:8px 0 0;color:#edf2f6;font-size:13px;line-height:1.62}
+.val-statement-lab{padding:42px 50px 46px;border-bottom:1px solid #e1e5e8;background:#f7f7f4}
+.val-statement-lab>h3,.val-practice>h3,.val-capstone>h3{max-width:820px;margin-top:8px!important;font-size:28px!important;line-height:1.14!important;text-wrap:balance}
+.val-lab-intro{max-width:820px;margin:12px 0 0;color:#51606f;font-size:14px;line-height:1.65}
+.val-statement-grid{display:grid;grid-template-columns:1.12fr .88fr .88fr;gap:24px;margin-top:28px}
+.val-statement-grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.val-statement-panel{min-width:0;padding-top:14px;border-top:2px solid #123c63}
+.val-statement-panel>div:not(.val-deep-kicker){display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;padding:8px 0;border-bottom:1px solid rgba(22,35,58,.09);align-items:baseline}
+.val-statement-panel>div.total{margin-top:2px;border-top:1px solid rgba(22,35,58,.18);border-bottom:0}
+.val-statement-panel span{color:#53606c;font-size:11.8px;line-height:1.4}
+.val-statement-panel b{color:#16233a;font-size:11.8px;font-variant-numeric:tabular-nums;text-align:right}
+.val-statement-panel .total span,.val-statement-panel .total b{font-weight:800;color:#10233f}
+.val-lab-note{margin:20px 0 0;padding-top:17px;border-top:1px solid rgba(22,35,58,.14);color:#4f5b66;font-size:12.5px;line-height:1.6}
+.val-practice{padding:42px 50px 46px;border-bottom:1px solid #e1e5e8}
+.val-practice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px;margin-top:27px}
+.val-practice-item{min-width:0;padding-top:15px;border-top:2px solid #b9852f}
+.val-practice-item h4{margin-top:7px;font-size:19px;line-height:1.25}
+.val-practice-item>p{margin:10px 0 0;color:#53606c;font-size:13px;line-height:1.62}
+.val-practice-item details{margin-top:16px;border-top:1px solid rgba(22,35,58,.13)}
+.val-practice-item summary{min-height:46px;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;color:#123c63;font-size:12px;font-weight:800;list-style:none}
+.val-practice-item summary::-webkit-details-marker{display:none}
+.val-practice-item summary:after{content:"+";font-size:20px;font-weight:500;color:#8a6d3f}
+.val-practice-item details[open] summary:after{content:"−"}
+.val-practice-item summary:focus-visible,.val-capstone summary:focus-visible,.val-case-library>summary:focus-visible{outline:3px solid rgba(47,111,235,.3);outline-offset:3px}
+.val-practice-item details ol{margin:4px 0 0;padding:0 0 0 21px}
+.val-practice-item details li{padding:5px 0;color:#4f5b66;font-size:12.5px;line-height:1.55}
+.val-practice-answer{display:grid;gap:3px;margin-top:13px;padding:13px 14px;border-radius:10px;background:#edf6ee;color:#315d38}
+.val-practice-answer b{font-size:10px;text-transform:uppercase;letter-spacing:.07em}
+.val-practice-answer span{font-size:12.5px;line-height:1.5;font-weight:650}
+.val-practice-takeaway{margin:12px 0 0;color:#53606c;font-size:12.2px;line-height:1.55}
+.val-capstone{padding:46px 50px 48px;border-bottom:1px solid #d8d1c4;background:#f1eee8}
+.val-cap-tag{color:#8a6d3f;font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.val-capstone>p{max-width:820px;margin:13px 0 0;color:#4f5b66;font-size:14px;line-height:1.65}
+.val-cap-exhibits{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:28px}
+.val-cap-exhibit{padding:18px 20px;border:1px solid rgba(22,35,58,.12);border-radius:13px;background:#fff}
+.val-cap-exhibit>div:not(.val-deep-kicker){display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;padding:8px 0;border-bottom:1px solid rgba(22,35,58,.08);align-items:baseline}
+.val-cap-exhibit>div:last-child{border-bottom:0}
+.val-cap-exhibit span{color:#5a6672;font-size:12px}
+.val-cap-exhibit b{color:#16233a;font-size:12px;text-align:right;font-variant-numeric:tabular-nums}
+.val-cap-tasks{margin-top:24px;padding-top:18px;border-top:1px solid rgba(22,35,58,.16)}
+.val-cap-tasks ol{margin:10px 0 0;padding-left:21px;columns:2;column-gap:40px}
+.val-cap-tasks li{break-inside:avoid;padding:4px 0;color:#4f5b66;font-size:12.5px;line-height:1.5}
+.val-capstone>details{margin-top:22px}
+.val-capstone>details>summary{min-height:48px;display:inline-flex;align-items:center;padding:11px 17px;border-radius:10px;background:#123c63;color:#fff;font-size:12.5px;font-weight:800;cursor:pointer;list-style:none}
+.val-capstone>details>summary::-webkit-details-marker{display:none}
+.val-capstone>details[open]>summary{background:#1d4f7c}
+.val-capstone>details>ol{margin:19px 0 0;padding-left:22px}
+.val-capstone>details>ol li{padding:6px 0;color:#3f4a54;font-size:12.8px;line-height:1.58}
+.val-cap-recommendation{margin-top:18px;padding:18px 20px;border-radius:12px;background:#16233a;color:#fff}
+.val-cap-recommendation b{color:#d8b36f;font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.val-cap-recommendation p{margin:6px 0 0;color:#edf2f6;font-size:13px;line-height:1.6}
+.val-case-library{padding:0!important;overflow:hidden}
+.val-case-library>summary{min-height:94px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:21px 28px;cursor:pointer;list-style:none}
+.val-case-library>summary::-webkit-details-marker{display:none}
+.val-case-library>summary span{display:grid;gap:3px}
+.val-case-library>summary small{color:#8a6d3f;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.val-case-library>summary b{color:#16233a;font:600 22px/1.2 "IBM Plex Serif",Georgia,serif}
+.val-case-library>summary em{color:#647084;font-size:11.5px;font-style:normal}
+.val-case-library>summary>i{color:#647084;font-size:24px;font-style:normal;transition:transform .16s}
+.val-case-library[open]>summary{border-bottom:1px solid #e1e5e8}
+.val-case-library[open]>summary>i{transform:rotate(180deg)}
+.val-case-library-body{padding:25px 28px 28px}
+.val-case-library-intro{max-width:820px;margin:0 0 20px;color:#53606c;font-size:13px;line-height:1.6}
+.val-case-list{border-top:1px solid rgba(22,35,58,.15)}
+.val-case-list article{display:grid;grid-template-columns:34px minmax(0,1fr);gap:15px;padding:21px 0;border-bottom:1px solid rgba(22,35,58,.1)}
+.val-case-no{width:30px;height:30px;display:grid;place-items:center;border:1px solid #ccd4da;border-radius:50%;color:#647084;font-size:10px;font-weight:800}
+.val-case-list h4{margin-top:5px;font-size:18px;line-height:1.3}
+.val-case-list ul{display:flex;gap:6px 18px;flex-wrap:wrap;margin:11px 0 0;padding:0;list-style:none}
+.val-case-list li{position:relative;padding-left:11px;color:#53606c;font-size:11.8px;line-height:1.45}
+.val-case-list li:before{content:"";position:absolute;left:0;top:.58em;width:4px;height:4px;border-radius:50%;background:#b9852f}
+.val-case-list p{margin:10px 0 0;color:#3f4a54;font-size:12.5px;line-height:1.55}
+.val-case-list a{display:inline-flex;align-items:center;min-height:40px;margin-top:5px;color:#123c63;font-size:11.8px;font-weight:750;text-decoration:underline;text-underline-offset:3px}
+.val-case-list a:focus-visible{outline:3px solid rgba(47,111,235,.3);outline-offset:3px}
+.val-worked{padding:42px 50px 44px;background:#f7f7f4;border-bottom:1px solid #e1e5e8}
+.val-section-label{color:#8a6d3f;font-size:10.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase}
+.val-worked h3,.val-check h3{margin-top:8px!important;max-width:760px}
+.val-worked-lines{margin-top:22px;border-top:1px solid rgba(22,35,58,.16)}
+.val-worked-lines>div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:baseline;padding:11px 0;border-bottom:1px solid rgba(22,35,58,.1)}
+.val-worked-lines span{color:#51606f;font-size:13.5px;line-height:1.4}
+.val-worked-lines b{color:#16233a;font-size:13.5px;font-variant-numeric:tabular-nums;text-align:right}
+.val-worked>p{margin:18px 0 0;color:#39434f;font-size:14px;line-height:1.62}
+.val-check{padding:42px 50px 44px;border-bottom:1px solid #e1e5e8}
+.val-check-options{display:grid;margin-top:23px;border-top:1px solid #dfe3e6}
+.val-check-options button{appearance:none;min-height:62px;display:grid;grid-template-columns:30px minmax(0,1fr);gap:13px;align-items:center;padding:14px 2px;border:0;border-bottom:1px solid #dfe3e6;background:#fff;text-align:left;color:#293746;cursor:pointer;transition:background .14s ease}
+.val-check-options button:hover{background:#f7f8f8}
+.val-check-options button>span{width:28px;height:28px;display:grid;place-items:center;border:1px solid #c9d2d9;border-radius:50%;color:#647084;font-size:11px;font-weight:800}
+.val-check-options button>b{font-size:13.5px;line-height:1.45}
+.val-check-options button.chosen.correct,.val-check-options button.is-answer{background:#edf6ee;color:#285a32}
+.val-check-options button.chosen.correct>span,.val-check-options button.is-answer>span{border-color:#7faf86;background:#5c9163;color:#fff}
+.val-check-options button.chosen.wrong{background:#fff0ed;color:#823f37}
+.val-check-options button.chosen.wrong>span{border-color:#c96457;background:#c96457;color:#fff}
+.val-check-hint{margin:14px 0 0;color:#647084;font-size:12.5px}
+.val-check-feedback{margin-top:16px;padding:17px 18px;border-radius:12px;background:#edf6ee;color:#315d38}
+.val-check-feedback.review{background:#fff6e5;color:#75500e}
+.val-check-feedback>b{font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+.val-check-feedback p{margin:6px 0 0;font-size:13px;line-height:1.55}
+.val-check-feedback p+p{padding-top:9px;border-top:1px solid rgba(117,80,14,.16)}
+.val-lesson-actions{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 50px;background:#fff}
+.val-lesson-actions .ghost,.val-model-ready .ghost{min-height:44px!important;border-radius:10px!important;padding:10px 16px!important;font-size:12.5px!important;font-weight:750!important;box-shadow:none!important}
+.val-lesson-actions>.ghost:first-child{background:transparent!important;color:#123c63!important;border:1px solid #b9c9d6!important}
+.val-lesson-actions>.ghost:first-child:hover{background:#f1f5f8!important;border-color:#839db3!important}
+.val-lesson-actions .val-next{background:#123c63!important;color:#fff!important;border:1px solid #123c63!important}
+.val-lesson-actions .val-next:hover{background:#1d4f7c!important;color:#fff!important}
+.val-finish-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.val-finish-actions .ghost{background:#123c63!important;color:#fff!important;border:1px solid #123c63!important}
+.val-finish-actions .ghost:last-child{background:#fff!important;color:#123c63!important;border-color:#9fb2c2!important}
+.val-model-primer{display:grid!important;grid-template-columns:minmax(0,1fr) 210px;gap:42px;align-items:center;padding:32px 36px!important}
+.val-model-primer h2{margin-top:7px!important;font-size:clamp(28px,3.2vw,38px)!important;line-height:1.08!important;text-wrap:balance}
+.val-model-primer p{max-width:720px;margin:11px 0 0;color:#51606f;font-size:14px;line-height:1.6}
+.val-model-ready{display:grid;align-content:start;padding-left:24px;border-left:1px solid #dfe3e6}
+.val-model-ready>b{color:#16233a;font:600 31px/1 "IBM Plex Serif",Georgia,serif;font-variant-numeric:tabular-nums}
+.val-model-ready>span{margin:4px 0 12px;color:#647084;font-size:11px;line-height:1.35}
+.val-model-ready .ghost{justify-self:start;background:#123c63!important;color:#fff!important;border:1px solid #123c63!important}
+.val-input-path{margin-top:13px;padding-top:12px;border-top:1px solid #e4e7ea;color:#123c63;font-size:11px;font-weight:700;line-height:1.45}
+.val-interview-rule{padding:34px 38px!important;background:#16233a!important;border-color:#16233a!important;color:#e9edf1!important}
+.val-interview-rule .eyebrow{color:#d8b36f!important}
+.val-interview-rule h2{margin-top:8px!important;color:#fff!important;font-size:clamp(25px,3vw,34px)!important}
+.val-interview-rule p{max-width:960px;margin:12px 0 0;color:#d4dde5;font-size:14px;line-height:1.65}
+@media(max-width:1180px){
+  .val-learn-layout{grid-template-columns:1fr}
+  .val-course-nav{position:static;max-height:none;overflow:hidden}
+  .val-course-nav-head{position:static}
+  .val-course-list{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .val-course-step{border-right:1px solid #eceef0}
+  .val-course-step:nth-child(4n){border-right:0}
+  .val-course-step:nth-last-child(-n+4){border-bottom:0}
+}
+@media(max-width:900px){
+  .val-start-card,.val-model-primer{grid-template-columns:1fr;gap:24px}
+  .val-start-progress{max-width:220px}
+  .val-model-ready{padding:18px 0 0;border-left:0;border-top:1px solid #dfe3e6}
+  .val-teaching{gap:30px}
+  .val-terms dl{grid-template-columns:1fr}
+  .val-deep-grid,.val-deep-bottom,.val-statement-grid,.val-statement-grid.two,.val-practice-grid,.val-cap-exhibits,.val-npv-decision{grid-template-columns:1fr}
+  .val-npv-decision>p{padding:18px 0 0;border-left:0;border-top:1px solid #dfe3e6}
+  .val-cap-tasks ol{columns:1}
+  .val-concept-flow{display:grid;grid-template-columns:1fr;gap:0;overflow:visible}
+  .val-concept-step{min-width:0;padding:14px 0;border-top:1px solid #cfd6dc}
+  .val-concept-flow>i{justify-self:center;line-height:1;transform:rotate(90deg)}
+}
+@media(max-width:820px){
+  .val-course-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .val-course-step:nth-child(4n){border-right:1px solid #eceef0}
+  .val-course-step:nth-child(2n){border-right:0}
+  .val-course-step:nth-last-child(-n+4){border-bottom:1px solid #eceef0}
+  .val-course-step:nth-last-child(-n+2){border-bottom:0}
+}
+@media(max-width:720px){
+  .valuation-hero h2{font-size:38px!important}
+  .valuation-hero .lede{font-size:15px!important}
+  .valuation-hero .val-tabs{width:100%;margin-top:22px;overflow-x:auto;overscroll-behavior-inline:contain;flex-wrap:nowrap;padding-bottom:2px}
+  .val-tab{flex:0 0 auto}
+  .val-symbols{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .val-npv-equation{align-items:start;flex-wrap:wrap}
+  .val-npv-equation>code{white-space:normal}
+  .val-start-card{padding:27px 24px!important}
+  .val-start-card h2{font-size:30px!important}
+  .val-course-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .val-course-step:nth-child(4n){border-right:1px solid #eceef0}
+  .val-course-step:nth-child(2n){border-right:0}
+  .val-course-step:nth-last-child(-n+4){border-bottom:1px solid #eceef0}
+  .val-course-step:nth-last-child(-n+2){border-bottom:0}
+  .val-lesson-head,.val-teaching,.val-concept,.val-statement-lab,.val-deep,.val-worked,.val-practice,.val-check,.val-capstone{padding-left:24px;padding-right:24px}
+  .val-lesson-head{padding-top:34px;padding-bottom:28px}
+  .val-lesson-head h2{font-size:36px!important}
+  .val-lesson-head p{font-size:14.5px;line-height:1.62}
+  .val-teaching{padding-top:30px;padding-bottom:31px}
+  .val-concept{padding-top:30px;padding-bottom:32px}
+  .val-statement-lab,.val-deep,.val-practice,.val-capstone{padding-top:32px;padding-bottom:36px}
+  .val-real{padding:20px}
+  .val-case-library>summary{padding:18px 21px;min-height:84px}
+  .val-case-library-body{padding:20px 21px 22px}
+  .val-worked,.val-check{padding-top:32px;padding-bottom:34px}
+  .val-lesson-actions{padding:16px 24px;align-items:stretch}
+  .val-finish-actions{width:100%;display:grid;grid-template-columns:1fr}
+  .val-finish-actions .ghost{width:100%;justify-content:center}
+  .val-model-primer{padding:27px 24px!important}
+  .val-interview-rule{padding:29px 24px!important}
+}
+@media(max-width:480px){
+  .val-course-list{grid-template-columns:1fr}
+  .val-course-step{border-right:0!important;border-bottom:1px solid #eceef0!important}
+  .val-course-step:last-child{border-bottom:0!important}
+  .val-worked-lines>div{gap:14px}
+  .val-worked-lines span,.val-worked-lines b{font-size:12.5px}
+  .val-check-options button{grid-template-columns:28px minmax(0,1fr);padding:13px 0}
+  .val-cap-exhibit,.val-real{padding:17px}
+  .val-practice-grid{gap:24px}
+  .val-case-library>summary b{font-size:19px}
+  .val-symbols{grid-template-columns:1fr}
+  .val-case-list article{grid-template-columns:1fr}
+  .val-case-no{display:none}
+  .val-lesson-actions{display:grid;grid-template-columns:1fr;gap:9px}
+  .val-lesson-actions>span{display:none}
+  .val-lesson-actions>.ghost{width:100%;justify-content:center}
+}
+/* ===== v3.7 compact lesson completion row ===== */
+.lesson-completion-bar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center;margin:22px 0 4px;padding:19px 2px 0;border-top:1px solid rgba(22,35,58,.14)}
+.lesson-completion-status{color:#647084;font-size:12.8px;line-height:1.5}.lesson-completion-bar.complete .lesson-completion-status{color:#376b3e;font-weight:700}
+.lesson-completion-actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}.lesson-completion-actions .ghost{min-height:42px!important;padding:9px 15px!important;border-radius:10px!important;font-size:12px!important;box-shadow:none!important}.lesson-completion-actions .lesson-next{background:var(--accent)!important;color:#fff!important;border-color:var(--accent)!important}.lesson-completion-actions .lesson-next:hover{background:#1d4f7c!important;border-color:#1d4f7c!important}
+@media(max-width:720px){.lesson-completion-bar{grid-template-columns:1fr;padding-top:16px}.lesson-completion-actions{justify-content:flex-start}}
+@media(max-width:480px){.lesson-completion-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.lesson-completion-actions .ghost{width:100%!important;justify-content:center}.lesson-completion-actions .lesson-next:only-child{grid-column:1/-1}}
+@media(prefers-reduced-motion:reduce){.val-start-progress i,.val-course-step,.val-check-options button{transition:none}}
+
 </style>
 </head>
 <body>
@@ -5031,12 +5332,665 @@ function interviewHomeCard(){return `<div class="card problem-preview-card"><div
 
 /* ---------- v2.9 Valuation Lab: DCF + rNPV ---------- */
 const VAL_KEY='readytoconsult-valuation-v29';
-let valuationState={mode:'dcf',dcf:{rev1:500,growth:10,ebitda:30,da:5,capex:6,nwc:2,tax:21,wacc:10,tg:2,debt:150,cash:80},rnpv:{value:3200,p2:40,p3:55,approval:90,cost2:120,cost3:200,costFile:10,platform:0,ask:800}};
-try{const v=JSON.parse(localStorage.getItem(VAL_KEY));if(v)valuationState={mode:v.mode||'dcf',dcf:Object.assign(valuationState.dcf,v.dcf||{}),rnpv:Object.assign(valuationState.rnpv,v.rnpv||{})};}catch(e){}
+const VAL_GUIDE_VERSION=2,VAL_FOUNDATION_COUNT=12;
+let valuationState={mode:'learn',lesson:0,answers:{},guideVersion:VAL_GUIDE_VERSION,npv:{initial:100,rate:10,cf1:30,cf2:40,cf3:50,cf4:40,cf5:30},dcf:{rev1:500,growth:10,ebitda:30,da:5,capex:6,nwc:2,tax:21,wacc:10,tg:2,debt:150,cash:80},rnpv:{value:3200,p2:40,p3:55,approval:90,cost2:120,cost3:200,costFile:10,platform:0,ask:800}};
+try{const v=JSON.parse(localStorage.getItem(VAL_KEY));if(v){const current=v.guideVersion===VAL_GUIDE_VERSION;valuationState.npv=Object.assign({},valuationState.npv,v.npv||{});valuationState.dcf=Object.assign({},valuationState.dcf,v.dcf||{});valuationState.rnpv=Object.assign({},valuationState.rnpv,v.rnpv||{});valuationState.lesson=current?Math.max(0,Math.min(VAL_FOUNDATION_COUNT-1,Number(v.lesson)||0)):0;valuationState.answers=current&&v.answers&&typeof v.answers==='object'?v.answers:{};valuationState.mode=current&&['learn','npv','dcf','rnpv'].includes(v.mode)?v.mode:'learn';}}catch(e){}
 function valSave(){localStorage.setItem(VAL_KEY,JSON.stringify(valuationState));}
 function valNum(x,d){const n=Number(x);return Number.isFinite(n)?n:d;}
 function valMoney(x){if(!Number.isFinite(x))return 'Invalid';const a=Math.abs(x);return (x<0?'−':'')+'$'+(a>=1000?(a/1000).toFixed(2)+'B':a.toFixed(a>=100?0:1)+'M');}
 function valClamp(v,lo,hi){return Math.min(hi,Math.max(lo,v));}
+const VAL_FOUNDATIONS=[
+  {
+    label:"Future cash",
+    title:"What a valuation model is actually doing",
+    intro:"Valuation turns an uncertain future business into a decision you can debate today. The model is not the answer by itself; it is a transparent chain of assumptions about cash, time, and risk.",
+    teach:[
+      "Consultants use valuation when a client must buy, sell, license, fund, prioritize, or stop something. The practical question is always: what future cash could this decision create, when could it arrive, and what could prevent it from arriving?",
+      "Revenue is sales before expenses. Profit is what remains after accounting expenses. Cash is money that actually moved. A credit sale can raise revenue and profit before the customer pays, so a company can look profitable while cash is still tied up in receivables."
+    ],
+    terms:[["Revenue","The sales a company recognizes before subtracting any expense. Under accrual accounting, revenue can be recorded before the customer pays, so revenue is not the same as cash received."],["Profit","A general word for what remains after selected expenses are subtracted from revenue. Always specify which level of profit you mean because each subtotal removes different costs."],["Cash","Money that actually entered or left the business. Cash changes when customers pay, suppliers are paid, assets are purchased, debt is raised or repaid, and investors contribute or receive funds."],["Accrual accounting","A system that records revenue when earned and expenses when incurred rather than waiting for cash to move. Receivables, inventory, payables, depreciation, and other balances connect accrual profit to cash."],["Valuation model","A transparent chain of assumptions and calculations that estimates what future cash is worth today. It supports a decision by showing the base case, range, sensitivities, and evidence gaps rather than producing one unquestionable answer."]],
+    flow:[["1","Forecast","What sales and costs could occur?"],["2","Convert","How much becomes real cash?"],["3","Adjust","When might it arrive, and how risky is it?"],["4","Decide","What is the range and what changes the answer?"]],
+    formula:"Value today = future cash adjusted for time and risk",
+    worked:{title:"Revenue, profit, and cash are three different numbers",lines:[["Revenue","$10.0M"],["Cash operating costs","−$6.0M"],["D&A expense","−$0.5M"],["EBIT","$3.5M"],["After-tax operating profit at 20%","$2.8M"],["Add back D&A; subtract $1M receivables build","$2.3M cash before capex"]],takeaway:"The business recorded $10M of sales, earned $2.8M after tax, but produced only $2.3M of operating cash before capex."},
+    check:{q:"Which statement correctly separates revenue, profit, and cash?",options:[
+      {text:"Revenue and cash are always equal because a sale is recorded only after payment arrives.",correct:false,why:"A sale can be recorded on credit before cash is collected."},
+      {text:"Revenue records sales, profit subtracts expenses, and cash changes when money actually moves.",correct:true,why:"Correct. Accrual accounting can recognize a sale before the customer pays, so all three can differ."},
+      {text:"EBITDA is the final cash available to investors because it removes non-cash expenses.",correct:false,why:"EBITDA still ignores tax, working capital, capex, and financing needs."}
+    ]}
+  },
+  {
+    label:"Operating profit",
+    title:"Build the ladder from EBITDA to NOPAT",
+    intro:"Before you can value cash flow, you need a clean measure of the business's operating profit that does not depend on how the company is financed.",
+    teach:[
+      "EBITDA is revenue minus cash operating costs before depreciation and amortization. It is useful for comparing operations, but it is not cash because it ignores tax and reinvestment.",
+      "EBIT subtracts D&A. NOPAT then taxes EBIT: NOPAT = EBIT × (1 − tax rate). Because interest is excluded, NOPAT measures after-tax operating profit before financing and becomes the starting point for unlevered free cash flow."
+    ],
+    terms:[["Operating expenses","Costs required to run the business, such as manufacturing, R&D, selling, and administration. Which expenses are included determines the profit subtotal you are calculating."],["EBITDA","Revenue minus cash-like operating expenses before interest, tax, depreciation, and amortization. It is useful for comparing operations, but it is not cash flow because it omits tax, working capital, and capital spending."],["D&A","Depreciation and amortization. These accounting expenses spread the cost of long-lived tangible and intangible assets across the periods that use them; they reduce profit today without causing a same-period cash payment."],["Operating profit (EBIT)","Profit from the core business after D&A but before interest and tax. EBIT separates operating performance from financing choices, which is why it is the operating-profit base for an enterprise DCF."],["NOPAT","Net operating profit after tax, calculated as EBIT multiplied by one minus the operating tax rate. It estimates after-tax operating profit as if the business had no debt financing."],["Interest expense","The cost of borrowing money. It is excluded from EBIT, NOPAT, and unlevered free cash flow because enterprise valuation values the business before deciding how debt and equity divide that value."]],
+    flow:[["1","Revenue","$100M"],["2","Less cash operating costs","$60M"],["3","EBITDA","$40M"],["4","Less D&A","$8M"],["5","EBIT","$32M"],["6","Tax EBIT at 24%","NOPAT $24.32M"]],
+    formula:"NOPAT = EBIT × (1 − tax rate)",
+    worked:{title:"One operating-profit bridge",lines:[["Revenue","$100.00M"],["Less cash operating costs","−$60.00M"],["EBITDA","$40.00M"],["Less D&A","−$8.00M"],["EBIT","$32.00M"],["NOPAT at 24% tax","$24.32M"]],takeaway:"NOPAT ignores interest on purpose. The same operating business should not look more or less valuable merely because it uses a different mix of debt and equity."},
+    check:{q:"Revenue is $100M, cash operating costs are $60M, D&A is $8M, and tax is 24%. What is NOPAT?",options:[
+      {text:"$32.00M",correct:false,why:"That is EBIT before tax, not NOPAT."},
+      {text:"$40.00M",correct:false,why:"That is EBITDA and still ignores D&A and tax."},
+      {text:"$24.32M",correct:true,why:"Correct. EBITDA is $40M, EBIT is $32M, and $32M × 76% = $24.32M."}
+    ]}
+  },
+  {
+    label:"Free cash flow",
+    title:"Separate operating cash flow from unlevered free cash flow",
+    intro:"Cash from operations and free cash flow are related, but they are not interchangeable. A DCF must pair the right cash-flow definition with the right discount rate.",
+    teach:[
+      "Reported cash flow from operations, often called CFO or OCF, usually starts with net income under the indirect method, adds non-cash items, and adjusts working capital. Because net income already reflects interest and tax, reported OCF can contain financing-related effects under accounting conventions.",
+      "Enterprise DCF instead uses unlevered free cash flow. Start with NOPAT, add back D&A, subtract capex, and subtract the increase in net working capital. UFCF excludes financing, so it belongs to both debt and equity investors and is discounted at WACC."
+    ],
+    terms:[["Capital expenditure (capex)","Cash spent to buy, build, or improve long-lived assets such as equipment, facilities, or software. Capex is a real reinvestment outflow even though accounting expense may be recognized gradually through D&A."],["Net working capital (NWC)","Operating current assets such as receivables and inventory minus operating current liabilities such as payables. Cash and debt are normally excluded because they are financing or non-operating items in this calculation."],["Change in NWC","The period-to-period movement in net working capital. An increase usually uses cash because more money is tied up in receivables or inventory; a decrease usually releases cash."],["Unlevered free cash flow (UFCF)","Cash produced after operating tax and reinvestment but before interest, debt repayment, or new borrowing. It is available to both debt and equity investors, so an enterprise DCF discounts it at WACC."],["Levered free cash flow","Cash left for equity holders after operating needs and financing obligations such as interest and required debt payments. It is an equity cash flow and should be paired with the cost of equity, not WACC."],["Reinvestment","Cash the business must put back into operations to maintain or grow future cash flow. In a simplified DCF, the main reinvestment items are capex and increases in NWC, with D&A added back because it is non-cash."]],
+    flow:[["1","NOPAT","After-tax EBIT"],["2","Add D&A","Non-cash expense"],["3","Subtract capex","Real reinvestment"],["4","Subtract ΔNWC","Cash tied up in operations"],["5","UFCF","Cash for debt and equity"]],
+    formula:"UFCF = NOPAT + D&A − capex − increase in NWC",
+    worked:{title:"A working-capital release adds cash",lines:[["NOPAT","$24.32M"],["Add D&A","+$8.00M"],["Subtract capex","−$12.00M"],["NWC decreases $1M","+$1.00M"],["Unlevered free cash flow","$21.32M"]],takeaway:"A decrease in NWC releases cash, so subtracting a negative change adds $1M. This sign is a common interview mistake."},
+    check:{q:"NOPAT is $24.32M, D&A is $8M, capex is $12M, and NWC decreases by $1M. What is UFCF?",options:[
+      {text:"$21.32M",correct:true,why:"Correct. $24.32M + $8M − $12M − (−$1M) = $21.32M."},
+      {text:"$19.32M",correct:false,why:"This treats the NWC decrease as a cash use. A decrease releases cash and must be added."},
+      {text:"$33.32M",correct:false,why:"This adds D&A and the NWC release but forgets the $12M capex outflow."}
+    ]}
+  },
+  {
+    label:"Discounting",
+    title:"Why future cash is worth less today",
+    intro:"A dollar received later cannot be compared directly with a dollar today. Discounting converts every future cash flow into the same present-value language.",
+    teach:[
+      "The discount factor for year n is 1 ÷ (1 + discount rate)^n. A later cash flow receives a smaller factor because you wait longer and bear risk for longer.",
+      "Net present value sums every discounted future cash flow and subtracts the investment paid today. A positive NPV means the modeled return exceeds the selected discount rate; a negative NPV means it falls short."
+    ],
+    terms:[["Time value of money","The principle that a dollar today is worth more than the same dollar later because today's dollar can be invested and because waiting exposes the investor to uncertainty."],["Future value","What money available today could grow into after earning a return for a stated period. Compounding moves value forward in time."],["Present value","What a future cash flow is worth today after adjusting for the required return and the time until receipt. Discounting moves value backward in time."],["Discount rate","The return investors require for waiting and bearing the risks represented in the cash flow. A higher discount rate lowers present value; a lower rate raises it."],["Discount factor","The multiplier 1 divided by one plus the discount rate raised to the number of years. Multiplying future cash by this factor converts it into present value."],["Net present value (NPV)","The sum of present values for all future cash inflows and outflows, including the investment at time zero. Positive NPV indicates value above the required return under the modeled assumptions."]],
+    flow:[["Today","$100","Can be invested now"],["Year 1","$110","Worth $100 today at 10%"],["Year 2","$121","Also worth $100 today at 10%"]],
+    formula:"PVt = CFt ÷ (1 + r)^t   ·   NPV = −initial investment + Σ[CFt ÷ (1 + r)^t]",
+    worked:{title:"Bring a year-2 cash flow back to today",lines:[["Cash received in year 2","$121.00M"],["Discount rate","10%"],["Two-year growth factor","1.10² = 1.21"],["Present value","$121M ÷ 1.21 = $100M"]],takeaway:"The cash flow grew by exactly the required return, so $121M in two years and $100M today are economically equivalent at 10%."},
+    check:{q:"At a 10% discount rate, what is $110M received one year from now worth today?",options:[
+      {text:"$110M",correct:false,why:"This ignores the one-year wait and the required return."},
+      {text:"$100M",correct:true,why:"Correct. $110M ÷ 1.10 = $100M."},
+      {text:"$121M",correct:false,why:"That compounds forward for another year instead of discounting back to today."}
+    ]}
+  },
+  {
+    label:"Traditional DCF",
+    title:"Turn UFCF into enterprise value, then equity value",
+    intro:"A traditional DCF forecasts unlevered free cash flow for an explicit period, discounts each year, adds the value beyond that period, and then bridges from the whole business to shareholders.",
+    teach:[
+      "Enterprise value equals the present value of explicit-period UFCF plus the present value of terminal value. The perpetuity-growth terminal formula is final-year UFCF × (1 + g) ÷ (WACC − g), and it is valid only when WACC is greater than g.",
+      "Equity value equals enterprise value minus debt plus cash, with other claims or non-operating assets adjusted when material. For a single drug, explicitly model patent expiry and loss of exclusivity rather than letting a perpetual-growth formula hide a patent cliff."
+    ],
+    terms:[["Explicit forecast period","The years modeled one by one with specific revenue, margin, tax, and reinvestment assumptions. Five to ten years is common, but the period should be long enough for the business to approach a stable state."],["Terminal value","The value of all cash flow after the explicit forecast period. Because it often represents most of enterprise value, its growth and discount-rate assumptions require careful challenge."],["Terminal growth rate","The long-run rate used to grow cash flow after the explicit period in a perpetuity model. It must remain below WACC and should not exceed sustainable long-run economic growth."],["Finite-life value","Value calculated only through the remaining commercial or protected life of an asset. A single drug with a patent cliff may need an explicit finite forecast instead of a perpetual terminal value."],["Perpetuity","A stream of cash flow assumed to continue indefinitely. The Gordon-growth formula is a perpetuity and is appropriate only when a business can reach a stable, sustainable state."],["Terminal-value share","The percentage of enterprise value contributed by discounted terminal value. A high share signals that the answer depends heavily on long-run assumptions."]],
+    flow:[["1","Forecast UFCF","Years 1–5"],["2","Discount each year","Use WACC"],["3","Add terminal value","Value after year 5"],["4","Enterprise value","Explicit PV + terminal PV"],["5","Equity value","EV − debt + cash"]],
+    formula:"Terminal value = final UFCF × (1 + g) ÷ (WACC − g)   ·   Equity value = EV − debt + cash",
+    worked:{title:"The default model, explained",lines:[["PV of five years of UFCF","$380.68M"],["Terminal value at year 5","$1,563.38M"],["PV of terminal value","$970.74M"],["Enterprise value","$1,351.42M"],["Less debt; add cash","−$150M + $80M"],["Equity value","$1,281.42M"]],takeaway:"Most of the value comes from terminal value, so WACC, terminal growth, lifecycle, and LOE assumptions deserve more attention than decimal-point precision."},
+    check:{q:"Enterprise value is $500M, debt is $120M, and cash is $20M. What is equity value?",options:[
+      {text:"$380M",correct:false,why:"This subtracts debt but forgets to add excess cash."},
+      {text:"$600M",correct:false,why:"Debt is a claim senior to equity and must be subtracted, not added."},
+      {text:"$400M",correct:true,why:"Correct. $500M − $120M + $20M = $400M."}
+    ]}
+  },
+  {
+    label:"Drug revenue",
+    title:"Build the revenue forecast before trusting the DCF",
+    intro:"A DCF cannot rescue a weak commercial forecast. In life sciences, revenue should come from a patient funnel and an explicit product lifecycle, not a top-down market-size headline.",
+    teach:[
+      "Start with diagnosed patients, then apply clinical eligibility, access clearance, treatment rate or market share, persistence, and net price. Gross-to-net converts list price into recognized net sales after rebates, discounts, and other deductions.",
+      "Revenue is a curve. Model launch uptake, time to peak, competition, supply, indication expansion, persistence, and loss of exclusivity. A slow launch destroys value even if eventual peak sales is unchanged because cash arrives later and may leave fewer protected years."
+    ],
+    terms:[["Patient funnel","A sequence that narrows the broad disease population into patients who are diagnosed, clinically eligible, able to gain access, treated, and persistent. Each conversion step needs its own evidence."],["Clinical eligibility","The share of diagnosed patients who fit the approved indication, biomarker, severity, contraindication, and other clinical criteria required for treatment."],["Access clearance","The share of eligible patients who can actually obtain treatment after payer coverage, prior authorization, referral, site capacity, affordability, and distribution barriers are considered."],["Gross-to-net","The percentage deductions from list-price sales for rebates, discounts, chargebacks, returns, assistance, and other adjustments. It turns gross billed sales into recognized net revenue."],["Net price","The average revenue retained per treated patient after gross-to-net deductions. A forecast should use net price, not list price, unless deductions are modeled separately."],["Uptake curve","The path from launch to peak penetration. It reflects diagnosis, awareness, access, prescriber adoption, supply, competition, and persistence, so two products with the same peak sales can have different values if one ramps more slowly."],["Peak sales","The highest annual net sales expected before maturity or decline. Peak sales alone is not a valuation because timing, margins, reinvestment, patent life, and risk determine how much cash those sales create."],["Loss of exclusivity (LOE)","The point when patent or regulatory protection no longer blocks generic or biosimilar competition. LOE can cause rapid price and share erosion, so a drug DCF should model the patent cliff explicitly."]],
+    flow:[["1","Diagnosed","120,000"],["2","Eligible","× 60%"],["3","Access-cleared","× 55%"],["4","Peak share","× 20%"],["5","Net price","× $60,000"]],
+    formula:"Peak net sales = diagnosed × eligibility × access × share × annual net price",
+    worked:{title:"Build peak sales from patients",lines:[["Diagnosed patients","120,000"],["Eligible and access-cleared","120,000 × 60% × 55% = 39,600"],["Treated at 20% share","7,920 patients"],["Net annual price","$60,000"],["Peak net sales","$475.2M"]],takeaway:"The headline population is not the revenue base. Every conversion step needs clinical, access, and commercial evidence."},
+    check:{q:"There are 10,000 diagnosed patients, 50% are eligible, 60% gain access, peak share is 20%, and annual net price is $50,000. What are peak net sales?",options:[
+      {text:"$30M",correct:true,why:"Correct. 10,000 × 50% × 60% × 20% × $50,000 = $30M."},
+      {text:"$150M",correct:false,why:"This stops at the access-cleared pool and forgets the 20% market share."},
+      {text:"$100M",correct:false,why:"This applies share to all diagnosed patients and ignores eligibility and access."}
+    ]}
+  },
+  {
+    label:"Biotech rNPV",
+    title:"Add clinical probability without double-counting risk",
+    intro:"A pre-approval asset may never produce commercial cash flow. rNPV makes that binary risk explicit instead of pretending the product is already approved.",
+    teach:[
+      "Multiply the remaining phase probabilities to get cumulative approval probability. Commercial value requires success through every gate. Each development cost, however, is weighted only by the probability of reaching the stage when it is spent. A Phase 2 cost committed today is 100%; a Phase 3 cost is paid only if Phase 2 passes.",
+      "This calculator starts with approved commercial value already discounted to today, then applies probability and stage-gated costs. A full rNPV model forecasts each year's cash flow, discounts it for time, and applies the probability relevant to that year. Do not probability-weight the cash flows and also use an extreme discount rate for the same technical risk."
+    ],
+    terms:[["PTRS or PoS","Probability of technical and regulatory success. It estimates the chance that a program passes a specific clinical or regulatory gate based on evidence, stage, modality, indication, and benchmark data."],["Conditional probability","The chance of passing one gate assuming the program has reached that gate. A Phase 3 success rate, for example, is conditional on Phase 2 already having succeeded."],["Cumulative probability","The chance of reaching a later outcome through every remaining gate. It is calculated by multiplying the conditional probabilities, not by adding them."],["Expected value","A probability-weighted average across possible outcomes. In a simple binary case, expected commercial value equals the success payoff multiplied by the probability of success."],["Stage-gated cost","A cost paid only if the program reaches the relevant stage. A cost committed today receives 100% weight, while a later Phase 3 cost is weighted only by the probability of reaching Phase 3."],["Approved commercial value","The present value of commercial cash flow assuming the product is approved. It must already reflect launch timing, access, competition, margins, lifecycle, and discounting before clinical probability is applied in this simplified model."],["Risk-adjusted NPV (rNPV)","Present value after technical and regulatory uncertainty is modeled explicitly. A full rNPV discounts each cash flow for time, weights it by the probability relevant to that year or stage, and subtracts probability-weighted development costs."]],
+    flow:[["1","Phase 2 pass","40%"],["2","Phase 3 pass","55%"],["3","Approval","90%"],["4","Cumulative approval","19.8%"],["5","Subtract expected costs","At each gate"]],
+    formula:"rNPV = approved value × cumulative PoS − stage-gated expected costs + separate platform value",
+    worked:{title:"Value a Phase 2 asset",lines:[["Approved commercial value","$3,200M"],["Cumulative approval probability","40% × 55% × 90% = 19.8%"],["Risk-adjusted commercial value","$633.6M"],["Expected costs","$120M + 40% × $200M + 40% × 55% × $10M = $202.2M"],["Lead-asset rNPV","$431.4M"]],takeaway:"Revenue needs every gate to succeed. Downstream costs disappear if the program fails early, so each cost uses its own reach probability."},
+    check:{q:"Approved value is $1,000M. Pass rates are 50%, 60%, and 90%. Costs are $50M now, $100M after the first pass, and $20M after the second pass. What is rNPV?",options:[
+      {text:"$189M",correct:false,why:"This incorrectly weights the $50M Phase 2 cost committed now by the 50% Phase 2 pass rate. That cost is paid with 100% certainty at the current stage."},
+      {text:"$164M",correct:true,why:"Correct. Value is $270M. Expected costs are $50M + $50M + $6M = $106M, leaving $164M."},
+      {text:"$270M",correct:false,why:"That is risk-adjusted commercial value before subtracting development costs."}
+    ]}
+  },
+  {
+    label:"Choose the model",
+    title:"Use DCF and rNPV together, then make the recommendation",
+    intro:"The model follows the asset's risk. A marketed product and a Phase 2 drug should not be forced into one undifferentiated spreadsheet.",
+    teach:[
+      "Use traditional DCF for approved or operating assets whose remaining uncertainty is mainly commercial and financial. Use rNPV for pre-approval assets with binary technical and regulatory gates. A company with both is usually valued with sum-of-the-parts: value each component with the appropriate method, then add cash and subtract debt and shared liabilities.",
+      "In an interview, do not present one precise number as fact. State a range, name the two assumptions that move it most, show the evidence behind the base case, and recommend a structure or next step that protects the downside."
+    ],
+    terms:[["Marketed asset","An approved product or operating business whose main uncertainties are commercial, competitive, operational, and financial. Its forecastable operating cash flows are usually valued with traditional DCF."],["Pipeline asset","A pre-approval program that can fail at clinical or regulatory gates before generating commercial cash. Its binary development risk is usually modeled explicitly with rNPV."],["Traditional DCF","A valuation method that forecasts cash flow, discounts each period at a risk-appropriate rate, and adds terminal or remaining lifecycle value. It works best when operating cash flow can be forecast with reasonable structure."],["Sum of the parts (SOTP)","A valuation that models each business, marketed product, pipeline asset, or platform separately with the method that fits its risk, then combines the pieces and bridges to equity value."],["Deal price","The amount a buyer pays or a seller asks. Price can differ from standalone value because of competition, synergies, control, negotiation leverage, taxes, and deal structure."],["Downside protection","A deal or decision mechanism that limits loss if uncertainty resolves badly, such as milestones, contingent payments, staged investment, a pilot, a walk-away price, or a stop rule."],["Double-counting risk","Penalizing the same uncertainty more than once, such as probability-weighting technical failure and also using an extreme discount rate for that identical risk. Each risk should have one clear home in the model."],["Recommendation","The decision the analysis supports, stated with the value range, key drivers, risks, and next action. A strong recommendation also names what new evidence would change it."]],
+    flow:[["1","Classify the asset","Marketed or pipeline?"],["2","Choose the method","DCF or rNPV"],["3","Value separately","Keep assumptions visible"],["4","Add the parts","Include cash and debt"],["5","Challenge","Sensitivity and downside protection"]],
+    formula:"SOTP equity value = DCF of marketed assets + rNPV of pipeline + cash − debt − other claims",
+    worked:{title:"One company, two valuation methods",lines:[["Marketed-product DCF","$900M"],["Phase 2 asset rNPV","$250M"],["Cash","+$100M"],["Debt","−$150M"],["SOTP equity value","$1,100M"]],takeaway:"The marketed product is not probability-weighted like a trial asset, and the trial asset is not treated as if approval were certain."},
+    check:{q:"A biotech owns one marketed product and one Phase 2 asset. Which approach is most defensible?",options:[
+      {text:"Use one DCF for both and raise WACC until the Phase 2 risk feels conservative.",correct:false,why:"A single discount rate does not represent binary clinical failure cleanly and hides the source of risk."},
+      {text:"Use full approved value for the Phase 2 asset because the marketed product already diversifies the company.",correct:false,why:"Diversification does not make the pipeline asset's technical and regulatory risk disappear."},
+      {text:"DCF the marketed product, rNPV the Phase 2 asset, then combine them in SOTP and bridge to equity.",correct:true,why:"Correct. Each asset is matched to the risk it actually has."}
+    ]}
+  }
+];
+const VAL_EXTRA_FOUNDATIONS={
+  gross:{
+    label:"Revenue & margin",
+    title:"Build revenue and gross profit from volume, price, and product cost",
+    intro:"Revenue becomes useful only when you can explain what created it and how much direct product cost it carries. This lesson turns treated patients and net price into revenue, then revenue into gross profit and gross margin.",
+    teach:[
+      "For a single therapy, start with treated patients or units and multiply by average net price. If a company has multiple products, changes in volume, price, foreign exchange, and product mix can all move revenue even when total units are flat.",
+      "Cost of products sold captures the direct cost of making and delivering the product. Gross profit is the dollars left after that direct cost; gross margin converts the dollars into a percentage so products or periods of different size can be compared."
+    ],
+    terms:[["Cost of products sold (COGS)","Direct cost associated with the products recognized as revenue, including manufacturing, certain royalties, distribution, and inventory charges. It does not normally include corporate R&D or SG&A."],["Gross profit","Net revenue minus COGS. It measures the dollars available to fund R&D, sales, administration, financing, tax, and profit after direct product cost."],["Gross margin","Gross profit divided by net revenue. The percentage shows how much of each revenue dollar remains after direct product cost."],["Net revenue","Revenue recognized after rebates, discounts, returns, chargebacks, and other gross-to-net deductions. It is the top line normally used in a product forecast."],["Volume","The number of treated patients, prescriptions, doses, or units recognized during the period. Volume growth can come from more eligible patients, access, share, persistence, or indications."],["Price and mix","Price is revenue per comparable unit; mix is the change caused by selling different products, strengths, channels, or geographies with different economics. Both can move revenue without a change in total units."]],
+    flow:[["1","Treated volume","10,000 patients"],["2","Net price","$50,000 each"],["3","Net revenue","$500M"],["4","Less COGS","$150M"],["5","Gross profit","$350M"],["6","Gross margin","70%"]],
+    formula:"Net revenue = volume × average net price   ·   Gross margin = (net revenue − COGS) ÷ net revenue",
+    worked:{title:"From treated patients to gross margin",lines:[["Treated patients","10,000"],["List price","$60,000"],["Gross-to-net deductions","16.7%"],["Average net price","$50,000"],["Net revenue","$500.0M"],["COGS","−$150.0M"],["Gross profit","$350.0M"],["Gross margin","70.0%"]],takeaway:"The forecast separates commercial demand from product economics. A price increase can raise revenue while rebates or manufacturing cost prevent gross margin from improving."},
+    check:{q:"A therapy treats 8,000 patients at a $40,000 average net price. COGS is $96M. What are net revenue, gross profit, and gross margin?",options:[
+      {text:"$320M revenue, $224M gross profit, 70% gross margin",correct:true,why:"Correct. Revenue is 8,000 × $40,000 = $320M; gross profit is $320M − $96M = $224M; margin is $224M ÷ $320M = 70%."},
+      {text:"$320M revenue, $96M gross profit, 30% gross margin",correct:false,why:"$96M is COGS, not gross profit. Gross profit is the amount remaining after COGS."},
+      {text:"$224M revenue, $320M gross profit, 70% gross margin",correct:false,why:"This reverses revenue and gross profit. Revenue is calculated before subtracting COGS."}
+    ]}
+  },
+  statements:{
+    label:"Three statements",
+    title:"Read the income statement, balance sheet, and cash-flow statement together",
+    intro:"No single statement tells the whole story. The income statement measures performance over a period, the balance sheet records resources and claims at one date, and the cash-flow statement explains how cash changed.",
+    teach:[
+      "A credit sale raises revenue and net income on the income statement and creates accounts receivable on the balance sheet. Until the customer pays, cash has not increased. The cash-flow statement removes that receivables increase when reconciling net income to operating cash flow.",
+      "The three statements connect. Net income flows into retained earnings, non-cash expenses affect asset balances, working-capital accounts explain timing, and investing and financing sections capture capex, acquisitions, borrowing, repayment, dividends, and share activity."
+    ],
+    terms:[["Net income","The final accounting profit for the period after operating costs, financing, other items, and tax. It links the income statement to retained earnings and is the starting point for indirect-method OCF."],["Income statement","A period statement that reports revenue, expenses, and profit from the top line to net income. It records economic activity under accrual rules, not only cash receipts and payments."],["Balance sheet","A point-in-time statement of assets, liabilities, and equity. Receivables, inventory, payables, debt, and cash show where timing and financing differences sit."],["Cash-flow statement","A period statement reconciling beginning cash to ending cash through operating, investing, and financing activities."],["Operating cash flow (OCF or CFO)","Cash generated by the operating section of the cash-flow statement. Under the indirect method it reconciles net income for non-cash items and working-capital changes."],["Cash conversion","The ability to turn accounting profit into cash. A simple diagnostic compares OCF with net income, then investigates working capital, non-cash items, and one-time effects."]],
+    flow:[["Sale","Revenue + profit"],["If unpaid","Receivable rises"],["OCF bridge","Subtract AR increase"],["Collection","Receivable falls"],["Cash","Arrives later"]],
+    formula:"Indirect OCF = net income + non-cash expenses − increases in operating assets + increases in operating liabilities",
+    worked:{title:"Reconcile net income to operating cash",lines:[["Net income","$90M"],["Add D&A","+$20M"],["Accounts receivable increase","−$25M"],["Accounts payable increase","+$5M"],["Simplified operating cash flow","$90M"]],takeaway:"The company earned $90M and generated $90M OCF, but only after a $20M non-cash add-back was offset by $20M of net working-capital cash use."},
+    check:{q:"Net income is $50M, D&A is $10M, receivables rise $8M, inventory falls $3M, and payables fall $2M. What is simplified OCF?",options:[
+      {text:"$48M",correct:false,why:"This misses the $10M D&A add-back and does not apply every working-capital sign correctly."},
+      {text:"$53M",correct:true,why:"Correct. $50M + $10M − $8M + $3M − $2M = $53M."},
+      {text:"$63M",correct:false,why:"This appears to add all working-capital movements. Receivables rising and payables falling both use cash."}
+    ]}
+  },
+  wacc:{
+    label:"Cost of capital",
+    title:"Build WACC from the required returns on equity and debt",
+    intro:"Discounting needs a rate that matches the cash flow. WACC combines what equity investors require with the after-tax cost of debt, using current market-value weights.",
+    teach:[
+      "The cost of equity is often estimated with CAPM: risk-free rate plus beta times the equity risk premium. The cost of debt begins with the company's borrowing rate and is reduced for the interest tax shield when appropriate.",
+      "Use WACC with unlevered free cash flow because both refer to all capital providers. Use the cost of equity with levered equity cash flow. The goal is consistency, not finding one universally correct percentage."
+    ],
+    terms:[["Cost of capital","The return investors require for providing money to a project or business with comparable risk. It is the opportunity cost used to discount future cash."],["Cost of equity","The return shareholders require for bearing residual business risk. CAPM estimates it from the risk-free rate, beta, and equity risk premium."],["Cost of debt","The yield lenders require before tax. WACC uses the after-tax debt cost when interest is tax deductible."],["Capital structure","The mix of debt and equity used to fund the business. WACC weights each required return by its share of total market value."],["Interest tax shield","The tax reduction created when deductible interest lowers taxable income. It is why the debt component of WACC is commonly multiplied by one minus the tax rate."],["WACC","Weighted average cost of capital. It is the blended required return for cash flow available to debt and equity together."]],
+    flow:[["1","Cost of equity","12.0%"],["2","After-tax debt","6% × 75%"],["3","Equity weight","80%"],["4","Debt weight","20%"],["5","WACC","10.5%"]],
+    formula:"WACC = E ÷ (D + E) × Re + D ÷ (D + E) × Rd × (1 − tax rate)",
+    worked:{title:"Weight equity and debt at market value",lines:[["Equity market value","$80M"],["Debt market value","$20M"],["Cost of equity","12.0%"],["Pretax cost of debt","6.0%"],["Tax rate","25.0%"],["Equity contribution","80% × 12% = 9.60%"],["Debt contribution","20% × 6% × 75% = 0.90%"],["WACC","10.50%"]],takeaway:"Debt is cheaper in this example, but adding debt indefinitely will not keep lowering WACC because financial risk eventually raises both debt and equity required returns."},
+    check:{q:"Equity is $60M, debt is $40M, cost of equity is 10%, pretax debt cost is 7%, and tax is 21%. What is WACC?",options:[
+      {text:"8.80%",correct:false,why:"This uses the pretax debt contribution and ignores the interest tax shield."},
+      {text:"7.90%",correct:false,why:"This understates the weighted equity and after-tax debt contributions."},
+      {text:"8.21%",correct:true,why:"Correct. 60% × 10% + 40% × 7% × 79% = 6.00% + 2.212% = 8.212%."}
+    ]}
+  },
+  equity:{
+    label:"Value bridge",
+    title:"Move from enterprise value to equity value, per-share value, and a range",
+    intro:"DCF first values the operating business for all capital providers. Investors and deal teams then adjust cash, debt, and other claims to determine the value attributable to shareholders.",
+    teach:[
+      "Enterprise value is independent of the initial debt-and-equity split because it comes from UFCF. Equity value is the residual after debt and other senior claims are subtracted and non-operating cash or assets are added.",
+      "A useful valuation is a range, not one point. Sensitivity changes WACC, terminal growth, peak sales, margin, or PoS and shows which assumptions can reverse the recommendation."
+    ],
+    terms:[["Enterprise value (EV)","Value of the operating business available to debt and equity capital. In DCF it equals discounted explicit UFCF plus discounted remaining value."],["Net debt","Debt minus cash and cash-like assets. Subtracting net debt is the standard first bridge from enterprise value to equity value."],["Equity value","Residual value for shareholders after debt and other senior claims are satisfied and excess cash is added."],["Per-share value","Equity value divided by diluted shares outstanding. Options, restricted stock, and convertible securities can affect the diluted share count."],["Sensitivity analysis","A structured test of how valuation changes as important assumptions move across defensible ranges."],["Valuation range","Downside, base, and upside values tied to explicit evidence and assumptions rather than one falsely precise estimate."]],
+    flow:[["Explicit PV","$381M"],["Terminal PV","+$971M"],["Enterprise value","$1,351M"],["Net debt","−$70M"],["Equity value","$1,281M"],["÷ shares","Per-share value"]],
+    formula:"Equity value = enterprise value − debt + cash − other senior claims   ·   Per-share value = equity value ÷ diluted shares",
+    worked:{title:"Bridge the default DCF to shareholders",lines:[["Enterprise value","$1,351.42M"],["Less debt","−$150.00M"],["Add cash","+$80.00M"],["Equity value","$1,281.42M"],["Illustrative diluted shares","100.00M"],["Implied value per share","$12.81"]],takeaway:"The operating forecast creates EV. Financing and non-operating items create the bridge. Changing debt does not retroactively change the operating cash flow already valued."},
+    check:{q:"Enterprise value is $900M, debt is $250M, cash is $50M, and diluted shares are 100M. What are equity value and per-share value?",options:[
+      {text:"$700M equity value and $7.00 per share",correct:true,why:"Correct. $900M − $250M + $50M = $700M; $700M ÷ 100M shares = $7.00."},
+      {text:"$600M equity value and $6.00 per share",correct:false,why:"This subtracts debt but does not add the $50M cash correctly."},
+      {text:"$1,100M equity value and $11.00 per share",correct:false,why:"Debt is a senior claim and should be subtracted, not added."}
+    ]}
+  }
+};
+VAL_FOUNDATIONS.splice(1,0,VAL_EXTRA_FOUNDATIONS.gross);
+VAL_FOUNDATIONS.splice(3,0,VAL_EXTRA_FOUNDATIONS.statements);
+VAL_FOUNDATIONS.splice(6,0,VAL_EXTRA_FOUNDATIONS.wacc);
+VAL_FOUNDATIONS.splice(8,0,VAL_EXTRA_FOUNDATIONS.equity);
+const VAL_TERM_EXAMPLES={
+  "Revenue":"A therapy treats 10,000 patients in one year at an average net price of $50,000. Recognized product revenue is 10,000 × $50,000 = $500M before any expense is subtracted.",
+  "Profit":"From $500M revenue, subtracting $150M product cost leaves $350M gross profit. Subtracting $200M of R&D and SG&A leaves $150M EBITDA; subtracting $20M D&A leaves $130M operating profit.",
+  "Gross profit":"If annual net revenue is $500M and manufacturing plus distribution cost is $150M, gross profit is $350M. R&D, sales, administration, interest, and tax still remain below this line.",
+  "Net income":"If EBIT is $130M, interest is $10M, and tax is 25%, pretax income is $120M and net income is $90M. The company can still collect a different amount of cash that year.",
+  "Cash":"A distributor receives $50M of medicine in December but pays in January. December can show $50M of revenue and related profit, while the cash arrives the following month.",
+  "Valuation model":"A biotech deciding whether to license an asset compares the seller's upfront ask with discounted, probability-adjusted future cash and tests how the answer changes if launch, access, or trial assumptions move.",
+  "Operating expenses":"A company with $500M revenue spends $150M on product cost, $120M on R&D, and $80M on sales and administration. Those operating costs determine the profit subtotal before financing and tax.",
+  "EBITDA":"Using $500M revenue, $150M product cost, $120M R&D, and $80M SG&A, EBITDA is $150M. That figure still ignores D&A, tax, capex, and working-capital cash needs.",
+  "D&A":"A $100M manufacturing line may be paid for when it is built, then create $10M of annual depreciation expense for ten years. The $10M reduces profit each year without another $10M cash payment that year.",
+  "Operating profit (EBIT)":"If EBITDA is $150M and D&A is $20M, EBIT is $130M. Interest is not subtracted because EBIT measures the operating business before financing.",
+  "NOPAT":"With $130M EBIT and a 25% operating tax rate, NOPAT is $130M × 75% = $97.5M. This is the after-tax operating-profit starting point for UFCF.",
+  "Interest expense":"A company with $50M of debt at a 6% rate pays about $3M annual interest. That lowers pretax and net income, but it does not change EBIT or NOPAT.",
+  "Operating cash flow (OCF or CFO)":"If net income is $90M, D&A is $20M, and receivables increase by $25M with no other changes, simplified operating cash flow is $90M + $20M − $25M = $85M.",
+  "Capital expenditure (capex)":"A manufacturer pays $40M this year for a new fill-finish line. The full $40M is a current cash outflow even though accounting records depreciation gradually in later years.",
+  "Net working capital (NWC)":"If operating receivables are $60M, inventory is $40M, and payables are $30M, NWC is $60M + $40M − $30M = $70M.",
+  "Change in NWC":"If NWC rises from $70M to $90M as inventory and receivables grow, the $20M increase is a use of cash. If NWC falls by $20M, that amount is released back into cash flow.",
+  "Unlevered free cash flow (UFCF)":"With $97.5M NOPAT, $20M D&A, $40M capex, and a $20M increase in NWC, UFCF is $97.5M + $20M − $40M − $20M = $57.5M.",
+  "Levered free cash flow":"Starting from UFCF, subtract after-tax interest and required debt repayment, then include new borrowing where appropriate. The remaining cash is available only to equity holders and is lower when financing obligations are heavy.",
+  "Reinvestment":"A growing biologic needs a new cold-chain warehouse and more inventory before sales expand. Those capex and NWC outflows reduce current free cash flow but can support larger future cash flow.",
+  "Time value of money":"At a 10% required return, $100M today can grow to $110M in one year. Therefore receiving only $100M next year is worth less than receiving $100M today.",
+  "Future value":"Investing $100M at 10% produces $110M after one year and $121M after two years: $100M × 1.10² = $121M.",
+  "Present value":"If $121M arrives in two years and the required return is 10%, its present value is $121M ÷ 1.10² = $100M.",
+  "Discount rate":"At 10%, a $100M year-5 cash flow is worth about $62.1M today. At 15%, it is worth only about $49.7M because investors require more return for time and risk.",
+  "Discount factor":"At 10%, the year-3 discount factor is 1 ÷ 1.10³ = 0.751. A $100M year-3 cash flow therefore contributes about $75.1M of present value.",
+  "WACC":"If funding is 80% equity requiring 12% and 20% debt costing 6%, with a 25% tax rate, WACC is 80% × 12% + 20% × 6% × 75% = 10.5%.",
+  "Cost of capital":"If a project is expected to return 8% while comparable-risk capital requires 10.5%, the project does not compensate investors for its opportunity cost and destroys value unless the plan improves.",
+  "Explicit forecast period":"A launch model may forecast years 1 through 10 separately, with patient uptake, net price, margins, reinvestment, and LOE timing specified for each year before any remaining value is estimated.",
+  "Terminal value":"If year-5 UFCF is $100M, WACC is 10%, and terminal growth is 2%, terminal value at year 5 is $100M × 1.02 ÷ 8% = $1,275M before discounting back to today.",
+  "Terminal growth rate":"A mature company might use 2% long-run growth rather than a launch-stage 20% rate. Using 20% forever when WACC is 10% makes the perpetuity formula invalid and economically impossible.",
+  "Enterprise value (EV)":"If explicit-period UFCF contributes $300M of present value and discounted terminal value contributes $700M, enterprise value is $1,000M before debt and cash are considered.",
+  "Net debt":"If a company has $250M debt and $70M cash, net debt is $180M. Subtracting $180M from enterprise value gives the standard first-pass bridge to equity value.",
+  "Equity value":"With $1,000M enterprise value and $180M net debt, equity value is $820M. If 100M diluted shares exist, implied value is $8.20 per share.",
+  "Sensitivity analysis":"A valuation team might test WACC from 9% to 11% and terminal growth from 1% to 3%. The resulting value grid shows whether the recommendation survives reasonable assumptions or depends on one optimistic cell.",
+  "Patient funnel":"Starting with 120,000 diagnosed patients, 60% eligibility, 55% access, and 20% peak share leaves 7,920 treated patients: 120,000 × 60% × 55% × 20%.",
+  "Clinical eligibility":"If 10,000 patients have the disease but only 30% carry the required biomarker and meet safety criteria, the clinically eligible pool is 3,000, not 10,000.",
+  "Access clearance":"If 3,000 patients are eligible but only 70% obtain coverage, complete prior authorization, and reach a treatment site, 2,100 patients clear access.",
+  "Gross-to-net":"A therapy with a $100,000 list price and 20% total rebates, discounts, and other deductions has an average net price of about $80,000.",
+  "Net price":"If the list price is $100,000 and gross-to-net deductions are $20,000 per treated patient, the model should multiply patient volume by the $80,000 net price.",
+  "Uptake curve":"A new therapy may capture 5% of eligible patients in year 1, 12% in year 2, and 20% in year 3. Reaching the same 20% peak one year later lowers value because cash arrives later.",
+  "Peak sales":"At 7,920 treated patients and $60,000 annual net price, peak net sales are $475.2M. Margin, timing, reinvestment, and LOE still determine free cash flow and value.",
+  "Loss of exclusivity (LOE)":"A small-molecule product earning $500M before patent expiry might fall to $150M after generic entry. A drug DCF should model that erosion rather than assume stable perpetual growth.",
+  "PTRS or PoS":"An asset might have a 50% chance to pass Phase 2, 60% to pass Phase 3 after reaching it, and 90% to gain approval after Phase 3. Each percentage represents a separate gate.",
+  "Conditional probability":"Out of 100 similar programs entering Phase 2, 50 may reach Phase 3. If 60% of those 50 pass Phase 3, 30 reach filing; the 60% is conditional on having reached Phase 3.",
+  "Cumulative probability":"With 50% Phase 2, 60% Phase 3, and 90% approval probabilities, cumulative approval probability is 50% × 60% × 90% = 27%.",
+  "Expected value":"If approved commercial value is $1,000M and cumulative approval probability is 27%, risk-adjusted commercial value is $270M before development costs.",
+  "Stage-gated cost":"A $50M Phase 2 cost committed now receives 100% weight. A $100M Phase 3 cost reached only after a 50% Phase 2 pass receives $50M expected weight.",
+  "Approved commercial value":"A commercial DCF may value an approved product at $1,000M after modeling launch, access, margin, LOE, and time. A Phase 2 asset then applies clinical probability to that already-discounted approved-state value.",
+  "Risk-adjusted NPV (rNPV)":"With $1,000M approved value, 27% cumulative probability, and expected costs of $50M + $50M + $6M, rNPV is $270M − $106M = $164M.",
+  "Marketed asset":"An approved medicine with observable prescriptions, net price, margin, and remaining exclusivity can be forecast through operating cash flow and valued with DCF.",
+  "Pipeline asset":"A Phase 2 program can still fail before approval, so a forecast that assumes full commercial sales overstates value. rNPV keeps the clinical gates visible.",
+  "Traditional DCF":"A marketed-product model forecasts annual UFCF, discounts each year at WACC, and adds remaining lifecycle value. The analyst then subtracts net debt to bridge from EV to equity.",
+  "Sum of the parts (SOTP)":"A company with a $900M marketed-product DCF, $250M pipeline rNPV, $100M cash, and $150M debt has SOTP equity value of $1,100M.",
+  "Valuation range":"A team may present $1.1B base value, $700M downside value, and $1.5B upside value, with each case tied to specific launch, access, and clinical assumptions.",
+  "Downside protection":"Instead of paying $500M entirely upfront for a risky asset, a buyer might pay $100M now and the rest only after Phase 3 and approval milestones are achieved.",
+  "Double-counting risk":"If commercial cash is already multiplied by a 30% approval probability, using an extreme discount rate solely for the same clinical-failure risk penalizes that risk twice.",
+  "Recommendation":"Proceed only if price stays below the risk-adjusted value range, use milestones to protect clinical downside, and stop or renegotiate if the next readout fails the predefined efficacy threshold."
+};
+Object.assign(VAL_TERM_EXAMPLES,{
+  "Accrual accounting":"A $50M December shipment on credit creates December revenue and a $50M receivable. When the distributor pays in January, receivables fall and cash rises without recording the same revenue again.",
+  "Cost of products sold (COGS)":"If a product generates $500M net revenue and direct manufacturing, royalty, freight, and inventory charges total $150M, reported COGS is $150M before broader R&D and SG&A.",
+  "Gross margin":"With $500M net revenue and $150M COGS, gross profit is $350M and gross margin is $350M ÷ $500M = 70%. The company keeps 70 cents before broader operating costs for each revenue dollar.",
+  "Net revenue":"A therapy bills $600M at list price but records $100M of rebates, discounts, returns, and chargebacks. Net revenue is $500M, the amount used as the income-statement top line.",
+  "Volume":"If treated patients rise from 8,000 to 10,000 at unchanged net price, volume grows 25%. The analyst should trace whether access, share, persistence, or a new indication caused the increase.",
+  "Price and mix":"A portfolio sells the same total prescriptions, but a higher-priced specialty therapy becomes a larger share. Revenue can rise from favorable mix even when total volume is flat.",
+  "Income statement":"A 2025 income statement reports the revenue earned and expenses incurred from January through December, ending with net income for that period rather than the cash balance on December 31.",
+  "Balance sheet":"A company can show $100M cash, $60M receivables, $40M inventory, $30M payables, and $250M debt on one date. Those balances explain liquidity, working capital, and financing at that moment.",
+  "Cash-flow statement":"The statement starts with beginning cash, adds or subtracts operating, investing, and financing cash flows, and reconciles exactly to ending cash on the balance sheet.",
+  "Cash conversion":"If net income is $100M but OCF is $60M because receivables and inventory grew, cash conversion is weak for that period and the analyst should test whether the build is temporary or structural.",
+  "Cost of equity":"With a 4% risk-free rate, beta of 1.1, and 6% equity risk premium, CAPM gives 4% + 1.1 × 6% = 10.6% cost of equity.",
+  "Cost of debt":"If comparable company debt yields 6% and the tax rate is 25%, its WACC contribution uses a 4.5% after-tax debt cost before applying the debt weight.",
+  "Capital structure":"A company with $80B market equity and $20B market debt has 80% equity and 20% debt weights for a simplified WACC calculation.",
+  "Interest tax shield":"If annual interest is $3M and the tax rate is 25%, deductible interest can reduce tax by about $0.75M, making the after-tax interest cost $2.25M.",
+  "Finite-life value":"A drug expected to lose exclusivity after year 10 can be valued by forecasting cash through the erosion period and stopping when cash becomes immaterial instead of assuming the drug grows forever.",
+  "Perpetuity":"If a stable diversified business produces $100M sustainable FCF next year and WACC minus growth is 8%, a Gordon-growth perpetuity value is $100M ÷ 8% = $1.25B.",
+  "Terminal-value share":"If enterprise value is $1.35B and discounted terminal value is $0.97B, terminal value contributes about 72% of EV. The long-run assumptions therefore drive most of the answer.",
+  "Per-share value":"If equity value is $820M and diluted shares are 100M, implied value is $8.20 per share. Using basic shares instead would overstate value if options or awards dilute ownership.",
+  "Deal price":"A buyer may estimate standalone value at $1.0B but pay $1.2B because expected synergies are worth $300M and competition requires sharing part of that benefit with the seller.",
+  "Net present value (NPV)":"An investment costs $100M today and produces $30M, $40M, $50M, $40M, and $30M over five years. At 10%, the future cash is worth about $143.8M today, so NPV is about $43.8M."
+});
+const VAL_DEEP_DIVES=[
+  {
+    title:"Trace one dollar from a sale to cash",
+    intro:"The income statement is a staircase, not one profit number. Follow the same sale through each subtotal, then move to the cash-flow statement to see when money actually moved.",
+    steps:[
+      ["Recognize the top line","Revenue = units recognized × net price","Revenue answers how much was sold under accounting rules. It does not say how much the company kept or collected in cash."],
+      ["Pay for the product","Gross profit = revenue − cost of products sold","Gross profit shows product economics before R&D, sales, administration, financing, and tax."],
+      ["Run the business","Operating profit = gross profit − operating expenses","Operating profit includes the cost of running the company and D&A, but excludes interest and tax."],
+      ["Reach the bottom line","Net income = operating profit − interest ± other items − tax","Net income is accounting profit attributable after financing and tax. It can still differ sharply from cash."],
+      ["Reconcile to cash","OCF starts with net income, then adjusts non-cash items and working capital","A credit sale can raise revenue and profit now while receivables delay the cash until a later period."]
+    ],
+    anchor:{
+      title:"Public-company anchor: AbbVie 2023",
+      body:"AbbVie's official 2023 results show why every subtotal needs a name. These are reported figures, not a valuation estimate.",
+      facts:[["Net revenue","$54.318B","The top line before expenses."],["Operating earnings","$12.757B","Profit from operations after reported operating expenses."],["Pretax earnings","$6.250B","Lower after interest and other non-operating items."],["Income tax expense","$1.377B","Pretax earnings less reported tax implies about $4.873B after tax."]],
+      source:"AbbVie full-year 2023 financial results",url:"https://investors.abbvie.com/news-releases/news-release-details/abbvie-reports-full-year-and-fourth-quarter-2023-financial"
+    },
+    pitfalls:["Calling revenue, operating profit, and net income interchangeable.","Assuming a booked sale means the customer already paid.","Subtracting capex on the income statement instead of the cash-flow statement."],
+    consulting:"When a client says sales grew, ask whether gross margin, operating profit, working capital, and cash conversion improved too. Growth can consume cash."
+  },
+  {
+    title:"Derive operating profit and NOPAT without mixing in financing",
+    intro:"Enterprise valuation asks what the operations earn before debt and equity split the result. That is why the bridge stops at EBIT, applies operating tax, and deliberately leaves interest out.",
+    steps:[
+      ["Start above non-cash asset charges","EBITDA = revenue − cash-like operating costs","EBITDA is an operating subtotal, not free cash flow. It still ignores D&A, tax, capex, and working capital."],
+      ["Recognize asset consumption","EBIT = EBITDA − D&A","D&A is non-cash this period, but the assets it represents eventually require replacement. EBIT keeps that economic cost visible."],
+      ["Apply operating tax","NOPAT = EBIT × (1 − normalized tax rate)","The tax rate should reflect sustainable tax on operations, not a one-time reported rate distorted by unusual items."],
+      ["Keep financing separate","Do not subtract interest in NOPAT","Interest belongs to the later debt-and-equity allocation. Subtracting it here would mix operating value with capital structure."]
+    ],
+    anchor:{
+      title:"Public-company anchor: reported EBIT is not NOPAT",
+      body:"AbbVie reported $12.757B of 2023 operating earnings and $6.250B of pretax earnings. The gap includes financing and other non-operating items. AbbVie does not report NOPAT; an analyst derives and normalizes it.",
+      facts:[["Reported operating earnings","$12.757B","Closest reported operating-profit subtotal in this example."],["Reported pretax earnings","$6.250B","Includes financing and other non-operating effects."],["Analyst-created line","NOPAT","Use normalized operating tax on EBIT; do not copy net income." ]],
+      source:"AbbVie full-year 2023 financial results",url:"https://investors.abbvie.com/news-releases/news-release-details/abbvie-reports-full-year-and-fourth-quarter-2023-financial"
+    },
+    pitfalls:["Calling EBITDA cash flow.","Subtracting D&A twice: once in EBIT and again after NOPAT.","Using net income as NOPAT even though net income includes interest and non-operating items."],
+    consulting:"If two targets have identical operations but different debt, NOPAT should be comparable. Net income may differ because financing differs."
+  },
+  {
+    title:"Derive UFCF and reconcile it to the cash-flow statement",
+    intro:"A DCF needs cash after the business pays tax and reinvests, but before lenders and shareholders are paid. This is not automatically the same line a company reports as operating cash flow.",
+    steps:[
+      ["Start with after-tax operations","Begin with NOPAT","NOPAT removes financing but is still an accounting profit measure."],
+      ["Reverse the non-cash charge","Add D&A","D&A reduced EBIT without a same-period cash payment, so it is added back."],
+      ["Fund long-lived assets","Subtract capex","Capex is the actual current cash spent on facilities, equipment, and capitalized technology."],
+      ["Fund day-to-day growth","Subtract increase in NWC","More receivables or inventory ties up cash. More payables can temporarily release cash."],
+      ["Arrive at enterprise cash flow","UFCF = NOPAT + D&A − capex − ΔNWC","This cash belongs to debt and equity together and therefore pairs with WACC."]
+    ],
+    anchor:{
+      title:"Public-company anchor: Eli Lilly 2025 cash flow",
+      body:"Lilly's 2025 Form 10-K reported $16.813B of net cash from operations and $7.841B of property-and-equipment purchases. Subtracting the two gives a simple $8.972B OCF-minus-capex proxy, but that proxy is not automatically UFCF because reported OCF begins with net income and follows accounting classifications.",
+      facts:[["Cash from operations","$16.813B","Reported operating-section cash flow."],["Property and equipment purchases","$7.841B","Reported investing cash outflow for capex."],["Simple OCF − capex","$8.972B","Useful cash proxy, but not a complete UFCF derivation."]],
+      source:"Eli Lilly 2025 Form 10-K",url:"https://investor.lilly.com/static-files/0d64699c-0cc7-490e-9152-b2ba1de08634"
+    },
+    pitfalls:["Treating a decrease in NWC as a cash use instead of a release.","Calling OCF minus capex UFCF without checking interest, tax, and classification differences.","Ignoring capex because D&A is non-cash."],
+    consulting:"Ask whether growth is cash-accretive. A launch can raise profit while inventory, receivables, and manufacturing investment make UFCF negative."
+  },
+  {
+    title:"Build WACC, then discount one cash flow at a time",
+    intro:"WACC is not a number printed in the annual report. It is an analyst estimate of the return debt and equity investors require at current market values.",
+    steps:[
+      ["Estimate the equity return","Cost of equity = risk-free rate + beta × equity risk premium","The risk-free rate pays for time. Beta and the equity premium add compensation for systematic market risk."],
+      ["Estimate the debt return","After-tax cost of debt = borrowing rate × (1 − tax rate)","Interest can create a tax shield, so the debt component uses its after-tax cost in WACC."],
+      ["Use market-value weights","E/V and D/V, where V = E + D","Book values can be stale. WACC represents what current investors require, so market values are normally used."],
+      ["Combine the claims","WACC = E/V × Re + D/V × Rd × (1 − T)","The result is the opportunity cost for cash flow available to both debt and equity."],
+      ["Discount each period","PV of FCF in year t = FCFt ÷ (1 + WACC)^t","Later cash gets a smaller discount factor because investors wait and bear risk for longer."]
+    ],
+    anchor:{
+      title:"Real-world practice: WACC must be built",
+      body:"A 10-K supplies pieces such as debt, interest expense, tax disclosures, and share count. Market prices and capital-market assumptions supply the rest. The final WACC is an analyst judgment, so a consulting answer should show the inputs and sensitivity rather than quote an unexplained percentage.",
+      facts:[["Reported input","Debt and interest","Found in financial statements and notes."],["Market input","Equity value and risk assumptions","Observed or estimated from capital markets."],["Analyst output","WACC","Not a GAAP line and not identical for every project."]],
+      source:"Eli Lilly 2025 Form 10-K as an example of reported inputs",url:"https://investor.lilly.com/static-files/0d64699c-0cc7-490e-9152-b2ba1de08634"
+    },
+    pitfalls:["Using book equity instead of market equity without explanation.","Pairing WACC with levered equity cash flow.","Changing WACC to hide clinical risk that is already modeled with PoS."],
+    consulting:"If the recommendation changes when WACC moves from 10% to 10.5%, the real discussion is evidence and risk, not decimal precision."
+  },
+  {
+    title:"Assemble the DCF and challenge terminal value",
+    intro:"A DCF is the sum of discounted explicit cash flows plus the discounted value after the forecast. The mechanics are simple; the difficult work is building a credible forecast and a terminal assumption that matches the asset lifecycle.",
+    steps:[
+      ["Forecast annual UFCF","Model revenue, margin, tax, capex, and NWC year by year","For a drug, include launch uptake, net price, competition, indication expansion, and LOE rather than one smooth growth rate."],
+      ["Discount explicit years","Explicit PV = Σ UFCFt ÷ (1 + WACC)^t","Every year's cash is valued at the date it is expected to arrive."],
+      ["Estimate remaining value","TV = final UFCF × (1 + g) ÷ (WACC − g)","A perpetuity is appropriate only for a stable continuing business with WACC greater than g. A single drug often needs a finite lifecycle instead."],
+      ["Discount terminal value","PV of TV = TV ÷ (1 + WACC)^n","Terminal value is measured at the end of the explicit forecast, so it must also be brought back to today."],
+      ["Bridge to shareholders","Equity value = enterprise value − debt + cash − other claims","Enterprise value belongs to all capital providers; equity receives the residual."]
+    ],
+    anchor:{
+      title:"Public-company anchor: Humira shows why LOE matters",
+      body:"AbbVie reported $14.404B of global Humira revenue in 2023 and $8.993B in 2024, a 37.6% reported decline in 2024 amid biosimilar competition. A model that lets pre-LOE Humira cash grow forever would conceal the product's actual lifecycle.",
+      facts:[["2023 global Humira revenue","$14.404B","Already down materially after biosimilar entry."],["2024 global Humira revenue","$8.993B","A further 37.6% reported decline."],["DCF implication","Model the patent cliff","Do not bury LOE inside a perpetual terminal value."]],
+      source:"AbbVie full-year 2024 financial results",url:"https://investors.abbvie.com/news-releases/news-release-details/abbvie-reports-full-year-and-fourth-quarter-2024-financial"
+    },
+    pitfalls:["Forgetting to discount terminal value back from the final forecast year.","Using WACC less than or equal to terminal growth.","Allowing terminal value to hide a drug's patent cliff or finite exclusivity."],
+    consulting:"Report the percentage of enterprise value coming from terminal value. If it is 80%, the terminal assumptions deserve more discussion than the first-year decimal places."
+  },
+  {
+    title:"Build drug revenue from patients, not a market-size headline",
+    intro:"A life-sciences forecast should explain exactly how a person becomes a treated patient and how a treated patient becomes net revenue. Each conversion has a different evidence source and owner.",
+    steps:[
+      ["Define the starting population","Diagnosed patients, not total prevalence by default","Use the population the health system can identify during the forecast period."],
+      ["Apply clinical filters","Eligible = diagnosed × indication and biomarker fit","Label, severity, prior therapy, contraindications, and testing narrow the pool."],
+      ["Apply access and delivery","Access-cleared = eligible × coverage × referral × site capacity","Coverage approval does not guarantee referral, affordability, or an available treatment site."],
+      ["Apply adoption","Treated = access-cleared × treatment rate or share","Share should follow a launch ramp and reflect competition, supply, and prescriber behavior."],
+      ["Apply economics","Net revenue = treated patients × net price","Net price must include rebates, discounts, assistance, returns, and other gross-to-net deductions."],
+      ["Build the lifecycle","Forecast uptake, peak, persistence, competition, and LOE by year","Peak sales is one point on a curve, not the entire valuation."]
+    ],
+    anchor:{
+      title:"Public-company anchor: one product can move down a lifecycle fast",
+      body:"AbbVie's reported global Humira revenue fell from $14.404B in 2023 to $8.993B in 2024 after U.S. biosimilar entry. Revenue forecasting therefore needs both an uptake curve before peak and an erosion curve after exclusivity.",
+      facts:[["Commercial peak","Not a terminal state","Even a blockbuster eventually faces competition and access changes."],["2024 reported decline","37.6%","Price and volume can erode together after LOE."],["Model requirement","Year-by-year lifecycle","Do not multiply one peak-sales number by a perpetual margin."]],
+      source:"AbbVie full-year 2024 financial results",url:"https://investors.abbvie.com/news-releases/news-release-details/abbvie-reports-full-year-and-fourth-quarter-2024-financial"
+    },
+    pitfalls:["Using total prevalence as the treated population.","Multiplying patients by list price instead of net price.","Assuming the same peak sales has the same value regardless of ramp speed or protected years."],
+    consulting:"For every funnel percentage, ask what data supports it, who controls it, and what operational intervention could move it."
+  },
+  {
+    title:"Derive rNPV with stage-specific probability and timing",
+    intro:"A pre-approval asset has two clocks: the development clock determines when cash is spent, and the probability tree determines whether later costs and commercial cash are ever reached.",
+    steps:[
+      ["Value the approved state","Build a commercial DCF as if approval occurs","This approved-state value should already include launch timing, access, margins, LOE, and ordinary discounting."],
+      ["Multiply the gates","Cumulative PoS = P2 × P3 × approval","Commercial payoff requires every remaining gate to succeed, so conditional probabilities multiply."],
+      ["Weight each cost at its own gate","Expected cost = current Phase 2 cost + P(Phase 2 pass) × Phase 3 cost + P(Phase 2 and Phase 3 pass) × filing cost","A cost paid now is certain. A later cost disappears if the asset fails before reaching it."],
+      ["Respect timing","rNPV = Σ probability-weighted cash flow ÷ (1 + r)^t","Probability and time are separate. A $100M payoff six years away is not worth $100M today even after PoS."],
+      ["Avoid duplicate penalties","Give each risk one home","Technical failure belongs in PoS. Market risk and time belong in the cash forecast and discount rate."]
+    ],
+    anchor:{
+      title:"Real deal anchor: the BMS-Celgene CVR",
+      body:"Bristol Myers Squibb's Celgene deal gave each Celgene share one BMS share, $50 cash, and a potential $9 contingent value right only if three specified drugs achieved FDA approvals by set deadlines. Liso-cel missed its deadline, so the CVR expired. The structure made a binary approval-and-timing risk explicit instead of hiding it in one headline price.",
+      facts:[["Guaranteed consideration","1 BMS share + $50 cash","Paid at closing for the acquired business."],["Contingent consideration","Potential $9 per share","Required all three approval milestones on time."],["Observed outcome","CVR expired","One approval deadline was missed." ]],
+      source:"Bristol Myers Squibb acquisition FAQ and CVR status",url:"https://www.bms.com/investors/shareholder-services/shareholder-faq.html"
+    },
+    pitfalls:["Adding phase probabilities instead of multiplying them.","Weighting a cost already committed today by approval probability.","Applying PoS to cash and then using an extreme discount rate for the same clinical risk."],
+    consulting:"If buyer and seller disagree on PoS, a milestone can bridge the gap: less cash now, more cash only if the evidence arrives."
+  },
+  {
+    title:"Turn separate models into a decision and a deal structure",
+    intro:"Valuation is complete only when the model changes a choice. Classify each asset, combine the parts, compare value with price, and design the next action around the uncertainty.",
+    steps:[
+      ["Classify each component","Marketed, pipeline, platform, cash, debt, or other claim","Different components carry different cash-flow and failure risks."],
+      ["Match method to risk","DCF marketed assets; rNPV pre-approval assets","Do not force one discount rate to represent every source of uncertainty."],
+      ["Combine the parts","SOTP EV = sum of operating and asset values","Keep asset assumptions visible so one optimistic program cannot disappear inside a company total."],
+      ["Bridge to equity or price","Equity = EV + cash − debt − other claims","Value is what the asset is worth under assumptions. Price is what the counterparty asks or offers."],
+      ["Set the decision range","Compare downside, base, and upside with the proposed price","State the assumptions that move the recommendation and the evidence that would change them."],
+      ["Protect uncertainty","Use milestones, staged investment, pilots, or a walk-away price","Deal structure can allocate risk when parties agree on potential but disagree on probability or timing."]
+    ],
+    anchor:{
+      title:"Real deal anchor: guaranteed value plus pipeline contingency",
+      body:"BMS announced the Celgene acquisition at about $74B equity value and highlighted both existing franchises and six expected near-term launches. The consideration mixed guaranteed cash and stock with a $9 CVR tied to three regulatory milestones. That is valuation translated into risk allocation.",
+      facts:[["Headline equity value","About $74B","Price for the combined marketed and pipeline opportunity."],["Guaranteed component","Cash + BMS stock","Value transferred at closing."],["Risk-sharing component","Milestone CVR","Additional value only if specified approvals arrived on time."]],
+      source:"Bristol Myers Squibb announcement of the Celgene acquisition",url:"https://news.bms.com/news/details/2019/Bristol-Myers-Squibb-to-Acquire-Celgene-to-Create-a-Premier-Innovative-Biopharma-Company/default.aspx"
+    },
+    pitfalls:["Presenting one precise value without a range or sensitivity.","Treating value and negotiated price as the same concept.","Recommending a deal without a stop rule, milestone, or evidence plan for the main uncertainty."],
+    consulting:"A partner-ready answer says what to do, at what price or threshold, why, what can go wrong, and what new fact would reverse the recommendation."
+  }
+];
+const VAL_EXTRA_DEEP_DIVES={
+  gross:{
+    title:"Decompose growth before calling it a strong top line",
+    intro:"Two companies can report the same revenue growth with very different quality. Separate volume, net price, product mix, foreign exchange, and acquisitions, then test what direct product cost does to gross margin.",
+    steps:[
+      ["Build gross sales","Gross sales = recognized units × list price","This is a useful commercial starting point, but it is usually not the revenue reported on the income statement."],
+      ["Apply gross-to-net","Net revenue = gross sales − rebates − discounts − returns − other deductions","Access and contracting can cause net revenue to grow slower than list price or unit demand."],
+      ["Separate growth drivers","Revenue change = volume + price + mix + FX + acquired or divested products","The decomposition shows whether growth is repeatable and which team or market lever created it."],
+      ["Subtract direct product cost","Gross profit = net revenue − COGS","Manufacturing, royalties, freight, and inventory charges determine how much of the top line remains."],
+      ["Normalize for size","Gross margin = gross profit ÷ net revenue","A percentage allows comparison across periods and products with different revenue bases."]
+    ],
+    anchor:{
+      title:"Public-company anchor: derive AbbVie's 2023 gross margin",
+      body:"AbbVie's official 2023 results reported $54.318B net revenue and $20.415B cost of products sold. The filing does not label a gross-profit subtotal, but an analyst can derive $33.903B gross profit and about 62.4% gross margin from those reported lines.",
+      facts:[["Reported net revenue","$54.318B","Income-statement top line."],["Reported cost of products sold","$20.415B","Direct product-cost line as reported."],["Derived gross profit","$33.903B","Revenue minus cost of products sold."],["Derived gross margin","62.4%","Gross profit divided by revenue; analyst calculation."]],
+      source:"AbbVie full-year 2023 financial results",url:"https://investors.abbvie.com/news-releases/news-release-details/abbvie-reports-full-year-and-fourth-quarter-2023-financial"
+    },
+    pitfalls:["Using list-price sales as reported net revenue.","Calling revenue growth attractive without checking whether gross margin fell.","Comparing gross-profit dollars across companies without normalizing for revenue size."],
+    consulting:"If revenue rose 10% but gross profit rose only 2%, ask whether rebates, product mix, royalties, manufacturing cost, or inventory charges absorbed the growth."
+  },
+  statements:{
+    title:"Make the three statements explain the same business event",
+    intro:"The statements are a linked system. A strong analyst can take one event, show its income-statement effect, locate the balance-sheet account, and explain the cash-flow timing without memorizing isolated formulas.",
+    steps:[
+      ["Record economic activity","The income statement records revenue and expense when earned or incurred","A credit sale can create profit before cash collection."],
+      ["Store the timing difference","The balance sheet records receivables, inventory, payables, debt, and retained earnings","These accounts carry timing and financing differences from one period to the next."],
+      ["Reconcile profit to cash","Indirect OCF starts with net income and reverses non-cash and timing effects","D&A is added back; increases in operating assets are usually subtracted."],
+      ["Separate investment","The investing section records capex and acquisitions","Buying a facility uses cash now but reaches the income statement through depreciation over time."],
+      ["Separate financing","The financing section records borrowing, repayment, dividends, and share activity","Financing changes cash and capital structure without changing operating revenue."]
+    ],
+    anchor:{
+      title:"Public-company anchor: Lilly profit did not equal OCF",
+      body:"Lilly's 2025 Form 10-K reported $20.640B net income, $1.997B D&A, and $16.813B operating cash flow. OCF was below net income despite the non-cash D&A add-back because working-capital and other reconciliation items also mattered.",
+      facts:[["Reported net income","$20.640B","Income-statement bottom line."],["Reported D&A","$1.997B","Non-cash adjustment in the OCF reconciliation."],["Reported OCF","$16.813B","Cash generated by the operating section."],["Core lesson","Profit ≠ cash","Every reconciliation item must be traced."]],
+      source:"Eli Lilly 2025 Form 10-K",url:"https://investor.lilly.com/static-files/0d64699c-0cc7-490e-9152-b2ba1de08634"
+    },
+    pitfalls:["Adding a receivables increase to OCF instead of subtracting it.","Treating capex as an operating expense paid through the income statement immediately.","Assuming high net income guarantees high operating cash flow."],
+    consulting:"When a client's profit rises but cash falls, bridge the change through receivables, inventory, payables, non-cash items, capex, and financing before blaming the core business."
+  },
+  time:{
+    title:"Derive present value instead of memorizing a button",
+    intro:"Discounting is reverse compounding. First ask what return turns today's amount into the future amount; then divide the future cash by that same growth factor to bring it back to today.",
+    steps:[
+      ["Compound one period","FV1 = PV × (1 + r)","At 10%, $100 today becomes $110 after one year."],
+      ["Compound multiple periods","FVt = PV × (1 + r)^t","At 10%, $100 becomes $121 after two years because year-2 return is earned on $110, not only the original $100."],
+      ["Reverse the equation","PV = FVt ÷ (1 + r)^t","Dividing removes each period of required return and converts future cash into today's dollars."],
+      ["Read the discount factor","Discount factor = 1 ÷ (1 + r)^t","At 10% in year 3, the factor is 0.751, so each future dollar contributes about 75 cents of present value."],
+      ["Connect timing to strategy","A delayed launch loses value even if peak sales is unchanged","Cash arrives later and may leave fewer years before competition or LOE."]
+    ],
+    anchor:{
+      title:"Real deal anchor: timing determined whether the CVR paid",
+      body:"The BMS-Celgene CVR offered a potential $9 per share only if specified approvals arrived by fixed dates. Liso-cel missed its deadline and the CVR expired. This was an all-or-nothing contract rather than a DCF, but it makes the economic importance of timing unmistakable.",
+      facts:[["Potential payment","$9 per CVR","Value depended on future events."],["Timing condition","Approval deadlines","The outcome required both success and on-time success."],["Observed outcome","Expired","A missed deadline eliminated the contingent payment."]],
+      source:"Bristol Myers Squibb acquisition FAQ and CVR status",url:"https://www.bms.com/investors/shareholder-services/shareholder-faq.html"
+    },
+    pitfalls:["Multiplying by one plus the rate when the task asks for present value.","Using one-year discounting for a multi-year cash flow.","Saying launch delay does not matter because eventual peak sales is unchanged."],
+    consulting:"A delay has at least two effects: future cash is discounted for longer, and the asset may have fewer protected commercial years. Quantify both."
+  },
+  equity:{
+    title:"Keep enterprise value, equity value, and transaction price separate",
+    intro:"These numbers answer different questions. Enterprise value prices operations for all capital providers; equity value belongs to shareholders; transaction price is negotiated and may include control, synergies, competition, and contingent terms.",
+    steps:[
+      ["Value operations","EV = PV of operating cash flow","DCF creates enterprise value when UFCF is discounted at WACC."],
+      ["Identify non-operating claims","List debt, cash, pensions, leases, minority interests, and other adjustments","The simple debt-and-cash bridge is a starting point, not always the final bridge."],
+      ["Calculate shareholder value","Equity value = EV − debt + cash − other claims + non-operating assets","The bridge allocates operating value after senior claims."],
+      ["Calculate ownership value","Per-share value = equity value ÷ diluted shares","Use diluted shares so options and other potential shares are not ignored."],
+      ["Build a range","Run downside, base, and upside cases on the key drivers","A range shows uncertainty and reveals whether the decision is robust."],
+      ["Compare with price","Value is modeled; price is negotiated","A strategic buyer may pay above standalone value if credible synergies support the premium."]
+    ],
+    anchor:{
+      title:"Public-deal anchor: the label was equity value",
+      body:"BMS announced the Celgene transaction as approximately $74B of equity value. Based on BMS's January 2, 2019 share price, the guaranteed cash-and-stock consideration was valued at $102.43 per Celgene share, plus a CVR. The announcement's wording shows why analysts must identify exactly which value a headline describes.",
+      facts:[["Announced value","About $74B","Explicitly described as equity value."],["Cash per Celgene share","$50","Guaranteed cash component."],["Stock per Celgene share","1 BMS share","Market value moved with BMS stock."],["Additional component","1 CVR","Contingent, not guaranteed value."]],
+      source:"Bristol Myers Squibb announcement of the Celgene acquisition",url:"https://news.bms.com/news/details/2019/Bristol-Myers-Squibb-to-Acquire-Celgene-to-Create-a-Premier-Innovative-Biopharma-Company/default.aspx"
+    },
+    pitfalls:["Calling enterprise value the amount shareholders receive.","Subtracting debt but forgetting to add excess cash.","Comparing a modeled standalone value directly with a strategic price without separating synergies."],
+    consulting:"Before debating whether a bid is high or low, label every number: enterprise, equity, per share, standalone, synergy-inclusive, guaranteed, or contingent."
+  }
+};
+VAL_DEEP_DIVES.splice(1,0,VAL_EXTRA_DEEP_DIVES.gross);
+VAL_DEEP_DIVES.splice(3,0,VAL_EXTRA_DEEP_DIVES.statements);
+VAL_DEEP_DIVES.splice(5,0,VAL_EXTRA_DEEP_DIVES.time);
+VAL_DEEP_DIVES.splice(8,0,VAL_EXTRA_DEEP_DIVES.equity);
+const VAL_PRACTICE_SETS=[
+  [
+    {kind:"Calculation",title:"Separate sale, profit, and collection",prompt:"A manufacturer recognizes a $12M product sale with $4.8M COGS. The customer pays 30% now and the rest next quarter. Ignore other expenses. Find current revenue, gross profit, cash collected, and ending receivable from this sale.",solution:["Revenue recognized = $12.0M.","Gross profit = $12.0M − $4.8M = $7.2M.","Cash collected = 30% × $12.0M = $3.6M.","Accounts receivable = 70% × $12.0M = $8.4M."],answer:"Revenue $12.0M; gross profit $7.2M; cash $3.6M; receivable $8.4M.",takeaway:"One event creates four different numbers because accounting recognition and cash timing are different."},
+    {kind:"Consultant judgment",title:"Revenue grew while cash fell",prompt:"A client celebrates 20% revenue growth, but OCF turned negative. What would you ask before deciding the launch is healthy or unhealthy?",solution:["Bridge revenue growth into volume, net price, and mix.","Check gross margin and whether rebates or COGS rose faster than revenue.","Inspect receivables, inventory, payables, and payment terms.","Separate temporary launch build from structural cash leakage.","Review capex and other investing cash separately from OCF."],answer:"Do not infer health from revenue alone. Build a profit-and-cash bridge and identify whether the cash use is planned growth investment or operating deterioration.",takeaway:"A strong answer asks what caused the divergence before recommending a fix."}
+  ],
+  [
+    {kind:"Calculation",title:"Price a therapy through gross-to-net",prompt:"A therapy treats 15,000 patients. List price is $80,000, gross-to-net deductions are 25%, and COGS is $240M. Calculate net price, net revenue, gross profit, and gross margin.",solution:["Net price = $80,000 × 75% = $60,000.","Net revenue = 15,000 × $60,000 = $900M.","Gross profit = $900M − $240M = $660M.","Gross margin = $660M ÷ $900M = 73.3%."],answer:"Net price $60,000; revenue $900M; gross profit $660M; gross margin 73.3%.",takeaway:"List price is not revenue. Gross-to-net and direct product cost both matter."},
+    {kind:"Consultant judgment",title:"Flat volume, higher revenue, lower margin",prompt:"Total prescriptions are flat, revenue is up 12%, and gross margin fell from 75% to 66%. Build the most useful first diagnostic.",solution:["Split revenue growth into net price, mix, foreign exchange, and acquisitions.","Test whether higher-priced products or geographies drove the top line.","Separate rebates and discounts from manufacturing, royalty, freight, and inventory effects.","Quantify gross-profit dollars, not only the percentage margin.","Identify whether the change is temporary, contractual, or structural."],answer:"The pattern could reflect favorable price or mix paired with worse rebates or COGS. Decompose both revenue and direct cost before calling the growth attractive.",takeaway:"Top-line growth quality depends on what happens below the top line."}
+  ],
+  [
+    {kind:"Calculation",title:"Build EBITDA, EBIT, and NOPAT",prompt:"Revenue is $800M, cash-like operating costs are $540M, D&A is $40M, and the normalized operating tax rate is 25%. Calculate EBITDA, EBIT, and NOPAT.",solution:["EBITDA = $800M − $540M = $260M.","EBIT = $260M − $40M = $220M.","NOPAT = $220M × 75% = $165M."],answer:"EBITDA $260M; EBIT $220M; NOPAT $165M.",takeaway:"Each subtotal answers a different question; none is automatically free cash flow."},
+    {kind:"Consultant judgment",title:"Compare two differently financed targets",prompt:"Target A and Target B have identical revenue, operating costs, and D&A. B has much more debt and lower net income. Which measures should you compare first when assessing operations?",solution:["Compare EBITDA only if D&A intensity is also understood.","Compare EBIT to include asset consumption.","Compare normalized NOPAT to view after-tax operations without financing.","Review leverage separately for equity risk and the EV-to-equity bridge."],answer:"Use EBIT and normalized NOPAT for operating comparison, then analyze debt separately. Net income mixes operating and financing differences.",takeaway:"Capital structure should not make the same operations appear better or worse at the enterprise level."}
+  ],
+  [
+    {kind:"Calculation",title:"Reconcile net income to OCF",prompt:"Net income is $75M, D&A is $15M, receivables rise $12M, inventory falls $4M, and payables rise $3M. Ignore other items. Calculate simplified OCF.",solution:["Start with net income: $75M.","Add D&A: +$15M.","Subtract receivables increase: −$12M.","Add inventory decrease: +$4M.","Add payables increase: +$3M."],answer:"OCF = $75M + $15M − $12M + $4M + $3M = $85M.",takeaway:"Operating assets rising use cash; operating liabilities rising provide cash."},
+    {kind:"Consultant judgment",title:"Profit improved, OCF deteriorated",prompt:"Net income improved by $30M, but OCF fell by $50M. What bridge would you build for the CFO?",solution:["Start with the $30M net-income improvement.","Separate D&A, stock compensation, impairments, and other non-cash items.","Bridge receivables, inventory, payables, accruals, and deferred revenue.","Identify timing effects versus collection, demand, or obsolescence problems.","Keep capex, acquisitions, debt, and dividends outside the OCF bridge."],answer:"Present a quantified net-income-to-OCF waterfall and isolate the two or three balances driving the $80M divergence.",takeaway:"A decision-ready bridge names the account, owner, timing, and evidence needed to determine whether cash returns."}
+  ],
+  [
+    {kind:"Calculation",title:"Convert NOPAT to UFCF",prompt:"NOPAT is $165M, D&A is $40M, capex is $70M, and NWC increases $25M. Calculate UFCF.",solution:["Start with NOPAT: $165M.","Add non-cash D&A: +$40M.","Subtract capex: −$70M.","Subtract the NWC increase: −$25M."],answer:"UFCF = $110M.",takeaway:"Positive operating profit does not become investor cash until reinvestment is funded."},
+    {kind:"Consultant judgment",title:"Negative UFCF during a capacity build",prompt:"A fast-growing biologic has positive NOPAT but negative UFCF because a new plant and inventory build consume cash. Should the client stop investing?",solution:["Quantify the amount and timing of capex and working-capital use.","Link the investment to incremental capacity, demand, margin, and launch timing.","Test downside if demand arrives late or validation is delayed.","Compare staged capacity, external manufacturing, and full build options.","Set decision gates tied to demand and operational readiness."],answer:"Negative UFCF is not automatically bad. Continue only if risk-adjusted future cash and strategic flexibility justify the investment and downside gates are explicit.",takeaway:"The question is what the cash outflow buys, not whether one year's UFCF is negative."}
+  ],
+  [
+    {kind:"Calculation",title:"Discount a delayed cash flow",prompt:"What is the present value of $50M received four years from now at a 9% discount rate?",solution:["Growth factor = 1.09⁴ = approximately 1.4116.","Discount factor = 1 ÷ 1.4116 = approximately 0.7084.","Present value = $50M × 0.7084 = approximately $35.42M."],answer:"Approximately $35.42M.",takeaway:"The future amount is divided by the compounded required return, not by four times the rate."},
+    {kind:"Calculation",title:"Value a one-year launch delay",prompt:"A product produces the same $400M cash payoff, but launch delay moves it from year 5 to year 6. At 10%, how much present value is lost?",solution:["Year-5 PV = $400M ÷ 1.10⁵ = $248.37M.","Year-6 PV = $400M ÷ 1.10⁶ = $225.79M.","PV lost = $248.37M − $225.79M = $22.58M."],answer:"Approximately $22.58M of present value is lost before considering fewer protected years.",takeaway:"Delay destroys value even if eventual peak cash is unchanged."}
+  ],
+  [
+    {kind:"Calculation",title:"Calculate WACC with a tax shield",prompt:"Equity is 70% of capital at an 11% required return. Debt is 30% at a 6% pretax cost. The tax rate is 25%. Calculate WACC.",solution:["Equity contribution = 70% × 11% = 7.70%.","After-tax debt cost = 6% × 75% = 4.50%.","Debt contribution = 30% × 4.50% = 1.35%.","WACC = 7.70% + 1.35% = 9.05%."],answer:"WACC = 9.05%.",takeaway:"Apply the tax shield to debt cost before multiplying by the debt weight."},
+    {kind:"Consultant judgment",title:"Can more debt always lower WACC?",prompt:"Management proposes adding debt because the after-tax debt cost is below the cost of equity. Is value guaranteed to rise?",solution:["Recognize the initial benefit of cheaper after-tax debt.","Test whether leverage raises default, refinancing, covenant, or strategic-flexibility risk.","Allow both cost of debt and cost of equity to rise as risk increases.","Stress cash coverage under downside scenarios.","Separate financing value from operating value creation."],answer:"No. Debt can lower WACC only until added financial risk raises required returns and expected distress costs.",takeaway:"A capital structure is optimized, not maximized."}
+  ],
+  [
+    {kind:"Calculation",title:"Build a three-year DCF with terminal value",prompt:"UFCF is $40M, $45M, and $50M in years 1 to 3. WACC is 10% and terminal growth is 2%. Calculate enterprise value.",solution:["Explicit PV = $40/1.10 + $45/1.10² + $50/1.10³ = approximately $111.12M.","Terminal value at year 3 = $50M × 1.02 ÷ 8% = $637.50M.","PV of terminal value = $637.50M ÷ 1.10³ = approximately $478.96M.","Enterprise value = $111.12M + $478.96M = approximately $590.08M."],answer:"Enterprise value is approximately $590.08M.",takeaway:"Terminal value is calculated at the final forecast date and then discounted back."},
+    {kind:"Consultant judgment",title:"Challenge an 81% terminal-value share",prompt:"In the model above, discounted terminal value is about 81% of EV. What should the recommendation say?",solution:["State the terminal-value share explicitly.","Test WACC, terminal growth, and an exit-multiple cross-check.","Ask whether the business is truly stable by year 3.","For a drug, model LOE and finite lifecycle instead of defaulting to perpetuity.","Present a range and the evidence required for the base case."],answer:"Do not reject the model automatically, but make terminal assumptions the center of sensitivity and decision risk.",takeaway:"A high terminal share means the long run, not the first three years, drives the answer."}
+  ],
+  [
+    {kind:"Calculation",title:"Bridge EV to per-share value",prompt:"EV is $1,200M, debt is $350M, cash is $100M, a pension deficit is $50M, and diluted shares are 100M. Calculate equity value and per-share value.",solution:["Net debt adjustment = −$350M + $100M.","Subtract the $50M pension deficit as another senior claim.","Equity value = $1,200M − $350M + $100M − $50M = $900M.","Per-share value = $900M ÷ 100M = $9.00."],answer:"Equity value $900M; implied value $9.00 per share.",takeaway:"The debt-and-cash bridge may need other claims before dividing by shares."},
+    {kind:"Consultant judgment",title:"Standalone value versus strategic price",prompt:"Standalone equity value is $900M. A buyer expects $250M of synergies and offers $1,050M. Is the offer value-destructive?",solution:["Compare price with standalone value: $150M premium.","Compare price with buyer value including synergies: $1,150M.","The buyer retains $100M of modeled synergy if the forecast is achieved.","Stress implementation cost, timing, tax, and probability of the synergy.","Use a walk-away price below risk-adjusted buyer value."],answer:"Not necessarily. The offer can create buyer value if risk-adjusted synergies exceed the premium and execution risk is acceptable.",takeaway:"Price above standalone value can still be rational, but only with defensible incremental value."}
+  ],
+  [
+    {kind:"Calculation",title:"Build a patient-based peak-sales estimate",prompt:"There are 200,000 diagnosed patients. Forty percent are clinically eligible, 50% clear access, peak share is 15%, and annual net price is $70,000. Calculate peak net sales.",solution:["Eligible patients = 200,000 × 40% = 80,000.","Access-cleared patients = 80,000 × 50% = 40,000.","Treated at peak = 40,000 × 15% = 6,000.","Peak net sales = 6,000 × $70,000 = $420M."],answer:"Peak net sales = $420M.",takeaway:"The diagnosed population is narrowed by clinical, access, and adoption gates before price is applied."},
+    {kind:"Consultant judgment",title:"Same peak, slower ramp",prompt:"Two forecasts reach the same $500M peak sales. Forecast B reaches peak two years later. Is valuation unchanged?",solution:["Discount B's cash for longer.","Count the remaining protected years after peak.","Test whether delay changes competitor entry, guideline adoption, or payer access.","Recalculate capex and launch spending during the longer ramp.","Compare cumulative lifecycle cash, not only peak sales."],answer:"No. A slower ramp usually lowers value because cash arrives later and may leave fewer protected commercial years.",takeaway:"Peak sales without timing is not a valuation input; it is only one point on the curve."}
+  ],
+  [
+    {kind:"Calculation",title:"Calculate rNPV with stage-gated costs",prompt:"Approved commercial value is $2,000M. Phase 2, Phase 3, and approval probabilities are 60%, 50%, and 90%. Current Phase 2 cost is $80M, Phase 3 cost is $180M, and filing cost is $20M. Calculate rNPV.",solution:["Cumulative PoS = 60% × 50% × 90% = 27%.","Risk-adjusted commercial value = $2,000M × 27% = $540M.","Expected cost = $80M + 60% × $180M + 60% × 50% × $20M = $194M.","rNPV = $540M − $194M = $346M."],answer:"rNPV = $346M.",takeaway:"Revenue uses cumulative approval probability; each cost uses the probability of reaching its own stage."},
+    {kind:"Consultant judgment",title:"Bridge a PoS disagreement",prompt:"The seller values a Phase 2 asset close to full approved value; the buyer's rNPV is far lower. How can deal structure bridge the gap?",solution:["Identify whether the disagreement is PoS, approved-state value, timing, cost, or platform value.","Pay less guaranteed cash at closing.","Tie later payments to clinical, regulatory, access, or sales milestones.","Avoid milestones the buyer can manipulate or that ignore timing.","Value each contingent payment using its probability and expected date."],answer:"Use contingent milestones or a CVR so the seller receives more only if the disputed upside is realized.",takeaway:"Deal structure can allocate uncertainty when price alone cannot resolve it."}
+  ],
+  [
+    {kind:"Calculation",title:"Build SOTP equity value",prompt:"Marketed-product DCF is $700M, pipeline rNPV is $200M, platform value is $100M, cash is $80M, debt is $180M, and other senior liabilities are $20M. Calculate SOTP equity value.",solution:["Operating and asset value = $700M + $200M + $100M = $1,000M.","Add cash: +$80M.","Subtract debt and other claims: −$180M − $20M.","Equity value = $880M."],answer:"SOTP equity value = $880M.",takeaway:"Keep marketed, pipeline, platform, cash, and claims separate so assumptions remain visible."},
+    {kind:"Consultant judgment",title:"Recommend against an all-upfront ask",prompt:"Your base SOTP is $880M, downside is $650M, upside is $1,050M, and the seller asks $1,100M all upfront. What is a defensible recommendation?",solution:["State that the ask exceeds modeled upside before buyer-specific synergies.","Identify the pipeline or synergy assumptions required to close the gap.","Set a walk-away price based on risk-adjusted buyer value.","Offer contingent milestones for disputed pipeline or commercial upside.","Define diligence evidence that could change the range."],answer:"Do not pay $1,100M all upfront on the current evidence. Lower guaranteed consideration and make the gap contingent on the upside actually occurring.",takeaway:"A recommendation combines value, price, evidence, and risk allocation."}
+  ]
+];
+const VAL_STATEMENT_LAB={
+  income:[["Net revenue","$500.0M"],["Cost of products sold","−$150.0M"],["R&D","−$120.0M"],["SG&A","−$80.0M"],["EBITDA","$150.0M"],["D&A","−$20.0M"],["Operating profit (EBIT)","$130.0M"],["Interest expense","−$10.0M"],["Pretax income","$120.0M"],["Tax at 25%","−$30.0M"],["Net income","$90.0M"]],
+  working:[["Accounts receivable increase","$25.0M cash use"],["Inventory increase","$10.0M cash use"],["Accounts payable increase","$5.0M cash source"],["Net working-capital increase","$30.0M cash use"]],
+  ocf:[["Net income","$90.0M"],["Add D&A","+$20.0M"],["Subtract AR increase","−$25.0M"],["Subtract inventory increase","−$10.0M"],["Add AP increase","+$5.0M"],["Operating cash flow","$80.0M"]],
+  ufcf:[["EBIT","$130.0M"],["NOPAT at 25% tax","$97.5M"],["Add D&A","+$20.0M"],["Subtract capex","−$40.0M"],["Subtract ΔNWC","−$30.0M"],["UFCF","$47.5M"]],
+  reconciliation:[["OCF − capex","$80.0M − $40.0M = $40.0M"],["UFCF","$47.5M"],["Difference","$7.5M"],["Why","After-tax interest: $10.0M × 75% = $7.5M"]]
+};
+const VAL_CAPSTONES=[
+  {
+    tag:"Capstone 1 · after Three statements",
+    title:"Northstar Pharma: reconcile profit, OCF, and UFCF",
+    scenario:"Northstar launched its first specialty therapy. Management says the company earned $90M, generated $80M from operations, and produced only $47.5M of UFCF. The board thinks one of the numbers must be wrong. Reconcile all three.",
+    exhibits:[
+      ["Income statement inputs",[["Revenue","$500M"],["COGS","$150M"],["R&D","$120M"],["SG&A","$80M"],["D&A","$20M"],["Interest","$10M"],["Tax rate","25%"]]],
+      ["Cash and reinvestment inputs",[["Increase in AR","$25M"],["Increase in inventory","$10M"],["Increase in AP","$5M"],["Capex","$40M"]]]
+    ],
+    tasks:["Calculate EBITDA, EBIT, pretax income, and net income.","Build the indirect OCF reconciliation.","Calculate NOPAT and UFCF.","Explain why OCF minus capex differs from UFCF.","Give the board a one-sentence conclusion."],
+    solution:["EBITDA = $500M − $150M − $120M − $80M = $150M.","EBIT = $150M − $20M D&A = $130M.","Pretax income = $130M − $10M interest = $120M; tax is $30M; net income is $90M.","OCF = $90M + $20M − $25M − $10M + $5M = $80M.","NOPAT = $130M × 75% = $97.5M.","ΔNWC = $25M + $10M − $5M = $30M; UFCF = $97.5M + $20M − $40M − $30M = $47.5M.","OCF − capex is $40M. UFCF is $7.5M higher because UFCF removes the $7.5M after-tax interest effect embedded in net-income-based OCF."],
+    recommendation:"All three numbers are correct. They answer different questions: accounting profit, reported operating cash, and financing-neutral cash available to debt and equity."
+  },
+  {
+    tag:"Capstone 2 · after Value bridge",
+    title:"Northstar Onco: finite-life drug DCF versus a misleading perpetuity",
+    scenario:"Northstar's oncology asset reaches peak revenue in year 3, then loses exclusivity and declines. Compare an explicit finite-life DCF with a year-5 Gordon-growth terminal value.",
+    exhibits:[
+      ["Revenue forecast",[["Year 1","$180M"],["Year 2","$270M"],["Year 3","$360M"],["Year 4","$360M"],["Year 5","$300M"],["Year 6","$200M"],["Year 7","$100M"],["Year 8","$40M"]]],
+      ["Operating assumptions",[["EBITDA margin","30%"],["D&A","5% of revenue"],["Capex","6% of revenue"],["Increase in NWC","2% of revenue"],["Tax rate","25%"],["WACC","10%"],["Terminal growth test","2%"]]]
+    ],
+    tasks:["Derive the UFCF margin.","Calculate annual UFCF for years 1 to 8.","Discount the finite-life cash flows.","Build the year-5 perpetuity case and compare values.","Recommend which method belongs in the base case."],
+    solution:["UFCF margin = (30% − 5%) × 75% + 5% − 6% − 2% = 15.75%.","Annual UFCF is $28.35M, $42.53M, $56.70M, $56.70M, $47.25M, $31.50M, $15.75M, and $6.30M.","Discounted finite-life value through year 8 is approximately $200.38M.","The year-5 terminal value is $47.25M × 1.02 ÷ 8% = $602.44M; discounted terminal value is $374.07M.","Adding years 1 to 5 PV creates a perpetuity EV of approximately $545.65M, versus $200.38M finite-life value.","The perpetuity overstates this single asset because it grows year-5 cash forever despite an explicit LOE decline."],
+    recommendation:"Use the finite-life lifecycle as the base case. A perpetuity can be a diagnostic only if the valuation is for a diversified continuing company, not one drug facing LOE."
+  },
+  {
+    tag:"Capstone 3 · after Choose the model",
+    title:"Borealis Bio acquisition: DCF, rNPV, SOTP, and deal structure",
+    scenario:"A buyer is considering Borealis Bio, which owns a marketed product, a Phase 2 asset, and an early platform. The seller asks $1.1B all upfront. Build SOTP and decide how to structure the offer.",
+    exhibits:[
+      ["Marketed and corporate pieces",[["Marketed-product DCF","$700M"],["Platform value","$100M"],["Cash","$80M"],["Debt","$180M"],["Potential buyer synergies","$200M"]]],
+      ["Phase 2 asset",[["Approved-state commercial value","$1,500M"],["Phase 2 / Phase 3 / approval PoS","50% / 60% / 90%"],["Current Phase 2 cost","$60M"],["Phase 3 cost","$150M"],["Filing cost","$20M"]]]
+    ],
+    tasks:["Calculate cumulative PoS and risk-adjusted commercial value.","Calculate expected development costs and rNPV.","Build standalone SOTP equity value.","Compare the $1.1B ask with standalone and synergy-inclusive values.","Recommend guaranteed and contingent consideration."],
+    solution:["Cumulative PoS = 50% × 60% × 90% = 27%.","Risk-adjusted commercial value = $1,500M × 27% = $405M.","Expected costs = $60M + 50% × $150M + 50% × 60% × $20M = $141M.","Pipeline rNPV = $405M − $141M = $264M.","Standalone SOTP equity value = $700M + $264M + $100M + $80M − $180M = $964M.","Synergy-inclusive buyer value is $1,164M before integration cost and execution risk. The $1.1B ask leaves only $64M of the modeled synergy cushion."],
+    recommendation:"Do not pay $1.1B entirely upfront. Keep guaranteed value near standalone SOTP and make the gap contingent on Phase 3, approval, and measurable commercial milestones."
+  }
+];
+const VAL_CAPSTONE_AT={3:0,8:1,11:2};
+const VAL_REAL_CASES=[
+  {company:"AbbVie",topic:"Income statement and LOE",headline:"One company shows both accounting layers and product lifecycle risk.",facts:["2023 net revenue $54.318B","2023 operating earnings $12.757B","2024 Humira revenue $8.993B, down 37.6%"],question:"Which reported line belongs in a revenue, operating-profit, NOPAT, or LOE discussion?",source:"AbbVie 2023 and 2024 financial results",url:"https://investors.abbvie.com/news-releases/news-release-details/abbvie-reports-full-year-and-fourth-quarter-2024-financial"},
+  {company:"Eli Lilly",topic:"Profit, OCF, and capex",headline:"Large reported profit did not remove the need to reconcile cash and reinvestment.",facts:["2025 net income $20.640B","2025 OCF $16.813B","2025 property-and-equipment purchases $7.841B"],question:"Why is OCF minus capex useful but not automatically identical to UFCF?",source:"Eli Lilly 2025 Form 10-K",url:"https://investor.lilly.com/static-files/0d64699c-0cc7-490e-9152-b2ba1de08634"},
+  {company:"Bristol Myers Squibb / Celgene",topic:"Contingent value and rNPV",headline:"The transaction separated guaranteed value from three approval deadlines.",facts:["1 BMS share + $50 cash per Celgene share","Potential $9 CVR","CVR expired after a missed liso-cel deadline"],question:"Which uncertainty was transferred from upfront price into contingent consideration?",source:"BMS shareholder FAQ",url:"https://www.bms.com/investors/shareholder-services/shareholder-faq.html"},
+  {company:"Pfizer / Seagen",topic:"EV, financing, and risk-adjusted revenue",headline:"A $43B oncology acquisition tied price, financing, marketed drugs, and pipeline together.",facts:["Approx. $43B enterprise value","$229 cash per Seagen share","More than $10B risk-adjusted 2030 revenue expected","About $31B of new long-term debt planned"],question:"Separate the operating valuation, acquisition financing, and revenue forecast assumptions.",source:"Pfizer announcement of Seagen acquisition",url:"https://www.pfizer.com/news/press-release/press-release-detail/pfizer-invests-43-billion-battle-cancer"},
+  {company:"Merck / Prometheus",topic:"Clinical-stage pipeline price",headline:"A large equity price was paid for a clinical-stage precision-immunology company.",facts:["Approx. $10.8B equity value","$200 cash per share","Lead asset PRA023 had positive Phase 2 data","Clinical and regulatory success remained uncertain"],question:"What approved-state value, PoS, indication, access, and platform assumptions would be required to support the price?",source:"Merck announcement of Prometheus acquisition",url:"https://www.merck.com/news/merck-strengthens-immunology-pipeline-with-acquisition-of-prometheus-biosciences-inc"},
+  {company:"Bristol Myers Squibb / Celgene",topic:"SOTP and deal structure",headline:"The $74B equity-value headline combined franchises, pipeline, cash, stock, and contingency.",facts:["Approx. $74B equity value","$50 cash + 1 BMS share per Celgene share","Six near-term launches highlighted","Additional CVR tied to milestones"],question:"Which pieces would you model with DCF, rNPV, synergy value, and contingent structure?",source:"BMS announcement of Celgene acquisition",url:"https://news.bms.com/news/details/2019/Bristol-Myers-Squibb-to-Acquire-Celgene-to-Create-a-Premier-Innovative-Biopharma-Company/default.aspx"}
+];
+function npvCalc(input){
+  const x=Object.assign({},input);x.initial=valClamp(x.initial,0,1e7);x.rate=valClamp(x.rate,0,100);for(let i=1;i<=5;i++)x['cf'+i]=valClamp(x['cf'+i],-1e7,1e7);
+  const r=x.rate/100,rows=[];let pvFuture=0;
+  for(let year=1;year<=5;year++){const cash=x['cf'+year],df=1/Math.pow(1+r,year),pv=cash*df;rows.push({year,cash,df,pv});pvFuture+=pv;}
+  return{rows,pvFuture,npv:pvFuture-x.initial};
+}
 function dcfCalc(input){
   const x=Object.assign({},input);x.rev1=valClamp(x.rev1,0,1e7);x.growth=valClamp(x.growth,-50,100);x.ebitda=valClamp(x.ebitda,-100,100);x.da=valClamp(x.da,0,100);x.capex=valClamp(x.capex,0,100);x.nwc=valClamp(x.nwc,-100,100);x.tax=valClamp(x.tax,0,60);x.wacc=valClamp(x.wacc,0.1,60);x.tg=valClamp(x.tg,-10,50);x.debt=valClamp(x.debt,0,1e7);x.cash=valClamp(x.cash,0,1e7);
   const g=x.growth/100,w=x.wacc/100,tg=x.tg/100,tax=x.tax/100;
@@ -5047,15 +6001,67 @@ function dcfCalc(input){
   return{rows,fcfMargin,pv,tv,pvTv,ev,equity,valid};
 }
 function rnpvCalc(input){const x=Object.assign({},input);x.value=valClamp(x.value,0,1e7);x.p2=valClamp(x.p2,0,100);x.p3=valClamp(x.p3,0,100);x.approval=valClamp(x.approval,0,100);x.cost2=valClamp(x.cost2,0,1e6);x.cost3=valClamp(x.cost3,0,1e6);x.costFile=valClamp(x.costFile,0,1e6);x.platform=valClamp(x.platform,-1e6,1e6);x.ask=valClamp(x.ask,0,1e7);const p2=x.p2/100,p3=x.p3/100,pa=x.approval/100,cum=p2*p3*pa,gross=x.value*cum,cost=x.cost2+p2*x.cost3+p2*p3*x.costFile,rnpv=gross-cost+x.platform,gap=x.ask-rnpv;return{cum,gross,cost,rnpv,gap};}
-function valInput(key,label,value,note,step){return `<div class="val-input"><label>${label}${note?`<small>${note}</small>`:''}</label><input type="number" step="${step||1}" value="${value}" data-val-key="${key}"></div>`;}
-function renderDcfModel(){const x=valuationState.dcf,c=dcfCalc(x);const ws=[Math.max(1,x.wacc-2),x.wacc,x.wacc+2],gs=[Math.max(0,x.tg-1),x.tg,x.tg+1];return `<div class="val-layout"><div class="card val-controls"><div class="val-controls-head"><h3>Operating assumptions</h3><p>All currency inputs are $M. Forecast period is five years.</p></div><div class="val-inputs">
-${valInput('rev1','Year-1 revenue',x.rev1,'$M')}${valInput('growth','Annual revenue growth',x.growth,'%')}${valInput('ebitda','EBITDA margin',x.ebitda,'% of revenue')}${valInput('da','D&A',x.da,'% of revenue')}${valInput('capex','Capex',x.capex,'% of revenue')}${valInput('nwc','Change in NWC',x.nwc,'% of revenue')}${valInput('tax','Tax rate',x.tax,'%')}${valInput('wacc','WACC',x.wacc,'%',0.5)}${valInput('tg','Terminal growth',x.tg,'%',0.5)}${valInput('debt','Debt',x.debt,'$M')}${valInput('cash','Cash',x.cash,'$M')}</div></div>
-<div class="val-results"><div class="val-kpis"><div class="val-kpi"><small>Enterprise value</small><b>${valMoney(c.ev)}</b><p>PV of explicit UFCF plus terminal value.</p></div><div class="val-kpi"><small>Equity value</small><b>${valMoney(c.equity)}</b><p>EV minus debt plus cash.</p></div><div class="val-kpi"><small>Terminal-value share</small><b>${c.valid?(c.ev>0?Math.round(c.pvTv/c.ev*100)+'%':'\u2014'):'Invalid'}</b><p>${c.valid?'High shares demand stronger sensitivity.':'WACC must exceed terminal growth.'}</p></div></div>
+function valFoundationDoneCount(){return VAL_FOUNDATIONS.reduce((n,l,i)=>{const a=Number(valuationState.answers[String(i)]);return n+(Number.isInteger(a)&&l.check.options[a]&&l.check.options[a].correct?1:0);},0);}
+function valRows(rows){return rows.map((r,idx)=>`<div class="${idx===rows.length-1?'total':''}"><span>${esc(r[0])}</span><b>${esc(r[1])}</b></div>`).join('');}
+function renderValStatementLab(i){
+  if(i!==3&&i!==4)return '';
+  if(i===3)return `<section class="val-statement-lab"><div class="val-section-label">Accounting lab</div><h3>One company, three connected statements</h3><p class="val-lab-intro">Trace the same $500M launch business from accrual profit to operating cash. The working-capital accounts explain why the income statement and cash-flow statement differ.</p><div class="val-statement-grid"><div class="val-statement-panel"><div class="val-deep-kicker">Income statement</div>${valRows(VAL_STATEMENT_LAB.income)}</div><div class="val-statement-panel"><div class="val-deep-kicker">Balance-sheet movements</div>${valRows(VAL_STATEMENT_LAB.working)}</div><div class="val-statement-panel"><div class="val-deep-kicker">Indirect OCF bridge</div>${valRows(VAL_STATEMENT_LAB.ocf)}</div></div><p class="val-lab-note"><b>Connection:</b> Net income is $90M and OCF is also $90M in the small lesson example above, but this full workbook uses a larger inventory build and produces $80M OCF. The formula is the same; the balance movements changed.</p></section>`;
+  return `<section class="val-statement-lab"><div class="val-section-label">Cash-flow lab</div><h3>Reconcile OCF minus capex with UFCF</h3><p class="val-lab-intro">The two paths start from different profit concepts. This bridge shows exactly why they differ by after-tax interest in the same Northstar example.</p><div class="val-statement-grid two"><div class="val-statement-panel"><div class="val-deep-kicker">NOPAT to UFCF</div>${valRows(VAL_STATEMENT_LAB.ufcf)}</div><div class="val-statement-panel"><div class="val-deep-kicker">Reconciliation</div>${valRows(VAL_STATEMENT_LAB.reconciliation)}</div></div><p class="val-lab-note"><b>Do not memorize the $7.5M difference.</b> It appears here because net-income-based OCF includes $10M interest after a 25% tax effect, while UFCF excludes financing. Different facts create a different bridge.</p></section>`;
+}
+function renderValPractice(i){const set=VAL_PRACTICE_SETS[i]||[];if(!set.length)return '';const cards=set.map((p,idx)=>`<article class="val-practice-item"><div class="val-deep-kicker">Problem ${idx+1} · ${esc(p.kind)}</div><h4>${esc(p.title)}</h4><p>${esc(p.prompt)}</p><details><summary>Reveal the worked solution</summary><ol>${p.solution.map(s=>`<li>${esc(s)}</li>`).join('')}</ol><div class="val-practice-answer"><b>Answer</b><span>${esc(p.answer)}</span></div><p class="val-practice-takeaway"><b>Why it matters:</b> ${esc(p.takeaway)}</p></details></article>`).join('');return `<section class="val-practice"><div class="val-section-label">Practice set · two additional problems</div><h3>Work it before you reveal it.</h3><p class="val-lab-intro">Write the bridge or recommendation first. Then open the solution and compare your sequence, signs, and decision logic.</p><div class="val-practice-grid">${cards}</div></section>`;}
+function renderValCapstone(i){const ci=VAL_CAPSTONE_AT[i];if(ci===undefined)return '';const c=VAL_CAPSTONES[ci],exhibits=c.exhibits.map(e=>`<div class="val-cap-exhibit"><div class="val-deep-kicker">${esc(e[0])}</div>${valRows(e[1])}</div>`).join('');return `<section class="val-capstone"><div class="val-cap-tag">${esc(c.tag)}</div><h3>${esc(c.title)}</h3><p>${esc(c.scenario)}</p><div class="val-cap-exhibits">${exhibits}</div><div class="val-cap-tasks"><div class="val-deep-kicker">Your assignment</div><ol>${c.tasks.map(t=>`<li>${esc(t)}</li>`).join('')}</ol></div><details><summary>Reveal the full capstone solution</summary><ol>${c.solution.map(s=>`<li>${esc(s)}</li>`).join('')}</ol><div class="val-cap-recommendation"><b>Recommendation</b><p>${esc(c.recommendation)}</p></div></details></section>`;}
+function renderValCaseLibrary(){const cases=VAL_REAL_CASES.map((c,idx)=>`<article><div class="val-case-no">${String(idx+1).padStart(2,'0')}</div><div><div class="val-deep-kicker">${esc(c.company)} · ${esc(c.topic)}</div><h4>${esc(c.headline)}</h4><ul>${c.facts.map(f=>`<li>${esc(f)}</li>`).join('')}</ul><p><b>Analyst question:</b> ${esc(c.question)}</p><a href="${esc(c.url)}" target="_blank" rel="noopener noreferrer">${esc(c.source)} ›</a></div></article>`).join('');return `<details class="card val-case-library"><summary><span><small>Public filing and transaction library</small><b>Six real-company case files</b><em>AbbVie · Lilly · BMS · Pfizer · Merck</em></span><i aria-hidden="true">⌄</i></summary><div class="val-case-library-body"><p class="val-case-library-intro">Use these as source-backed anchors, not investment recommendations. Separate reported facts from analyst-derived calculations and forward-looking management claims.</p><div class="val-case-list">${cases}</div></div></details>`;}
+function renderValDeepDive(i){
+  const d=VAL_DEEP_DIVES[i];if(!d)return '';
+  const steps=d.steps.map((s,idx)=>`<li><span>${String(idx+1).padStart(2,'0')}</span><div><b>${esc(s[0])}</b><code>${esc(s[1])}</code><p>${esc(s[2])}</p></div></li>`).join('');
+  const facts=d.anchor.facts.map(f=>`<div><span>${esc(f[0])}</span><b>${esc(f[1])}</b><small>${esc(f[2])}</small></div>`).join('');
+  const pitfalls=d.pitfalls.map(x=>`<li>${esc(x)}</li>`).join('');
+  return `<section class="val-deep"><div class="val-section-label">Deep explanation</div><h3>${esc(d.title)}</h3><p class="val-deep-intro">${esc(d.intro)}</p><div class="val-deep-grid"><div class="val-derive"><div class="val-deep-kicker">Derive it step by step</div><ol>${steps}</ol></div><aside class="val-real"><div class="val-deep-kicker">Real-world anchor</div><h4>${esc(d.anchor.title)}</h4><p>${esc(d.anchor.body)}</p><div class="val-real-facts">${facts}</div><a href="${esc(d.anchor.url)}" target="_blank" rel="noopener noreferrer">Read the official source ›</a><small class="val-source-note">Source: ${esc(d.anchor.source)}. Public figures are teaching anchors, not investment advice.</small></aside></div><div class="val-deep-bottom"><div class="val-pitfalls"><div class="val-deep-kicker">Common mistakes</div><ul>${pitfalls}</ul></div><div class="val-consulting-lens"><div class="val-deep-kicker">Consulting lens</div><p>${esc(d.consulting)}</p></div></div></section>`;
+}
+function renderValFoundationCourse(){
+  const total=VAL_FOUNDATIONS.length,definitions=VAL_FOUNDATIONS.reduce((n,x)=>n+x.terms.length,0),i=Math.max(0,Math.min(total-1,Number(valuationState.lesson)||0)),l=VAL_FOUNDATIONS[i],raw=valuationState.answers[String(i)],selected=raw===undefined?null:Number(raw),choice=selected===null?null:l.check.options[selected],correct=!!(choice&&choice.correct),best=l.check.options.find(o=>o.correct),done=valFoundationDoneCount(),pct=Math.round(done/total*100);
+  const nav=VAL_FOUNDATIONS.map((x,idx)=>{const a=Number(valuationState.answers[String(idx)]),ok=Number.isInteger(a)&&x.check.options[a]&&x.check.options[a].correct;return `<button type="button" class="val-course-step ${idx===i?'active':''} ${ok?'done':''}" data-val-lesson="${idx}" ${idx===i?'aria-current="step"':''}><span>${ok?'✓':String(idx+1).padStart(2,'0')}</span><b>${esc(x.label)}</b><small>${ok?'Complete':idx===i?'Learning':'Not started'}</small></button>`;}).join('');
+  const terms=l.terms.map(t=>{const example=VAL_TERM_EXAMPLES[t[0]]||'';return `<div><dt>${esc(t[0])}</dt><dd>${esc(t[1])}${example?`<span class="val-term-example"><b>Life-sciences example</b>${esc(example)}</span>`:''}</dd></div>`;}).join('');
+  const flow=l.flow.map((s,idx)=>`<div class="val-concept-step"><small>${esc(s[0])}</small><b>${esc(s[1])}</b><span>${esc(s[2])}</span></div>${idx<l.flow.length-1?'<i aria-hidden="true">→</i>':''}`).join('');
+  const worked=l.worked.lines.map(r=>`<div><span>${esc(r[0])}</span><b>${esc(r[1])}</b></div>`).join('');
+  const options=l.check.options.map((o,idx)=>{const isChosen=selected===idx,cls=selected===null?'':(isChosen?(o.correct?'chosen correct':'chosen wrong'):(o.correct?'is-answer':''));return `<button type="button" class="${cls}" data-val-answer="${idx}" aria-pressed="${isChosen?'true':'false'}"><span>${String.fromCharCode(65+idx)}</span><b>${esc(o.text)}</b></button>`;}).join('');
+  const feedback=selected===null?`<p class="val-check-hint">Choose an answer. Every option includes an explanation.</p>`:`<div class="val-check-feedback ${correct?'correct':'review'}" role="status" aria-live="polite"><b>${correct?'Correct':'Review the bridge'}</b><p>${esc(choice.why)}</p>${correct?'':`<p><strong>Best answer:</strong> ${esc(best.text)} ${esc(best.why)}</p>`}</div>`;
+  const prev=i>0?`<button type="button" class="ghost" data-val-lesson="${i-1}">‹ Previous lesson</button>`:'<span></span>';
+  const next=i<total-1?`<button type="button" class="ghost val-next" data-val-lesson="${i+1}">Next lesson ›</button>`:`<div class="val-finish-actions"><button type="button" class="ghost" data-val-mode="npv">Open NPV calculator</button><button type="button" class="ghost" data-val-mode="dcf">Open DCF model</button><button type="button" class="ghost" data-val-mode="rnpv">Open rNPV model</button></div>`;
+  return `<div class="card val-start-card"><div><div class="eyebrow">Start here · no finance background required</div><h2>Learn the language before touching the model.</h2><p>${definitions} plain-language definitions and examples move from revenue and cash to DCF, drug forecasts, and rNPV. Every lesson derives the formula, uses a public-company or real-deal anchor, flags common mistakes, and includes three problems. Three cumulative capstones and six source-backed company cases connect the full course.</p></div><div class="val-start-progress"><b>${done}/${total}</b><span>lessons mastered</span><div role="progressbar" aria-label="Valuation foundation progress" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${done}"><i style="width:${pct}%"></i></div></div></div>
+  <div class="val-learn-layout"><nav class="card val-course-nav" aria-label="Valuation foundation lessons"><div class="val-course-nav-head"><small>Foundation course · ${definitions} definitions</small><b>From zero to model</b></div><div class="val-course-list">${nav}</div></nav>
+  <article class="card val-lesson"><header class="val-lesson-head"><div class="eyebrow">Lesson ${i+1} of ${total}</div><h2>${esc(l.title)}</h2><p>${esc(l.intro)}</p></header>
+  <section class="val-teaching"><div class="val-teaching-copy"><h3>What this means</h3>${l.teach.map(p=>`<p>${esc(p)}</p>`).join('')}</div><div class="val-terms"><h3>Definitions, in plain language</h3><dl>${terms}</dl></div></section>
+  <section class="val-concept"><h3>Follow the logic</h3><div class="val-concept-flow">${flow}</div><div class="val-course-formula"><span>Core formula</span><code>${esc(l.formula)}</code></div></section>
+  ${renderValStatementLab(i)}
+  ${renderValDeepDive(i)}
+  <section class="val-worked"><div class="val-section-label">Worked example</div><h3>${esc(l.worked.title)}</h3><div class="val-worked-lines">${worked}</div><p>${esc(l.worked.takeaway)}</p></section>
+  ${renderValPractice(i)}
+  <section class="val-check"><div class="val-section-label">Your turn · scored check</div><h3>${esc(l.check.q)}</h3><div class="val-check-options">${options}</div>${feedback}</section>
+  ${renderValCapstone(i)}
+  <footer class="val-lesson-actions">${prev}${next}</footer></article></div>${renderValCaseLibrary()}`;
+}
+function renderValModelPrimer(mode){
+  const done=valFoundationDoneCount(),meta=mode==='npv'?['Simple NPV calculator','Use this to learn discounting one cash flow at a time.','Enter the investment paid today, five future cash flows, and a required return. The model shows every discount factor, present value, and the final NPV.']:mode==='dcf'?['Traditional DCF model','Use this when operating cash flows are forecastable.','Convert revenue into UFCF, discount it at WACC, add remaining value, and bridge enterprise value to equity value.']:['Biotech rNPV model','Use this when clinical success is still binary.','Weight approved-state value by cumulative success and each development cost by the probability of reaching its stage.'];
+  return `<div class="card val-model-primer"><div><div class="eyebrow">${meta[0]}</div><h2>${meta[1]}</h2><p>${meta[2]}</p></div><div class="val-model-ready"><b>${done}/${VAL_FOUNDATIONS.length}</b><span>foundation lessons mastered</span><button type="button" class="ghost" data-val-mode="learn">${done<VAL_FOUNDATIONS.length?'Learn the terms first':'Review foundations'}</button></div></div>`;
+}
+function valInput(key,label,value,note,step){const id=`val-${key}`;return `<div class="val-input"><label for="${id}">${label}${note?`<small>${note}</small>`:''}</label><input id="${id}" type="number" step="${step||1}" value="${value}" data-val-key="${key}"></div>`;}
+function renderNpvModel(){
+  const x=valuationState.npv,c=npvCalc(x),positive=c.npv>0.005,negative=c.npv<-.005,verdict=positive?'Value above the required return':negative?'Below the required return':'Exactly at the required return',actual=`−${valMoney(x.initial)} + `+c.rows.map(r=>`${valMoney(r.cash)} ÷ (1 + ${x.rate}%)^${r.year}`).join(' + ')+` = ${valMoney(c.npv)}`;
+  return `<div class="val-layout"><div class="card val-controls"><div class="val-controls-head"><h3>Project cash flows</h3><p>Enter the initial investment as a positive cash outflow. Future cash flows may be positive or negative. All currency inputs are $M.</p><div class="val-input-path">Time 0 investment → discount Year 1–5 cash → sum present values → NPV</div></div><div class="val-inputs">${valInput('initial','Initial investment',x.initial,'paid today, $M')}${valInput('rate','Discount rate',x.rate,'required return, %',0.5)}${valInput('cf1','Year 1 cash flow',x.cf1,'$M')}${valInput('cf2','Year 2 cash flow',x.cf2,'$M')}${valInput('cf3','Year 3 cash flow',x.cf3,'$M')}${valInput('cf4','Year 4 cash flow',x.cf4,'$M')}${valInput('cf5','Year 5 cash flow',x.cf5,'$M')}</div></div>
+  <div class="val-results"><div class="val-kpis" aria-live="polite"><div class="val-kpi"><small>PV of future cash</small><b>${valMoney(c.pvFuture)}</b><p>Sum of discounted Year 1–5 cash flows.</p></div><div class="val-kpi"><small>Initial investment</small><b>${valMoney(-x.initial)}</b><p>Time-zero cash outflow; no discounting.</p></div><div class="val-kpi ${positive?'positive':negative?'negative':''}"><small>Net present value</small><b>${valMoney(c.npv)}</b><p>${verdict}.</p></div></div>
+  <div class="card val-equation-card"><div class="eyebrow">Core formula</div><h2>Discount each cash flow, then include time zero.</h2><div class="val-npv-equation"><b>NPV</b><span>=</span><code>−I₀ + Σ [ CFₜ ÷ (1 + r)ᵗ ]</code></div><div class="val-symbols"><div><b>I₀</b><span>Initial investment at time 0</span></div><div><b>CFₜ</b><span>Cash flow in year t</span></div><div><b>r</b><span>Discount rate per year</span></div><div><b>t</b><span>Number of years from today</span></div></div><div class="val-substitution">${esc(actual)}</div></div>
+  <div class="card"><div class="eyebrow">Present-value schedule</div><h2 style="font-size:21px">See exactly where NPV comes from</h2><div class="table-scroll" tabindex="0" aria-label="NPV present-value table. Scroll horizontally on a small screen."><table class="val-table"><thead><tr><th>Time</th><th>Cash flow</th><th>Discount factor</th><th>Present value</th></tr></thead><tbody><tr><td>0</td><td>${valMoney(-x.initial)}</td><td>1.000</td><td>${valMoney(-x.initial)}</td></tr>${c.rows.map(r=>`<tr><td>${r.year}</td><td>${valMoney(r.cash)}</td><td>${r.df.toFixed(3)}</td><td>${valMoney(r.pv)}</td></tr>`).join('')}<tr><td><b>NPV</b></td><td></td><td></td><td><b>${valMoney(c.npv)}</b></td></tr></tbody></table></div></div>
+  <div class="card val-npv-decision ${positive?'positive':negative?'negative':'neutral'}"><div><div class="eyebrow">Interpretation</div><h2>${verdict}</h2><p>${positive?'The modeled future cash exceeds the initial investment after earning the selected discount rate.':negative?'The modeled future cash does not recover the investment at the selected discount rate.':'The project earns exactly the selected discount rate under these assumptions.'}</p></div><p><b>Do not stop at the sign.</b> Challenge cash-flow timing, terminal assumptions, risk, alternatives, and what evidence could change the result.</p></div></div></div>`;
+}
+function renderDcfModel(){const x=valuationState.dcf,c=dcfCalc(x);const ws=[Math.max(1,x.wacc-2),x.wacc,x.wacc+2],gs=[Math.max(0,x.tg-1),x.tg,x.tg+1];return `<div class="val-layout"><div class="card val-controls"><div class="val-controls-head"><h3>Operating assumptions</h3><p>All currency inputs are $M. Forecast period is five years.</p><div class="val-input-path">Revenue → EBITDA → EBIT → NOPAT → UFCF → present value</div></div><div class="val-inputs">
+${valInput('rev1','Year-1 revenue',x.rev1,'net sales, $M')}${valInput('growth','Annual revenue growth',x.growth,'year-over-year %')}${valInput('ebitda','EBITDA margin',x.ebitda,'before D&A, % of revenue')}${valInput('da','D&A',x.da,'non-cash expense, % of revenue')}${valInput('capex','Capex',x.capex,'cash reinvestment, % of revenue')}${valInput('nwc','Change in NWC',x.nwc,'cash use, % of revenue')}${valInput('tax','Tax rate',x.tax,'applied to EBIT, %')}${valInput('wacc','WACC',x.wacc,'discount rate for UFCF, %',0.5)}${valInput('tg','Terminal growth',x.tg,'after year 5; below WACC, %',0.5)}${valInput('debt','Debt',x.debt,'subtract from EV, $M')}${valInput('cash','Cash',x.cash,'add to EV, $M')}</div></div>
+<div class="val-results"><div class="val-kpis" aria-live="polite"><div class="val-kpi"><small>Enterprise value</small><b>${valMoney(c.ev)}</b><p>PV of explicit UFCF plus terminal value.</p></div><div class="val-kpi"><small>Equity value</small><b>${valMoney(c.equity)}</b><p>EV minus debt plus cash.</p></div><div class="val-kpi"><small>Terminal-value share</small><b>${c.valid?(c.ev>0?Math.round(c.pvTv/c.ev*100)+'%':'\u2014'):'Invalid'}</b><p>${c.valid?'High shares demand stronger sensitivity.':'WACC must exceed terminal growth.'}</p></div></div>
 ${dcfFlowCard(c,x)}<div class="card"><div class="eyebrow">Five-year cash flow</div><h2 style="font-size:21px">From operating forecast to UFCF</h2><div class="val-formula">UFCF = EBIT × (1 − tax) + D&A − capex − change in NWC<br>UFCF margin = ${(c.fcfMargin*100).toFixed(2)}% of revenue</div><div class="table-scroll" tabindex="0" aria-label="Five-year cash flow table. Scroll horizontally on a small screen."><table class="val-table"><thead><tr><th>Year</th><th>Revenue</th><th>UFCF</th><th>Discount factor</th><th>PV</th></tr></thead><tbody>${c.rows.map(r=>`<tr><td>${r.y}</td><td>${valMoney(r.rev)}</td><td>${valMoney(r.fcf)}</td><td>${r.df.toFixed(3)}</td><td>${valMoney(r.pv)}</td></tr>`).join('')}<tr><td><b>Terminal</b></td><td></td><td>${valMoney(c.tv)}</td><td>${(1/Math.pow(1+x.wacc/100,5)).toFixed(3)}</td><td><b>${valMoney(c.pvTv)}</b></td></tr></tbody></table></div></div>
 <div class="card"><div class="eyebrow">Sensitivity</div><h2 style="font-size:21px">Enterprise value across WACC and terminal growth</h2><div class="val-sens"><div class="head">g \ WACC</div>${ws.map(v=>`<div class="head">${v.toFixed(1)}%</div>`).join('')}${gs.map(g=>`<div class="head">${g.toFixed(1)}%</div>${ws.map(w=>{const q=dcfCalc(Object.assign({},x,{wacc:w,tg:g}));const base=w===x.wacc&&g===x.tg;return `<div class="${base?'base':''}">${valMoney(q.ev)}</div>`;}).join('')}`).join('')}</div><p class="val-note">Do not pick the most favorable cell. Explain what evidence supports the risk and long-run growth assumptions.</p></div></div></div>`;}
-function renderRnpvModel(){const x=valuationState.rnpv,c=rnpvCalc(x);const ps=[Math.max(1,x.p2-10),x.p2,Math.min(99,x.p2+10)],vs=[x.value*.8,x.value,x.value*1.2];return `<div class="val-layout"><div class="card val-controls"><div class="val-controls-head"><h3>Lead-asset assumptions</h3><p>Approved value is present value today if approval occurs. Costs are stage-gated.</p></div><div class="val-inputs">
-${valInput('value','Approved commercial value',x.value,'$M')}${valInput('p2','Phase 2 pass',x.p2,'%')}${valInput('p3','Phase 3 pass',x.p3,'%')}${valInput('approval','Approval after Phase 3',x.approval,'%')}${valInput('cost2','Phase 2 cost now',x.cost2,'$M')}${valInput('cost3','Phase 3 cost',x.cost3,'$M if Phase 2 passes')}${valInput('costFile','Filing cost',x.costFile,'$M if Phase 3 passes')}${valInput('platform','Risk-adjusted platform value',x.platform,'$M, keep separate')}${valInput('ask','Seller ask',x.ask,'$M')}</div></div>
-<div class="val-results"><div class="val-kpis"><div class="val-kpi"><small>Cumulative approval probability</small><b>${(c.cum*100).toFixed(1)}%</b><p>${x.p2}% × ${x.p3}% × ${x.approval}%.</p></div><div class="val-kpi"><small>Lead + platform rNPV</small><b>${valMoney(c.rnpv)}</b><p>Risk-adjusted value minus expected costs.</p></div><div class="val-kpi"><small>Ask minus rNPV</small><b>${valMoney(c.gap)}</b><p>${c.gap>0?'Gap needs pipeline, synergy, or contingency.':'Ask is below modeled rNPV.'}</p></div></div>
+function renderRnpvModel(){const x=valuationState.rnpv,c=rnpvCalc(x);const ps=[Math.max(1,x.p2-10),x.p2,Math.min(99,x.p2+10)],vs=[x.value*.8,x.value,x.value*1.2];return `<div class="val-layout"><div class="card val-controls"><div class="val-controls-head"><h3>Lead-asset assumptions</h3><p>Approved value is present value today if approval occurs. Costs are stage-gated.</p><div class="val-input-path">Approved value × cumulative PoS − stage-gated costs = rNPV</div></div><div class="val-inputs">
+${valInput('value','Approved commercial value',x.value,'PV today if approved, $M')}${valInput('p2','Phase 2 pass',x.p2,'conditional success %')}${valInput('p3','Phase 3 pass',x.p3,'conditional success %')}${valInput('approval','Approval after Phase 3',x.approval,'conditional success %')}${valInput('cost2','Phase 2 cost now',x.cost2,'committed now, $M')}${valInput('cost3','Phase 3 cost',x.cost3,'paid only if Phase 2 passes, $M')}${valInput('costFile','Filing cost',x.costFile,'paid only if Phase 2 and 3 pass, $M')}${valInput('platform','Risk-adjusted platform value',x.platform,'separate from lead asset, $M')}${valInput('ask','Seller ask',x.ask,'headline purchase price, $M')}</div></div>
+<div class="val-results"><div class="val-kpis" aria-live="polite"><div class="val-kpi"><small>Cumulative approval probability</small><b>${(c.cum*100).toFixed(1)}%</b><p>${x.p2}% × ${x.p3}% × ${x.approval}%.</p></div><div class="val-kpi"><small>Lead + platform rNPV</small><b>${valMoney(c.rnpv)}</b><p>Risk-adjusted value minus expected costs.</p></div><div class="val-kpi"><small>Ask minus rNPV</small><b>${valMoney(c.gap)}</b><p>${c.gap>0?'Gap needs pipeline, synergy, or contingency.':'Ask is below modeled rNPV.'}</p></div></div>
 ${rnpvTreeCard(c,x)}<div class="card"><div class="eyebrow">Stage-gated value</div><h2 style="font-size:21px">Do not weight every cost by approval probability</h2><div class="val-formula">Risk-adjusted commercial value = ${x.p2}% × ${x.p3}% × ${x.approval}% × ${valMoney(x.value)} = ${valMoney(c.gross)}<br>Expected costs = ${valMoney(x.cost2)} + ${x.p2}% × ${valMoney(x.cost3)} + ${x.p2}% × ${x.p3}% × ${valMoney(x.costFile)} = ${valMoney(c.cost)}<br>rNPV = commercial value − expected costs + platform value = ${valMoney(c.rnpv)}</div><div class="table-scroll" tabindex="0" aria-label="Stage-gated value table. Scroll horizontally on a small screen."><table class="val-table"><thead><tr><th>Cash flow</th><th>Trigger probability</th><th>Nominal</th><th>Expected value</th></tr></thead><tbody><tr><td>Approved commercial value</td><td>${(c.cum*100).toFixed(1)}%</td><td>${valMoney(x.value)}</td><td>${valMoney(c.gross)}</td></tr><tr><td>Phase 2 cost</td><td>100%</td><td>${valMoney(x.cost2)}</td><td>${valMoney(x.cost2)}</td></tr><tr><td>Phase 3 cost</td><td>${x.p2}%</td><td>${valMoney(x.cost3)}</td><td>${valMoney(x.cost3*x.p2/100)}</td></tr><tr><td>Filing cost</td><td>${(x.p2*x.p3/100).toFixed(1)}%</td><td>${valMoney(x.costFile)}</td><td>${valMoney(x.costFile*x.p2*x.p3/10000)}</td></tr></tbody></table></div></div>
 <div class="card"><div class="eyebrow">Sensitivity</div><h2 style="font-size:21px">rNPV across Phase 2 probability and approved value</h2><div class="val-sens"><div class="head">Value \ P2</div>${ps.map(v=>`<div class="head">${v.toFixed(0)}%</div>`).join('')}${vs.map(v=>`<div class="head">${valMoney(v)}</div>${ps.map(p=>{const q=rnpvCalc(Object.assign({},x,{p2:p,value:v}));const base=p===x.p2&&v===x.value;return `<div class="${base?'base':''}">${valMoney(q.rnpv)}</div>`;}).join('')}`).join('')}</div><p class="val-note">Ask what clinical evidence can move Phase 2 probability, and whether the approved-value model already reflects access, competition, and LOE.</p></div></div></div>`;}
 function valFlowNode(x,t,sub,dark){return `<div class="vf-node ${dark?'vf-dark':''}"><b>${t}</b><small>${sub}</small></div>`;}
@@ -5102,9 +6108,21 @@ function rnpvTreeCard(c,x){
   s+=`<text x='380' y='321' text-anchor='middle' font-family='Inter,sans-serif' font-size='10.6' fill='#5a6675'>Weight the payoff by cumulative approval, each cost by its own gate, and never double-count risk in the discount rate.</text></svg>`;
   return `<div class="card"><div class="eyebrow">Follow the odds</div><h2 style="font-size:21px">Your inputs, as a probability tree</h2><div class="data-viz-scroll" tabindex="0" aria-label="rNPV probability tree. Scroll horizontally on a small screen.">${s}</div></div>`;
 }
-function renderValuationLab(){const d=valuationState.mode==='dcf';return `<div class="card hero valuation-hero"><div class="eyebrow">Valuation Lab</div><h2>Build the model, then challenge the model.</h2><p class="lede">Use traditional DCF for operating cash flow and rNPV for binary pipeline risk. Change the assumptions, watch value move, and explain what evidence would justify the base case.</p><div class="val-tabs"><button class="val-tab ${d?'active':''}" data-val-mode="dcf">Traditional DCF</button><button class="val-tab ${!d?'active':''}" data-val-mode="rnpv">Biotech rNPV</button></div></div><div class="card"><div class="val-method"><div><b>1. Forecast</b><span>Revenue, margin, reinvestment, or stage-gated pipeline cash flow.</span></div><div><b>2. Risk and time</b><span>Use WACC for UFCF. Use explicit PTRS for binary development risk.</span></div><div><b>3. Bridge</b><span>Move from enterprise or asset value to equity, deal ask, or portfolio value.</span></div><div><b>4. Challenge</b><span>Sensitivity, break-even thresholds, downside, and what changes the answer.</span></div></div></div>${d?renderDcfModel():renderRnpvModel()}<div class="card"><div class="eyebrow">Interview rule</div><h2 style="font-size:21px">A model is a structured argument, not a fact</h2><p class="val-note" style="font-size:14px">State the valuation range, the two assumptions that matter most, the evidence behind them, and the decision or deal structure that protects the downside. Never hide technical risk in both PTRS and an extreme discount rate, and never let terminal value conceal a drug's loss-of-exclusivity curve.</p></div>`;}
-function valRefreshResults(){const wrap=document.querySelector('.val-results');if(!wrap){render();return;}const d=valuationState.mode==='dcf';const htmlStr=d?renderDcfModel():renderRnpvModel();const m=htmlStr.match(/<div class="val-results">([\s\S]*)<\/div><\/div>$/);if(m){wrap.innerHTML=m[1];}else{render();}}
-function wireValuationLab(){document.querySelectorAll('[data-val-mode]').forEach(b=>b.onclick=()=>{valuationState.mode=b.getAttribute('data-val-mode');valSave();render();window.scrollTo({top:0,behavior:'smooth'});});document.querySelectorAll('[data-val-key]').forEach(inp=>inp.onchange=()=>{const bucket=valuationState.mode==='dcf'?valuationState.dcf:valuationState.rnpv;bucket[inp.getAttribute('data-val-key')]=valNum(inp.value,bucket[inp.getAttribute('data-val-key')]);valSave();valRefreshResults();});}
+function renderValuationLab(){
+  const mode=['learn','npv','dcf','rnpv'].includes(valuationState.mode)?valuationState.mode:'learn',learn=mode==='learn',n=mode==='npv',d=mode==='dcf';
+  const hero=`<div class="card hero valuation-hero"><div class="eyebrow">Valuation Lab</div><h2>Learn the cash logic, then build the model.</h2><p class="lede">Start with the foundation course if revenue, operating cash flow, UFCF, NPV, WACC, DCF, or rNPV is unfamiliar. Every calculator shows the formula and the full bridge.</p><div class="val-tabs"><button type="button" class="val-tab ${learn?'active':''}" data-val-mode="learn" aria-pressed="${learn?'true':'false'}">Learn from zero</button><button type="button" class="val-tab ${n?'active':''}" data-val-mode="npv" aria-pressed="${n?'true':'false'}">Simple NPV calculator</button><button type="button" class="val-tab ${d?'active':''}" data-val-mode="dcf" aria-pressed="${d?'true':'false'}">Traditional DCF model</button><button type="button" class="val-tab ${mode==='rnpv'?'active':''}" data-val-mode="rnpv" aria-pressed="${mode==='rnpv'?'true':'false'}">Biotech rNPV model</button></div></div>`;
+  const rule=`<div class="card val-interview-rule"><div class="eyebrow">Interview rule</div><h2>A model is a structured argument, not a fact.</h2><p>State a valuation range, the two assumptions that matter most, the evidence behind them, and the decision or deal structure that protects the downside. Never hide technical risk in both PTRS and an extreme discount rate, and never let terminal value conceal a drug's loss-of-exclusivity curve.</p></div>`;
+  if(learn)return hero+renderValFoundationCourse()+rule;
+  const method=n?`<div class="card"><div class="val-method"><div><b>1. Time zero</b><span>Enter the investment paid today as a positive outflow.</span></div><div><b>2. Future cash</b><span>Enter each year's expected positive or negative cash flow.</span></div><div><b>3. Discount</b><span>Convert every future cash flow into today's dollars.</span></div><div><b>4. Decide</b><span>Compare total present value with the initial investment.</span></div></div></div>`:`<div class="card"><div class="val-method"><div><b>1. Forecast</b><span>Build revenue from patients, price, uptake, lifecycle, and costs.</span></div><div><b>2. Convert</b><span>Turn operating profit into UFCF, or map stage-gated pipeline cash flow.</span></div><div><b>3. Adjust</b><span>Discount for time. Use explicit probability for binary clinical gates.</span></div><div><b>4. Decide</b><span>Bridge to equity or deal value, then test sensitivity and downside.</span></div></div></div>`;
+  return hero+renderValModelPrimer(mode)+method+(n?renderNpvModel():d?renderDcfModel():renderRnpvModel())+rule;
+}
+function valRefreshResults(){const wrap=document.querySelector('.val-results');if(!wrap){render();return;}const htmlStr=valuationState.mode==='npv'?renderNpvModel():valuationState.mode==='dcf'?renderDcfModel():renderRnpvModel();const m=htmlStr.match(/<div class="val-results">([\s\S]*)<\/div><\/div>$/);if(m){wrap.innerHTML=m[1];}else{render();}}
+function wireValuationLab(){
+  document.querySelectorAll('[data-val-mode]').forEach(b=>b.onclick=()=>{valuationState.mode=b.getAttribute('data-val-mode');valuationState.guideVersion=VAL_GUIDE_VERSION;valSave();render();window.scrollTo({top:0,behavior:'smooth'});});
+  document.querySelectorAll('[data-val-lesson]').forEach(b=>b.onclick=()=>{valuationState.lesson=Math.max(0,Math.min(VAL_FOUNDATIONS.length-1,Number(b.getAttribute('data-val-lesson'))||0));valuationState.guideVersion=VAL_GUIDE_VERSION;valSave();render();requestAnimationFrame(()=>document.querySelector('.val-lesson')?.scrollIntoView({block:'start'}));});
+  document.querySelectorAll('[data-val-answer]').forEach(b=>b.onclick=()=>{const answer=Number(b.getAttribute('data-val-answer'));valuationState.answers[String(valuationState.lesson)]=answer;valuationState.guideVersion=VAL_GUIDE_VERSION;valSave();render();requestAnimationFrame(()=>{document.querySelector(`[data-val-answer="${answer}"]`)?.focus({preventScroll:true});document.querySelector('.val-check-feedback')?.scrollIntoView({block:'nearest'});});});
+  document.querySelectorAll('[data-val-key]').forEach(inp=>inp.onchange=()=>{const bucket=valuationState[valuationState.mode];if(!bucket)return;bucket[inp.getAttribute('data-val-key')]=valNum(inp.value,bucket[inp.getAttribute('data-val-key')]);valuationState.guideVersion=VAL_GUIDE_VERSION;valSave();valRefreshResults();});
+}
 
 function render(){
   renderSide(); updateMeters();
@@ -5135,7 +6153,7 @@ function render(){
 
 function renderFoot(){
   document.getElementById("foot").innerHTML =
-    "ReadyToConsult v3.6.5 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
+    "ReadyToConsult v3.7.0 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
 }
 
 /* ---------- Home ---------- */
@@ -5285,11 +6303,11 @@ function renderLevel(i){
 
   h+=takeawayBox(i);
   const done=levelDone(i);
-  h+=`<div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
-      <div style="font-size:14px;color:${done?'var(--green)':'var(--slate)'}">${done?'&#10003; Lesson complete. Your answers are saved.':'Answer every drill to complete this lesson. Progress saves automatically.'}</div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-${i>0?`<button class="ghost" data-goto="level-${i-1}">Previous</button>`:''}
-        ${i<DATA.levels.length-1?`<button class="ghost" data-goto="level-${i+1}" style="background:var(--accent);color:#fff;border-color:var(--accent)">Next lesson</button>`:`<button class="ghost" data-goto="certificate" style="background:var(--accent);color:#fff;border-color:var(--accent)">Get certificate</button>`}
+  h+=`<div class="lesson-completion-bar ${done?'complete':''}">
+      <div class="lesson-completion-status">${done?'&#10003; Lesson complete. Your answers are saved.':'Answer every drill to complete this lesson. Progress saves automatically.'}</div>
+      <div class="lesson-completion-actions">
+${i>0?`<button type="button" class="ghost" data-goto="level-${i-1}">Previous</button>`:''}
+        ${i<DATA.levels.length-1?`<button type="button" class="ghost lesson-next" data-goto="level-${i+1}">Next lesson</button>`:`<button type="button" class="ghost lesson-next" data-goto="certificate">Get certificate</button>`}
       </div>
     </div>`;
   return h;
