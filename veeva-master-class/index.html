@@ -1400,10 +1400,10 @@ body{background:#f6f6f3!important;color:#1d2630!important}.card{background:#fff!
   .val-lesson-actions>.ghost{width:100%;justify-content:center}
 }
 /* ===== v3.7 compact lesson completion row ===== */
-.lesson-completion-bar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center;margin:22px 0 4px;padding:19px 2px 0;border-top:1px solid rgba(22,35,58,.14)}
+.lesson-completion-bar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px;align-items:center;margin:58px 0 24px;padding:30px 2px 0;border-top:1px solid rgba(22,35,58,.14)}
 .lesson-completion-status{color:#647084;font-size:12.8px;line-height:1.5}.lesson-completion-bar.complete .lesson-completion-status{color:#376b3e;font-weight:700}
 .lesson-completion-actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}.lesson-completion-actions .ghost{min-height:42px!important;padding:9px 15px!important;border-radius:10px!important;font-size:12px!important;box-shadow:none!important}.lesson-completion-actions .lesson-next{background:var(--accent)!important;color:#fff!important;border-color:var(--accent)!important}.lesson-completion-actions .lesson-next:hover{background:#1d4f7c!important;border-color:#1d4f7c!important}
-@media(max-width:720px){.lesson-completion-bar{grid-template-columns:1fr;padding-top:16px}.lesson-completion-actions{justify-content:flex-start}}
+@media(max-width:720px){.lesson-completion-bar{grid-template-columns:1fr;margin-top:44px;padding-top:22px}.lesson-completion-actions{justify-content:flex-start}}
 @media(max-width:480px){.lesson-completion-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.lesson-completion-actions .ghost{width:100%!important;justify-content:center}.lesson-completion-actions .lesson-next:only-child{grid-column:1/-1}}
 @media(prefers-reduced-motion:reduce){.val-start-progress i,.val-course-step,.val-check-options button{transition:none}}
 
@@ -1447,6 +1447,71 @@ body{background:#f6f6f3!important;color:#1d2630!important}.card{background:#fff!
 .gitem .formula-block{margin:13px 0 12px;padding:13px 0 11px}
 .gitem .formula-lines code{font-size:12px}
 @media(max-width:480px){.term-pop{max-width:min(calc(100vw - 20px),360px)!important;padding:15px 16px!important}.formula-lines code{font-size:11.5px}}
+
+/* v3.7.2: readable terms and visual-first study flow */
+#main .term-def.chip,#main .brief .term-def.chip{font-family:inherit!important;font-size:1em!important;line-height:inherit!important;letter-spacing:inherit!important;vertical-align:baseline!important;font-weight:750!important;padding:0 .035em!important}
+.concept-focus .chip{font-size:16px!important;line-height:1.42!important;padding:3px 0!important}
+.concept-focus small{font-size:11px!important;line-height:1.35!important}
+.term-pop{font-size:15px!important;padding:20px 22px!important}
+.term-pop h5{font-size:20px!important;line-height:1.2!important;margin-bottom:7px!important}
+.term-pop .tp-cat{font-size:10.5px!important;vertical-align:2px}
+.term-pop .tp-def{font-size:15.5px!important;line-height:1.55!important}
+.term-pop .tp-ex{font-size:14px!important;line-height:1.52!important;margin-top:12px!important}
+.term-pop a.tp-link{font-size:14px!important;margin-top:12px!important}
+.term-pop .formula-lines code{font-size:14px!important}.term-pop .formula-variables,.term-pop .formula-example{font-size:13.5px!important}.term-pop .formula-source,.term-pop .formula-basis{font-size:12.5px!important}
+
+.simple-hero.rtc-visual-hero{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(420px,.9fr)!important;gap:58px!important;align-items:center!important;min-height:620px;text-align:left!important;padding:66px 64px!important;overflow:hidden}
+.rtc-visual-hero .rtc-hero-copy{min-width:0}
+.rtc-visual-hero .eyebrow{margin:0 0 16px!important;text-align:left!important}
+.rtc-visual-hero h2{max-width:670px!important;margin:0 0 20px!important;text-align:left!important}
+.rtc-visual-hero .lede{max-width:610px!important;margin:0!important;text-align:left!important}
+.rtc-visual-hero .hero-actions{justify-content:flex-start!important;margin:30px 0 0!important}
+.home-hero-exhibit{margin:0;min-width:0;align-self:center}
+.home-hero-exhibit svg{display:block;width:100%;height:auto;filter:drop-shadow(0 24px 34px rgba(15,42,67,.18))}
+.home-hero-exhibit figcaption{margin-top:13px;color:#647084;font-size:12.5px;line-height:1.4;text-align:center}
+
+.lesson-lead-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(390px,.92fr);gap:46px;align-items:start;margin-top:30px;padding-top:30px;border-top:1px solid rgba(22,35,58,.16)}
+.takeaway-card{margin-top:60px!important}
+.lesson-lead-grid .brief{margin:0!important;padding:0 0 8px!important;border-top:0!important}
+.lesson-lead-figure{position:sticky;top:94px;margin:0;border:1px solid rgba(22,35,58,.12);border-radius:20px;background:#f7f5ef;overflow:hidden;box-shadow:0 14px 34px rgba(22,35,58,.07)}
+.lesson-lead-head{display:flex;align-items:baseline;justify-content:space-between;gap:18px;padding:16px 18px 13px;border-bottom:1px solid rgba(22,35,58,.1);background:#fff}
+.lesson-lead-head span{flex:0 0 auto;color:#8a6d3f;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.lesson-lead-head b{color:#16233a;font:600 17px/1.25 "IBM Plex Serif",Georgia,serif;text-align:right}
+.lesson-lead-canvas{padding:20px 18px;background:#fbfaf7;overflow:hidden}
+.lesson-lead-canvas svg{display:block;width:100%;height:auto;max-height:390px}
+.lesson-lead-figure figcaption{padding:13px 18px 15px;border-top:1px solid rgba(22,35,58,.1);color:#526071;font-size:13px;line-height:1.48;background:#fff}
+.lesson-motion-card{grid-template-columns:minmax(0,.62fr) minmax(380px,1fr)!important;align-items:center!important;padding:38px 44px!important;gap:48px!important}
+.lesson-motion-card>div:first-child{display:block!important}
+.lesson-motion-card .visual-video-copy{border-top:0!important;padding-top:0!important}
+
+@media(max-width:1180px){
+  .simple-hero.rtc-visual-hero{grid-template-columns:1fr!important;min-height:0;gap:42px!important;padding:62px 48px!important}
+  .rtc-visual-hero .rtc-hero-copy{max-width:760px}
+  .home-hero-exhibit{width:min(100%,680px);margin:0 auto}
+  .lesson-lead-grid{grid-template-columns:1fr;gap:28px}
+  .lesson-lead-figure{order:-1;position:static}
+  .lesson-lead-canvas svg{max-height:none}
+}
+@media(max-width:980px){
+  .lesson-motion-card{grid-template-columns:1fr!important;gap:24px!important;padding:34px 28px!important}
+  .lesson-motion-card .visual-video-copy{border-top:1px solid rgba(22,35,58,.12)!important;padding-top:22px!important}
+}
+@media(max-width:720px){
+  .simple-hero.rtc-visual-hero{padding:48px 22px!important;gap:30px!important}
+  .rtc-visual-hero h2{font-size:42px!important}.rtc-visual-hero .lede{font-size:19px!important;line-height:1.35!important}
+  .home-hero-exhibit figcaption{text-align:left}
+  .lesson-lead-grid{margin-top:24px;padding-top:24px}
+  .lesson-lead-head{display:grid;gap:5px;padding:14px 15px 12px}.lesson-lead-head b{text-align:left;font-size:16px}
+  .lesson-lead-canvas{padding:15px 10px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .lesson-lead-canvas svg{width:620px;max-width:none}
+  .lesson-lead-figure figcaption{padding:12px 15px 14px;font-size:12.5px}
+  .concept-focus .chip{font-size:15.5px!important}
+  .term-pop{font-size:14.5px!important}.term-pop h5{font-size:18px!important}.term-pop .tp-def{font-size:15px!important}
+}
+@media(max-width:480px){
+  .rtc-visual-hero h2{font-size:36px!important}.home-hero-exhibit svg{min-width:0}
+  #main .term-def.chip,#main .brief .term-def.chip{font-size:1em!important}
+}
 </style>
 </head>
 <body>
@@ -5199,7 +5264,7 @@ try { const u = JSON.parse(localStorage.getItem(UI_KEY)); if(u) uiState = Object
 function saveUI(){ localStorage.setItem(UI_KEY, JSON.stringify(uiState)); scheduleCloudSave(); }
 function applyFocusMode(){ document.body.classList.toggle("focus-mode", !!uiState.focus); const b=document.getElementById("focusBtn"); if(b) b.textContent=uiState.focus?"Exit focus":"Focus"; }
 
-const READYTOCONSULT_VERSION = "3.6.3";
+const READYTOCONSULT_VERSION = "3.7.2";
 const SUPABASE_URL = "https://oergojtnxmjztjgadkkv.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_WdMMBeui--DSDVloYcTWeg_L9WAXcKA";
 const NOTEBOOK_KEY = "readytoconsult-notebook-v17";
@@ -6196,7 +6261,7 @@ function render(){
 
 function renderFoot(){
   document.getElementById("foot").innerHTML =
-    "ReadyToConsult v3.7.1 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
+    "ReadyToConsult v3.7.2 &nbsp;&middot;&nbsp; Independent educational course &nbsp;&middot;&nbsp; Not affiliated with or endorsed by any company named for teaching context &nbsp;&middot;&nbsp; Progress saves in this browser unless signed in.";
 }
 
 /* ---------- Home ---------- */
@@ -6220,11 +6285,14 @@ function renderHome(){
   const nextView=nextIndex>=0?'level-'+nextIndex:'case';
   const nextLabel=nextIndex>=0?(cp.done?'Continue lesson '+(nextIndex+1):'Start lesson 1'):'Start Case Lab';
   return `<div class="simple-home">
-    <div class="card hero simple-hero">
-      <div class="eyebrow">Guided life sciences consulting course</div>
-      <h2>Think like the analyst in the room.</h2>
-      <p class="lede tight">Build the language, cases, and judgment for life sciences consulting interviews. Follow one path, one session at a time.</p>
-      <div class="hero-actions"><button class="ghost" data-view="${nextView}">${nextLabel} ›</button></div>
+    <div class="card hero simple-hero rtc-visual-hero">
+      <div class="rtc-hero-copy">
+        <div class="eyebrow">Guided life sciences consulting course</div>
+        <h2>Think like the analyst in the room.</h2>
+        <p class="lede tight">Build the language, cases, and judgment for life sciences consulting interviews. Follow one path, one session at a time.</p>
+        <div class="hero-actions"><button class="ghost" data-view="${nextView}">${nextLabel}</button></div>
+      </div>
+      ${homeHeroExhibit()}
     </div>
     ${guidedRoadmapCard()}
     <details class="home-library">
@@ -6239,6 +6307,55 @@ function renderHome(){
       </div>
     </details>
   </div>`;
+}
+
+function homeHeroExhibit(){
+  return `<figure class="home-hero-exhibit">
+    <svg viewBox="0 0 640 540" role="img" aria-labelledby="rtcHeroVisualTitle rtcHeroVisualDesc">
+      <title id="rtcHeroVisualTitle">Life sciences consulting case from issue tree to recommendation</title>
+      <desc id="rtcHeroVisualDesc">A three-part study exhibit that structures an enrollment problem, finds the funnel bottleneck, and states an answer-first recommendation.</desc>
+      <rect width="640" height="540" rx="30" fill="#0f2a43"/>
+      <g font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif">
+        <text x="36" y="38" fill="#c8a668" font-size="10" font-weight="800" letter-spacing="1.5">CASE NOTEBOOK 01</text>
+        <text x="36" y="67" fill="#ffffff" font-family="IBM Plex Serif, Georgia, serif" font-size="21" font-weight="600">From ambiguity to a recommendation</text>
+        <rect x="28" y="88" width="584" height="126" rx="18" fill="#ffffff"/>
+        <text x="48" y="113" fill="#9a7437" font-size="9.5" font-weight="800" letter-spacing="1.1">01  STRUCTURE</text>
+        <rect x="221" y="123" width="198" height="32" rx="8" fill="#0f2a43"/>
+        <text x="320" y="144" text-anchor="middle" fill="#ffffff" font-size="11.5" font-weight="700">Why is enrollment behind?</text>
+        <path d="M320 155 V169 M124 169 H516 M124 169 V179 M320 169 V179 M516 169 V179" stroke="#9fb0c6" stroke-width="1.8" fill="none"/>
+        <rect x="58" y="179" width="132" height="24" rx="7" fill="#eef3f7"/>
+        <rect x="254" y="179" width="132" height="24" rx="7" fill="#eef3f7"/>
+        <rect x="450" y="179" width="132" height="24" rx="7" fill="#eef3f7"/>
+        <text x="124" y="195" text-anchor="middle" fill="#183b5b" font-size="10.5" font-weight="700">Active sites</text>
+        <text x="320" y="195" text-anchor="middle" fill="#183b5b" font-size="10.5" font-weight="700">Screened per site</text>
+        <text x="516" y="195" text-anchor="middle" fill="#183b5b" font-size="10.5" font-weight="700">Conversion</text>
+        <rect x="28" y="228" width="584" height="150" rx="18" fill="#f7f4ed"/>
+        <text x="48" y="253" fill="#9a7437" font-size="9.5" font-weight="800" letter-spacing="1.1">02  READ THE EVIDENCE</text>
+        <text x="48" y="276" fill="#16233a" font-family="IBM Plex Serif, Georgia, serif" font-size="15" font-weight="600">The patient pool collapses before treatment.</text>
+        <rect x="48" y="292" width="348" height="18" rx="5" fill="#153b60"/>
+        <rect x="48" y="316" width="254" height="18" rx="5" fill="#315f88"/>
+        <rect x="48" y="340" width="138" height="18" rx="5" fill="#c8a668"/>
+        <text x="58" y="305" fill="#ffffff" font-size="9.5" font-weight="700">Diagnosed 120,000</text>
+        <text x="58" y="329" fill="#ffffff" font-size="9.5" font-weight="700">Eligible 72,000</text>
+        <text x="58" y="353" fill="#ffffff" font-size="9.5" font-weight="700">Access-cleared 39,600</text>
+        <path d="M422 337 H515" stroke="#9a7437" stroke-width="1.5"/>
+        <circle cx="422" cy="337" r="3" fill="#9a7437"/>
+        <text x="526" y="331" fill="#9a7437" font-size="9.5" font-weight="800">BOTTLENECK</text>
+        <text x="526" y="348" fill="#5f6874" font-size="9.5">coverage and referral</text>
+        <rect x="28" y="392" width="584" height="120" rx="18" fill="#ffffff"/>
+        <text x="48" y="418" fill="#9a7437" font-size="9.5" font-weight="800" letter-spacing="1.1">03  MAKE THE CALL</text>
+        <text x="48" y="445" fill="#16233a" font-family="IBM Plex Serif, Georgia, serif" font-size="16" font-weight="600">Fix access and referral before adding demand.</text>
+        <line x1="48" y1="458" x2="592" y2="458" stroke="#d9dde2"/>
+        <text x="48" y="480" fill="#5f6874" font-size="10.5">Evidence</text>
+        <text x="112" y="480" fill="#16233a" font-size="10.5" font-weight="700">largest controllable leak</text>
+        <text x="294" y="480" fill="#5f6874" font-size="10.5">Next test</text>
+        <text x="357" y="480" fill="#16233a" font-size="10.5" font-weight="700">PA time + referral conversion</text>
+        <text x="48" y="499" fill="#5f6874" font-size="10.5">Decision gate</text>
+        <text x="123" y="499" fill="#16233a" font-size="10.5" font-weight="700">scale only after weekly starts improve</text>
+      </g>
+    </svg>
+    <figcaption>One case, shown as structure, evidence, and decision.</figcaption>
+  </figure>`;
 }
 
 function consultingBenchmarkCard(){
@@ -6329,10 +6446,13 @@ function renderLevel(i){
     <div class="kbd-hint">Tip: press <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> to answer, <kbd>&larr;</kbd><kbd>&rarr;</kbd> to move between levels. Open a concept below if you want the definition.</div>
     ${objectivesBox(i)}
     ${coreConceptBand(i)}
-    <div class="brief">
-      <div class="btag">What matters</div>
-      ${l.brief.map(p=>`<p>${termify(p,l.concepts,inlineConcepts)}</p>`).join("")}
-      <div class="we"><b>Example</b>${termify(l.worked,l.concepts,inlineConcepts)}</div>
+    <div class="lesson-lead-grid">
+      <div class="brief">
+        <div class="btag">What matters</div>
+        ${l.brief.map(p=>`<p>${termify(p,l.concepts,inlineConcepts)}</p>`).join("")}
+        <div class="we"><b>Example</b>${termify(l.worked,l.concepts,inlineConcepts)}</div>
+      </div>
+      ${lessonLeadFigure(i)}
     </div>
   </div>`;
 
@@ -7654,18 +7774,29 @@ function conceptSketch(i){
     </g>
   </svg>`;
 }
-function mediaCard(i){
+function lessonLeadFigure(i){
   const m=MEDIA[String(i)] || {};
   const diagram=(m.diagram && DIAGRAMS[m.diagram]) ? DIAGRAMS[m.diagram] : conceptSketch(i);
+  const visual=LESSON_VISUALS[i] || [];
+  const title=visual[0] || DATA.levels[i].title;
+  const note=visual[10] || 'Use the picture to hold the structure while you read.';
+  return `<figure class="lesson-lead-figure" aria-labelledby="lessonVisualTitle${i}">
+    <div class="lesson-lead-head"><span>Visual anchor</span><b id="lessonVisualTitle${i}">${esc(title)}</b></div>
+    <div class="lesson-lead-canvas">${diagram}</div>
+    <figcaption>${esc(note)}</figcaption>
+  </figure>`;
+}
+function mediaCard(i){
+  const m=MEDIA[String(i)] || {};
   const videos=m.videos || [];
-  return `<div class="card visual-card ${videos.length?'':'no-video'}">
-    <div>
-      <div class="eyebrow">Visual model</div>
-      <h2>See it before you drill it.</h2>
-      <p class="sub">Use the picture as the mental anchor, then answer the scenario out loud. If a video appears, treat it as optional reinforcement, not another lesson to finish.</p>
-      <div class="visual-surface"><div class="diagram">${diagram}</div></div>
+  if(!videos.length) return '';
+  return `<div class="card visual-card lesson-motion-card">
+    <div class="lesson-motion-intro">
+      <div class="eyebrow">Motion version</div>
+      <h2>Watch the idea move.</h2>
+      <p class="sub">Use one short explainer to reinforce the visual anchor. It loads only after you click.</p>
     </div>
-    ${videos.length?`<div class="visual-video-copy"><h3>Motion version</h3><p>Short third-party explainer. It loads only after you click, so the lesson stays lightweight.</p><div class="vgrid">${videos.map(videoFacade).join("")}</div></div>`:''}
+    <div class="visual-video-copy"><h3>Optional reinforcement</h3><p>Watch for the same structure, evidence, and decision pattern used in the lesson.</p><div class="vgrid">${videos.map(videoFacade).join("")}</div></div>
   </div>`;
 }
 function orientationCard(){
