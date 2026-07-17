@@ -10,10 +10,11 @@ process.env.RTC_EVALUATOR_MOCK = '1';
 const { CASE_PACKETS, getCasePacket } = await import('../veeva-master-class/server/cases.mjs');
 const { evaluationInputHash, normalizeEvaluationInput, runEvaluation, validateModelResult } = await import('../veeva-master-class/server/evaluator.mjs');
 const { verifyStripeSignature } = await import('../veeva-master-class/server/stripe.mjs');
-const { publicProductConfig } = await import('../veeva-master-class/server/config.mjs');
+const { publicProductConfig, serverConfig } = await import('../veeva-master-class/server/config.mjs');
 
 assert.equal(CASE_PACKETS.length, 24, 'four cases x six stages');
 assert.equal(publicProductConfig().sales_open,false,'commerce remains closed unless explicitly enabled');
+assert.equal(serverConfig().evaluatorEnabled,false,'AI review access remains closed unless explicitly enabled');
 assert.equal(new Set(CASE_PACKETS.map(p => `${p.case_id}:${p.stage}`)).size, 24, 'case-stage packets are unique');
 assert.equal(getCasePacket(2, 'math').math.expected, 8);
 assert.equal(getCasePacket(2, 'math').math.integer, true);

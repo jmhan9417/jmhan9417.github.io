@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import { PRODUCT_KEY, RUBRIC_VERSION } from '../server/config.mjs';
+import { PRODUCT_KEY, RUBRIC_VERSION, serverConfig } from '../server/config.mjs';
 import { methodGuard, readJson, safeErrorResponse, sendJson } from '../server/http.mjs';
 import { completeEvaluation, failEvaluation, reserveEvaluation, verifyUser } from '../server/supabase.mjs';
 import { evaluationInputHash, normalizeEvaluationInput, runEvaluation } from '../server/evaluator.mjs';
@@ -10,6 +10,7 @@ export default async function handler(req, res) {
   let reservedRequestId = null;
   const deadlineAt=Date.now()+50000;
   try {
+    const cfg=serverConfig();if(!cfg.evaluatorEnabled)throw Object.assign(new Error('private_beta_closed'),{code:'private_beta_closed',status:503});
     ({ user } = await verifyUser(req));
     const body = await readJson(req, 32 * 1024);
     const input = normalizeEvaluationInput(body);
