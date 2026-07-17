@@ -6,7 +6,7 @@ process.env.RTC_EVALUATOR_HASH_SECRET='semantic-test-secret-at-least-32-characte
 const {CASE_PACKETS,expectedProbe,getCasePacket}=await import('../veeva-master-class/server/cases.mjs');
 const {normalizeEvaluationInput,validateModelResult,postProcess}=await import('../veeva-master-class/server/evaluator.mjs');
 const ids=['recommendation_evidence_consistency','prompt_comprehension','numeric_interpretation','partner_level_concision','immediate_followup_responsiveness'];
-const expected=[54,1584,8,431];
+const expected=[54,1584,12,431];
 const units=['months','patients','sites','$M'];
 function inputFor(caseIndex,value=expected[caseIndex],answerExtra=''){
   const isCorrect=(caseIndex===2?Number.isInteger(value):true)&&Math.abs(value-expected[caseIndex])<=(caseIndex===0?2:caseIndex===1?30:caseIndex===2?.1:15),probeId=isCorrect?'math_worse':'math_recheck',followup=isCorrect?'What assumption would make this result materially worse?':'Your result is outside the expected range. Which term, gate, or unit would you recheck first?';
@@ -21,13 +21,13 @@ assert.match(getCasePacket(0,'pressure').stage_prompt,/COO/);assert.match(getCas
 assert.ok(getCasePacket(0,'exhibit').facts.some(f=>f.text.includes('Site B intake is 420')));assert.ok(getCasePacket(1,'exhibit').facts.some(f=>f.text.includes('7,920')));assert.ok(getCasePacket(2,'exhibit').facts.some(f=>f.text.includes('49% screen failure')));
 for(let i=0;i<4;i+=1){const input=inputFor(i),raw=fixture(input);assert.equal(validateModelResult(raw,input),true,`case ${i+1} correct math validates`);const result=postProcess(raw,input);assert.equal(result.deterministic.numeric.correct,true);assert.equal(result.score.applied_cap,null);}
 for(let i=0;i<4;i+=1){const badValue=expected[i]+(i===2?.5:Math.max(5,expected[i]*.2)),input=inputFor(i,badValue),raw=fixture(input,'wrong');assert.equal(validateModelResult(raw,input),true,`case ${i+1} wrong math classification validates`);const result=postProcess(raw,input);assert.equal(result.deterministic.numeric.correct,false);assert.ok(result.score.final_score<=69);assert.ok(result.score.applied_caps.some(c=>c.code==='central_numeric_error_69'));}
-const rareFraction=inputFor(2,8.05);const rareRaw=fixture(rareFraction,'wrong');assert.equal(postProcess(rareRaw,rareFraction).deterministic.numeric.correct,false,'fractional site count is wrong');
+const rareFraction=inputFor(2,12.05);const rareRaw=fixture(rareFraction,'wrong');assert.equal(postProcess(rareRaw,rareFraction).deterministic.numeric.correct,false,'fractional site count is wrong');
 function derivationUnitAttack(caseIndex,value,claimedUnit){const packet=getCasePacket(caseIndex,'math'),answer=`I calculate ${value} ${claimedUnit} and use that result for the decision.`,probe=expectedProbe(packet,answer,value),input=normalizeEvaluationInput({request_id:`d${caseIndex}111111-1111-4111-8111-111111111111`,case_index:caseIndex,stage:'math',exhibit_mode:'base',probe_id:probe.id,followup_question:probe.text,followup_answer:'I would recheck the unit and central assumption before deciding.',answer,locked_number:value}),raw=fixture(input);raw.numeric_checks=[{quote:`${value} ${claimedUnit}`,status:'correct',decision_critical:true,explanation:'Claims the server-defined result.',fact_ids:input.packet.math.fact_ids,derivation_id:'math_expected'}];raw.dimensions.forEach(d=>{if(d.applicability==='applicable')d.evidence=[{source:d.id==='immediate_followup_responsiveness'?'followup_answer':'candidate_answer',quote:d.id==='immediate_followup_responsiveness'?input.followupAnswer.slice(0,70):answer.slice(0,70)}];});raw.contradiction.recommendation_quote=answer.slice(0,70);raw.followup.answer_quote=input.followupAnswer.slice(0,70);return{input,raw};}
 const derivationUnitAttacks=[
   {caseIndex:0,value:54,claimedUnit:'patients',expectedUnit:'months'},
   {caseIndex:1,value:1584,claimedUnit:'months',expectedUnit:'patients'},
-  {caseIndex:2,value:8,claimedUnit:'patients',expectedUnit:'sites'},
-  {caseIndex:2,value:8.05,claimedUnit:'sites',expectedUnit:'integer sites'}
+  {caseIndex:2,value:12,claimedUnit:'patients',expectedUnit:'sites'},
+  {caseIndex:2,value:12.05,claimedUnit:'sites',expectedUnit:'integer sites'}
 ];
 for(const attackCase of derivationUnitAttacks){const attack=derivationUnitAttack(attackCase.caseIndex,attackCase.value,attackCase.claimedUnit);assert.equal(validateModelResult(attack.raw,attack.input),false,`${attackCase.value} ${attackCase.claimedUnit} must not validate as ${attackCase.expectedUnit}`);}
 const grounded=inputFor(0),base=fixture(grounded);
