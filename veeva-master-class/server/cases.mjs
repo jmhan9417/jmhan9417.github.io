@@ -51,13 +51,14 @@ const CASES = [
       ['fact_ai', 'Automation uplift is a 16% scenario on the original 980-case baseline, not a validated forecast.'],
       ['fact_validation', 'AI validation takes 12 weeks and requires human review and audit-trail controls.'],
       ['fact_buffer', 'The scenario produces about 1,317 closures per month, only 67 above intake.'],
+      ['fact_twelve_month_target', 'Clearing 3,600 backlog cases in 12 months requires about 1,550 closures per month, roughly 233 more than the proposed scenario.'],
       ['fact_exhibit_site_a', 'Base exhibit: Site A intake is 310 and closures are 285 cases per month.'],
       ['fact_exhibit_site_b', 'Base exhibit: Site B intake is 420 and quality-adjusted closures are 344 cases per month.'],
       ['fact_exhibit_site_c', 'Base exhibit: Site C intake is 290 and closures are 276 cases per month.']
     ],
     math: { question: 'At the resulting net burn rate, about how many months are needed to clear the 3,600-case backlog?', expected: 54, tolerance: 2, unit: 'months', integer: false, equation: '(3600) / ((980 + 980×0.16 + 180) - 1250)', fact_ids: ['fact_backlog','fact_intake','fact_baseline_capacity','fact_vendor','fact_ai'] },
     conflicts: [
-      ['rule_full_rollout', 'Approving a full rollout solely because scenario capacity exceeds intake conflicts with the unvalidated uplift and fragile 67-case buffer.'],
+      ['rule_full_rollout', 'Approving a full rollout solely because scenario capacity exceeds intake conflicts with the unvalidated uplift, fragile 67-case buffer, and failure to meet the 12-month clearance target.'],
       ['rule_remove_review', 'Replacing human review before validation conflicts with the required quality and audit controls.']
     ]
   },
@@ -90,15 +91,15 @@ const CASES = [
   {
     id: 'rare_disease_trial_rescue',
     title: 'Rare-disease trial rescue',
-    decision: 'Close the monthly enrollment gap while protecting data quality.',
+    decision: 'Close the eight-month enrollment target while protecting data quality.',
     brief: 'A global rare-disease Phase 3 trial must enroll 240 additional patients in eight months. Twenty active sites enroll 1.1 patients per month each. The sponsor proposes eight new countries, but patient groups report travel burden and screen failures.',
     pressure: 'The Clinical Lead says: Country C activates in six weeks, faster than all others. Why not put the full budget there?',
     facts: [
-      ['fact_target', 'The target pace is 30 patients per month.'],
-      ['fact_current', 'Current active sites produce about 22 patients per month.'],
-      ['fact_gap', 'The monthly enrollment gap is 8 patients.'],
-      ['fact_site_rate', 'A new active site enrolls 1.1 patients per month.'],
-      ['fact_activation', 'New-site activation takes 10 weeks and screening adds two more in the base question.'],
+      ['fact_target', 'The trial needs 240 additional patients over eight months.'],
+      ['fact_current', 'Current active sites produce about 22 patients per month, or about 176 patients over eight months.'],
+      ['fact_gap', 'The eight-month enrollment shortfall is 64 patients before adding new sites.'],
+      ['fact_site_rate', 'A new active site enrolls 1.1 patients per month once active.'],
+      ['fact_activation', 'New-site activation takes 10 weeks and screening adds two more, leaving about five productive months in the eight-month window.'],
       ['fact_country_c', 'Country C activates quickly but has the worst screen-failure and travel profile.'],
       ['fact_quality', 'The rescue cannot weaken endpoint reliability or data quality.'],
       ['fact_support', 'Pre-screening, travel support, and selective site additions can improve conversion.'],
@@ -107,7 +108,7 @@ const CASES = [
       ['fact_country_c_detail', 'Base exhibit Country C: 6-week activation, 49% screen failure, high travel burden, medium data quality.'],
       ['fact_country_d', 'Base exhibit Country D: 10-week activation, 25% screen failure, medium travel burden, high data quality.']
     ],
-    math: { question: 'What is the minimum whole number of equally productive new sites needed to close the eight-patient monthly gap?', expected: 8, tolerance: 0.1, unit: 'sites', integer: true, equation: 'ceiling((30-22)/1.1)', fact_ids: ['fact_target','fact_current','fact_site_rate'] },
+    math: { question: 'What is the minimum whole number of equally productive new sites needed to reach the 240-patient target after accounting for the 12-week activation and screening delay?', expected: 12, tolerance: 0.1, unit: 'sites', integer: true, equation: 'ceiling((240 - 22×8) / (1.1×5))', fact_ids: ['fact_target','fact_current','fact_gap','fact_site_rate','fact_activation'] },
     conflicts: [
       ['rule_country_c_only', 'Concentrating the full budget in Country C based on activation speed alone ignores its high screen failure and travel burden.'],
       ['rule_capacity_only', 'Treating site count as the only lever ignores conversion, retention, and patient burden.']
