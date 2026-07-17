@@ -51,6 +51,7 @@ export function serverConfig() {
     aiGatewayKey: process.env.AI_GATEWAY_API_KEY || process.env.VERCEL_OIDC_TOKEN || '',
     evaluatorHashSecret: process.env.RTC_EVALUATOR_HASH_SECRET || '',
     evaluatorModel: process.env.RTC_EVALUATOR_MODEL || 'anthropic/claude-sonnet-5',
-    evaluatorMock: process.env.RTC_EVALUATOR_MOCK === '1'
+    evaluatorMock: process.env.RTC_EVALUATOR_MOCK === '1',
+    evaluatorEnabled: process.env.RTC_EVALUATOR_ENABLED === '1'
   };
 }

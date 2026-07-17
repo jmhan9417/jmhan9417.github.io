@@ -12,8 +12,11 @@ export default async function handler(req, res) {
     const { user } = await verifyUser(req);
     const access = await accessState(user.id);
     const cfg = serverConfig();
+    const evaluatorAvailable=Boolean(cfg.evaluatorEnabled&&(cfg.aiGatewayKey||cfg.evaluatorMock)&&cfg.evaluatorHashSecret);
     return sendJson(res, 200, {
       ...access,
+      can_evaluate: Boolean(evaluatorAvailable&&access.can_evaluate),
+      evaluator_available: evaluatorAvailable,
       email: user.email || null,
       product,
       checkout_available: Boolean(cfg.commerceEnabled && cfg.stripeSecret && cfg.stripePriceId)
