@@ -13,6 +13,7 @@ const { verifyStripeSignature } = await import('../veeva-master-class/server/str
 const { publicProductConfig } = await import('../veeva-master-class/server/config.mjs');
 
 assert.equal(CASE_PACKETS.length, 24, 'four cases x six stages');
+assert.equal(publicProductConfig().sales_open,false,'commerce remains closed unless explicitly enabled');
 assert.equal(new Set(CASE_PACKETS.map(p => `${p.case_id}:${p.stage}`)).size, 24, 'case-stage packets are unique');
 assert.equal(getCasePacket(2, 'math').math.expected, 8);
 assert.equal(getCasePacket(2, 'math').math.integer, true);

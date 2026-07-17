@@ -31,6 +31,7 @@ export function publicProductConfig() {
     privacy_version: PRIVACY_VERSION,
     refund_version: REFUND_VERSION,
     subscription: false,
+    sales_open: process.env.RTC_COMMERCE_ENABLED === '1',
     evaluator_label: 'Beta AI partner review'
   };
 }
@@ -45,6 +46,7 @@ export function serverConfig() {
     stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET || '',
     stripePriceId: process.env.STRIPE_PRICE_ID || '',
     stripeLivemode: stripeSecret.startsWith('sk_live_'),
+    commerceEnabled: process.env.RTC_COMMERCE_ENABLED === '1',
     publicAppUrl: (process.env.READYTOCONSULT_PUBLIC_URL || 'https://readytoconsult.vercel.app').replace(/\/$/, ''),
     aiGatewayKey: process.env.AI_GATEWAY_API_KEY || process.env.VERCEL_OIDC_TOKEN || '',
     evaluatorHashSecret: process.env.RTC_EVALUATOR_HASH_SECRET || '',

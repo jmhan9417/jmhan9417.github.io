@@ -16,7 +16,7 @@ export default async function handler(req, res) {
       ...access,
       email: user.email || null,
       product,
-      checkout_available: Boolean(cfg.stripeSecret && cfg.stripePriceId)
+      checkout_available: Boolean(cfg.commerceEnabled && cfg.stripeSecret && cfg.stripePriceId)
     });
   } catch (error) {
     safeErrorResponse(res, error);

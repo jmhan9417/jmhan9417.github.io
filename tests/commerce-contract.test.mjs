@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 process.env.SUPABASE_URL='https://commerce.supabase.co';
 process.env.SUPABASE_ANON_KEY='anon-commerce';
 process.env.SUPABASE_SERVICE_ROLE_KEY='service-commerce';
+process.env.RTC_COMMERCE_ENABLED='1';
 process.env.STRIPE_SECRET_KEY='sk_test_commerce';
 process.env.STRIPE_PRICE_ID='price_test_readytoconsult_79';
 process.env.READYTOCONSULT_PUBLIC_URL='https://readytoconsult.vercel.app';
