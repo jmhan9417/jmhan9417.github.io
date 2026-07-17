@@ -1658,6 +1658,23 @@ body{background:#f6f6f3!important;color:#1d2630!important}.card{background:#fff!
 
 @media(max-width:320px){.lesson-hero-card{padding:20px 14px 18px!important}.lesson-hero-card .lvl-head h2{font-size:29px!important}.lesson-signal-deck{grid-auto-columns:94%}.lesson-route button span{font-size:9.5px}.lesson-phase-head h2{font-size:26px!important}.lesson-frame-card{padding:16px!important}.lesson-phase-practice .drill{padding:24px 16px!important}.lesson-phase-practice .opt{padding:16px 14px!important}}
 
+.concept-tryit{margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,255,.18)}
+.tryit-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.tryit-head span{color:#d8b36f;font-size:9.5px;font-weight:850;letter-spacing:.1em;text-transform:uppercase}
+.tryit-head button{border:1px solid rgba(255,255,255,.28);border-radius:8px;background:transparent;color:rgba(255,255,255,.85);font:inherit;font-size:10.5px;font-weight:750;padding:4px 10px;cursor:pointer}
+.tryit-head button:hover{border-color:#d8b36f;color:#fff}
+.tryit-head button:focus-visible{outline:2px solid #d8b36f;outline-offset:2px}
+.tryit-inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 14px;margin-top:13px}
+.tryit-inputs label{min-width:0;color:rgba(255,255,255,.66);font-size:10.5px;font-weight:700;line-height:1.3}
+.tryit-inputs input{width:100%;margin-top:5px;padding:8px 10px;border:1px solid rgba(255,255,255,.24);border-radius:9px;background:rgba(255,255,255,.07);color:#fff;font:inherit;font-size:14px}
+.tryit-inputs input:focus{outline:2px solid #d8b36f;outline-offset:1px;border-color:transparent}
+.tryit-out{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 14px;margin-top:16px}
+.tryit-out div{min-width:0;border-top:2px solid rgba(216,179,111,.55);padding-top:8px}
+.tryit-out small{display:block;color:rgba(255,255,255,.6);font-size:9.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+.tryit-out b{display:block;margin-top:3px;color:#fff;font-family:var(--serif);font-size:21px;line-height:1.15;overflow-wrap:anywhere}
+@media(max-width:600px){.tryit-out b{font-size:18px}}
+@media(max-width:390px){.tryit-inputs{grid-template-columns:1fr}}
+
 /* v4.3 market-access benefit pathway */
 .benefit-flow{margin:2px 0 24px;border:1px solid #dbe3e7;border-radius:16px;overflow:hidden;background:#f7faf9}.benefit-flow-head{display:grid;gap:5px;padding:15px 18px;border-bottom:1px solid #dbe3e7;background:#fff}.benefit-flow-head small{color:#547764;font-size:9.5px;font-weight:850;letter-spacing:.09em;text-transform:uppercase}.benefit-flow-head b{color:#183b2a;font-size:14px;line-height:1.35}.benefit-flow-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.benefit-flow article{position:relative;min-width:0;padding:18px 16px;border-right:1px solid #dbe3e7;border-bottom:1px solid #dbe3e7;overflow-wrap:anywhere}.benefit-flow article:nth-child(2n){border-right:0}.benefit-flow article:nth-last-child(-n+2){border-bottom:0}.benefit-flow article>small{display:block;color:#5f7c6b;font-size:9px;font-weight:850;letter-spacing:.08em}.benefit-flow article>b{display:block;margin-top:8px;color:#183b2a;font-size:13px;line-height:1.3}.benefit-flow article>p{margin:7px 0 0;color:#5b6d62;font-size:11.5px;line-height:1.43}.benefit-flow article>i{display:none}.benefit-flow-note{margin:0;padding:11px 18px;border-top:1px solid #dbe3e7;color:#66766c;font-size:10.5px;line-height:1.4}.benefit-flow.medical{background:#f5f8fb}.benefit-flow.medical .benefit-flow-head small,.benefit-flow.medical article>small{color:#4f7396}.benefit-flow.medical .benefit-flow-head b,.benefit-flow.medical article>b{color:#173a5b}.benefit-flow.medical article>p,.benefit-flow.medical .benefit-flow-note{color:#5c6f80}
 @media(max-width:760px){.benefit-flow-steps{grid-template-columns:1fr}.benefit-flow article,.benefit-flow article:nth-child(2n),.benefit-flow article:nth-last-child(-n+2){border-right:0;border-bottom:1px solid #dbe3e7}.benefit-flow article:last-child{border-bottom:0}.case-media .case-diagram{overflow:hidden}.case-media .case-diagram svg{display:block!important;width:100%!important;min-width:0!important;max-width:100%!important;height:auto!important}}
@@ -5426,7 +5443,7 @@ try { const u = JSON.parse(localStorage.getItem(UI_KEY)); if(u) uiState = Object
 function saveUI(){ localStorage.setItem(UI_KEY, JSON.stringify(uiState)); scheduleCloudSave(); }
 function applyFocusMode(){ document.body.classList.toggle("focus-mode", !!uiState.focus); const b=document.getElementById("focusBtn"); if(b) b.textContent=uiState.focus?"Exit focus":"Focus"; }
 
-const READYTOCONSULT_VERSION = "4.3.1";
+const READYTOCONSULT_VERSION = "4.4.0";
 const SUPABASE_URL = "https://oergojtnxmjztjgadkkv.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_WdMMBeui--DSDVloYcTWeg_L9WAXcKA";
 const NOTEBOOK_KEY = nsKey("readytoconsult-notebook-v17");
@@ -7676,10 +7693,49 @@ function conceptModelSvg(m,i){
   for(let k=0;k<n;k++){const x=start+k*(bw+gap);parts.push(modelBox(x,y,bw,88,m.steps[k],m.values[k],k===n-1));if(k<n-1)parts.push(modelArrow(x+bw,y+44,x+bw+gap-5,y+44));}
   return '<svg viewBox="0 0 680 310" aria-hidden="true" focusable="false">'+font+parts.join('')+end+'</svg>';
 }
+function calcNum(v,d){if(!isFinite(v))return'—';return (+v).toLocaleString('en-US',{maximumFractionDigits:d==null?1:d});}
+function calcMoneyM(v){if(!isFinite(v))return'—';const neg=v<0,a=Math.abs(v);let s;if(a>=1000)s='$'+calcNum(a/1000,a>=10000?1:3)+'B';else s='$'+calcNum(a,1)+'M';return neg?'−'+s:s;}
+function calcMoney(v){if(!isFinite(v))return'—';const neg=v<0,a=Math.abs(v);let s;if(a>=1e9)s='$'+calcNum(a/1e9,2)+'B';else if(a>=1e6)s='$'+calcNum(a/1e6,1)+'M';else s='$'+calcNum(a,0);return neg?'−'+s:s;}
+const LESSON_CALCS={
+0:{inputs:[['sites','Active sites',24,1,200,1],['screens','Screened per site / month',8,0,60,0.5],['conv','Screen-to-enroll %',30,0,100,1]],compute:v=>{const e=v.sites*v.screens*v.conv/100;return[['Enrollment / month',calcNum(e,1)],['Rounded',calcNum(Math.round(e),0)+' patients']];}},
+2:{inputs:[['pop','Population',120000,0,10000000,1000],['elig','Eligible %',60,0,100,1],['adopt','Adoption %',10,0,100,1],['price','Annual net price $',24000,0,1000000,500]],compute:v=>{const s=v.pop*v.elig/100*v.adopt/100*v.price;return[['Treated patients',calcNum(v.pop*v.elig/100*v.adopt/100,0)],['Annual net sales',calcMoney(s)]];}},
+7:{inputs:[['inc','Incoming cases / month',1200,0,100000,10],['out','Completed cases / month',960,0,100000,10],['fte','Cases per FTE / month',120,1,10000,5]],compute:v=>{const gap=v.inc-v.out;return[['Backlog change / month',(gap>0?'+':'')+calcNum(gap,0)],['Staffing gap',gap>0?calcNum(gap/v.fte,1)+' FTE':'none']];}},
+8:{inputs:[['inv','Investment $k',650,1,1000000,10],['gross','Gross annual benefit $k',400,0,1000000,10],['run','Annual run cost $k',100,0,1000000,10]],compute:v=>{const net=v.gross-v.run;return[['Net annual benefit',net>=0?'$'+calcNum(net,0)+'k':'−$'+calcNum(-net,0)+'k'],['Payback',net>0?calcNum(v.inv/net,2)+' years':'—'],['Annual ROI',net>0?calcNum(net/v.inv*100,0)+'%':'—']];}},
+13:{inputs:[['cmc','CMC package (weeks)',4,0,100,1],['sum','Integrated summary (weeks)',6,0,100,1],['qc','Publishing / QC (weeks)',2,0,100,1]],compute:v=>{return[['Critical path',calcNum(v.cmc+v.sum+v.qc,1)+' weeks']];}},
+14:{inputs:[['sites','Active sites',20,1,500,1],['rate','Enrollments / site / month',1.1,0,20,0.1],['months','Months',8,1,60,1],['ret','Retention %',85,0,100,1]],compute:v=>{const e=v.sites*v.rate*v.months*v.ret/100;return[['Evaluable patients',calcNum(Math.round(e),0)]];}},
+16:{inputs:[['base','Baseline deviations / quarter',12,1,10000,1],['post','Post-CAPA deviations / quarter',3,0,10000,1]],compute:v=>{const r=(v.base-v.post)/v.base*100;return[['Recurrence reduction',calcNum(r,0)+'%']];}},
+17:{inputs:[['diag','Diagnosed',120000,0,10000000,1000],['elig','Eligible %',60,0,100,1],['acc','Accessible %',55,0,100,1],['ref','Referred %',25,0,100,1],['init','Initiated %',40,0,100,1]],compute:v=>{const t=v.diag*v.elig/100*v.acc/100*v.ref/100*v.init/100;return[['Treated patients',calcNum(Math.round(t),0)]];}},
+18:{inputs:[['nc','New-drug cost $M',20,0,100000,1],['off','Condition-cost offsets $M',4,0,100000,1],['disp','Displaced comparator cost $M',8,0,100000,1]],compute:v=>{return[['Incremental annual impact',calcMoneyM(v.nc-v.off-v.disp)]];}},
+19:{inputs:[['t','Adjusted treated risk %',18,0,100,0.5],['c','Adjusted comparator risk %',24,0,100,0.5]],compute:v=>{const d=v.t-v.c;return[['Adjusted risk difference',(d>0?'+':d<0?'−':'')+calcNum(Math.abs(d),1)+' pp']];}},
+20:{inputs:[['tasks','Eligible tasks',5000,0,10000000,100],['adopt','Adoption %',70,0,100,1],['mins','Minutes saved per task',8,0,240,0.5],['pass','Quality pass rate %',95,0,100,1]],compute:v=>{const h=v.tasks*v.adopt/100*v.mins*v.pass/100/60;return[['Usable hours saved',calcNum(Math.round(h),0)+' h']];}},
+21:{inputs:[['val','Approved value $M',1200,0,1000000,10],['pos','Probability of success %',20,0,100,1],['cost','Expected remaining cost $M',80,0,1000000,5]],compute:v=>{return[['Risk-adjusted value',calcMoneyM(v.val*v.pos/100)],['rNPV',calcMoneyM(v.val*v.pos/100-v.cost)]];}},
+22:{inputs:[['prob','Disruption probability %',15,0,100,1],['car','Contribution at risk $M',300,0,1000000,10]],compute:v=>{return[['Expected exposure',calcMoneyM(v.prob/100*v.car)]];}},
+25:{inputs:[['sites','Qualified sites',40,1,2000,1],['thr','Patients / site / month',2,0,50,0.5],['yield','Manufacturing success %',85,0,100,1]],compute:v=>{const d=v.sites*v.thr*v.yield/100;return[['Delivered / month',calcNum(Math.round(d),0)+' patients']];}},
+27:{inputs:[['pvf','PV of forecast cash $M',381,0,1000000,10],['pvt','PV of terminal value $M',971,0,1000000,10],['debt','Debt $M',150,0,1000000,10],['cash','Cash $M',80,0,1000000,10]],compute:v=>{const ev=v.pvf+v.pvt;return[['Enterprise value',calcMoneyM(ev)],['Equity value',calcMoneyM(ev-v.debt+v.cash)]];}},
+28:{inputs:[['diag','Diagnosed',120000,0,10000000,1000],['elig','Eligible %',60,0,100,1],['acc','Access %',55,0,100,1],['share','Share %',10,0,100,1],['price','Annual net price $',24000,0,1000000,500]],compute:v=>{const t=v.diag*v.elig/100*v.acc/100*v.share/100;return[['Treated patients',calcNum(Math.round(t),0)],['Peak annual net sales',calcMoney(t*v.price)]];}},
+29:{inputs:[['p2','Phase 2 PoS %',40,0,100,1],['p3','Phase 3 PoS %',55,0,100,1],['appr','Approval PoS %',90,0,100,1],['val','Approved value $M',3200,0,1000000,50],['c1','Phase 2 cost $M',120,0,100000,5],['c2','Phase 3 cost $M',200,0,100000,5],['c3','Filing cost $M',10,0,100000,1]],compute:v=>{const cum=v.p2/100*v.p3/100*v.appr/100,costs=v.c1+v.p2/100*v.c2+v.p2/100*v.p3/100*v.c3;return[['Cumulative PoS',calcNum(cum*100,1)+'%'],['Expected costs',calcMoneyM(costs)],['Lead-asset rNPV',calcMoneyM(v.val*cum-costs)]];}},
+30:{inputs:[['pay','Milestone payment $M',200,0,1000000,10],['prob','Trigger probability %',40,0,100,1],['rate','Discount rate %',10,0,50,0.5],['yrs','Years until payment',3,0,30,1]],compute:v=>{return[['Probability-adjusted',calcMoneyM(v.pay*v.prob/100)],['Present expected value',calcMoneyM(v.pay*v.prob/100/Math.pow(1+v.rate/100,v.yrs))]];}},
+31:{inputs:[['fut','Risk-adjusted future value $M',220,0,1000000,10],['cost','Next-stage cost $M',60,0,1000000,5]],compute:v=>{const d=v.fut-v.cost;return[['Incremental value',calcMoneyM(d)],['Gate',d>0?'Advance clears the gate':'Does not clear the gate']];}}
+};
+function conceptTryIt(i){
+  const c=LESSON_CALCS[i];if(!c)return'';
+  return '<div class="concept-tryit" data-calc="'+i+'"><div class="tryit-head"><span id="tryitLabel'+i+'">Try the numbers</span><button type="button" data-calc-reset aria-label="Reset inputs to the worked example">Reset</button></div><div class="tryit-inputs" role="group" aria-labelledby="tryitLabel'+i+'">'+c.inputs.map(f=>'<label>'+esc(f[1])+'<input type="number" data-calc-key="'+f[0]+'" data-default="'+f[2]+'" value="'+f[2]+'" min="'+f[3]+'" max="'+f[4]+'" step="'+f[5]+'" inputmode="decimal"></label>').join('')+'</div><div class="tryit-out" data-calc-out aria-live="polite"></div></div>';
+}
+function wireLessonCalcs(){
+  document.querySelectorAll('[data-calc]').forEach(function(box){
+    if(box.dataset.calcWired)return;box.dataset.calcWired='1';
+    const spec=LESSON_CALCS[+box.getAttribute('data-calc')];if(!spec)return;
+    const read=function(){const v={};box.querySelectorAll('input[data-calc-key]').forEach(function(inp){let x=parseFloat(inp.value);const mn=parseFloat(inp.min),mx=parseFloat(inp.max);if(!isFinite(x))x=parseFloat(inp.getAttribute('data-default'));x=Math.min(mx,Math.max(mn,x));v[inp.getAttribute('data-calc-key')]=x;});return v;};
+    const paint=function(){const rows=spec.compute(read());box.querySelector('[data-calc-out]').innerHTML=rows.map(function(r){return '<div><small>'+r[0]+'</small><b>'+r[1]+'</b></div>';}).join('');};
+    box.addEventListener('input',paint);
+    box.querySelector('[data-calc-reset]').onclick=function(){box.querySelectorAll('input[data-calc-key]').forEach(function(inp){inp.value=inp.getAttribute('data-default');});paint();};
+    paint();
+  });
+}
 function conceptModelCard(i){
   const m=LESSON_MODELS[i];if(!m)return'';
   const conceptual=m.literal===false,dataId='conceptModelData'+i,eyebrow=conceptual?'Conceptual framework · applied example':'Concept model · formula + worked example',intro=conceptual?'Use this structure to organize the decision, then apply it to a concrete situation.':'Translate the lesson into one reusable model, then put numbers or a concrete decision through it.',equation=conceptual?'<div class="concept-equation conceptual">'+esc(m.formula)+'</div>':'<code class="concept-equation">'+esc(m.formula)+'</code>';
-  return '<section class="card concept-model-card" aria-labelledby="conceptModelTitle'+i+'"><div class="concept-model-head"><div><div class="eyebrow">'+eyebrow+'</div><h2 id="conceptModelTitle'+i+'">'+esc(m.title)+'</h2><p>'+intro+'</p></div><button type="button" class="concept-model-coach" data-coach-model="'+i+'">Ask Coach about this model</button></div><div class="concept-model-grid"><div class="concept-math"><small>'+esc(m.kind)+'</small>'+equation+'<div class="concept-variables">'+esc(m.variables)+'</div><div class="concept-example"><span>Worked example</span><p>'+esc(m.example)+'</p><b>So what: '+esc(m.insight)+'</b></div></div><figure class="concept-figure" role="button" aria-label="Open '+esc(m.title)+' diagram" aria-labelledby="conceptModelTitle'+i+' '+dataId+'" data-figure-zoom data-zoom-title="'+esc(m.title)+'" tabindex="0">'+conceptModelSvg(m,i)+modelA11yList(m,dataId)+'<figcaption>'+esc(m.insight)+'</figcaption></figure></div></section>';
+  return '<section class="card concept-model-card" aria-labelledby="conceptModelTitle'+i+'"><div class="concept-model-head"><div><div class="eyebrow">'+eyebrow+'</div><h2 id="conceptModelTitle'+i+'">'+esc(m.title)+'</h2><p>'+intro+'</p></div><button type="button" class="concept-model-coach" data-coach-model="'+i+'">Ask Coach about this model</button></div><div class="concept-model-grid"><div class="concept-math"><small>'+esc(m.kind)+'</small>'+equation+'<div class="concept-variables">'+esc(m.variables)+'</div><div class="concept-example"><span>Worked example</span><p>'+esc(m.example)+'</p><b>So what: '+esc(m.insight)+'</b></div>'+conceptTryIt(i)+'</div><figure class="concept-figure" role="button" aria-label="Open '+esc(m.title)+' diagram" aria-labelledby="conceptModelTitle'+i+' '+dataId+'" data-figure-zoom data-zoom-title="'+esc(m.title)+'" tabindex="0">'+conceptModelSvg(m,i)+modelA11yList(m,dataId)+'<figcaption>'+esc(m.insight)+'</figcaption></figure></div></section>';
 }
 
 const PLAIN_INTRO={
@@ -7846,6 +7902,7 @@ function renderDrill(li,di,d){
 
 function wireLevel(i){
   const m=document.getElementById("main");
+  wireLessonCalcs();
   m.querySelectorAll(".opt:not([disabled])").forEach(b=>{
     b.onclick=()=>{
       const li=+b.getAttribute("data-li"), di=+b.getAttribute("data-di"), oi=+b.getAttribute("data-oi");
