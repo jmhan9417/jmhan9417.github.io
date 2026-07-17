@@ -37,6 +37,7 @@ export async function createCheckoutForUser(user, input) {
   const requestKey = String(input.request_key || '');
   if (!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(requestKey)) throw bodyError('invalid_request_key', 400);
   const cfg = serverConfig();
+  if (!cfg.commerceEnabled) throw bodyError('commerce_closed', 403);
   if (!cfg.stripeSecret || !cfg.stripePriceId) throw bodyError('checkout_unavailable', 503);
 
   const access = await accessState(user.id);

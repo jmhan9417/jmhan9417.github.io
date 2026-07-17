@@ -15,6 +15,7 @@ Required server environment variables:
 - `STRIPE_PRICE_ID`
 - `READYTOCONSULT_PUBLIC_URL=https://readytoconsult.vercel.app`
 - `CRON_SECRET` (strong random value used by the daily retention job)
+- `RTC_COMMERCE_ENABLED=1` only when the owner explicitly opens sales; omit it for the current private beta
 
 Production does not set `RTC_EVALUATOR_MOCK`. The mock flag is only for the local contract harness.
 
