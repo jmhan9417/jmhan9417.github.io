@@ -1410,10 +1410,10 @@ body{background:#f6f6f3!important;color:#1d2630!important}.card{background:#fff!
 .concept-focus-statement,.concept-focus-terms{display:grid;grid-template-columns:132px minmax(0,1fr);gap:26px;align-items:start;padding:22px 0}
 .concept-focus-terms{border-top:1px solid rgba(22,35,58,.1);padding-top:18px;padding-bottom:19px}
 .concept-focus small{padding-top:4px;color:#8a6d3f;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
-.concept-focus-statement strong{max-width:780px;color:#16233a;font:600 18px/1.5 "IBM Plex Serif",Georgia,serif;letter-spacing:-.01em;text-wrap:balance}
+.concept-focus-statement strong{max-width:780px;color:#16233a;font-family:inherit;font-size:17px;font-weight:600;line-height:1.42;letter-spacing:0;text-wrap:balance}
 .concept-focus-terms>div{display:flex;flex-wrap:wrap;gap:10px 24px}
-.concept-focus .chip{appearance:none!important;border:0!important;border-radius:0!important;margin:0!important;padding:2px 0!important;background:linear-gradient(transparent 57%,rgba(206,166,91,.34) 57%)!important;color:#16233a!important;font-size:14px!important;font-weight:750!important;line-height:1.35!important;cursor:pointer!important}
-.concept-focus .chip:hover,.concept-focus .chip:focus-visible{background:linear-gradient(transparent 43%,rgba(206,166,91,.5) 43%)!important;text-decoration:none!important}
+.concept-focus .chip{appearance:none!important;border:0!important;border-radius:0!important;margin:0!important;padding:2px 0!important;background:none!important;color:#16233a!important;font-size:14px!important;font-weight:750!important;line-height:1.35!important;cursor:pointer!important;text-decoration:underline!important;text-decoration-style:dotted!important;text-decoration-color:rgba(138,109,63,.65)!important;text-decoration-thickness:1.5px!important;text-underline-offset:4px!important}
+.concept-focus .chip:hover,.concept-focus .chip:focus-visible{background:none!important;color:#0f2f4d!important;text-decoration-style:solid!important;text-decoration-color:#8a6d3f!important}
 .val-key-band{display:grid;grid-template-columns:180px minmax(0,1fr);gap:22px 30px;padding:28px 50px 30px;border-bottom:1px solid #d9dde1;background:#f7f5ef}
 .val-key-copy{display:grid;align-content:start;gap:6px}
 .val-key-copy small,.val-key-formula>span{color:#8a6d3f;font-size:9.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
@@ -1425,10 +1425,10 @@ body{background:#f6f6f3!important;color:#1d2630!important}.card{background:#fff!
 .val-key-formula{grid-column:1/-1;display:grid;grid-template-columns:150px minmax(0,1fr);gap:30px;align-items:baseline;padding-top:19px;border-top:1px solid rgba(22,35,58,.16)}
 .val-key-formula code{color:#123c63;font:700 14px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:normal}
 .val-terms dl>div.is-core dt{display:inline;background:linear-gradient(transparent 60%,rgba(206,166,91,.28) 60%)}
-#main .term-def.chip{display:inline!important;border:0!important;border-radius:0!important;padding:0 .04em!important;margin:0!important;background:linear-gradient(transparent 60%,rgba(206,166,91,.32) 60%)!important;color:#16233a!important;font-weight:750!important;text-decoration:none!important;cursor:pointer!important;box-decoration-break:clone;-webkit-box-decoration-break:clone}
-#main .term-def.chip:hover,#main .term-def.chip:focus-visible{background:linear-gradient(transparent 46%,rgba(206,166,91,.5) 46%)!important;color:#0f2f4d!important}
+#main .term-def.chip{display:inline!important;border:0!important;border-radius:0!important;padding:0 .04em!important;margin:0!important;background:none!important;color:#16233a!important;font-weight:750!important;cursor:pointer!important;text-decoration:underline!important;text-decoration-style:dotted!important;text-decoration-color:rgba(138,109,63,.6)!important;text-decoration-thickness:1.2px!important;text-underline-offset:3.5px!important;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+#main .term-def.chip:hover,#main .term-def.chip:focus-visible{background:none!important;color:#0f2f4d!important;text-decoration-style:solid!important;text-decoration-color:#8a6d3f!important}
 @media(max-width:900px){.val-key-band{grid-template-columns:1fr}.val-key-terms{grid-template-columns:repeat(2,minmax(0,1fr))}.val-key-formula{grid-template-columns:1fr;gap:7px}}
-@media(max-width:720px){.concept-focus-statement,.concept-focus-terms{grid-template-columns:1fr;gap:8px;padding:18px 0}.concept-focus-statement strong{font-size:16.5px}.concept-focus-terms>div{gap:9px 18px}.val-key-band{padding:23px 24px 25px}.val-key-terms{gap:15px}.val-key-terms b{font-size:12.5px}}
+@media(max-width:720px){.concept-focus-statement,.concept-focus-terms{grid-template-columns:1fr;gap:8px;padding:18px 0}.concept-focus-statement strong{font-size:15.5px}.concept-focus-terms>div{gap:9px 18px}.val-key-band{padding:23px 24px 25px}.val-key-terms{gap:15px}.val-key-terms b{font-size:12.5px}}
 @media(max-width:480px){.val-key-terms{grid-template-columns:1fr 1fr}.val-key-formula code{font-size:12px}}
 /* v3.7.1: formula-first glossary and definition popovers */
 .term-pop{max-width:440px!important;max-height:min(72vh,620px);overflow:auto;padding:17px 19px!important}
@@ -1619,8 +1619,8 @@ body{background:#f6f6f3!important;color:#1d2630!important}.card{background:#fff!
 .lesson-hero-card .objectives{border-top-color:rgba(22,35,58,.14)!important}.lesson-hero-card .objectives .obj-h{color:#8a6d3f!important}
 .lesson-hero-card .concept-focus{margin-top:20px}
 .lesson-hero-card .concept-focus-statement,.lesson-hero-card .concept-focus-terms{grid-template-columns:112px minmax(0,1fr);gap:20px;padding:16px 0}
-#main .access-hero .term-def.chip,#main .interview-hero .term-def.chip{color:#fff!important;background:linear-gradient(transparent 60%,rgba(216,179,111,.4) 60%)!important}
-#main .access-hero .term-def.chip:hover,#main .access-hero .term-def.chip:focus-visible,#main .interview-hero .term-def.chip:hover,#main .interview-hero .term-def.chip:focus-visible{color:#fff!important;background:linear-gradient(transparent 42%,rgba(216,179,111,.58) 42%)!important}
+#main .access-hero .term-def.chip,#main .interview-hero .term-def.chip,#main .cap-hero .term-def.chip{color:#fff!important;background:none!important;text-decoration-color:rgba(216,179,111,.75)!important}
+#main .access-hero .term-def.chip:hover,#main .access-hero .term-def.chip:focus-visible,#main .interview-hero .term-def.chip:hover,#main .interview-hero .term-def.chip:focus-visible,#main .cap-hero .term-def.chip:hover,#main .cap-hero .term-def.chip:focus-visible{color:#fff!important;background:none!important;text-decoration-color:#e0c38d!important}
 .lesson-signal-deck{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:22px;border:1px solid rgba(22,35,58,.13);border-radius:18px;overflow:hidden;background:#fbfaf7}
 .lesson-signal-deck button{min-width:0;min-height:124px;padding:18px 20px;border:0;border-right:1px solid rgba(22,35,58,.11);background:transparent;color:#16233a;text-align:left;cursor:pointer;transition:background .18s,transform .18s}
 .lesson-signal-deck button:last-child{border-right:0}.lesson-signal-deck button:hover{background:#f4efe5}
@@ -1649,14 +1649,14 @@ body{background:#f6f6f3!important;color:#1d2630!important}.card{background:#fff!
 .lesson-phase-practice .takeaway-card{display:grid!important;grid-template-columns:90px minmax(0,1fr) auto!important;gap:22px!important;align-items:center!important;margin-top:34px!important;padding:28px 30px!important;border:0!important;border-radius:18px!important;background:#153b60!important}.lesson-phase-practice .takeaway-card .tk-badge{color:#d9bb80!important}.lesson-phase-practice .takeaway-card p{margin:0!important;color:#fff!important}.lesson-phase-practice .takeaway-coach{border-color:rgba(255,255,255,.24);background:rgba(255,255,255,.08);color:#fff}.lesson-phase-practice .takeaway-coach small{color:rgba(255,255,255,.64)}.lesson-phase-practice .takeaway-coach:hover{border-color:#d9bb80;background:rgba(255,255,255,.13)}
 .lesson-signal-deck button:focus-visible,.lesson-route button:focus-visible,.lesson-phase .viz-shape:focus-visible,.lesson-phase-practice .opt:focus-visible{outline:3px solid #d0a350!important;outline-offset:3px!important}
 @media(max-width:1180px){.lesson-hero-card{padding:36px 38px 34px!important}.lesson-signal-deck button{min-height:138px}.lesson-frame-card{padding:32px!important}.lesson-frame-card .lesson-lead-side{display:contents}.lesson-frame-card .we{order:2}.lesson-phase-apply .workbench-head{grid-template-columns:1fr}.lesson-phase-apply .workbench-decision{padding:22px 28px}}
-@media(max-width:760px){.lesson-hero-card{display:flex;flex-direction:column}.lesson-hero-card .lvl-head{order:1}.lesson-hero-card .lvl-progress{order:2}.lesson-hero-card .lesson-signal-deck{order:3;margin-top:12px}.lesson-hero-card .objectives{display:none!important}.lesson-hero-card .concept-focus{order:4;margin-top:16px}.lesson-head-side{justify-items:start;grid-auto-flow:column;justify-content:space-between;width:100%}.lesson-hero-card .kbd-hint{display:none!important}.lesson-hero-card .concept-focus-statement,.lesson-hero-card .concept-focus-terms{grid-template-columns:1fr;gap:7px;padding:14px 0}#coachBtn{right:12px!important;bottom:max(12px,env(safe-area-inset-bottom))!important;width:48px!important;height:48px!important;padding:0!important;justify-content:center!important;border-radius:50%!important;font-size:0!important}#coachBtn:after{display:none!important}#coachBtn:before{width:24px!important;height:24px!important;margin:0!important}.lesson-frame-card .lesson-lead-canvas{overflow:hidden!important}.lesson-frame-card .lesson-lead-canvas svg{display:block!important;width:100%!important;min-width:0!important;max-width:100%!important;height:auto!important}.lesson-hero-card{padding:30px 22px 26px!important;border-radius:20px!important}.lesson-hero-card .lvl-head h2{font-size:38px!important}.lesson-signal-deck{grid-auto-flow:column;grid-auto-columns:minmax(230px,86%);grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.lesson-signal-deck::-webkit-scrollbar{display:none}.lesson-signal-deck button{min-height:118px;border-right:1px solid rgba(22,35,58,.11);scroll-snap-align:start}.lesson-route{top:62px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:14px 0 42px;overflow:hidden}.lesson-route button{min-width:0;padding:0 4px;gap:0;border-right:1px solid #e4e7e9}.lesson-route button small{display:none}.lesson-route button span{font-size:10.5px}.lesson-phase{scroll-margin-top:132px;margin-bottom:52px}.lesson-phase-head{grid-template-columns:1fr;gap:10px;padding:0}.lesson-phase-head>b{font-size:38px}.lesson-phase-head h2{font-size:31px!important}.lesson-frame-card{padding:22px!important}.lesson-frame-card .lesson-lead-grid{gap:24px}.lesson-phase-apply .lesson-workbench .workbench-visual{padding:20px!important}.lesson-phase-apply .workbench-insight{grid-template-columns:1fr}.lesson-phase-apply .workbench-insight>div{border-right:0;border-bottom:1px solid #e2e6e9}.lesson-phase-apply .workbench-insight>div:last-child{border-bottom:0}.lesson-phase-apply .lesson-workbench .viz-flow,.lesson-phase-apply .lesson-workbench .viz-timeline{grid-template-columns:1fr!important}.lesson-phase-practice .drill{padding:30px 22px!important}.lesson-phase-practice .drill-path{grid-template-columns:1fr!important}.lesson-phase-practice .path-step{min-height:0;border-right:0!important;border-bottom:1px solid #dfe4e8!important}.lesson-phase-practice .path-step:last-child{border-bottom:0!important}.lesson-phase-practice .opt{padding:17px 16px!important}.lesson-phase-practice .takeaway-card{grid-template-columns:1fr!important;padding:24px!important}.lesson-phase-practice .takeaway-coach{width:100%}}
+@media(max-width:760px){.lesson-hero-card{display:flex;flex-direction:column}.lesson-hero-card .lvl-head{order:1}.lesson-hero-card .lvl-progress{order:2}.lesson-hero-card .lesson-signal-deck{order:3;margin-top:12px}.lesson-hero-card .objectives{display:none!important}.lesson-hero-card .concept-focus{order:4;margin-top:16px}.lesson-head-side{justify-items:start;grid-auto-flow:column;justify-content:space-between;width:100%}.lesson-hero-card .kbd-hint{display:none!important}.lesson-hero-card .concept-focus-statement,.lesson-hero-card .concept-focus-terms{grid-template-columns:1fr;gap:7px;padding:14px 0}#coachBtn{right:12px!important;bottom:max(12px,env(safe-area-inset-bottom))!important;width:48px!important;height:48px!important;padding:0!important;justify-content:center!important;border-radius:50%!important;font-size:0!important}#coachBtn:after{display:none!important}#coachBtn:before{width:24px!important;height:24px!important;margin:0!important}.lesson-frame-card .lesson-lead-canvas{overflow:hidden!important}.lesson-frame-card .lesson-lead-canvas svg{display:block!important;width:100%!important;min-width:0!important;max-width:100%!important;height:auto!important}.lesson-hero-card{padding:30px 22px 26px!important;border-radius:20px!important}.lesson-hero-card .lvl-head h2{font-size:38px!important}.lesson-signal-deck{grid-auto-flow:column;grid-auto-columns:minmax(230px,86%);grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.lesson-signal-deck::-webkit-scrollbar{display:none}.lesson-signal-deck button{min-height:118px;border-right:1px solid rgba(22,35,58,.11);scroll-snap-align:start}.lesson-route{top:62px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:14px 0 42px;overflow:hidden}.lesson-route button{min-width:0;padding:0 4px;gap:5px;border-right:1px solid #e4e7e9}.lesson-route button small{display:none}.lesson-route button span{font-size:10.5px}.lesson-route .ui-ico{width:13px;height:13px}.lesson-phase{scroll-margin-top:132px;margin-bottom:52px}.lesson-phase-head{grid-template-columns:1fr;gap:10px;padding:0}.lesson-phase-head>b{font-size:38px}.lesson-phase-head h2{font-size:31px!important}.lesson-frame-card{padding:22px!important}.lesson-frame-card .lesson-lead-grid{gap:24px}.lesson-phase-apply .lesson-workbench .workbench-visual{padding:20px!important}.lesson-phase-apply .workbench-insight{grid-template-columns:1fr}.lesson-phase-apply .workbench-insight>div{border-right:0;border-bottom:1px solid #e2e6e9}.lesson-phase-apply .workbench-insight>div:last-child{border-bottom:0}.lesson-phase-apply .lesson-workbench .viz-flow,.lesson-phase-apply .lesson-workbench .viz-timeline{grid-template-columns:1fr!important}.lesson-phase-practice .drill{padding:30px 22px!important}.lesson-phase-practice .drill-path{grid-template-columns:1fr!important}.lesson-phase-practice .path-step{min-height:0;border-right:0!important;border-bottom:1px solid #dfe4e8!important}.lesson-phase-practice .path-step:last-child{border-bottom:0!important}.lesson-phase-practice .opt{padding:17px 16px!important}.lesson-phase-practice .takeaway-card{grid-template-columns:1fr!important;padding:24px!important}.lesson-phase-practice .takeaway-coach{width:100%}}
 @media(max-width:760px){.lesson-phase-model .concept-figure{min-height:0!important;overflow:hidden!important;justify-content:center!important}.lesson-phase-model .concept-figure:before{content:none!important}.lesson-phase-model .concept-figure svg{display:block!important;width:100%!important;min-width:0!important;max-width:100%!important;height:auto!important}.lesson-phase-model .concept-figure figcaption{position:static!important;width:auto!important;max-width:none!important;text-align:center!important}}
 @media(max-width:390px){.lesson-hero-card{padding:24px 18px 22px!important}.lesson-hero-card .lvl-head h2{font-size:32px!important}.lesson-signal-deck{grid-auto-columns:92%}.lesson-route button{min-width:0}.lesson-phase-head h2{font-size:28px!important}.lesson-frame-card{padding:18px!important}.lesson-phase-practice .drill{padding:26px 18px!important}}
 @media(prefers-reduced-motion:reduce){.lesson-signal-deck button,.lesson-lead-canvas,.lesson-phase .viz-shape,.lesson-phase-practice .opt,.lesson-phase-practice .fb,.lesson-phase-practice .banner.show{transition:none!important;animation:none!important;transform:none!important}}
 
 .skip-link{position:fixed;left:14px;top:-80px;z-index:200;padding:11px 15px;border-radius:9px;background:#153b60;color:#fff;font-weight:800;transition:top .15s}.skip-link:focus{top:14px}
 
-@media(max-width:320px){.lesson-hero-card{padding:20px 14px 18px!important}.lesson-hero-card .lvl-head h2{font-size:29px!important}.lesson-signal-deck{grid-auto-columns:94%}.lesson-route button span{font-size:9.5px}.lesson-phase-head h2{font-size:26px!important}.lesson-frame-card{padding:16px!important}.lesson-phase-practice .drill{padding:24px 16px!important}.lesson-phase-practice .opt{padding:16px 14px!important}}
+@media(max-width:320px){.lesson-hero-card{padding:20px 14px 18px!important}.lesson-hero-card .lvl-head h2{font-size:29px!important}.lesson-signal-deck{grid-auto-columns:94%}.lesson-route button span{font-size:9.5px}.lesson-route .ui-ico{display:none}.lesson-phase-head h2{font-size:26px!important}.lesson-frame-card{padding:16px!important}.lesson-phase-practice .drill{padding:24px 16px!important}.lesson-phase-practice .opt{padding:16px 14px!important}}
 
 .concept-tryit{margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,255,.18)}
 .tryit-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -1674,6 +1674,27 @@ body{background:#f6f6f3!important;color:#1d2630!important}.card{background:#fff!
 .tryit-out b{display:block;margin-top:3px;color:#fff;font-family:var(--serif);font-size:21px;line-height:1.15;overflow-wrap:anywhere}
 @media(max-width:600px){.tryit-out b{font-size:18px}}
 @media(max-width:390px){.tryit-inputs{grid-template-columns:1fr}}
+
+/* v4.5 imagery + icon system */
+.ui-ico{width:16px;height:16px;flex:0 0 auto}
+.lesson-route .ui-ico{width:15px;height:15px;color:#a18452}
+.lesson-route button[aria-current="step"] .ui-ico{color:#e0c38d}
+.lesson-phase-head small .ui-ico{width:14px;height:14px;vertical-align:-2.5px;margin-right:7px;color:#b9852f}
+.path-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.path-ico{display:grid;place-items:center;width:30px;height:30px;border:1px solid rgba(22,35,58,.14);border-radius:9px;background:#fbfaf7;color:#8a6d3f}
+.path-ico .ui-ico{width:16px;height:16px}
+.path-card:hover .path-ico{border-color:#c79c56;color:#6e5322}
+.unit-head-row{display:flex;align-items:flex-start;gap:15px}
+.unit-ico{display:grid;place-items:center;flex:0 0 auto;width:42px;height:42px;margin-top:2px;border:1px solid rgba(22,35,58,.15);border-radius:12px;background:linear-gradient(150deg,#fbfaf7,#f2ecdf);color:#123c63}
+.unit-ico .ui-ico{width:21px;height:21px}
+.interview-hero{background:linear-gradient(100deg,rgba(13,34,56,.97) 0%,rgba(13,34,56,.9) 46%,rgba(15,41,68,.68) 100%),url(assets/hero-interview.jpg) right center/cover no-repeat #0f2944!important}
+.access-hero{background:linear-gradient(100deg,rgba(16,44,62,.97) 0%,rgba(16,44,62,.9) 46%,rgba(23,62,84,.66) 100%),url(assets/hero-access.jpg) right 30%/cover no-repeat #173e54!important}
+.cap-hero{background:linear-gradient(102deg,rgba(13,27,47,.97) 0%,rgba(13,27,47,.88) 48%,rgba(16,35,63,.62) 100%),url(assets/hero-capstone.jpg) center 64%/cover no-repeat #10233f!important;color:#f2f6fa!important}
+.cap-hero h2{color:#fff!important}.cap-hero .eyebrow{color:#d9bb80!important}.cap-hero .lede,.cap-hero .sub,.cap-hero p{color:rgba(255,255,255,.78)!important}.cap-hero b{color:#fff}
+.home-library>summary{position:relative;overflow:hidden;background:linear-gradient(96deg,rgba(13,34,56,.96) 0%,rgba(13,34,56,.86) 52%,rgba(13,34,56,.55) 100%),url(assets/hero-library.jpg) right center/cover no-repeat #10233f!important;border-color:transparent!important}
+.home-library>summary small{color:#d9bb80!important}
+.home-library>summary b{color:#fff!important}
+.home-library>summary i{color:rgba(255,255,255,.85)!important;border-color:rgba(255,255,255,.3)!important}
 
 /* v4.3 market-access benefit pathway */
 .benefit-flow{margin:2px 0 24px;border:1px solid #dbe3e7;border-radius:16px;overflow:hidden;background:#f7faf9}.benefit-flow-head{display:grid;gap:5px;padding:15px 18px;border-bottom:1px solid #dbe3e7;background:#fff}.benefit-flow-head small{color:#547764;font-size:9.5px;font-weight:850;letter-spacing:.09em;text-transform:uppercase}.benefit-flow-head b{color:#183b2a;font-size:14px;line-height:1.35}.benefit-flow-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.benefit-flow article{position:relative;min-width:0;padding:18px 16px;border-right:1px solid #dbe3e7;border-bottom:1px solid #dbe3e7;overflow-wrap:anywhere}.benefit-flow article:nth-child(2n){border-right:0}.benefit-flow article:nth-last-child(-n+2){border-bottom:0}.benefit-flow article>small{display:block;color:#5f7c6b;font-size:9px;font-weight:850;letter-spacing:.08em}.benefit-flow article>b{display:block;margin-top:8px;color:#183b2a;font-size:13px;line-height:1.3}.benefit-flow article>p{margin:7px 0 0;color:#5b6d62;font-size:11.5px;line-height:1.43}.benefit-flow article>i{display:none}.benefit-flow-note{margin:0;padding:11px 18px;border-top:1px solid #dbe3e7;color:#66766c;font-size:10.5px;line-height:1.4}.benefit-flow.medical{background:#f5f8fb}.benefit-flow.medical .benefit-flow-head small,.benefit-flow.medical article>small{color:#4f7396}.benefit-flow.medical .benefit-flow-head b,.benefit-flow.medical article>b{color:#173a5b}.benefit-flow.medical article>p,.benefit-flow.medical .benefit-flow-note{color:#5c6f80}
@@ -5443,7 +5464,7 @@ try { const u = JSON.parse(localStorage.getItem(UI_KEY)); if(u) uiState = Object
 function saveUI(){ localStorage.setItem(UI_KEY, JSON.stringify(uiState)); scheduleCloudSave(); }
 function applyFocusMode(){ document.body.classList.toggle("focus-mode", !!uiState.focus); const b=document.getElementById("focusBtn"); if(b) b.textContent=uiState.focus?"Exit focus":"Focus"; }
 
-const READYTOCONSULT_VERSION = "4.4.0";
+const READYTOCONSULT_VERSION = "4.5.0";
 const SUPABASE_URL = "https://oergojtnxmjztjgadkkv.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_WdMMBeui--DSDVloYcTWeg_L9WAXcKA";
 const NOTEBOOK_KEY = nsKey("readytoconsult-notebook-v17");
@@ -7757,13 +7778,35 @@ function lessonSignalDeck(i){
   ];
   return `<div class="lesson-signal-deck" aria-label="Lesson decision path">${cards.map(c=>`<button type="button" data-lesson-jump="${c[0]}"><small>${c[1]}</small><span>${esc(c[2])}</span><b>${esc(modelShort(c[3],118))}</b></button>`).join('')}</div>`;
 }
+const UI_ICONS={
+ tree:'<path d="M12 4v6M12 10l-5.5 4M12 10l5.5 4"/><circle cx="12" cy="4" r="1.9"/><circle cx="5.6" cy="15.6" r="1.9"/><circle cx="18.4" cy="15.6" r="1.9"/><path d="M5.6 17.5v2.5M18.4 17.5v2.5"/>',
+ sliders:'<path d="M4 7h9M17 7h3M4 12h3M11 12h9M4 17h9M17 17h3"/><circle cx="15" cy="7" r="1.9"/><circle cx="9" cy="12" r="1.9"/><circle cx="15" cy="17" r="1.9"/>',
+ target:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".8" fill="currentColor" stroke="none"/>',
+ pen:'<path d="M5 19l1.2-4.2L15.4 5.6a1.9 1.9 0 0 1 2.7 0l.3.3a1.9 1.9 0 0 1 0 2.7L9.2 17.8 5 19z"/><path d="M13.8 7.2l3 3"/>',
+ book:'<path d="M12 6.5C10.5 5.3 8.4 4.8 4.5 4.8v13.4c3.9 0 6 .5 7.5 1.7 1.5-1.2 3.6-1.7 7.5-1.7V4.8c-3.9 0-6 .5-7.5 1.7z"/><path d="M12 6.5v13.4"/>',
+ briefcase:'<rect x="3.5" y="7.5" width="17" height="12" rx="2.4"/><path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5M3.5 12.5h17"/>',
+ chart:'<path d="M4 4v15.2h16"/><path d="M7.5 15.5l3.4-4 2.8 2.3 4.6-6"/><circle cx="18.3" cy="7.8" r="1.3"/>',
+ layers:'<path d="M12 3.8l8.5 4.4L12 12.6 3.5 8.2 12 3.8z"/><path d="M20.5 12.4L12 16.8l-8.5-4.4M20.5 16.4L12 20.8l-8.5-4.4"/>',
+ mic:'<rect x="9.4" y="3.4" width="5.2" height="10" rx="2.6"/><path d="M6 11.5a6 6 0 0 0 12 0M12 17.5v3M9.4 20.5h5.2"/>',
+ award:'<circle cx="12" cy="9.4" r="5.4"/><path d="M8.8 13.8L7.4 20.4l4.6-2.4 4.6 2.4-1.4-6.6M12 7l.9 1.8 2 .3-1.4 1.4.3 2L12 11.6l-1.8.9.3-2-1.4-1.4 2-.3L12 7z"/>',
+ compass:'<circle cx="12" cy="12" r="8.4"/><path d="M15.4 8.6l-2 4.8-4.8 2 2-4.8 4.8-2z"/>',
+ id:'<rect x="3.5" y="5" width="17" height="14" rx="2.4"/><circle cx="9" cy="11" r="2.1"/><path d="M6.4 15.8c.5-1.5 1.4-2.2 2.6-2.2s2.1.7 2.6 2.2M14.5 9.6h3.5M14.5 13h3.5"/>',
+ calculator:'<rect x="5" y="3.5" width="14" height="17" rx="2.4"/><path d="M8.4 7.2h7.2"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01M8.5 15.6h.01M12 15.6h.01M15.5 15.6h.01" stroke-width="2.4"/>',
+ molecule:'<circle cx="7" cy="7.4" r="2.6"/><circle cx="17" cy="9.4" r="2.2"/><circle cx="11" cy="17" r="2.4"/><path d="M9.4 8.4l5.4 1M8 9.8l2 4.8M15.4 11.2l-3 4"/>',
+ flask:'<path d="M9.8 3.8h4.4M10.6 3.8v5.2L5.4 18a2 2 0 0 0 1.8 2.8h9.6a2 2 0 0 0 1.8-2.8L13.4 9V3.8"/><path d="M7.6 15h8.8"/>',
+ scale:'<path d="M12 4.4v13.8M7.4 6.4h9.2M5.2 6.4L2.8 12a3.2 3.2 0 0 0 6.4 0L6.8 6.4M17.2 6.4L14.8 12a3.2 3.2 0 0 0 6.4 0l-2.4-5.6M8.4 20.2h7.2"/>',
+ coins:'<ellipse cx="12" cy="6.6" rx="7" ry="2.8"/><path d="M5 6.6v5c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8v-5"/><path d="M5 11.6v5c0 1.5 3.1 2.8 7 2.8s7-1.3 7-2.8v-5"/>'
+};
+function uiIcon(name,cls){const p=UI_ICONS[name];if(!p)return'';return '<svg class="ui-ico'+(cls?' '+cls:'')+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+p+'</svg>';}
+const UNIT_ICONS=['compass','id','calculator','molecule','flask','chart','scale','coins'];
 function lessonRoute(){
-  const items=[['lesson-frame','01','Frame'],['lesson-model','02','Model'],['lesson-apply','03','Apply'],['lesson-practice','04','Practice']];
-  return `<nav class="lesson-route" aria-label="Lesson sections">${items.map((x,k)=>`<button type="button" data-lesson-jump="${x[0]}" ${k===0?'aria-current="step"':''}><small>${x[1]}</small><span>${x[2]}</span></button>`).join('')}</nav>`;
+  const items=[['lesson-frame','01','Frame','tree'],['lesson-model','02','Model','sliders'],['lesson-apply','03','Apply','target'],['lesson-practice','04','Practice','pen']];
+  return `<nav class="lesson-route" aria-label="Lesson sections">${items.map((x,k)=>`<button type="button" data-lesson-jump="${x[0]}" ${k===0?'aria-current="step"':''}>${uiIcon(x[3])}<small>${x[1]}</small><span>${x[2]}</span></button>`).join('')}</nav>`;
 }
 function lessonPhaseHead(number,kicker,title,copy){
   const ids={'01':'lesson-frame-title','02':'lesson-model-title','03':'lesson-apply-title','04':'lesson-practice-title'};
-  return `<header class="lesson-phase-head"><b aria-hidden="true">${number}</b><div><small>${esc(kicker)}</small><h2 id="${ids[number]||''}">${esc(title)}</h2><p>${esc(copy)}</p></div></header>`;
+  const icons={'01':'tree','02':'sliders','03':'target','04':'pen'};
+  return `<header class="lesson-phase-head"><b aria-hidden="true">${number}</b><div><small>${uiIcon(icons[number])}${esc(kicker)}</small><h2 id="${ids[number]||''}">${esc(title)}</h2><p>${esc(copy)}</p></div></header>`;
 }
 function renderLevel(i){
   const l=DATA.levels[i];
@@ -9632,9 +9675,9 @@ function renderSyllabus(){
     <div class="legend" style="margin-top:16px"><div class="lg"><b>${cp.done}/${cp.total}</b> lessons complete</div><div class="lg"><b>${cp.k}%</b> knowledge</div><div class="lg"><b>${cp.r}%</b> scenario judgment</div></div>
     <div class="syllabus-next"><div><small>Next required step</small><b>${nextIndex>=0?'Lesson '+(nextIndex+1)+': '+esc(DATA.levels[nextIndex].title):'Case Lab: apply what you learned'}</b></div><button class="ghost" data-view="${nextView}">${nextLabel} ›</button></div>
   </div>`;
-  COURSE.units.forEach((u)=>{
+  COURSE.units.forEach((u,ui)=>{
     const parts=u.title.split(": ");
-    h+=`<div class="card"><div class="eyebrow">${esc(parts[0])}</div><h2 style="font-size:19px;margin-bottom:3px">${esc(parts[1]||u.title)}</h2><p class="sub" style="margin-bottom:12px">${esc(u.sub)}</p><div class="syl-list">`;
+    h+=`<div class="card"><div class="unit-head-row"><span class="unit-ico" aria-hidden="true">${uiIcon(UNIT_ICONS[ui]||'compass')}</span><div><div class="eyebrow">${esc(parts[0])}</div><h2 style="font-size:19px;margin-bottom:3px">${esc(parts[1]||u.title)}</h2><p class="sub" style="margin-bottom:0">${esc(u.sub)}</p></div></div><div class="syl-list" style="margin-top:12px">`;
     for(let i=u.start;i<u.start+u.count;i++){ const l=DATA.levels[i]; if(!l) continue; const done=levelDone(i); const m=COURSE.meta[i];
       h+=`<button class="syl-item ${done?'done':''}" data-view="level-${i}"><span class="syl-num">${done?'&#10003;':(i+1)}</span><span class="syl-main"><b>${esc(l.title)}</b><small>${esc(m?m.obj:l.subtitle)}</small></span></button>`;
     }
@@ -10227,7 +10270,7 @@ function guidedRoadmapCard(){
   return `<div class="roadmap-card">
     <div class="roadmap-head"><div><div class="eyebrow">Your learning path</div><h2>One route. Six steps.</h2></div><p>Follow the numbered path once. Use Daily Rep, Drills, and Review missed only to sharpen weak spots along the way.</p></div>
     <div class="path-now"><div><small>Recommended now · ${cp.done}/${cp.total} lessons complete</small><b>${esc(nextTitle)}</b><span>${nextIndex>=0?'Finish the drills in this lesson before moving forward.':'The foundation is complete. Start applying it to a guided case.'}</span></div><button class="ghost" data-view="${nextView}">${nextIndex>=0?'Continue learning':'Open Case Lab'} ›</button></div>
-    <div class="learning-spine">${steps.map(s=>`<button class="path-card" data-view="${s[4]}"><span>${s[0]}</span><small>${s[1]}</small><b>${s[2]}</b><p>${s[3]}</p></button>`).join('')}</div>
+    <div class="learning-spine">${steps.map((s,k)=>`<button class="path-card" data-view="${s[4]}"><span class="path-top"><span>${s[0]}</span><i class="path-ico" aria-hidden="true">${uiIcon(['book','briefcase','chart','layers','mic','award'][k])}</i></span><small>${s[1]}</small><b>${s[2]}</b><p>${s[3]}</p></button>`).join('')}</div>
     <div class="path-support"><b>Practice tools are not extra steps.</b><span>Problem Lab, Market Access Lab, Strategy Lab, and Roleplay are optional depth. Notebook and Glossary support every step. After any practice session, use Review missed.</span></div>
   </div>`;
 }
